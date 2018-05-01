@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+html, body {
+  display: inline-block;
+  height: 100%;
+}
+
+html, body, footer, footer a {
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+.nav-link {
+    font-size: 1.1em;
+}
+.card-img-top {
+    width: 256px;
+}
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+}
+.createheading {
+    color: white;
+}
+.createjoin {
+    width: 180px;
+}
+
+.loggedInBG {
+  background: url("img/loggedin/sky.jpg");
+  background-size: cover;
+  height: auto;
+}
+.masthead {
+    min-height: 47rem;
+    width: 100%;
+    background: url("img/createjoin/background.jpg");
+    background-position: center center;
+    background-size: cover;
+}
+
+.signin {
+    background-color: #FFF;
+    color: #1A75C1;
+}
+
+.site-footer {
+    background: #112978;
+    color: white;
+}
+
+.site-footer a {
+    color: #D5D5D5;
+    text-decoration:none;
+}
+
+.site-footer a:hover {
+    color: white;
+}
+.oneliner {
+    width: 80%;
+}
+
+#copyright {
+    background-color: #0f1c6c;
+}
+    #main {
+        font-size: 20pt;
+    }
+    
+    #formContainer {
+        background-color: #004338;
+        border: 1px solid #6c6c6c;
+    }
+
+    #form {
+        color: #ececec;
+    }
+    #submitButton {
+        background-color: #1A75C1;
+    }
+
+/*---Media Queries --*/
+@media (max-width: 992px) {
+
+  }
+@media (max-width: 768px) {
+  
+}
+@media (max-width: 576px) {
+    .carousel-caption h1, .carousel-caption h3 {
+        display: none;
+    }
+    
+    .masthead {
+        min-height: 15rem;
+    }
+
+    .card-title {
+        font-size: 9pt;
+    }
+
+}
+
+/*
+Extra small (xs) devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap
+
+Small (sm) devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+Medium (md) devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+Large (lg) devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+Extra (xl) large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+*/
+
+
+
+
+
+
+
+
