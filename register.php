@@ -34,7 +34,7 @@
             echo "<p>No update performed.</p>";
         } else {
             // perform update to the DB
-            $sql = "INSERT INTO `tbl_user` (user_Name, user_Password, user_Email) values (:userName, :userPassword, :userEmail)";
+            $sql = "INSERT INTO `tbl_User` (user_Name, user_Password, user_Email) values (:userName, :userPassword, :userEmail)";
             // $insert is a 'PDOStatement
             $statement = $conn->prepare($sql);
             $statement->execute(array(":userName" => $user_Name, ":userPassword" => $user_Password, ":userEmail" => $user_Email));
