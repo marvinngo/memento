@@ -1,116 +1,128 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 
+/* Element Selectors */
 html, body {
   display: inline-block;
   height: 100%;
 }
 
 html, body, footer, footer a {
-    width: 100%;
-    font-family: 'Poppins', sans-serif;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
 }
 
-.nav-link {
-    font-size: 1.1em;
-}
-.icons {
-    width: 50%;
+/* Class Selectors */
+
+.card-text {
+  font-size: 14pt;
 }
 .carousel-inner img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
-
 .carousel-caption {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .createheading {
-    color: white;
+  color: white;
 }
 .createjoin {
-    width: 180px;
+  width: 180px;
 }
-
+.formContainer {
+  background-color: #112978;
+  border: 1px solid #6c6c6c;
+}
+.icons {
+  width: 50%;
+}
 .loggedInBG {
   background: url("img/loggedin/sky.jpg");
   background-size: cover;
   height: auto;
 }
 .masthead {
-    min-height: 47rem;
-    width: 100%;
-    background: url("img/createjoin/background.jpg");
-    background-position: center center;
-    background-size: cover;
+  min-height: 47rem;
+  width: 100%;
+  background: url("img/createjoin/background.jpg");
+  background-position: center center;
+  background-size: cover;
 }
-
-.signin {
-    background-color: #FFF;
-    color: #1A75C1;
-}
-
-.site-footer {
-    background: #273443;
-    color: white;
-  
-}
-
-.site-footer a {
-    color: #D5D5D5;
-    text-decoration:none;
-}
-
-.site-footer a:hover {
-    color: white;
+.nav-link {
+  font-size: 1.1em;
 }
 .oneliner {
-    width: 80%;
+  width: 80%;
+}
+.signin {
+  background-color: #FFF;
+  color: #1A75C1;
+}
+.site-footer {
+  background: #273443;
+  color: white;
+}
+.site-footer a {
+  color: #D5D5D5;
+  text-decoration:none;
+}
+.site-footer a:hover {
+  color: white;
+}
+img.mr-2 {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #8c8c8c;
 }
 
+/* ID Selectors */
+
+#content {
+  font-size: 12pt;
+  color: #F6F6F6;
+}
 #copyright {
-    background-color: #232F3C;
+  background-color: #232F3C;
 }
-    #main {
-        font-size: 20pt;
-    }
-    
-    .formContainer {
-        background-color: #112978;
-        border: 1px solid #6c6c6c;
-    }
-
-    #form {
-        color: #ececec;
-    }
-    #submitButton {
-        background-color: #1A75C1;
-    }
+#form {
+  color: #ececec;
+}
+#main {
+  font-size: 20pt;
+}
+#maintext {
+  color: #F6F6F6;
+  font-size: 14pt;
+}
+#submitButton {
+  background-color: #1A75C1;
+}
+#title {
+  color: #F6F6F6;
+}
 
 /*---Media Queries --*/
 @media (max-width: 992px) {
 
-  }
+}
 @media (max-width: 768px) {
   
 }
 @media (max-width: 576px) {
-    .carousel-caption h1, .carousel-caption h3 {
-        display: none;
-    }
-
-
-    .card-title {
-        font-size: 14pt;
-    }
+  .carousel-caption h1, .carousel-caption h3 {
+    display: none;
+  }
+  .card-title {
+    font-size: 14pt;
+  }
   .createheading {
     display: none;
   }
   .textcenter{
     text-align: center;
   }
-
 }
 
 

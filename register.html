@@ -1,153 +1,109 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-	<link href="style.css" rel="stylesheet">
-    <title>reg</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link href="style.css" rel="stylesheet">
+  <title>Register</title>
 
-
-    <style>
-
-    </style>
-  </head>
-  <body>
+</head>
+  
+<body>
 
 <!-- Navigation -->
-    <nav class="navbar navbar-expand-md navbar-dark sticky-top w-100" style="background-color: #1A75C1;">
-            <div class="container-fluid w-75">
-                <a class="navbar-brand" href="#"><img src="img/frontpage/logo/logo.png"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTop">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active mt-1">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item mt-1">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item mt-1">
-                            <a class="nav-link" href="#">Sponsors</a>
-                        </li>
-                        <li class="nav-item mt-1">
-                            <a class="nav-link" href="#">Connect</a>
-                        </li>
-                        <li class="nav-item mt-1">
-                            <a class="nav-link" href="#">Groups</a>
-                        </li>
-                        <li class="nav-item">
-                            <button type="button" onclick="construction()" class="btn btn-primary btn-lg signin">Sign In</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<nav class="navbar navbar-expand-md navbar-dark sticky-top w-100" style="background-color: #1A75C1;">
+  <div class="container-fluid w-75">
+    <a class="navbar-brand" href="#"><img src="img/frontpage/logo/logo.png"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collase" data-target="#navbarTop">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTop">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active mt-1">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item mt-1">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item mt-1">
+          <a class="nav-link" href="#">Sponsors</a>
+        </li>
+        <li class="nav-item mt-1">
+          <a class="nav-link" href="#">Connect</a>
+        </li>
+        <li class="nav-item">
+          <button type="button" onclick="construction()" class="btn btn-primary btn-lg signin">Sign In</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <div class="loggedInBG container-fluid">
-
-        
-
-<div id="main" class="container col-lg-6 col-md-7 col-sm-9 w-90 px-2 pt-4">
-  <div class="row xs-12 text-left font-weight-bold">
-    <div class="col">
-   
-
-      <!-- signup form -->
-      <div class="container pt-2 px-3 rounded mb-4">
-        <div class="row xs-12 text-left font-weight-bold">
-          <div id="form" class="col text-center px-3 py-3">
-            Sign up
+  <div id="main" class="container col-lg-6 col-md-7 col-sm-9 w-90 px-2 pt-4">
+    <div class="row xs-12 text-left font-weight-bold">
+      <div class="col">
+        <div class="container pt-2 px-3 rounded mb-4">
+          <div class="row xs-12 text-left font-weight-bold">
+            <div id="form" class="col text-center px-3 py-3">
+              Sign up
             
             <!-- form -->
-            <form>
+              <form>
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                      <input type="text" class="form-control" id="usernameForm" placeholder="Username">
-                    </div>
-
-                    <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                        <input type="text" class="form-control" id="passwordForm" placeholder="Password">
-                      </div>
-
-                    <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                        <input type="text" class="form-control" id="confirmpasswordForm" placeholder="Confirm password">
-                      </div>
-
-                    <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                        <input type="email" class="form-control" id="emailForm" placeholder="Email">
-                        <div class="col">
-                        <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right">Submit</button>
-                    </div>
-                      </div>
-                    
-
+                  <input type="text" class="form-control" id="usernameForm" placeholder="Username">
+                </div>
+                <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+                  <input type="text" class="form-control" id="passwordForm" placeholder="Password">
+                </div>
+                <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+                  <input type="text" class="form-control" id="confirmpasswordForm" placeholder="Confirm password">
+                </div>
+                <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+                  <input type="email" class="form-control" id="emailForm" placeholder="Email">
+                  <div class="col">
+                    <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right">Submit</button>
+                  </div>
+                </div>
               </form>
-                <br>
-                <br>
-
-                <!-- form for existing users -->
+              <br>
+              <br>
+            <!-- form for existing users -->
               <small><b>Already have an account? Sign in:</b></small>
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
                 <input type="text" class="form-control" id="usernameForm" placeholder="Username">
               </div>
-
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="text" class="form-control" id="passwordForm" placeholder="Password">
-
-                  <div class="col">
-                    <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right" onclick="location.href = 'createjoin.html'">Sign in</button>
-
+                <input type="text" class="form-control" id="passwordForm" placeholder="Password">
+                <div class="col">
+                  <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right" onclick="location.href = 'createjoin.html'">Sign in</button>
                 </div>
-                </div>
-
-
-
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-        </div>
-    <!--- Footer -->
-        <footer class="site-footer page-footer font-small pt-3">
-            <div class="container-fluid text-center my-auto">
-                <div class="row">
-                    <div class="col-md-12 mt-">
-                        <h5>links</h5><pre><a href="#">About</a>    <a href="#">Sponsors</a>    <a href="#">Connect</a>
-                      </pre>
-                        <!-- <ul class="list-unstyled">
-                            <li>
-                                <a href="#!">About</a>
-                            </li>
-                            <li>
-                                <a href="#!">Contact</a>
-                            </li>
-                            <li>
-                                <a href="#!">Sponsors</a>
-                            </li>
-                            <li>
-                                <a href="#!"></a>
-                            </li>
-                        </ul> -->
-                    </div>
-                </div>
-            </div>
-        
-            <div id="copyright" class="pt-1 text-center">
-                2018 &copy; Team Five
-            </div>
-        
-        </footer>
+<!--- Footer -->
+<footer class="site-footer page-footer font-small pt-3">
+  <div class="container-fluid text-center my-auto">
+    <div class="row">
+      <div class="col-md-12">
+        <h5>links</h5>
+        <pre>   <a href="#">About</a>    <a href="#">Sponsors    </a>   <a href="#">Connect</a>
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div id="copyright" class="pt-1 text-center">
+      2018 &copy; Team Five
+  </div>
+</footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
