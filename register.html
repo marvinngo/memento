@@ -52,18 +52,18 @@
               Sign up
             
             <!-- form -->
-              <form>
+              <form method="post" action="register.php">
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="text" class="form-control" id="usernameForm" placeholder="Username">
+                  <input type="text" name="user_Name" class="form-control" id="usernameForm" placeholder="Username">
                 </div>
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="text" class="form-control" id="passwordForm" placeholder="Password">
+                  <input type="text" name="user_Password" class="form-control" id="passwordForm" placeholder="Password">
                 </div>
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
                   <input type="text" class="form-control" id="confirmpasswordForm" placeholder="Confirm password">
                 </div>
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="email" class="form-control" id="emailForm" placeholder="Email">
+                  <input type="email" name="user_Email" class="form-control" id="emailForm" placeholder="Email">
                   <div class="col">
                     <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right">Submit</button>
                   </div>
