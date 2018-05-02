@@ -38,6 +38,7 @@
             // $insert is a 'PDOStatement
             $statement = $conn->prepare($sql);
             $statement->execute(array(":userName" => $user_Name, ":userPassword" => $user_Password, ":userEmail" => $user_Email));
+            header( 'Location: createjoin.html' ) ;
         }
 
     } catch(PDOException $e) {
