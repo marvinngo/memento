@@ -14,7 +14,7 @@ html, body, footer, footer a {
     font-size: 1.1em;
 }
 .card-img-top {
-    width: 256px;
+    width: 50%;
 }
 .carousel-inner img {
     width: 100%;
@@ -25,7 +25,6 @@ html, body, footer, footer a {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    
 }
 .createheading {
     color: white;
@@ -53,8 +52,9 @@ html, body, footer, footer a {
 }
 
 .site-footer {
-    background: #112978;
+    background: #273443;
     color: white;
+  
 }
 
 .site-footer a {
@@ -70,14 +70,14 @@ html, body, footer, footer a {
 }
 
 #copyright {
-    background-color: #0f1c6c;
+    background-color: #232F3C;
 }
     #main {
         font-size: 20pt;
     }
     
     #formContainer {
-        background-color: #004338;
+        background-color: #112978;
         border: 1px solid #6c6c6c;
     }
 
@@ -99,37 +99,16 @@ html, body, footer, footer a {
     .carousel-caption h1, .carousel-caption h3 {
         display: none;
     }
-    
-    .masthead {
-        min-height: 15rem;
-    }
+
 
     .card-title {
-        font-size: 9pt;
+        font-size: 14pt;
     }
+  .createheading {
+    display: none;
+  }
 
 }
-
-/*
-Extra small (xs) devices (portrait phones, less than 576px)
-No media query since this is the default in Bootstrap
-
-Small (sm) devices (landscape phones, 576px and up)
-@media (min-width: 576px) { ... }
-
-Medium (md) devices (tablets, 768px and up)
-@media (min-width: 768px) { ... }
-
-Large (lg) devices (desktops, 992px and up)
-@media (min-width: 992px) { ... }
-
-Extra (xl) large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) { ... }
-*/
-
-
-
-
 
 
 
