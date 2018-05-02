@@ -13,36 +13,42 @@ html, body, footer, footer a {
 
 /* Class Selectors */
 
+/* aboutgroups (events) */
 .card-text {
   font-size: 14pt;
 }
+
+/* front page carousel images */
 .carousel-inner img {
   width: 100%;
   height: 100%;
 }
+
+/* front page carousel caption */
 .carousel-caption {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
 }
-.createheading {
-  color: white;
-}
+
+/* size of 'join group' button on aboutgroups page */
 .createjoin {
   width: 180px;
 }
-.formContainer {
-  background-color: #112978;
-  border: 1px solid #6c6c6c;
-}
+
+/* three icons on front page,  */
 .icons {
   width: 50%;
 }
+
+/* background divs */
 .loggedInBG {
   background: url("img/loggedin/sky.jpg");
   background-size: cover;
   height: auto;
 }
+
+/* background for createjoin page */
 .masthead {
   min-height: 47rem;
   width: 100%;
@@ -50,27 +56,43 @@ html, body, footer, footer a {
   background-position: center center;
   background-size: cover;
 }
+
+/* links in navbar */
 .nav-link {
   font-size: 1.1em;
 }
 .oneliner {
   width: 80%;
 }
+
+/* colors for sign in button in nav bar */
 .signin {
   background-color: #FFF;
   color: #1A75C1;
 }
+
+/* background color for site footer */
 .site-footer {
   background: #273443;
   color: white;
 }
+
+/* site footer links */
 .site-footer a {
   color: #D5D5D5;
   text-decoration:none;
 }
+/* hover on site footer links  */
 .site-footer a:hover {
   color: white;
 }
+
+/* copyright in footer */
+#copyright {
+  background-color: #232F3C;
+}
+
+/* images on mygroups page */
 img.mr-2 {
   width: 100px;
   height: 100px;
@@ -79,27 +101,30 @@ img.mr-2 {
 
 /* ID Selectors */
 
+/* content of mygroups page */
 #content {
   font-size: 12pt;
   color: #F6F6F6;
 }
-#copyright {
-  background-color: #232F3C;
-}
-#form {
-  color: #ececec;
-}
+
+/* title of main div containers */
 #main {
   font-size: 20pt;
 }
+
+/* smaller text bodies of main div containers */
 #maintext {
   color: #F6F6F6;
   font-size: 14pt;
 }
+
+/* colour for buttons (most pages) */
 #submitButton {
   background-color: #1A75C1;
 }
-#title {
+
+/* colour of title text for most pages */
+.title {
   color: #F6F6F6;
 }
 
@@ -110,16 +135,26 @@ img.mr-2 {
 @media (max-width: 768px) {
   
 }
+
+
 @media (max-width: 576px) {
+
+  /* hides carousel captions */
   .carousel-caption h1, .carousel-caption h3 {
     display: none;
   }
+
+  /* card title to smaller size (home page, aboutgroup) */
   .card-title {
     font-size: 14pt;
   }
+
+  /* title for createjoin page */
   .createheading {
     display: none;
   }
+
+  /* used to center text */
   .textcenter{
     text-align: center;
   }
