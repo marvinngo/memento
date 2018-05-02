@@ -13,7 +13,7 @@ html, body, footer, footer a {
 .nav-link {
     font-size: 1.1em;
 }
-.card-img-top {
+.icons {
     width: 50%;
 }
 .carousel-inner img {
@@ -76,7 +76,7 @@ html, body, footer, footer a {
         font-size: 20pt;
     }
     
-    #formContainer {
+    .formContainer {
         background-color: #112978;
         border: 1px solid #6c6c6c;
     }
@@ -106,6 +106,9 @@ html, body, footer, footer a {
     }
   .createheading {
     display: none;
+  }
+  .textcenter{
+    text-align: center;
   }
 
 }
