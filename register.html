@@ -60,22 +60,24 @@
               <form method="post" action="register.php">
                 <!-- username -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="text" name="user_Name" class="form-control" id="usernameForm" placeholder="Username">
+                  <input type="text" name="user_Name" class="form-control" id="usernameForm" placeholder="Username" pattern="[a-zA-Z0-9]{4-20}" required >
                 </div>
+
+          
 
                 <!-- password -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="password" name="user_Password" class="form-control" id="passwordForm" placeholder="Password">
+                  <input type="password" name="user_Password" class="form-control" id="passwordForm" placeholder="Password" pattern="[a-zA-Z0-9]{8-20}" required>
                 </div>
 
                 <!-- confirm password -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="password" class="form-control" id="confirmpasswordForm" placeholder="Confirm password">
+                  <input type="password" class="form-control" id="confirmpasswordForm" placeholder="Confirm password" pattern="[a-zA-Z0-9]{8-20}" oninput="check(this)" required>
                 </div>
 
                 <!-- email -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="email" name="user_Email" class="form-control" id="emailForm" placeholder="Email">
+                  <input type="email" name="user_Email" class="form-control" id="emailForm" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
                   <div class="col">
                     <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right">Submit</button>
                   </div>
@@ -90,12 +92,12 @@
               <!-- username -->
               <form method="post" action="signin.php">
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                <input type="text" name="user_Name" class="form-control" id="usernameForm" placeholder="Username">
+                <input type="text" name="user_Name" class="form-control" id="usernameForm" placeholder="Username" pattern="[a-zA-Z0-9]{4-20}" required>
               </div>
 
               <!-- password -->
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                <input type="password" name="user_Password" class="form-control" id="passwordForm" placeholder="Password">
+                <input type="password" name="user_Password" class="form-control" id="passwordForm" placeholder="Password" pattern="[a-zA-Z0-9]{8-20}" required>
                 <div class="col">
                   <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right">Sign in</button>
                 </div>
@@ -130,5 +132,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script src="mementoScripts.js"></script>
+
+  
   </body>
 </html>

@@ -61,6 +61,13 @@ html, body, footer, footer a {
 .nav-link {
   font-size: 1.1em;
 }
+
+/* offsets the navbar when 'about' is clicked */
+.navbarOffset {
+  top: -130px;
+  position: relative;
+}
+
 .oneliner {
   width: 80%;
 }
@@ -86,6 +93,7 @@ html, body, footer, footer a {
 .site-footer a:hover {
   color: white;
 }
+
 
 /* copyright in footer */
 #copyright {
