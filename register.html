@@ -88,16 +88,16 @@
               <small><b>Already have an account? Sign in:</b></small>
 
               <!-- username -->
-              <form method="post" action="register.php">
+              <form method="post" action="signin.php">
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                <input type="text" class="form-control" id="usernameForm" placeholder="Username">
+                <input type="text" name="user_Name" class="form-control" id="usernameForm" placeholder="Username">
               </div>
 
               <!-- password -->
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                <input type="text" class="form-control" id="passwordForm" placeholder="Password">
+                <input type="text" name="user_Password" class="form-control" id="passwordForm" placeholder="Password">
                 <div class="col">
-                  <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right" onclick="location.href = 'createjoin.html'">Sign in</button>
+                  <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right">Sign in</button>
                 </div>
               </div>
             </form>
