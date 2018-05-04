@@ -151,6 +151,11 @@ img.mr-2 {
   background-color: #1A75C1;
 }
 
+.modaluserpw {
+  width: 100%;
+}
+
+
 /* colour of title text for most pages */
 .title {
   color: #F6F6F6;
