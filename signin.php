@@ -16,43 +16,43 @@ if ($methodType === 'POST') {
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $user_Name = "";
-        $user_Password = "";
-        if (isset($_POST["user_Name"]) && !empty($_POST["user_Name"])) {
+        $User_Name = "";
+        $User_Password = "";
+        if (isset($_POST["User_Name"]) && !empty($_POST["User_Name"])) {
             // these names don't all have to be the same but if we have several variables
             // then it makes sense to make them the same
-            $user_Name =  $_POST["user_Name"];
+            $User_Name =  $_POST["User_Name"];
         }
-        if (isset($_POST["user_Password"]) && !empty($_POST["user_Password"])) {
+        if (isset($_POST["User_Password"]) && !empty($_POST["User_Password"])) {
             // these names don't all have to be the same but if we have several variables
             // then it makes sense to make them the same
-            $user_Password =  $_POST["user_Password"];
+            $User_Password =  $_POST["User_Password"];
         }
       
-        $sql = "SELECT * FROM tbl_User WHERE user_Name = :uName";
+        $sql = "SELECT * FROM tbl_User WHERE User_Name = :uName";
 
         $statement = $conn->prepare($sql);
-        $statement->execute(array(":uName" => $user_Name));
+        $statement->execute(array(":uName" => $User_Name));
         $count = $statement->rowCount();
         $rows = $statement->fetchAll();
       
         //echo $count . "</br>";
-        //echo "user_Name: " . $user_Name . "</br>";
+        //echo "User_Name: " . $User_Name . "</br>";
 
         if ($count > 1) {
-          echo "Error: multiple instances of same username in DB.";
+          echo "Error: multiple instances of same Username in DB.";
         }
                             
         if ($count == 0) {
-          echo "username does not exist in DB.";
+          echo "Username does not exist in DB.";
         }
         
                 
         if ($count == 1) {
-          if ($user_Password == $rows[0]['user_Password']) {
+          if ($User_Password == $rows[0]['User_Password']) {
             header( 'Location: createjoin.html' ) ;
           } else {
-            echo "username matches DB.<br>";
+            echo "Username matches DB.<br>";
             echo "incorrect password";
           }
 
