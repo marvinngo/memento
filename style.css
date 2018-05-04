@@ -2,7 +2,6 @@
 
 /* Element Selectors */
 html, body {
-  display: inline-block;
   height: 100%;
 }
 
@@ -45,7 +44,7 @@ html, body, footer, footer a {
 .loggedInBG {
   background: url("img/loggedin/sky.jpg");
   background-size: cover;
-  height: auto;
+  height: 82%;
 }
 
 /* background for createjoin page */
