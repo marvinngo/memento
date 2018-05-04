@@ -57,6 +57,22 @@ html, body, footer, footer a {
   background-size: cover;
 }
 
+.modal-content {
+  background: #1A75C1;
+  color: #FFF;
+  
+}
+.loginmodal-submit {
+  background: #FFF;
+  color: #1A75C1;
+  width: 70%;
+}
+.c {
+  align-content: center;
+  margin-bottom: 10px;
+  width: 70%;
+  
+}
 /* links in navbar */
 .nav-link {
   font-size: 1.1em;
