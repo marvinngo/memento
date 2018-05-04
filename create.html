@@ -79,6 +79,16 @@
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
                 <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name">
               </div>
+            <!-- password -->
+              <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+                <input type="password" name="group_Password" class="form-control" id="groupPasswordForm" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
+              </div>
+
+            <!-- confirm password -->
+              <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+                <input type="password" class="form-control" id="confirmGroupPasswordForm" placeholder="Confirm password" pattern="[a-zA-Z0-9]{8,20}" oninput="check(this)" required>
+              </div>
+              
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4" style="height: 100px;">
                 <input type="text" class="form-control" id="descriptionForm" placeholder="Description">
               </div>
