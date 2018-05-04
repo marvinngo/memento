@@ -62,6 +62,10 @@ html, body, footer, footer a {
   color: #FFF;
   
 }
+.modaluserpw {
+  margin-bottom: 20px;
+  width: 70%
+}
 .loginmodal-submit {
   background: #FFF;
   color: #1A75C1;
