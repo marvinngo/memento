@@ -1,5 +1,9 @@
 <?php
 
+$methodType = $_SERVER['REQUEST_METHOD'];
+
+if ($methodType === 'POST') {
+
     $servername = "localhost";
     $dblogin = "justince_team5";
     $password = "Team5!Team5!";
@@ -58,6 +62,10 @@
         echo "<p style='color: red;'>From the SQL code: $sql</p>";
         $error = $e->getMessage();
         echo "<p style='color: red;'>$error</p>";
+    }
+  
+    } else {
+      echo "Has to be POST.";
     }
 
 ?>
