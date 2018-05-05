@@ -33,12 +33,25 @@
         if(empty($User_Name) || empty($User_Password) || empty($User_Email)) {
             echo "<p>No update performed.</p>";
         } else {
-            // perform update to the DB
-            $sql = "INSERT INTO `tbl_User` (User_Name, User_Password, User_Email) values (:UserName, :UserPassword, :UserEmail)";
-            // $insert is a 'PDOStatement
+          
+            // Check if username already exists in database:
+          
+            $sql = "SELECT * FROM tbl_User WHERE User_Name = :uName";
+
             $statement = $conn->prepare($sql);
-            $statement->execute(array(":UserName" => $User_Name, ":UserPassword" => $User_Password, ":UserEmail" => $User_Email));
-            header( 'Location: createjoin.html' ) ;
+            $statement->execute(array(":uName" => $User_Name));
+            $count = $statement->rowCount();
+          
+            if ($count > 0) {
+              echo "Username already exists in DB.";
+            } else {
+              // perform update to the DB
+              $sql = "INSERT INTO `tbl_User` (User_Name, User_Password, User_Email) values (:UserName, :UserPassword, :UserEmail)";
+              // $insert is a 'PDOStatement
+              $statement = $conn->prepare($sql);
+              $statement->execute(array(":UserName" => $User_Name, ":UserPassword" => $User_Password, ":UserEmail" => $User_Email));
+              header( 'Location: createjoin.html' ) ;
+            }
         }
 
     } catch(PDOException $e) {

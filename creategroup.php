@@ -39,12 +39,27 @@
         if(empty($Group_Name) || empty($Group_Password) || empty($Group_Description) || empty($Group_Size)) {
             echo "<p>No update performed.</p>";
         } else {
+          
+            // Check if username already exists in database:
+          
+            $sql = "SELECT * FROM tbl_Group WHERE Group_Name = :GroupName";
+
+            $statement = $conn->prepare($sql);
+            $statement->execute(array(":GroupName" => $Group_Name));
+            $count = $statement->rowCount();
+          
+            if ($count > 0) {
+              echo "Group Name already exists in DB.";
+            } else {
+              
             // perform update to the DB
+              
             $sql = "INSERT INTO `tbl_Group` (Group_Name, Group_Description, Group_Password, Group_Size) values (:GroupName, :GroupDescription, :GroupPassword, :GroupSize)";
             // $insert is a 'PDOStatement
             $statement = $conn->prepare($sql);
             $statement->execute(array(":GroupName" => $Group_Name, ":GroupPassword" => $Group_Password, ":GroupDescription" => $Group_Description, ":GroupSize" => $Group_Size));
             header( 'Location: mygroups.html' ) ;
+            }
         }
 
     } catch(PDOException $e) {
