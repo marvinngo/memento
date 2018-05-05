@@ -75,13 +75,13 @@
             Create Group
             
             <!-- form -->
-            <form>
+            <form method="post" action="creategroup.php">
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name" required autofocus>
+                <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name" name="Group_Name" required autofocus>
               </div>
             <!-- password -->
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                <input type="password" name="group_Password" class="form-control" id="groupPasswordForm" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
+                <input type="password" name="Group_Password" class="form-control" id="groupPasswordForm" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
               </div>
 
             <!-- confirm password -->
@@ -90,11 +90,11 @@
               </div>
               
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4" style="height: 100px;">
-                <input type="text" class="form-control" id="descriptionForm" placeholder="Description">
+                <input type="text" name="Group_Description" class="form-control" id="descriptionForm" placeholder="Description">
               </div>
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
                 <label>Select the group size:</label>
-                <select class="form-control" title="lol" placeholder="Number of People" id="totalPeople">
+                <select class="form-control" name="Group_Size" title="lol" placeholder="Number of People" id="totalPeople">
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
