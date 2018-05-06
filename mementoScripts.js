@@ -48,6 +48,18 @@ if ((document.getElementById("passwordForm").value !== document.getElementById("
 }
 }
 
+function checkEmail(input) {
+    let regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+
+    //true if username is not between 4-20 chars AND does not match regex
+    if (!regex.test(input.value)) {
+        input.setCustomValidity('Please enter a valid email.');
+    } else {
+            // gets rid of alert box if username is valid
+      input.setCustomValidity('');
+    }
+}
+
 
 
 

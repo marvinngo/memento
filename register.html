@@ -93,7 +93,7 @@
 
                 <!-- email -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="email" name="User_Email" class="form-control" id="emailForm" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+                  <input type="email" name="User_Email" class="form-control" id="emailForm" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" oninput="checkEmail(this)" required>
                   <div class="col px-0">
                     <button type="submit" class="btn btn-primary mt-4 submitButton float-right" name="submit">Submit</button>
                   </div>
