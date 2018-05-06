@@ -146,7 +146,7 @@ img.mr-2 {
 }
 
 /* colour for buttons (most pages) */
-#submitButton {
+.submitButton {
   background-color: #1A75C1;
 }
 

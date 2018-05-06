@@ -2,14 +2,53 @@ function construction() {
     alert("Page is under construction!");
 }
 
+//checks username regex and displays alert 
+function checkUsername(input) {
+    let regex = /^[a-zA-Z0-9]+$/;
 
-
-function check(input) {
-    if (input.value != document.getElementById('passwordForm').value){
-        input.setCustomValidity("passwords don't match");
-    }  else {
-        // gets rid of alert box if inputs match
-        input.setCustomValidity('');
+    //true if username is not between 4-20 chars AND does not match regex
+    if ((input.value.length < 4 || input.value.length > 20) && !regex.test(input.value)) {
+        input.setCustomValidity('Username must be between 4 and 20 characters and can only contain letters and numbers.');
+    } 
+    // true if username is not between 4-20 chars
+    else if (input.value.length < 4 || input.value.length > 20) {
+        input.setCustomValidity('Username must be between 4 and 20 characters.'); 
+    } 
+    //true if username does not match regex
+    else if (!regex.test(input.value)) {
+        input.setCustomValidity('Username can only contain letters and numbers.'); 
+    } else {
+            // gets rid of alert box if username is valid
+      input.setCustomValidity('');
     }
 }
+
+
+//checks password regex and displays alert 
+function checkPw(input) {
+    let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    if (!regex.test(input.value)) {
+        input.setCustomValidity("Password must be at least 8 characters long and contain one letter and number.");
+    } else {
+        // gets rid of alert box if username is valid
+  input.setCustomValidity('');
+}
+
+}
+
+//checks if passwords match
+function validate(){
+    // console.log((document.getElementById("passwordForm").value === document.getElementById("confirmpasswordForm").value));
+
+if ((document.getElementById("passwordForm").value !== document.getElementById("confirmpasswordForm").value)){
+    alert("Passwords do not match.");
+
+    return (document.getElementById("passwordForm").value === document.getElementById("confirmpasswordForm").value);
+}
+}
+
+
+
+
 
