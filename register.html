@@ -17,7 +17,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-dark sticky-top w-100" style="background-color: #1A75C1;">
   <div class="container-fluid w-75">
-    <a class="navbar-brand" href="#"><img src="img/frontpage/logo/logo.png"></a>
+    <a class="navbar-brand" href="index.html"><img src="img/frontpage/logo/logo.png"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -44,19 +44,31 @@
   <div class="modal-dialog">
     <div class="modal-content">
     <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Login</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-header mx-auto">
+          <div class="container mx-auto">
+              <div class="row">
+                <div class="col-2">
+                </div>
+                <div class="col-8 text-center">
+                   <h3>
+                     Login 
+                   </h3>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
+                </div>
+              </div>
+              </div>
       </div>
       <!-- Modal body -->
-      <div class="modal-body">
+      <div class="modal-body col-6 mx-auto">
         <form method="post" action="signin.php">
 		  <input type="text" name="User_Name" class="modaluserpw" placeholder="Username">
 		  <input type="password" name="User_Password" 
           class="modaluserpw" placeholder="Password">
-		  <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+		  <input type="submit" name="login" class="login loginmodal-submit modaluserpw" value="Login">
 		</form>
-      </div>
+    </div>
     </div>
   </div>
 </div>
