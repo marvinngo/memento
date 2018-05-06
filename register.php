@@ -5,9 +5,9 @@ $methodType = $_SERVER['REQUEST_METHOD'];
 if ($methodType === 'POST') {
 
     $servername = "localhost";
-    $dblogin = "justince_team5";
+    $dblogin = "evanmorr_team5";
     $password = "Team5!Team5!";
-    $dbname = "justince_mementodb";
+    $dbname = "evanmorr_mementodb";
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dblogin, $password);
