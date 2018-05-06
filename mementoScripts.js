@@ -61,6 +61,12 @@ function checkEmail(input) {
 }
 
 
+//prevents form from submitting if no option has been selected for group size
+function validate() {
+    var select = document.getElementById('totalPeople');
+    // console.log(select.value);
+    return !select.value == 0;
+}
 
 
 
