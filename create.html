@@ -87,7 +87,7 @@
             Create Group
             
             <!-- form -->
-            <form method="post" action="creategroup.php">
+            <form method="post" action="creategroup.php" onsubmit="return validate()">
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
                 <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name" name="Group_Name" required autofocus>
               </div>
@@ -98,39 +98,39 @@
 
             <!-- confirm password -->
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                <input type="password" class="form-control" id="confirmGroupPasswordForm" placeholder="Confirm password" pattern="[a-zA-Z0-9]{8,20}" oninput="check(this)" required>
+                <input type="password" class="form-control" id="confirmGroupPasswordForm" placeholder="Confirm password" pattern="[a-zA-Z0-9]{8,20}" required>
               </div>
               
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4" style="height: 100px;">
-                <input type="text" name="Group_Description" class="form-control" id="descriptionForm" placeholder="Description">
+                <input type="text" name="Group_Description" class="form-control" id="descriptionForm" placeholder="Description" required>
               </div>
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                <label>Select the group size:</label>
-                <select class="form-control" name="Group_Size" title="lol" placeholder="Number of People" id="totalPeople">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                  <option>13</option>
-                  <option>14</option>
-                  <option>15</option>
-                  <option>16</option>
-                  <option>17</option>
-                  <option>18</option>
-                  <option>19</option>
-                  <option>20</option>
-                  <option>21</option>
-                  <option>22</option>
-                  <option>23</option>
-                  <option>24</option>
+                <select class="form-control" name="Group_Size" title="Number of people" id="totalPeople" required>
+                  <option value="" selected>Number of people</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
                 </select>
                 <div class="col px-0">
                 <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right">Submit</button>
