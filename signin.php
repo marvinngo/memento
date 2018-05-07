@@ -26,7 +26,7 @@ if ($methodType === 'POST') {
         if (isset($_POST["User_Password"]) && !empty($_POST["User_Password"])) {
             // these names don't all have to be the same but if we have several variables
             // then it makes sense to make them the same
-            $User_Password =  $_POST["User_Password"];
+            $User_Password = $_POST["User_Password"];
         }
       
         $sql = "SELECT * FROM tbl_User WHERE User_Name = :uName";
@@ -49,7 +49,7 @@ if ($methodType === 'POST') {
         
                 
         if ($count == 1) {
-          if ($User_Password == $rows[0]['User_Password']) {
+          if (hash_equals($rows[0]['User_Password'], crypt($User_Password, $rows[0]['User_Password']))) {
             header( 'Location: createjoin.html' ) ;
           } else {
             echo "Username matches DB.<br>";

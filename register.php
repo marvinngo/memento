@@ -26,7 +26,7 @@ if ($methodType === 'POST') {
         if (isset($_POST["User_Password"]) && !empty($_POST["User_Password"])) {
             // these names don't all have to be the same but if we have several variables
             // then it makes sense to make them the same
-            $User_Password =  $_POST["User_Password"];
+            $User_Password =  crypt($_POST["User_Password"]);
         }
         if (isset($_POST["User_Email"]) && !empty($_POST["User_Email"])) {
             // these names don't all have to be the same but if we have several variables

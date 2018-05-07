@@ -51,7 +51,7 @@ if ($methodType === 'POST') {
             // Check if Password matches in database:
               
           if ($count == 1) {
-          if ($Group_Password == $rows[0]['Group_Password']) {
+          if (hash_equals($rows[0]['Group_Password'], crypt($Group_Password, $rows[0]['Group_Password']))) {
             // Placeholder - should go to specific group's page? Depends
             // how MyGroups page is implemented.
             header( 'Location: http://mementovancouver.com/mygroups.html' ) ;
