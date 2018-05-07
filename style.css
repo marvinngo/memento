@@ -192,7 +192,13 @@ img.mr-2 {
 
 }
 @media (max-width: 768px) {
-  
+  .navbar-brand {
+    width: 60%;
+  }
+  .navbar-brand img {
+    width: 100%;
+  }
+
 }
 
 
