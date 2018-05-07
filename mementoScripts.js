@@ -28,25 +28,32 @@ function checkUsername(input) {
 function checkPw(input) {
     let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    if (!regex.test(input.value)) {
+    console.log(!regex.test(input.value));
+    console.log((document.getElementById("passwordForm").value !== document.getElementById("confirmpasswordForm").value));
+
+     if (!regex.test(input.value)) {
         input.setCustomValidity("Password must be at least 8 characters long and contain one letter and number.");
+    } else if (input.value !== document.getElementById("confirmpasswordForm").value) {
+        input.setCustomValidity('Passwords do not match.');
     } else {
         // gets rid of alert box if username is valid
-  input.setCustomValidity('');
-}
+    input.setCustomValidity('');
+
+    }
 
 }
 
-//checks if passwords match
-function validate(){
-    // console.log((document.getElementById("passwordForm").value === document.getElementById("confirmpasswordForm").value));
 
-if ((document.getElementById("passwordForm").value !== document.getElementById("confirmpasswordForm").value)){
-    alert("Passwords do not match.");
+// //checks if passwords match
+// function validate(){
+//     // console.log((document.getElementById("passwordForm").value === document.getElementById("confirmpasswordForm").value));
 
-    return (document.getElementById("passwordForm").value === document.getElementById("confirmpasswordForm").value);
-}
-}
+// if ((document.getElementById("passwordForm").value !== document.getElementById("confirmpasswordForm").value)){
+//     alert("Passwords do not match.");
+
+//     return (document.getElementById("passwordForm").value === document.getElementById("confirmpasswordForm").value);
+// }
+// }
 
 function checkEmail(input) {
     let regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
