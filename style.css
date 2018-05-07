@@ -69,7 +69,7 @@ html, body, footer, footer a {
 
 /* background for createjoin page */
 .masthead {
-  min-height: 47rem;
+  height: 82%;
   width: 100%;
   background: url("img/createjoin/background.jpg");
   background-position: center center;
@@ -83,7 +83,7 @@ html, body, footer, footer a {
 }
 .modaluserpw {
   margin-bottom: 20px;
-  width: 70%
+  width: 100%
 }
 .loginmodal-submit {
   background: #FFF;
@@ -96,6 +96,12 @@ html, body, footer, footer a {
   width: 70%;
   
 }
+
+.modaluserpw {
+  width: 100%;
+}
+
+
 /* links in navbar */
 .nav-link {
   font-size: 1.1em;
@@ -111,6 +117,11 @@ html, body, footer, footer a {
   width: 80%;
 }
 
+/* registration page bg */
+.registerBG {
+  background: url("img/loggedin/sky.jpg");
+  background-size: cover;
+}
 /* colors for sign in button in nav bar */
 .signin {
   background-color: #FFF;
@@ -133,7 +144,15 @@ html, body, footer, footer a {
   color: white;
 }
 
+/* colour for buttons (most pages) */
+.submitButton {
+  background-color: #1A75C1;
+}
 
+/* colour of title text for most pages */
+.title {
+  color: #F6F6F6;
+}
 
 
 /* copyright in footer */
@@ -166,21 +185,6 @@ img.mr-2 {
 #maintext {
   color: #F6F6F6;
   font-size: 14pt;
-}
-
-/* colour for buttons (most pages) */
-.submitButton {
-  background-color: #1A75C1;
-}
-
-.modaluserpw {
-  width: 100%;
-}
-
-
-/* colour of title text for most pages */
-.title {
-  color: #F6F6F6;
 }
 
 /*---Media Queries --*/
