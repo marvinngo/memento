@@ -1,3 +1,5 @@
+var count=0;
+
 function construction() {
     alert("Page is under construction!");
 }
@@ -104,5 +106,13 @@ function checkGroupName(input) {
     } else {
             // gets rid of alert box if username is valid
       input.setCustomValidity('');
+    }
+}
+
+function huehuehue() {
+    count++;
+    var x = document.getElementById("A");
+    if (count === 5) {
+        x.style.display = "block";
     }
 }
