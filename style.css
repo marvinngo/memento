@@ -237,15 +237,12 @@ img.mr-2 {
 
 
 #ele {
-  position: absolute;
+  position: relative;
   left: 100%;
-  width: 100%;
-  height: 100%;
-}
-
-#ele2 {
-  width: 650px;
+  top: 800px;
+  width: 500px;
   height: 500px;
+  z-index: 1;
 }
 
 #A{
