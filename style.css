@@ -112,6 +112,7 @@ html, body, footer, footer a {
 /* links in navbar */
 .nav-link {
   font-size: 1.1em;
+  text-align: right;
 }
 
 /* offsets the navbar when 'about' is clicked */
