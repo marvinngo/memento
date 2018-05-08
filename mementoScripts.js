@@ -102,4 +102,4 @@ function checkGroupName(input) {
 
 
 
-$('#ele').animate({left:'-8000px'},25000);
+$('#ele').animate({left:'-8000px'},28000);
