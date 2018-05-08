@@ -1,3 +1,5 @@
+
+
 function construction() {
     alert("Page is under construction!");
 }
@@ -77,15 +79,6 @@ function validate() {
 
 
 
-//  https://www.w3schools.com/jquery/jquery_animate.as
-/* moves the img until it is -6000 px to the left (off the screen)
-11 seconds */
-$('div.test').click(function(){
-    $('#ele').animate({left:'0'},11000)
-})
-
-
-
 //checks username regex and displays alert 
 function checkGroupName(input) {
     let regex = /^[a-zA-Z0-9]+$/;
@@ -106,3 +99,7 @@ function checkGroupName(input) {
       input.setCustomValidity('');
     }
 }
+
+
+
+$('#ele').animate({left:'-8000px'},25000);

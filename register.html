@@ -13,7 +13,7 @@
 </head>
   
 <body>
-
+  
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-dark sticky-top w-100" style="background-color: #1A75C1;">
     <div class="container-fluid w-75">
@@ -52,7 +52,6 @@
       <div class="col">
         <div class="container pt-2 px-3 rounded mb-4">
           <div class="row xs-12 text-left font-weight-bold">
-
             <!-- form container -->
             <div id="title" class="col text-center px-3 py-3">
               <div class="container-fluid w-100 mb-4">
@@ -61,10 +60,10 @@
                     <div class="pt-3">
                       Sign Up
                     </div>
-              
-            
+
             <!-- sign up form -->
               <form method="post" action="register.php">
+                
                 <!-- username -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
                   <input type="text" name="User_Name" class="form-control" id="usernameForm" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" oninput="checkUsername(this)" required autofocus>
@@ -72,12 +71,7 @@
 
                 <!-- password -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="password" name="User_Password" class="form-control" id="passwordForm" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" oninput="checkPw(this)" required>
-                </div>
-
-                <!-- confirm password -->
-                <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="password" name="confirm_User_Password" class="form-control" id="confirmpasswordForm" placeholder="Confirm password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>
+                  <input type="password" name="User_Password" class="form-control" id="passwordForm" placeholder="Password" pattern="^(?pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>
                 </div>
 
                 <!-- email -->
@@ -90,7 +84,12 @@
               </form>
             </div>
           </div>
-        </div>
+        </div>=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" oninput="checkPw(this)" required>
+                </div>
+
+                <!-- confirm password -->
+                <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+                  <input type="password" name="confirm_User_Password" class="form-control" id="confirmpasswordForm" placeholder="Confirm password" 
         <div class="container-fluid w-100 mb-4">
             <div class="row">
               <div class="container col-xs-12 col-sm-10 col-md-10 col-lg-8 divBorder title pt-3">
@@ -147,12 +146,16 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
     <script src="mementoScripts.js"></script>
-
+    
   
   </body>
 </html>
