@@ -2,6 +2,7 @@ function construction() {
     alert("Page is under construction!");
 }
 
+
 //checks username regex and displays alert 
 function checkUsername(input) {
     let regex = /^[a-zA-Z0-9]+$/;
@@ -22,7 +23,6 @@ function checkUsername(input) {
       input.setCustomValidity('');
     }
 }
-
 
 //checks password regex and displays alert 
 function checkPw(input) {
@@ -77,3 +77,32 @@ function validate() {
 
 
 
+//  https://www.w3schools.com/jquery/jquery_animate.as
+/* moves the img until it is -6000 px to the left (off the screen)
+11 seconds */
+$('div.test').click(function(){
+    $('#ele').animate({left:'0'},11000)
+})
+
+
+
+//checks username regex and displays alert 
+function checkGroupName(input) {
+    let regex = /^[a-zA-Z0-9]+$/;
+
+    //true if username is not between 4-20 chars AND does not match regex
+    if ((input.value.length < 4 || input.value.length > 20) && !regex.test(input.value)) {
+        input.setCustomValidity('Group name must be between 4 and 20 characters and can only contain letters and numbers.');
+    } 
+    // true if username is not between 4-20 chars
+    else if (input.value.length < 4 || input.value.length > 20) {
+        input.setCustomValidity('Group name must be between 4 and 20 characters.'); 
+    } 
+    //true if username does not match regex
+    else if (!regex.test(input.value)) {
+        input.setCustomValidity('Group name can only contain letters and numbers.'); 
+    } else {
+            // gets rid of alert box if username is valid
+      input.setCustomValidity('');
+    }
+}
