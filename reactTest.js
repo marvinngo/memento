@@ -30,10 +30,17 @@ class LoginUser extends React.Component {
         super(props);
         this.handleLoginUser = this.handleLoginUser.bind(this);
         this.handleLogoutUser = this.handleLogoutUser.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+
+        this.state = { username: '' };
     }
 
-    handleLoginUser(user) {
-        this.props.onLoginUser(user);
+    handleChange(e) {
+        this.setState({ username: e.target.value });
+    }
+
+    handleLoginUser(password) {
+        this.props.onLoginUser(password, this.state.username);
     }
 
     handleLogoutUser() {
@@ -53,6 +60,7 @@ class LoginUser extends React.Component {
             return (
                 <div>
                     <h3>log in user</h3>
+                    <input onChange={this.handleChange} />
                     <TextInput onRegister={this.handleLoginUser} />
                 </div>
             );
@@ -70,8 +78,18 @@ class App extends React.Component {
         this.handleLogoutUser = this.handleLogoutUser.bind(this);
     }
 
-    handleLoginUser(user) {
-        fetch('./signin.php')
+    handleLoginUser(password, user) {
+        fetch('./signin.php', {
+            headers: {
+                'Accept' : 'application/json',
+                'Content-Type:': 'application/json'
+            },
+            mathod: "POST",
+            body: JSON.stringify({
+                'username': user,
+                'password': password
+            })
+        })
             .then(
                 function (response) {
                     if (response.status == 200) {
