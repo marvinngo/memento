@@ -71,7 +71,7 @@ class App extends React.Component {
     }
 
     handleLoginUser(user) {
-        fetch('./api/some.json')
+        fetch('./signin.php')
             .then(
                 function (response) {
                     if (response.status == 200) {
