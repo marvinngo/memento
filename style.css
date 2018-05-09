@@ -252,7 +252,7 @@ img.mr-2 {
   display: none;
   position:absolute;
   z-index: 1;
-	left:-25%; /* Set initial position for each image off-screen left -- adjust according to image width */
+	left: -100%; /* Set initial position for each image off-screen left -- adjust according to image width */
 	animation:mymove 8s infinite;	/* total animation time for each image is 8 seconds, loops forever */
 	animation-direction:normal;	
 	animation-delay:0s;
@@ -261,6 +261,6 @@ img.mr-2 {
 
 @keyframes mymove
 	{
-	from {left:-0%;}	/*off-screen left (adjust for image width)*/
-	to {left:100%;}		/*off-screen right*/
+	from {left:-100%;}	/*off-screen left (adjust for image width)*/
+	to {left:150%;}		/*off-screen right*/
 	}
