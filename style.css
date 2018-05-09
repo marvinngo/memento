@@ -85,10 +85,17 @@ html, body, footer, footer a {
   background-size: cover;
 }
 
+.modal {
+  border: 0px;
+}
 .modal-content {
   background: #FFF;
   color: #1A75C1;
-  
+}
+
+.modal-header {
+  background: #AED6F1;
+  width: 100%;
 }
 .modaluserpw {
   margin-bottom: 20px;
@@ -179,6 +186,10 @@ img.mr-2 {
 
 /* ID Selectors */
 
+#aboutModal {
+  background: rgba(255, 255, 255, 0.3);
+  color: #1A75C1;
+}
 /* content of mygroups page */
 #content {
   font-size: 12pt;
@@ -192,7 +203,7 @@ img.mr-2 {
 
 /* smaller text bodies of main div containers */
 #maintext {
-  color: #F6F6F6;
+  color: #1A75C1;
   font-size: 14pt;
 }
 

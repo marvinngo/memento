@@ -55,8 +55,8 @@ if($_SESSION['loggedin'] == false){
     </div>
   </nav>
 <!-- The Modal -->
-<div class="modal fade" id="login">
-  <div class="modal-dialog">
+<div class="modal fade" id="login" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
     <!-- Modal Header -->
       <div class="modal-header mx-auto">
@@ -93,13 +93,13 @@ if($_SESSION['loggedin'] == false){
 <header class="masthead d-flex">
   <!-- main div container -->
   <div class="container col-12  col-sm-9  col-md-8  col-lg-5 text-center mt-3 title">
-    <h1 class="my-5 createheading">Create a Memento</h1>
+    <h1 class="mt-4 createheading">Create a Memento</h1>
       <div class="row">
-        <div class="col-12 col-sm-6 mb-5">
+        <div class="col-12 col-sm-6 my-4">
             <button type="button" class="btn btn-primary btn-lg createjoin" data-toggle="modal" data-target="#createModal" style="background-color: #FFF; color: #1A75C1;">Create Group</button>
           <!-- <button type="button" onclick="location.href = 'create.html'" class="btn btn-primary btn-lg createjoin" style="background-color: #FFF; color: #1A75C1;">Create Group</button> -->
         </div>
-        <div class="col-12 col-sm-6 mb-5">
+        <div class="col-12 col-sm-6 my-4">
             <button type="button" class="btn btn-light btn-lg createjoin" data-toggle="modal" data-target="#joinModal" style="background-color: #1A75C1; color: #FFF;">Join Group</button>
           <!-- <button type="button" onclick="location.href = 'join.html'" class="btn btn-light btn-lg createjoin" style="background-color: #1A75C1; color: #FFF;">Join Group</button> -->
         </div>
@@ -126,7 +126,33 @@ if($_SESSION['loggedin'] == false){
             <ul class="list-unstyled w-100">
   
               <div class="clickableDiv">
-                <a href="aboutgroup.html">
+                <a href="#" data-toggle="modal" data-target="#aboutModal">
+                  <div id="firstGroup" class="row xs-12 mx-2">
+                    <li class="media">
+                      <img class="mr-2 mb-3" src="img/mygroups/suit.jpeg" alt="group picture 1">
+                      <div class="media-body">
+                        <h4 class="mt-0 mb-1">Coworkers</h4>
+                        <p>Year end celebration</p>
+                      </div>
+                    </li>
+                  </div>
+                </a>
+              </div>
+              <div class="clickableDiv">
+                <a href="#" data-toggle="modal" data-target="#aboutModal">
+                  <div id="firstGroup" class="row xs-12 mx-2">
+                    <li class="media">
+                      <img class="mr-2 mb-3" src="img/mygroups/suit.jpeg" alt="group picture 1">
+                      <div class="media-body">
+                        <h4 class="mt-0 mb-1">Coworkers</h4>
+                        <p>Year end celebration</p>
+                      </div>
+                    </li>
+                  </div>
+                </a>
+              </div>
+              <div class="clickableDiv">
+                <a href="#" data-toggle="modal" data-target="#aboutModal">
                   <div id="firstGroup" class="row xs-12 mx-2">
                     <li class="media">
                       <img class="mr-2 mb-3" src="img/mygroups/suit.jpeg" alt="group picture 1">
@@ -139,58 +165,6 @@ if($_SESSION['loggedin'] == false){
                 </a>
               </div>
   
-              <div class="clickableDiv">
-                <a href="aboutgroup.html">
-                  <div id="secondGroup" class="row xs-12 mx-2">
-                    <li class="media">
-                      <img class="mr-2 mb-3" src="img/mygroups/seawall.jpeg" alt="group picture 1">
-                      <div class="media-body">
-                        <h4 class="mt-0 mb-1">Family</h4>
-                        <p>Rent bikes to go around seawall</p>
-                      </div>
-                    </li>
-                  </div>
-                </a>
-              </div>
-              <div class="clickableDiv">
-                <a href="aboutgroup.html">
-                  <div id="secondGroup" class="row xs-12 mx-2">
-                    <li class="media">
-                      <img class="mr-2 mb-3" src="img/mygroups/seawall.jpeg" alt="group picture 1">
-                      <div class="media-body">
-                        <h4 class="mt-0 mb-1">Family</h4>
-                        <p>Rent bikes to go around seawall</p>
-                      </div>
-                    </li>
-                  </div>
-                </a>
-              </div>
-              <div class="clickableDiv">
-                <a href="aboutgroup.html">
-                  <div id="secondGroup" class="row xs-12 mx-2">
-                    <li class="media">
-                      <img class="mr-2 mb-3" src="img/mygroups/seawall.jpeg" alt="group picture 1">
-                      <div class="media-body">
-                        <h4 class="mt-0 mb-1">Family</h4>
-                        <p>Rent bikes to go around seawall</p>
-                      </div>
-                    </li>
-                  </div>
-                </a>
-              </div>
-              <div class="clickableDiv">
-                <a href="aboutgroup.html">
-                  <div id="secondGroup" class="row xs-12 mx-2">
-                    <li class="media">
-                      <img class="mr-2 mb-3" src="img/mygroups/seawall.jpeg" alt="group picture 1">
-                      <div class="media-body">
-                        <h4 class="mt-0 mb-1">Family</h4>
-                        <p>Rent bikes to go around seawall</p>
-                      </div>
-                    </li>
-                  </div>
-                </a>
-              </div>
   
             </ul>
           </div>
@@ -209,7 +183,7 @@ if($_SESSION['loggedin'] == false){
 
 <!-- Create Group Modal -->
 <div class="modal fade" id="createModal">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
       <!-- Modal Header -->
         <div class="modal-header mx-auto">
@@ -300,7 +274,7 @@ if($_SESSION['loggedin'] == false){
                   </div>
                   <div class="col-8 text-center">
                      <h3>
-                       Login 
+                       Join a Group
                      </h3>
                   </div>
                   <div class="col-2">
@@ -328,6 +302,82 @@ if($_SESSION['loggedin'] == false){
       </div>
     </div>
   </div>
+<!-- About Group Modal -->
+<div class="modal fade" id="aboutModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      <!-- Modal Header -->
+        <div class="modal-header mx-auto">
+            <div class="container mx-auto">
+                <div class="row">
+                  <div class="col-2">
+                  </div>
+                  <div class="col-8 text-center">
+                     <h2>
+                       GROUP NAME
+                     </h2>
+                  </div>
+                  <div class="col-2">
+                      <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body col-12 mx-auto">
+            <!-- group description, # of members, budget -->
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-5 mx-auto">
+                <img class="mr-2 my-3 rounded mx-auto d-block img-fluid img-thumbnail" src="img/aboutgroup/groupimg.jpeg" alt="group picture 1">
+              </div>
+              <div id="maintext" class="col-sm-12 col-md-7 mb-4">
+                <h2>Description</h2>
+                <h3>Number of Members</h3>
+                <br>
+                <p>Budget</p>
+              </div>
+            </div>
+          </div>
+          <!-- events -->
+          <div class="container-fluid">
+            <div class="row">
+              <!-- event 1 -->
+              <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                <div class="card mx-auto">
+                  <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                  <div class="card-body">
+                    <h3 class="card-title">event</h3>
+                    <p class="card-text">event description</p>
+                  </div>
+                </div>
+              </div>
+              <!-- event 2 -->
+              <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                <div class="card mx-auto">
+                  <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                  <div class="card-body">
+                    <h3 class="card-title">event</h3>
+                    <p class="card-text">event description</p>
+                  </div>
+                </div>
+              </div>
+              <!-- event 3 -->
+              <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                <div class="card mx-auto">
+                  <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                  <div class="card-body">
+                    <h3 class="card-title">event</h3>
+                    <p class="card-text">event description</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--- Footer -->
 <footer class="site-footer page-footer font-small pt-3">
