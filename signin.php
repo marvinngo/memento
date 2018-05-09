@@ -29,7 +29,7 @@ if ($methodType === 'POST') {
         $User_Name = "";
         $User_Password = "";
       
-        if (isset($_POST["User_Name"]) && isset($_POST["User_Name"])) {
+        if (isset($_POST["User_Name"]) && isset($_POST["User_Password"])) {
             // these names don't all have to be the same but if we have several variables
             // then it makes sense to make them the same
             $passwordEmpty = false;
