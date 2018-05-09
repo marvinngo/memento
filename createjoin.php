@@ -92,22 +92,119 @@ if($_SESSION['loggedin'] == false){
 <!-- background -->
 <header class="masthead d-flex">
   <!-- main div container -->
-  <div class="container text-center my-auto title">
-    <h1 class="mb-5 createheading">Create a Memento</h1>
+  <div class="container col-12  col-sm-9  col-md-8  col-lg-5 text-center mt-3 title">
+    <h1 class="my-5 createheading">Create a Memento</h1>
       <div class="row">
-        <div class="col-12 col-md-4 my-2">
+        <div class="col-12 col-sm-6 mb-5">
             <button type="button" class="btn btn-primary btn-lg createjoin" data-toggle="modal" data-target="#createModal" style="background-color: #FFF; color: #1A75C1;">Create Group</button>
           <!-- <button type="button" onclick="location.href = 'create.html'" class="btn btn-primary btn-lg createjoin" style="background-color: #FFF; color: #1A75C1;">Create Group</button> -->
         </div>
-        <div class="col-12 col-md-4 my-2">
+        <div class="col-12 col-sm-6 mb-5">
             <button type="button" class="btn btn-light btn-lg createjoin" data-toggle="modal" data-target="#joinModal" style="background-color: #1A75C1; color: #FFF;">Join Group</button>
           <!-- <button type="button" onclick="location.href = 'join.html'" class="btn btn-light btn-lg createjoin" style="background-color: #1A75C1; color: #FFF;">Join Group</button> -->
         </div>
-        <div class="col-12 col-md-4 my-2">
-          <button type="button" onclick="location.href = 'mygroups.php'" class="btn btn-light btn-lg createjoin" style="background-color: #FFF; color: #1A75C1;">My Groups</button>
+
+
+
+
+
+  </div>
+
+      <!-- main div container -->
+<div class="container-fluid divBorder my-4">
+  <div id="main" class="container col-12 w-90 px-2 pt-4 title">
+    <div class="row xs-12 text-left font-weight-bold">
+      <div class="col">
+        <!-- signup form -->
+        <div class="container px-3 rounded mb-4">
+          <div class="row xs-12 text-left font-weight-bold">
+            <div id="title" class="col text-center mb-3">
+              My Groups
+            </div>
+          </div>
+          <div id="content" class="row xs-12">
+            <ul class="list-unstyled w-100">
+  
+              <div class="clickableDiv">
+                <a href="aboutgroup.html">
+                  <div id="firstGroup" class="row xs-12 mx-2">
+                    <li class="media">
+                      <img class="mr-2 mb-3" src="img/mygroups/suit.jpeg" alt="group picture 1">
+                      <div class="media-body">
+                        <h4 class="mt-0 mb-1">Coworkers</h4>
+                        <p>Year end celebration</p>
+                      </div>
+                    </li>
+                  </div>
+                </a>
+              </div>
+  
+              <div class="clickableDiv">
+                <a href="aboutgroup.html">
+                  <div id="secondGroup" class="row xs-12 mx-2">
+                    <li class="media">
+                      <img class="mr-2 mb-3" src="img/mygroups/seawall.jpeg" alt="group picture 1">
+                      <div class="media-body">
+                        <h4 class="mt-0 mb-1">Family</h4>
+                        <p>Rent bikes to go around seawall</p>
+                      </div>
+                    </li>
+                  </div>
+                </a>
+              </div>
+              <div class="clickableDiv">
+                <a href="aboutgroup.html">
+                  <div id="secondGroup" class="row xs-12 mx-2">
+                    <li class="media">
+                      <img class="mr-2 mb-3" src="img/mygroups/seawall.jpeg" alt="group picture 1">
+                      <div class="media-body">
+                        <h4 class="mt-0 mb-1">Family</h4>
+                        <p>Rent bikes to go around seawall</p>
+                      </div>
+                    </li>
+                  </div>
+                </a>
+              </div>
+              <div class="clickableDiv">
+                <a href="aboutgroup.html">
+                  <div id="secondGroup" class="row xs-12 mx-2">
+                    <li class="media">
+                      <img class="mr-2 mb-3" src="img/mygroups/seawall.jpeg" alt="group picture 1">
+                      <div class="media-body">
+                        <h4 class="mt-0 mb-1">Family</h4>
+                        <p>Rent bikes to go around seawall</p>
+                      </div>
+                    </li>
+                  </div>
+                </a>
+              </div>
+              <div class="clickableDiv">
+                <a href="aboutgroup.html">
+                  <div id="secondGroup" class="row xs-12 mx-2">
+                    <li class="media">
+                      <img class="mr-2 mb-3" src="img/mygroups/seawall.jpeg" alt="group picture 1">
+                      <div class="media-body">
+                        <h4 class="mt-0 mb-1">Family</h4>
+                        <p>Rent bikes to go around seawall</p>
+                      </div>
+                    </li>
+                  </div>
+                </a>
+              </div>
+  
+            </ul>
+          </div>
         </div>
       </div>
+    </div>
   </div>
+  </div>
+
+
+
+
+      </div>
+      
 </header>
 
 <!-- Create Group Modal -->
@@ -136,23 +233,23 @@ if($_SESSION['loggedin'] == false){
             <div id="form" class="col text-center px-3 py-3">
                 <!-- form -->
             <form method="post" action="creategroup.php" onsubmit="return validate()">
-              <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+              <div class="form-row mx-auto my-4">
                 <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name" name="Group_Name" pattern="[a-zA-Z0-9]{4,20}" oninput="checkGroupName(this)"  required autofocus>
               </div>
             <!-- password -->
-              <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+              <div class="form-row mx-auto my-4">
                 <input type="password" name="Group_Password" class="form-control" id="groupPasswordForm" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"  oninput="checkPw(this)" required>
               </div>
 
             <!-- confirm password -->
-              <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+              <div class="form-row mx-auto my-4">
                 <input type="password" class="form-control" id="confirmGroupPasswordForm" placeholder="Confirm password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" oninput="checkPw(this)" required>
               </div>
               
-              <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4" style="height: 100px;">
+              <div class="form-row mx-auto my-4" style="height: 100px;">
                 <textarea type="text" id="descriptionForm" class="form-control" rows ="5" name="Group_Description" placeholder="Description" required></textarea>
               </div>
-              <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+              <div class="form-row mx-auto my-4">
                 <select class="form-control" name="Group_Size" title="Number of people" id="totalPeople" required>
                   <option value="" selected>Number of people</option>
                     <option value="1">1</option>

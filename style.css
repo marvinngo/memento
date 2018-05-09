@@ -78,7 +78,7 @@ html, body, footer, footer a {
 
 /* background for createjoin page */
 .masthead {
-  height: 82%;
+  min-height: 100%;
   width: 100%;
   background: url("img/createjoin/background.jpg");
   background-position: center center;
