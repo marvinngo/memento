@@ -208,7 +208,7 @@ document.getElementById("ms").innerHTML += User_Name + "!";
     <script>
     var Group_Name = '<?php echo $row['Group_Name'];?>';
     var Group_Description = '<?php echo $groupArray[0]['Group_Description'];?>';
-    tables.innerHTML += "<div class='clickableDiv'><a href='aboutgroup.html'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture 1'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
+    tables.innerHTML += "<div class='clickableDiv'><a href='aboutgroup.html'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
     </script>
     
 <?php endforeach; ?>
