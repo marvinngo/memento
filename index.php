@@ -87,7 +87,7 @@
               <div class="form-row mx-auto my-4">
                 <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
                 <div class="col px-0">
-                  <button id="submitButton2" type="submit" class="btn btn-primary mt-4 submitButton float-right">Sign in</button>
+                  <button id="submitButton" type="submit" class="btn btn-primary mt-4 w-100 submitButton">Sign in</button>
                 </div>
               </div>
             </form>
