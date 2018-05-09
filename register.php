@@ -54,6 +54,15 @@ if ($methodType === 'POST') {
               // $insert is a 'PDOStatement
               $statement = $conn->prepare($sql);
               $statement->execute(array(":UserName" => $User_Name, ":UserPassword" => $User_Password, ":UserEmail" => $User_Email));
+              
+              // Set session login to true to login the user after registering:
+              
+              $_SESSION['User_Name'] = $User_Name;
+              $_SESSION['email'] = $rows[0]['User_Email'];
+              $_SESSION['loggedin'] = true;
+              
+              // Redirect user to MyGroups page after updating database and logging in:
+              
               header( 'Location: createjoin.html' ) ;
             }
         }
