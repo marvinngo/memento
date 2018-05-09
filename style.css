@@ -208,6 +208,10 @@ img.mr-2 {
     width: 100%;
   }
 
+  #A{
+    left: -150%; /* Set initial position for each image off-screen left -- adjust according to image width */
+  }
+
 }
 
 
@@ -236,17 +240,14 @@ img.mr-2 {
   .greyBG {
     background-color: #e9ecef;
   }
+  
+
+  #A{ 
+    width: 500px;
+  }
 
 }
 
-#ele {
-  position: relative;
-  left: 100%;
-  top: 800px;
-  width: 500px;
-  height: 500px;
-  z-index: 1;
-}
 
 #A{
   display: none;
