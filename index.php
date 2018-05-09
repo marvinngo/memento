@@ -77,12 +77,20 @@
       </div>
       <!-- Modal body -->
       <div class="modal-body col-6 mx-auto">
+        <!-- username -->
         <form method="post" action="signin.php">
-		  <input type="text" name="User_Name" class="modaluserpw" placeholder="Username" autofocus>
-		  <input type="password" name="User_Password" 
-          class="modaluserpw" placeholder="Password">
-		  <input type="submit" name="login" class="login loginmodal-submit modaluserpw" value="Login">
-		</form>
+              <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+                <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" required>
+              </div>
+
+              <!-- password -->
+              <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+                <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
+                <div class="col px-0">
+                  <button id="submitButton2" type="submit" class="btn btn-primary mt-4 submitButton float-right">Sign in</button>
+                </div>
+              </div>
+            </form>
     </div>
     </div>
   </div>
