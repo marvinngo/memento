@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 06, 2018 at 07:54 PM
--- Server version: 5.7.22
--- PHP Version: 5.6.30
+-- Host: 127.0.0.1
+-- Generation Time: May 10, 2018 at 12:17 AM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_Event`
+-- Table structure for table `tbl_event`
 --
 
-CREATE TABLE `tbl_Event` (
+CREATE TABLE `tbl_event` (
   `ID` int(11) NOT NULL,
   `Event_Name` varchar(100) NOT NULL,
   `Event_Description` varchar(700) NOT NULL,
@@ -40,10 +40,10 @@ CREATE TABLE `tbl_Event` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_Event`
+-- Dumping data for table `tbl_event`
 --
 
-INSERT INTO `tbl_Event` (`ID`, `Event_Name`, `Event_Description`, `Event_MinUser`, `Event_MaxUser`, `Event_PricePP`, `Event_ImgLocation`, `Event_URL`) VALUES
+INSERT INTO `tbl_event` (`ID`, `Event_Name`, `Event_Description`, `Event_MinUser`, `Event_MaxUser`, `Event_PricePP`, `Event_ImgLocation`, `Event_URL`) VALUES
 (1, 'Drive to Victoria!', 'Spend the day in our province\'s capital and visit the parliament building while frolicking in the picturesque waterfront views.', 4, 5, 30, 'img/eventimgs/1ferry.jpg', 'https://www.leg.bc.ca/learn-about-us/visiting-the-legislature'),
 (2, 'Stargazing at Cypress Bowl', 'Requires a car! Drive up to cypress bowl with your friends on a clear night, and enjoy the view!!!', 1, 99, 3, 'img/eventimgs/6stargaze.jpg', 'http://rasc-vancouver.com/observing/observing-sites/cypress-mountain/'),
 (3, 'Bike Rental at Spokes', 'Rent a bike for 2 hours and bike around Vancouver\'s Sea Wall or around the Science World area!', 1, 99, 20, 'img/eventimgs/2bikerental.jpg', 'http://www.spokesbicyclerentals.com/rates'),
@@ -68,10 +68,10 @@ INSERT INTO `tbl_Event` (`ID`, `Event_Name`, `Event_Description`, `Event_MinUser
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_Group`
+-- Table structure for table `tbl_group`
 --
 
-CREATE TABLE `tbl_Group` (
+CREATE TABLE `tbl_group` (
   `ID` int(11) NOT NULL,
   `Group_Name` varchar(100) NOT NULL,
   `Group_Description` varchar(50) NOT NULL,
@@ -82,49 +82,66 @@ CREATE TABLE `tbl_Group` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_Group`
+-- Dumping data for table `tbl_group`
 --
 
-INSERT INTO `tbl_Group` (`ID`, `Group_Name`, `Group_Description`, `Group_Password`, `Group_Size`, `Event_Name`, `DateTime_Created`) VALUES
+INSERT INTO `tbl_group` (`ID`, `Group_Name`, `Group_Description`, `Group_Password`, `Group_Size`, `Event_Name`, `DateTime_Created`) VALUES
 (1, 'grouptest', 'this is a description', 'password', 6, NULL, '2018-05-06 22:19:42'),
 (2, 'grouptest2', 'this is a description', 'password', 6, NULL, '2018-05-06 22:19:42'),
 (3, 'Mom\'s Birthday', 'Mom\'s Birthday', '123123123', 4, NULL, '2018-05-06 22:19:42'),
-(4, 'newsitenewtestgrp', 'this is a new test group', 'password8', 1, NULL, '2018-05-06 22:31:15');
+(4, 'newsitenewtestgrp', 'this is a new test group', 'password8', 1, NULL, '2018-05-06 22:31:15'),
+(5, 'Hash Test', 'this is a hash test', '$1$LbxvqK4I$YI5hW.GWJrYfXbM.xGtNt/', 12, NULL, '2018-05-07 02:29:04'),
+(7, 'newtest', 'password1', '$1$nQiNAAwa$yfdpozFACwRRCjQlEc9PE.', 3, NULL, '2018-05-09 02:06:03'),
+(8, 'newtest2', 'password1 test', '$1$UX9Qs57j$Idd6PpBzxJ.v0wje7Ed.U/', 3, NULL, '2018-05-09 02:07:04'),
+(9, 'SamsGroup', 'Sams Group is the best', '$1$TAon48Nv$PXbKHL6Fol6ztN.jR2it41', 8, NULL, '2018-05-09 03:29:00'),
+(10, 'PeterGroup', 'PeterSucks', '$1$AeLFpQ9l$vjNz5DuYX2R57fJu2bgOL.', 4, NULL, '2018-05-09 03:40:39'),
+(11, 'Balloon', 'this group is all about balloons', '$1$J/Y.Sg3C$u8lturd9xYYpqrrBKmUD9.', 24, NULL, '2018-05-09 21:14:07');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_Registration`
+-- Table structure for table `tbl_registration`
 --
 
-CREATE TABLE `tbl_Registration` (
+CREATE TABLE `tbl_registration` (
   `ID` int(11) NOT NULL,
   `User_Name` varchar(30) NOT NULL,
   `Group_Name` varchar(30) NOT NULL,
-  `Registration_Budget` double NOT NULL,
+  `Registration_Budget` double DEFAULT NULL,
   `DateTime_Created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_registration`
+--
+
+INSERT INTO `tbl_registration` (`ID`, `User_Name`, `Group_Name`, `Registration_Budget`, `DateTime_Created`) VALUES
+(1, 'newtest', 'newtest', NULL, '2018-05-09 02:06:03'),
+(2, 'newtest', 'newtest2', NULL, '2018-05-09 02:07:04'),
+(3, 'newtest', 'SamsGroup', NULL, '2018-05-09 03:29:00'),
+(4, 'newtest', 'PeterGroup', NULL, '2018-05-09 03:40:39'),
+(5, 'newtest', 'Balloon', NULL, '2018-05-09 21:14:07');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_User`
+-- Table structure for table `tbl_user`
 --
 
-CREATE TABLE `tbl_User` (
+CREATE TABLE `tbl_user` (
   `ID` int(11) NOT NULL,
   `User_Name` varchar(20) NOT NULL,
-  `User_Password` varchar(20) NOT NULL,
+  `User_Password` varchar(100) NOT NULL,
   `User_Email` varchar(35) NOT NULL,
   `User_SignUpTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_User`
+-- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_User` (`ID`, `User_Name`, `User_Password`, `User_Email`, `User_SignUpTime`) VALUES
-(1, 'newtest', 'password', 'email@email.com', '2018-05-03 21:20:02'),
+INSERT INTO `tbl_user` (`ID`, `User_Name`, `User_Password`, `User_Email`, `User_SignUpTime`) VALUES
+(15, 'newtest', '$1$2yTLCJVs$J.Q6UcLDOZyfWWBgGWhG2.', 'email@email.com', '2018-05-07 15:09:59'),
 (2, 'Justin', 'passcode', 'abc@abc.abc', '2018-05-03 21:30:49'),
 (3, 'testaccount', 'password', 'email@email.com', '2018-05-03 22:09:38'),
 (4, 'newtest1', 'password', 'what@ever.com', '2018-05-03 23:01:49'),
@@ -134,34 +151,40 @@ INSERT INTO `tbl_User` (`ID`, `User_Name`, `User_Password`, `User_Email`, `User_
 (8, 'delmas91', 'Benji123', 'sebastiandelmas15@gmail.com', '2018-05-04 14:25:01'),
 (9, 'Micheal', '12345abcde', 'mjozdoba@gmail.com', '2018-05-04 14:28:46'),
 (10, 'asdfasdf', 'asdfasdf', 'asdf@asdf.com', '2018-05-04 14:33:21'),
-(11, 'newtestnewsite', 'ffs8pass', 'email@email.com', '2018-05-06 18:30:31');
+(11, 'newtestnewsite', 'ffs8pass', 'email@email.com', '2018-05-06 18:30:31'),
+(12, 'asdfasdf1234', '$1$lo6SHtNb$jBIMkIqBml5P1vFgTZUTi.', 'asdfasdf@a.ca', '2018-05-06 19:16:02'),
+(13, 'hashtest', '$1$9jnEV5IW$j.5RlJdneTLc1AUP7zbG50', 'hashtest1@test.com', '2018-05-06 19:21:07'),
+(14, 'newhashaccount', '$1$lT8jY523$XtpYiqlSqSZFQurKKPlU8/', 'email@email.com', '2018-05-07 12:01:44'),
+(16, 'newtest2', '$1$4Mo5YwHD$dQgsNhzkhVep8NgFNtwFb/', 'email@email.com', '2018-05-08 10:11:14'),
+(17, 'newtest123', '$1$mSjEghcd$b9E1kIkVtOLhZ.5xEmJ111', 'email@email.com', '2018-05-09 14:59:07'),
+(18, 'newtest1234', '$1$GK/1GzhN$EGmagjFhRJYyFZEZGMRwL1', 'email@email.com', '2018-05-09 14:59:43');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `tbl_Event`
+-- Indexes for table `tbl_event`
 --
-ALTER TABLE `tbl_Event`
+ALTER TABLE `tbl_event`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `tbl_Group`
+-- Indexes for table `tbl_group`
 --
-ALTER TABLE `tbl_Group`
+ALTER TABLE `tbl_group`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `tbl_Registration`
+-- Indexes for table `tbl_registration`
 --
-ALTER TABLE `tbl_Registration`
+ALTER TABLE `tbl_registration`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `tbl_User`
+-- Indexes for table `tbl_user`
 --
-ALTER TABLE `tbl_User`
+ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -169,28 +192,28 @@ ALTER TABLE `tbl_User`
 --
 
 --
--- AUTO_INCREMENT for table `tbl_Event`
+-- AUTO_INCREMENT for table `tbl_event`
 --
-ALTER TABLE `tbl_Event`
+ALTER TABLE `tbl_event`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `tbl_Group`
+-- AUTO_INCREMENT for table `tbl_group`
 --
-ALTER TABLE `tbl_Group`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `tbl_Registration`
---
-ALTER TABLE `tbl_Registration`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_User`
---
-ALTER TABLE `tbl_User`
+ALTER TABLE `tbl_group`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `tbl_registration`
+--
+ALTER TABLE `tbl_registration`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_user`
+--
+ALTER TABLE `tbl_user`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

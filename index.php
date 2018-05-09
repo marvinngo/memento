@@ -38,7 +38,7 @@
         <li class="nav-item my-0">
           <a class="nav-link" href="index.php">Home</a>
         </li>
-        <div class="dropdown-divider"></div>
+        <div id="groupDivider" class="dropdown-divider"></div>
         <li id="Groups" class="nav-item my-0">
           <a class="nav-link" href="createjoin.php">Groups</a>
         </li>
@@ -79,12 +79,12 @@
       <div class="modal-body col-6 mx-auto">
         <!-- username -->
         <form method="post" action="signin.php">
-              <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+              <div class="form-row mx-auto my-4">
                 <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" required>
               </div>
 
               <!-- password -->
-              <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+              <div class="form-row mx-auto my-4">
                 <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
                 <div class="col px-0">
                   <button id="submitButton2" type="submit" class="btn btn-primary mt-4 submitButton float-right">Sign in</button>
@@ -217,7 +217,7 @@
   <script>
     
   document.getElementById("Groups").innerHTML = ""; 
-
+  document.getElementById("groupDivider").setAttribute("class", "");
   
   </script>
   

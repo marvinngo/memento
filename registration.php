@@ -32,7 +32,7 @@
         <li class="nav-item my-0">
           <a class="nav-link" href="index.php">Home</a>
         </li>
-        <div class="dropdown-divider"></div>
+        <div id="groupDivider" class="dropdown-divider"></div>
         <li id="Groups" class="nav-item my-0">
           <a class="nav-link" href="createjoin.php">Groups</a>
         </li>
@@ -181,6 +181,17 @@
       2018 &copy; Team Five
   </div>
 </footer>
+
+<?php if($_SESSION['loggedin'] === false): ?>
+  
+  <script>
+    
+  document.getElementById("Groups").innerHTML = ""; 
+  document.getElementById("groupDivider").setAttribute("class", "");
+  
+  </script>
+  
+<?php endif; ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
