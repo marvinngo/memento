@@ -181,7 +181,7 @@ if($_SESSION['loggedin'] == false){
                     <option value="24">24</option>
                 </select>
                 <div class="col px-0">
-                <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right">Submit</button>
+                <button id="submitButton" type="submit" class="btn btn-primary mt-4 w-100">Submit</button>
               </div>
               </div>
             </form>
@@ -222,7 +222,7 @@ if($_SESSION['loggedin'] == false){
               <div class="form-row mx-auto my-4">
                 <input type="password" class="form-control" id="passwordForm" placeholder="Password" name="Group_Password" required>
                 <div class="col px-0">
-                  <button id="submitButton" type="submit" class="btn btn-primary mt-4 float-right">Submit</button>
+                  <button id="submitButton" type="submit" class="btn btn-primary mt-4 w-100">Submit</button>
                 </div>
               </div>
               
