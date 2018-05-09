@@ -1,5 +1,9 @@
 <?php
 
+      if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
 $methodType = $_SERVER['REQUEST_METHOD'];
 
 if ($methodType === 'POST') {
@@ -56,13 +60,23 @@ if ($methodType === 'POST') {
               echo "Group Name already exists in DB.";
             } else {
               
-            // perform update to the DB
+            // perform update to tbl_Group
               
             $sql = "INSERT INTO `tbl_Group` (Group_Name, Group_Description, Group_Password, Group_Size) values (:GroupName, :GroupDescription, :GroupPassword, :GroupSize)";
             // $insert is a 'PDOStatement
             $statement = $conn->prepare($sql);
             $statement->execute(array(":GroupName" => $Group_Name, ":GroupPassword" => $Group_Password, ":GroupDescription" => $Group_Description, ":GroupSize" => $Group_Size));
-            header( 'Location: mygroups.html' ) ;
+            
+            // perform update to tbl_Registration
+              
+            $sql = "INSERT INTO `tbl_Registration` (User_Name, Group_Name) values (:UserName, :GroupName)";
+            // $insert is a 'PDOStatement
+            $statement = $conn->prepare($sql);
+            $statement->execute(array(":UserName" => $_SESSION['User_Name'], ":GroupName" => $Group_Name));
+              
+              
+            
+            header( 'Location: mygroups.php' ) ;
             }
         }
 
