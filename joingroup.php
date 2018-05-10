@@ -1,5 +1,9 @@
 <?php
 
+  if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
 $methodType = $_SERVER['REQUEST_METHOD'];
 
 if ($methodType === 'POST') {
@@ -54,6 +58,14 @@ if ($methodType === 'POST') {
           if (hash_equals($rows[0]['Group_Password'], crypt($Group_Password, $rows[0]['Group_Password']))) {
             // Placeholder - should go to specific group's page? Depends
             // how MyGroups page is implemented.
+            
+            // Add username to Registration:
+            
+            $sql = "INSERT INTO `tbl_Registration` (User_Name, Group_Name) values (:UserName, :GroupName)";
+            // $insert is a 'PDOStatement
+            $statement = $conn->prepare($sql);
+            $statement->execute(array(":UserName" => $_SESSION['User_Name'], ":GroupName" => $Group_Name));
+            
             header( 'Location: http://mementovancouver.com/mygroups.html' ) ;
           } else {
             echo "Username matches DB.<br>";
