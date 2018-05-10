@@ -314,8 +314,8 @@ if($_SESSION['loggedin'] === false){
                     <div class="card mx-auto">
                       <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
-                        <h3 class="card-title">event</h3>
-                        <p class="card-text">event description</p>
+                        <h3 id="event1name" class="card-title">event</h3>
+                        <p id="event1description" class="card-text">event description</p>
                       </div>
                     </div>
                   </div>
@@ -336,8 +336,8 @@ if($_SESSION['loggedin'] === false){
                     <div class="card mx-auto">
                       <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
-                        <h3 class="card-title">event</h3>
-                        <p class="card-text">event description</p>
+                        <h3 id="event2name" class="card-title">event</h3>
+                        <p id="event2description" class="card-text">event description</p>
                       </div>
                     </div>
                   </div>
@@ -358,8 +358,8 @@ if($_SESSION['loggedin'] === false){
                     <div class="card mx-auto">
                       <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
-                        <h3 class="card-title">event</h3>
-                        <p class="card-text">event description</p>
+                        <h3 id="event3name" class="card-title">event</h3>
+                        <p id="event3description" class="card-text">event description</p>
                       </div>
                     </div>
                   </div>
@@ -484,10 +484,14 @@ crossorigin="anonymous"></script>
     document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
   
     function reply_click(clicked_id) {
+      
+    // Updates the modal with the id of what was clicked - the id is set to the Group_Name when created.
     
     var Group_Name = (clicked_id);
     document.getElementById("modalgroupname").innerHTML = Group_Name;
     
+        // Ajax call to get query database for groups, find the group that matches the id that was clicked, updates the modal with group description and number of members.
+      
         $.ajax({
             url: "ajax-get-groups.php",
             dataType: "json",
@@ -495,9 +499,9 @@ crossorigin="anonymous"></script>
             success: function(data) {
                 // get each item
                 //var groups = "";
-                console.log("test");
-                console.log(data);
-                console.log("Array length: " + Object.keys(data).length);
+                //console.log("test");
+                //console.log(data);
+                //console.log("Array length: " + Object.keys(data).length);
               
                 var length = Object.keys(data).length;
                 
@@ -505,30 +509,71 @@ crossorigin="anonymous"></script>
                 
                 for (i = 0; i < length; i++) {
                   
-                  console.log("Group Name: " + Group_Name);
-                  console.log(data[i]["Group_Name"]);
+                  //console.log("Group Name: " + Group_Name);
+                  //console.log(data[i]["Group_Name"]);
                   
                   if (data[i]["Group_Name"] === Group_Name) {
                     
-                    console.log("i = " + i);
+                    //console.log("i = " + i);
                     
-                  console.log(data[i]["Group_Description"]);
+                  //console.log(data[i]["Group_Description"]);
                     Group_Description = data[i]["Group_Description"];
                     Group_Size = "" + data[i]["Group_Size"]
-                    
-                document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
-                document.getElementById("numbermembers").innerHTML = "Number of members: " + Group_Size;
-                    
+                    document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
+                document.getElementById("numbermembers").innerHTML = "Number of members: " + Group_Size;   
+                } 
                 }
-                  
-                }
-                
-
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 $("#modalgroupdescription").text("An error has occurred.");
             }
           }); 
+      
+      // This Ajax call queries the database for all Events.
+      
+        $.ajax({
+        url: "ajax-get-events.php",
+        dataType: "json",
+        type: "GET",
+        success: function(data) {
+            // get events
+            var events = "";
+            console.log("test");
+            console.log(data);
+            //console.log("Array length: " + Object.keys(events).length);
+
+            //var length = Object.keys(events).length;
+
+            // for(var key in data) 
+
+            //for (i = 0; i < length; i++) {
+
+              //console.log("Group Name: " + Group_Name);
+              //console.log(data[i]["Group_Name"]);
+
+              //if (data[i]["Group_Name"] === Group_Name) {
+
+                //console.log("i = " + i);
+
+              //console.log(data[i]["Group_Description"]);
+                //Group_Description = data[i]["Group_Description"];
+                //Group_Size = "" + data[i]["Group_Size"]
+                document.getElementById("event1name").innerHTML = data[0]["Event_Name"];
+                document.getElementById("event1description").innerHTML = data[0]["Event_Description"];   
+                document.getElementById("event2name").innerHTML = data[1]["Event_Name"];
+                document.getElementById("event2description").innerHTML = data[1]["Event_Description"]; 
+                document.getElementById("event3name").innerHTML = data[2]["Event_Name"];
+                document.getElementById("event3description").innerHTML = data[2]["Event_Description"]; 
+          
+            //} 
+            //}
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#modalgroupdescription").text(jqXHR.statusText);
+        }
+      });
+      
+      
       }
 
 /*]]>*/

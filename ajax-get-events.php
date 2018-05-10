@@ -18,17 +18,16 @@
 
 
           
-            // Check if username already exists in database:
-      
-            $sql = "SELECT * FROM tbl_Group";
+        // Check if username already exists in database:
 
-            $statement = $conn->prepare($sql);
-            $statement->execute(array());
-            //$groupcount = $statement->rowCount();
-            $data = $statement->fetchAll();
-      
-            //echo json_encode($data);
-            //var_dump($rows[0]["Event_Description"]);
+        $sql = "SELECT * FROM tbl_Event LIMIT 3";
+
+        $statement = $conn->prepare($sql);
+        $statement->execute(array());
+        $data = $statement->fetchAll();
+
+        //echo json_encode($data);
+        //var_dump($rows[0]["Event_Description"]);
 
     } catch(PDOException $e) {
         echo "<p style='color: red;'>From the SQL code: $sql</p>";
