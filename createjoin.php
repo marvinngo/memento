@@ -3,7 +3,7 @@
         session_start();
     }
 
-if($_SESSION['loggedin'] == false){
+if($_SESSION['loggedin'] === false){
   header( 'Location: error.html' ) ;
 }
 
@@ -385,10 +385,10 @@ if($_SESSION['loggedin'] == false){
     <h4>Links</h4>
     <div class="row pb-2">
       <div class="col-4">
-        <a href="index.html">Home</a>
+        <a href="index.php">Home</a>
       </div>
       <div class="col-4">
-        <a href="register.html">Signup</a>
+        <a href="registration.php">Signup</a>
       </div>
       <div class="col-4">
         <a href="#" data-toggle="modal" data-target="#login">Login</a>

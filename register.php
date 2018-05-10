@@ -1,5 +1,9 @@
 <?php
 
+  if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 $methodType = $_SERVER['REQUEST_METHOD'];
 
 if ($methodType === 'POST') {
@@ -58,12 +62,12 @@ if ($methodType === 'POST') {
               // Set session login to true to login the user after registering:
               
               $_SESSION['User_Name'] = $User_Name;
-              $_SESSION['email'] = $rows[0]['User_Email'];
+              //$_SESSION['email'] = $User_Email;
               $_SESSION['loggedin'] = true;
               
               // Redirect user to MyGroups page after updating database and logging in:
               
-              header( 'Location: createjoin.html' ) ;
+              header( 'Location: createjoin.php' ) ;
             }
         }
 
