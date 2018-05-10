@@ -66,7 +66,7 @@ if ($methodType === 'POST') {
             $statement = $conn->prepare($sql);
             $statement->execute(array(":UserName" => $_SESSION['User_Name'], ":GroupName" => $Group_Name));
             
-            header( 'Location: http://mementovancouver.com/mygroups.html' ) ;
+            header( 'Location: createjoin.php' ) ;
           } else {
             echo "Username matches DB.<br>";
             echo "incorrect password";

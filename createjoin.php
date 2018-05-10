@@ -123,49 +123,7 @@ if($_SESSION['loggedin'] === false){
             </div>
           </div>
           <div id="content" class="row xs-12">
-            <ul class="list-unstyled w-100">
-  
-              <div class="clickableDiv">
-                <a href="#" data-toggle="modal" data-target="#aboutModal">
-                  <div id="firstGroup" class="row xs-12 mx-2">
-                    <li class="media">
-                      <img class="mr-2 mb-3" src="img/mygroups/suit.jpeg" alt="group picture 1">
-                      <div class="media-body">
-                        <h4 class="mt-0 mb-1">Coworkers</h4>
-                        <p>Year end celebration</p>
-                      </div>
-                    </li>
-                  </div>
-                </a>
-              </div>
-              <div class="clickableDiv">
-                <a href="#" data-toggle="modal" data-target="#aboutModal">
-                  <div id="firstGroup" class="row xs-12 mx-2">
-                    <li class="media">
-                      <img class="mr-2 mb-3" src="img/mygroups/suit.jpeg" alt="group picture 1">
-                      <div class="media-body">
-                        <h4 class="mt-0 mb-1">Coworkers</h4>
-                        <p>Year end celebration</p>
-                      </div>
-                    </li>
-                  </div>
-                </a>
-              </div>
-              <div class="clickableDiv">
-                <a href="#" data-toggle="modal" data-target="#aboutModal">
-                  <div id="firstGroup" class="row xs-12 mx-2">
-                    <li class="media">
-                      <img class="mr-2 mb-3" src="img/mygroups/suit.jpeg" alt="group picture 1">
-                      <div class="media-body">
-                        <h4 class="mt-0 mb-1">Coworkers</h4>
-                        <p>Year end celebration</p>
-                      </div>
-                    </li>
-                  </div>
-                </a>
-              </div>
-  
-  
+            <ul id="tables" class="list-unstyled w-100">
             </ul>
           </div>
         </div>
@@ -399,6 +357,57 @@ if($_SESSION['loggedin'] === false){
       2018 &copy; Team Five
   </div>
 </footer>
+  
+<script>
+  
+var User_Name='<?php echo $_SESSION['User_Name'];?>';
+    
+document.getElementById("ms").innerHTML += User_Name + "!";  
+
+</script>
+  
+<?php 
+  
+  $servername = "localhost";
+  $dblogin = "evanmorr_team5";
+  $password = "Team5!Team5!";
+  $dbname = "evanmorr_mementodb";
+  
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dblogin, $password);
+
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  
+  
+  $sql = "SELECT * FROM tbl_Registration WHERE User_Name = :UserName";
+
+  $statement = $conn->prepare($sql);
+  $statement->execute(array(":UserName" => $_SESSION['User_Name']));
+  $count = $statement->rowCount();
+  $rows = $statement->fetchAll();
+  foreach ($rows as $row): ?>
+  
+  <?php
+  
+  $Group_Name = $row['Group_Name'];
+  
+  $sql2 = "SELECT * FROM tbl_Group WHERE Group_Name = :GroupName";
+  
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dblogin, $password);
+
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  $statement2 = $conn->prepare($sql2);
+  $statement2->execute(array(":GroupName" => $Group_Name));
+  $groupArray = $statement2->fetchAll();
+  ?>
+  
+    <script>
+    var Group_Name = '<?php echo $row['Group_Name'];?>';
+    var Group_Description = '<?php echo $groupArray[0]['Group_Description'];?>';
+    tables.innerHTML += "<div class='clickableDiv'><a href='#' data-toggle='modal' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
+    </script>
+    
+<?php endforeach; ?>
 
 <script>
   

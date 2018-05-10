@@ -76,7 +76,7 @@ if ($methodType === 'POST') {
               
               
             
-            header( 'Location: mygroups.php' ) ;
+            header( 'Location: createjoin.php' ) ;
             }
         }
 
