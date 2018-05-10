@@ -299,46 +299,79 @@ if($_SESSION['loggedin'] === false){
               </div>
             </div>
           </div>
-          <!-- events -->
-          <div class="container-fluid">
-            <div class="row">
-              <!-- event 1 -->
-              <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                <div class="card mx-auto">
-                  <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
-                  <div class="card-body">
-                    <h3 class="card-title">event</h3>
-                    <p class="card-text">event description</p>
+          <!--collapse-->
+          <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title text-center">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Event 1</a>
+                </h4>
+              </div>
+              <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                  <!-- event 1 -->
+                  <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                    <div class="card mx-auto">
+                      <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                      <div class="card-body">
+                        <h3 class="card-title">event</h3>
+                        <p class="card-text">event description</p>
+                      </div>
+                    </div>
                   </div>
+                  <!--event end-->
                 </div>
               </div>
-              <!-- event 2 -->
-              <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                <div class="card mx-auto">
-                  <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
-                  <div class="card-body">
-                    <h3 class="card-title">event</h3>
-                    <p class="card-text">event description</p>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title text-center">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Event 2</a>
+                </h4>
+              </div>
+              <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <!-- event 2 -->
+                  <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                    <div class="card mx-auto">
+                      <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                      <div class="card-body">
+                        <h3 class="card-title">event</h3>
+                        <p class="card-text">event description</p>
+                      </div>
+                    </div>
                   </div>
+                  <!--event end-->
                 </div>
               </div>
-              <!-- event 3 -->
-              <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                <div class="card mx-auto">
-                  <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
-                  <div class="card-body">
-                    <h3 class="card-title">event</h3>
-                    <p class="card-text">event description</p>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title text-center">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Event 3</a>
+                </h4>
+              </div>
+              <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <!-- event 3 -->
+                  <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                    <div class="card mx-auto">
+                      <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                      <div class="card-body">
+                        <h3 class="card-title">event</h3>
+                        <p class="card-text">event description</p>
+                      </div>
+                    </div>
                   </div>
+                  <!--event end-->
                 </div>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
 <!--- Footer -->
 <footer class="site-footer page-footer font-small pt-3">
   <div class="container-fluid col-7 col-md-3 text-center my-auto">
