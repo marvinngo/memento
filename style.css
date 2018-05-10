@@ -140,7 +140,18 @@ button {
 .oneliner {
   width: 80%;
 }
-
+/* event panel */
+.panel-title {
+  background: #1A75C1;
+}
+/* event panel title */
+.panel-title a {
+  color: #FFF;
+}
+/* event panel title */
+.panel-title a:hover {
+  text-decoration: none;
+}
 /* registration page bg */
 .registerBG {
   background: url("img/loggedin/sky.jpg");
