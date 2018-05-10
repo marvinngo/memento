@@ -293,7 +293,7 @@ if($_SESSION['loggedin'] === false){
               </div>
               <div id="maintext" class="col-sm-12 col-md-7 mb-4">
                 <h2 id="modalgroupdescription">Description</h2>
-                <h3>Number of Members</h3>
+                <h3 id="numbermembers">Number of Members</h3>
                 <br>
                 <p>Budget</p>
               </div>
@@ -392,8 +392,19 @@ document.getElementById("ms").innerHTML += User_Name + "!";
 
   $statement = $conn->prepare($sql);
   $statement->execute(array());
+  $groupcount = $statement->rowCount();
   $groups = $statement->fetchAll();
-  
+  ?>
+  <script>
+    var groupcount = '<?php echo $groupcount;?>';
+    var groups = new Array();
+    
+    <?php foreach($groups as $key => $group){
+    foreach($group as $key => $value){?>
+        groups.push('<?php echo $value; ?>');
+    <?php } } ?>
+  </script>
+  <?php
   // Loop begins below foreach, and ends at endforeach
   
   foreach ($rows as $row): ?>
@@ -421,28 +432,72 @@ document.getElementById("ms").innerHTML += User_Name + "!";
   
 <?php endforeach; ?>
 
-<script>
-  
-var User_Name='<?php echo $_SESSION['User_Name'];?>';
-    
-document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!"; 
-document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
-  
-  function reply_click(clicked_id)
-{
-    var Group_Name = (clicked_id);
-    document.getElementById("modalgroupname").innerHTML = Group_Name;
-  
-    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-}
-
-</script>
-  
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="mementoScripts.js"></script>
+  
+  <script>
+/*<![CDATA[*/
+    
+    var User_Name='<?php echo $_SESSION['User_Name'];?>';
+    
+    document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!"; 
+    
+    document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
+  
+    function reply_click(clicked_id) {
+    
+    var Group_Name = (clicked_id);
+    document.getElementById("modalgroupname").innerHTML = Group_Name;
+    
+        $.ajax({
+            url: "ajax-get-groups.php",
+            dataType: "json",
+            type: "GET",
+            success: function(data) {
+                // get each item
+                //var groups = "";
+                console.log("test");
+                console.log(data);
+                console.log("Array length: " + Object.keys(data).length);
+              
+                var length = Object.keys(data).length;
+                
+                // for(var key in data) 
+                
+                for (i = 0; i < length; i++) {
+                  
+                  console.log("Group Name: " + Group_Name);
+                  console.log(data[i]["Group_Name"]);
+                  
+                  if (data[i]["Group_Name"] === Group_Name) {
+                    
+                    console.log("i = " + i);
+                    
+                  console.log(data[i]["Group_Description"]);
+                    Group_Description = data[i]["Group_Description"];
+                    Group_Size = "" + data[i]["Group_Size"]
+                    
+                document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
+                document.getElementById("numbermembers").innerHTML = "Number of members: " + Group_Size;
+                    
+                }
+                  
+                }
+                
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $("#modalgroupdescription").text("An error has occurred.");
+            }
+          }); 
+      }
+
+/*]]>*/
+</script>
+  
 </body>
 </html>
