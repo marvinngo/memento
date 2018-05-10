@@ -163,11 +163,13 @@ if($_SESSION['loggedin'] === false){
         <!-- Modal body -->
         <div class="modal-body col-8 mx-auto">
             <div id="form" class="col text-center px-3 py-3">
+            
                 <!-- form -->
             <form method="post" action="creategroup.php" onsubmit="return validate()">
               <div class="form-row mx-auto my-4">
                 <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name" name="Group_Name" pattern="[a-zA-Z0-9]{4,20}" oninput="checkGroupName(this)"  required autofocus>
               </div>
+
             <!-- password -->
               <div class="form-row mx-auto my-4">
                 <input type="password" name="Group_Password" class="form-control" id="groupPasswordForm" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"  oninput="checkPw(this)" required>

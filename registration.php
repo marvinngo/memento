@@ -115,14 +115,14 @@
                   <input type="text" name="User_Name" class="form-control" id="usernameForm" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" oninput="checkUsername(this)" required autofocus>
                 </div>
 
+                  <!-- confirm password -->
+                  <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
+                  <input type="password" name="confirm_User_Password" class="form-control" id="confirmpasswordForm" placeholder="Confirm password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" oninput="checkPw(this)" required>
+                </div>
+                
                 <!-- password -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
                   <input type="password" name="User_Password" class="form-control" id="passwordForm" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" oninput="checkPw(this)" required>
-                </div>
-
-                <!-- confirm password -->
-                <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="password" name="confirm_User_Password" class="form-control" id="confirmpasswordForm" placeholder="Confirm password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>
                 </div>
 
                 <!-- email -->

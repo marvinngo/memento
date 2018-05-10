@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 
 /* Element Selectors */
+
 html, body {
   height: 100%;
+
+  /* following two used for easter egg: */
   max-width: 100%;
   overflow-x: hidden;
 }
@@ -11,6 +14,7 @@ html, body, footer, footer a {
   width: 100%;
   font-family: 'Poppins', sans-serif;
 }
+
 button {
   border-radius: 30px !important;
 }
@@ -59,6 +63,7 @@ button {
   width: 180px;
 }
 
+/* style of transparent divs */
 .divBorder {
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 6px;
@@ -250,11 +255,12 @@ img.mr-2 {
     text-align: center;
   }
 
+  /* used on home page */
   .greyBG {
     background-color: #e9ecef;
   }
   
-
+/* easter egg is smaller when viewed on smaller viewport */
   #A{ 
     width: 500px;
   }
