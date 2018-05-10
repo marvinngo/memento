@@ -271,7 +271,7 @@ if($_SESSION['loggedin'] === false){
                   <div class="col-2">
                   </div>
                   <div class="col-8 text-center">
-                     <h2>
+                     <h2 id="modalgroupname">
                        GROUP NAME
                      </h2>
                   </div>
@@ -290,7 +290,7 @@ if($_SESSION['loggedin'] === false){
                 <img class="mr-2 my-3 rounded mx-auto d-block img-fluid img-thumbnail" src="img/aboutgroup/groupimg.jpeg" alt="group picture 1">
               </div>
               <div id="maintext" class="col-sm-12 col-md-7 mb-4">
-                <h2>Description</h2>
+                <h2 id="modalgroupdescription">Description</h2>
                 <h3>Number of Members</h3>
                 <br>
                 <p>Budget</p>
@@ -377,13 +377,23 @@ document.getElementById("ms").innerHTML += User_Name + "!";
 
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   
-  
   $sql = "SELECT * FROM tbl_Registration WHERE User_Name = :UserName";
 
   $statement = $conn->prepare($sql);
   $statement->execute(array(":UserName" => $_SESSION['User_Name']));
   $count = $statement->rowCount();
   $rows = $statement->fetchAll();
+  
+  // Storing group data for use in modal:
+  
+  $sql = "SELECT * FROM tbl_Group";
+
+  $statement = $conn->prepare($sql);
+  $statement->execute(array());
+  $groups = $statement->fetchAll();
+  
+  // Loop begins below foreach, and ends at endforeach
+  
   foreach ($rows as $row): ?>
   
   <?php
@@ -404,9 +414,9 @@ document.getElementById("ms").innerHTML += User_Name + "!";
     <script>
     var Group_Name = '<?php echo $row['Group_Name'];?>';
     var Group_Description = '<?php echo $groupArray[0]['Group_Description'];?>';
-    tables.innerHTML += "<div class='clickableDiv'><a href='#' data-toggle='modal' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
+    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
     </script>
-    
+  
 <?php endforeach; ?>
 
 <script>
@@ -415,6 +425,15 @@ var User_Name='<?php echo $_SESSION['User_Name'];?>';
     
 document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!"; 
 document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
+  
+  function reply_click(clicked_id)
+{
+    var Group_Name = (clicked_id);
+    document.getElementById("modalgroupname").innerHTML = Group_Name;
+  
+    
+
+}
 
 </script>
   
