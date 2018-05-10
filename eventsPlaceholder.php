@@ -12,4 +12,4 @@ $sampleEvents
     ),
 );
 
-var_dump($sampleEvents);
+echo json_encode($sampleEvents);
