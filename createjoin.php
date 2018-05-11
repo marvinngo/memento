@@ -384,13 +384,13 @@ if($_SESSION['loggedin'] === false){
     <h4>Links</h4>
     <div class="row pb-2">
       <div class="col-4">
-        <a href="index.php">Home</a>
+        <a id="footerHome" href="index.php">Home</a>
       </div>
       <div class="col-4">
-        <a href="registration.php">Signup</a>
+        <a id="footerSignup" href="registration.php">Signup</a>
       </div>
       <div class="col-4">
-        <a href="#" data-toggle="modal" data-target="#login">Login</a>
+        <a id="footerLogin" href="#" data-toggle="modal" data-target="#login">Login</a>
       </div>
     </div>
   </div>
@@ -404,6 +404,10 @@ if($_SESSION['loggedin'] === false){
 var User_Name='<?php echo $_SESSION['User_Name'];?>';
     
 document.getElementById("ms").innerHTML += User_Name + "!";  
+document.getElementById("footerHome").innerHTML = "";
+document.getElementById("footerSignup").innerHTML = "Home";
+document.getElementById("footerSignup").setAttribute("href", "index.php");
+document.getElementById("footerLogin").innerHTML = "";
 
 </script>
   
