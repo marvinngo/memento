@@ -110,7 +110,7 @@
       <div class="carousel-caption">
         <h1 class="display-2">Memento</h1>
           <h3>Create Memories Together</h3>
-            <button type="button" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
+            <button type="button" id="getStarted1" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
       </div>
     </div>
     <!-- second image -->
@@ -119,7 +119,7 @@
       <div class="carousel-caption">
         <h1 class="display-2">Memento</h1>
           <h3>Create Memories Together</h3>
-            <button type="button" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
+            <button type="button" id="getStarted2" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
       </div>
     </div>
     <!-- third image -->
@@ -128,7 +128,7 @@
       <div class="carousel-caption">
         <h1 class="display-2">Memento</h1>
           <h3>Create Memories Together</h3>
-            <button type="button" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
+            <button type="button" id="getStarted3" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
       </div>
     </div>    
   </div>
@@ -197,13 +197,13 @@
     <h4>Links</h4>
     <div class="row pb-2">
       <div class="col-4">
-        <a href="index.php">Home</a>
+        <a id="footerHome" ref="index.php">Home</a>
       </div>
       <div class="col-4">
-        <a href="registration.php">Signup</a>
+        <a id="footerSignup" href="registration.php">Signup</a>
       </div>
       <div class="col-4">
-        <a href="#" data-toggle="modal" data-target="#login">Login</a>
+        <a id="footerLogin" href="#" data-toggle="modal" data-target="#login">Login</a>
       </div>
     </div>
   </div>
@@ -219,6 +219,9 @@
   document.getElementById("Groups").innerHTML = ""; 
   document.getElementById("groupDivider").setAttribute("class", "");
   
+  document.getElementById("getStarted1").setAttribute("onclick", "location.href='registration.php'");
+  document.getElementById("getStarted2").setAttribute("onclick", "location.href='registration.php'");
+  document.getElementById("getStarted3").setAttribute("onclick", "location.href='registration.php'");
   </script>
   
 <?php endif; ?>
@@ -233,10 +236,17 @@
   document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!"; 
   document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
     
-    
   document.getElementById("signup").innerHTML = "Logout";
   document.getElementById("signup").setAttribute("href", "logout.php");
+
+  document.getElementById("footerHome").innerHTML = "";
+  document.getElementById("footerSignup").innerHTML = "Home";
+  document.getElementById("footerSignup").setAttribute("href", "index.php");
+  document.getElementById("footerLogin").innerHTML = "";
   
+  document.getElementById("getStarted1").setAttribute("onclick", "location.href='createjoin.php'");
+  document.getElementById("getStarted2").setAttribute("onclick", "location.href='createjoin.php'");
+  document.getElementById("getStarted3").setAttribute("onclick", "location.href='createjoin.php'");
   </script>
   
 <?php endif; ?>
