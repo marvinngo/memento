@@ -608,17 +608,40 @@ crossorigin="anonymous"></script>
             var events = "";
             //console.log("test");
             //console.log(data);
+          
+            var Group_PricePP = 36.00;
+          
+            var eventslength = Object.keys(data).length;
+          
+            var rand1 = Math.floor(Math.random()*eventslength);
+          
+            while (data[rand1]["Event_PricePP"] > Group_PricePP) {
+              rand1 = Math.floor(Math.random()*eventslength);
+            }
+          
+            var rand2 = rand1;
+          
+            while (rand2 == rand1 || data[rand2]["Event_PricePP"] > Group_PricePP) {
+              rand2 = Math.floor(Math.random()*eventslength);
+            }
+          
+            var rand3 = rand1;
+          
+            while (rand3 == rand1 || rand3 == rand2 || data[rand3]["Event_PricePP"] > Group_PricePP) {
+              rand3 = Math.floor(Math.random()*eventslength);
+            }
 
-            document.getElementById("event1name").innerHTML = data[0]["Event_Name"];
-            document.getElementById("event1description").innerHTML = data[0]["Event_Description"];   
-            document.getElementById("event1image").setAttribute("src", data[0]["Event_ImgLocation"]);   
-            document.getElementById("event2name").innerHTML = data[1]["Event_Name"];
-            document.getElementById("event2description").innerHTML = data[1]["Event_Description"]; 
-
-            document.getElementById("event2image").setAttribute("src", data[1]["Event_ImgLocation"]); 
-            document.getElementById("event3name").innerHTML = data[2]["Event_Name"];
-            document.getElementById("event3description").innerHTML = data[2]["Event_Description"]; 
-            document.getElementById("event3image").setAttribute("src", data[2]["Event_ImgLocation"]); 
+            document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
+            document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
+            document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
+          
+            document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
+            document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
+            document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]); 
+          
+            document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
+            document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
+            document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]); 
           
         },
         error: function(jqXHR, textStatus, errorThrown) {

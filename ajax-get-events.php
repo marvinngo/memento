@@ -20,7 +20,7 @@
           
         // Check if username already exists in database:
 
-        $sql = "SELECT * FROM tbl_Event LIMIT 3";
+        $sql = "SELECT * FROM tbl_Event";
 
         $statement = $conn->prepare($sql);
         $statement->execute(array());
