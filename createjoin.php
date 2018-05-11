@@ -404,6 +404,8 @@ document.getElementById("ms").innerHTML += User_Name + "!";
   
 <?php 
   
+  try {
+  
   $servername = "localhost";
   $dblogin = "evanmorr_team5";
   $password = "Team5!Team5!";
@@ -428,6 +430,13 @@ document.getElementById("ms").innerHTML += User_Name + "!";
   $statement->execute(array());
   $groupcount = $statement->rowCount();
   $groups = $statement->fetchAll();
+    
+  } catch(PDOException $e) {
+      echo "<p style='color: red;'>From the SQL code: $sql</p>";
+      $error = $e->getMessage();
+      echo "<p style='color: red;'>$error</p>";
+  }
+    
   ?>
   <script>
     var groupcount = '<?php echo $groupcount;?>';
@@ -445,6 +454,8 @@ document.getElementById("ms").innerHTML += User_Name + "!";
   
   <?php
   
+  try {
+  
   $Group_Name = $row['Group_Name'];
   
   $sql2 = "SELECT * FROM tbl_Group WHERE Group_Name = :GroupName";
@@ -456,6 +467,13 @@ document.getElementById("ms").innerHTML += User_Name + "!";
   $statement2 = $conn->prepare($sql2);
   $statement2->execute(array(":GroupName" => $Group_Name));
   $groupArray = $statement2->fetchAll();
+    
+  } catch(PDOException $e) {
+    echo "<p style='color: red;'>From the SQL code: $sql</p>";
+    $error = $e->getMessage();
+    echo "<p style='color: red;'>$error</p>";
+  }
+    
   ?>
   
     <script>
