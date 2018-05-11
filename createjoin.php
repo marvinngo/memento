@@ -296,6 +296,11 @@ if($_SESSION['loggedin'] === false){
                 <h3 id="numbermembers">Max Members</h3>
                 <h5 id="currentmembers"></h5>
                 <br>
+                <form>
+                  <input type="text" class="form-control" id="personalBudget" placeholder="Personal Budget" pattern="[0-9]">
+                  <button id="budgetSubmit" type="submit" class="btn btn-primary mt-4 w-100">Submit</button>
+                </form>
+                <br>
                 <p id="budget">Budget: </p>
               </div>
             </div>
