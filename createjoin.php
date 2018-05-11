@@ -311,7 +311,7 @@ if($_SESSION['loggedin'] === false){
               <div id="collapse1" class="panel-collapse collapse in">
                 <div class="panel-body">
                   <!-- event 1 -->
-                  <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                  <div class="w-100 mb-3">
                     <div class="card mx-auto">
                       <img id="event1image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
@@ -333,7 +333,7 @@ if($_SESSION['loggedin'] === false){
               <div id="collapse2" class="panel-collapse collapse">
                 <div class="panel-body">
                   <!-- event 2 -->
-                  <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                  <div class="w-100 mb-3">
                     <div class="card mx-auto">
                       <img id="event2image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
@@ -355,7 +355,7 @@ if($_SESSION['loggedin'] === false){
               <div id="collapse3" class="panel-collapse collapse">
                 <div class="panel-body">
                   <!-- event 3 -->
-                  <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                  <div class="w-100 mb-3">
                     <div class="card mx-auto">
                       <img id="event3image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
