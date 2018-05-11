@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2018 at 12:17 AM
+-- Generation Time: May 11, 2018 at 09:19 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -54,16 +54,16 @@ INSERT INTO `tbl_event` (`ID`, `Event_Name`, `Event_Description`, `Event_MinUser
 (8, 'Try Dragon Boating', 'Join one of the many intro to dragon boating courses offered by False Creek community centre. Race through False Creek, enjoying scenes of the mountains, the city, and local attractions such as Granville Island and Science World.', 1, 20, 30, 'img/eventimgs/8dragonboat.jpg', 'http://dragonzone.ca/paddle/'),
 (9, 'Cat Cafe!!!', 'A great date place, or a hangout with friends! Come check out this cat cafe in the International Village mall, and enjoy some cappuccinos and cats while you\'re there!', 2, 6, 20, 'img/eventimgs/9catcafe.jpg', 'http://www.catfe.ca/'),
 (10, 'Vancouver Aquarium', 'Get up to something fishy at the Vancouver Aquarium. Get lost in the doe eyed sea otters as they frolic and play. Imitate the penguins as they waddle around. Learn about the ecological issues facing our aquatic friends!', 1, 99, 45, 'img/eventimgs/10aquarium.jpg', 'http://www.vanaqua.org/visit/tickets'),
-(11, 'Full Day Guided Kayaking Tour', 'Venture for the day to visit some of Vancouver’s surrounding scenic paddling highlights. All locations are hand-picked by Ecomarine for their scenery and beginner friendliness. We supply the kayaks, safety gear and driving directions. All you have to do is bring lunch! The daytrip locations are subject to change and are weather dependent.', 2, 50, 140, 'img/eventimgs/11kayakdaytrips.jpg', 'https://www.ecomarine.com/tours/daytrip/'),
+(11, 'Full Day Guided Kayaking Tour', 'Venture for the day to visit some of Vancouver\'s surrounding scenic paddling highlights. All locations are hand-picked by Ecomarine for their scenery and beginner friendliness. We supply the kayaks, safety gear and driving directions. All you have to do is bring lunch! The daytrip locations are subject to change and are weather dependent.', 2, 50, 140, 'img/eventimgs/11kayakdaytrips.jpg', 'https://www.ecomarine.com/tours/daytrip/'),
 (12, 'Zipline Adventure in Whistler - Bear & Sasquatch Package', 'uests will be met by their tour guides and fitted with their harnesses and helmets before taking a complimentary shuttle from Whistler Village to our base on Blackcomb Mountain. Guests will zipline between the two mountains directly over the river. \r\n\r\n', 2, 30, 210, 'img/eventimgs/12bearpackage.jpg', 'https://whistler.ziptrek.com/tours/bear/'),
-(13, 'Picnic at the Park', 'Grab a blanket, frisbee/football/cards, grab some snacks from the fridge/grocery store and head down to the beach or one of Vancouver\'s many parks for a picnic! ', 1, 99, 10, 'img/eventimgs/13beachpicnic.jpeg', ''),
+(13, 'Picnic at the Park', 'Grab a blanket, frisbee/football/cards, grab some snacks from the fridge/grocery store and head down to the beach or one of Vancouver\'s many parks for a picnic! ', 1, 99, 10, 'img/eventimgs/13beachpicnic.jpg', ''),
 (14, 'Get the best fried chicken in Metro Vancouver and Picnic across the Street!', 'Constantly nominated best fried chicken place, they are the epitome of family business success. Not only are they the best fried chicken joint in town, they also only use non-hormone fed chicken. ', 1, 6, 15, '	\r\nimg/eventimgs/14lachicken.jpg', 'https://foodgressing.com/la-chicken-richmond-fried-chicken/'),
 (15, 'Settler\'s of Catan', 'Play one of the best family board games on the market. Ages 16 and up.', 3, 4, 20, '	\r\nimg/eventimgs/15settlers.jpg', 'https://www.catan.com/'),
 (16, 'Spend a night at the Sparking Hills resort in Kelowna', 'Eat farm to table foods, relax in comfort at one of the finest hotels in Canada, and enjoy amazing spa treatments while absorbing picturesque Canadian landscapes.', 1, 99, 550, '	\r\nimg/eventimgs/16crystalhills.jpg', 'https://www.sparklinghill.com/'),
 (17, 'Snowshoe at Mt Seymour', 'Enjoy the crunch of some of the finest powders Canad has to offer as you enjoy panoramic views of Metro Vancouver. Don\'t forget to take selfies! Price includes showshoe rentals.', 1, 99, 20, '	\r\nimg/eventimgs/17snowshoe.jpg', 'http://mtseymour.ca/snowshoe-rates'),
 (18, 'Enjoy a big group event for practically nothing; play Werewolf!', 'Werewolf is an interactive card game where you get to practice your skills of deception and acting! A party game for devious people...', 7, 14, 2, '	\r\nimg/eventimgs/18werewolf.jpg', 'https://www.playwerewolf.co/products/werewolf-deck'),
 (19, 'Nothing beats home cooking!', 'Spend the night in and try making a new dish! Our recommendations include: Chinese dumplings, perogies, hummus, raviolli, sushi, spring rolls and Jamaican patties!', 2, 6, 15, '	\r\nimg/eventimgs/19cooking.jpg', 'http://www.foodnetwork.ca/everyday-cooking/recipes/'),
-(20, 'Board games and drinks at Storm Crow', 'Find a new board game or play one of the classics with friends over drinks!', 2, 15, 15, 'img/eventimgs/20StormCrow', 'https://www.stormcrowtavern.com/');
+(20, 'Board games and drinks at Storm Crow', 'Find a new board game or play one of the classics with friends over drinks!', 2, 15, 15, 'img/eventimgs/20StormCrow.jpg', 'https://www.stormcrowtavern.com/');
 
 -- --------------------------------------------------------
 
@@ -88,14 +88,16 @@ CREATE TABLE `tbl_group` (
 INSERT INTO `tbl_group` (`ID`, `Group_Name`, `Group_Description`, `Group_Password`, `Group_Size`, `Event_Name`, `DateTime_Created`) VALUES
 (1, 'grouptest', 'this is a description', 'password', 6, NULL, '2018-05-06 22:19:42'),
 (2, 'grouptest2', 'this is a description', 'password', 6, NULL, '2018-05-06 22:19:42'),
-(3, 'Mom\'s Birthday', 'Mom\'s Birthday', '123123123', 4, NULL, '2018-05-06 22:19:42'),
+(3, 'Moms Birthday', 'Moms Birthday', '123123123', 4, NULL, '2018-05-06 22:19:42'),
 (4, 'newsitenewtestgrp', 'this is a new test group', 'password8', 1, NULL, '2018-05-06 22:31:15'),
 (5, 'Hash Test', 'this is a hash test', '$1$LbxvqK4I$YI5hW.GWJrYfXbM.xGtNt/', 12, NULL, '2018-05-07 02:29:04'),
 (7, 'newtest', 'password1', '$1$nQiNAAwa$yfdpozFACwRRCjQlEc9PE.', 3, NULL, '2018-05-09 02:06:03'),
 (8, 'newtest2', 'password1 test', '$1$UX9Qs57j$Idd6PpBzxJ.v0wje7Ed.U/', 3, NULL, '2018-05-09 02:07:04'),
 (9, 'SamsGroup', 'Sams Group is the best', '$1$TAon48Nv$PXbKHL6Fol6ztN.jR2it41', 8, NULL, '2018-05-09 03:29:00'),
-(10, 'PeterGroup', 'PeterSucks', '$1$AeLFpQ9l$vjNz5DuYX2R57fJu2bgOL.', 4, NULL, '2018-05-09 03:40:39'),
-(11, 'Balloon', 'this group is all about balloons', '$1$J/Y.Sg3C$u8lturd9xYYpqrrBKmUD9.', 24, NULL, '2018-05-09 21:14:07');
+(12, 'Newtest2Group', 'Grp description password1', '$1$KxSibW.y$WSGZy/CgSxyduEYqDTTfl1', 2, NULL, '2018-05-10 00:03:52'),
+(11, 'Balloon', 'this group is all about balloons', '$1$J/Y.Sg3C$u8lturd9xYYpqrrBKmUD9.', 24, NULL, '2018-05-09 21:14:07'),
+(13, 'Justin50th', 'Justin is getting old', '$1$TgOWT3Bi$SckxV8MP6nwa246hWb31t0', 1, NULL, '2018-05-10 01:03:27'),
+(14, 'ArronLANParty', 'Arron is throwing a LAN party', '$1$GXoatIxi$fLZDgFfbyAd76WVnA.WDQ0', 3, NULL, '2018-05-10 01:05:06');
 
 -- --------------------------------------------------------
 
@@ -119,8 +121,15 @@ INSERT INTO `tbl_registration` (`ID`, `User_Name`, `Group_Name`, `Registration_B
 (1, 'newtest', 'newtest', NULL, '2018-05-09 02:06:03'),
 (2, 'newtest', 'newtest2', NULL, '2018-05-09 02:07:04'),
 (3, 'newtest', 'SamsGroup', NULL, '2018-05-09 03:29:00'),
-(4, 'newtest', 'PeterGroup', NULL, '2018-05-09 03:40:39'),
-(5, 'newtest', 'Balloon', NULL, '2018-05-09 21:14:07');
+(6, 'newtest2', 'Newtest2Group', NULL, '2018-05-10 00:03:52'),
+(5, 'newtest', 'Balloon', NULL, '2018-05-09 21:14:07'),
+(7, 'newtest', 'Newtest2Group', NULL, '2018-05-10 00:06:30'),
+(8, 'newtest3', 'Justin50th', NULL, '2018-05-10 01:03:27'),
+(9, 'newtest3', 'ArronLANParty', NULL, '2018-05-10 01:05:06'),
+(15, 'newtest3', 'newtest', NULL, '2018-05-10 01:13:32'),
+(11, 'newtest3', 'newtest2', NULL, '2018-05-10 01:06:52'),
+(12, 'newtest3', 'Newtest2Group', NULL, '2018-05-10 01:08:21'),
+(16, 'newtest2', 'newtest2', NULL, '2018-05-11 02:00:40');
 
 -- --------------------------------------------------------
 
@@ -142,22 +151,13 @@ CREATE TABLE `tbl_user` (
 
 INSERT INTO `tbl_user` (`ID`, `User_Name`, `User_Password`, `User_Email`, `User_SignUpTime`) VALUES
 (15, 'newtest', '$1$2yTLCJVs$J.Q6UcLDOZyfWWBgGWhG2.', 'email@email.com', '2018-05-07 15:09:59'),
-(2, 'Justin', 'passcode', 'abc@abc.abc', '2018-05-03 21:30:49'),
-(3, 'testaccount', 'password', 'email@email.com', '2018-05-03 22:09:38'),
-(4, 'newtest1', 'password', 'what@ever.com', '2018-05-03 23:01:49'),
-(5, 'newertest', 'password', 'email@email.com', '2018-05-04 01:24:38'),
-(6, 'heyjustin', 'itssulei', 'suleimon.kh@gmail.com', '2018-05-04 14:21:16'),
-(7, 'Platypus', '123123123', 'dfasdfsadfsadf@sfsdfds.com', '2018-05-04 14:24:43'),
-(8, 'delmas91', 'Benji123', 'sebastiandelmas15@gmail.com', '2018-05-04 14:25:01'),
-(9, 'Micheal', '12345abcde', 'mjozdoba@gmail.com', '2018-05-04 14:28:46'),
-(10, 'asdfasdf', 'asdfasdf', 'asdf@asdf.com', '2018-05-04 14:33:21'),
-(11, 'newtestnewsite', 'ffs8pass', 'email@email.com', '2018-05-06 18:30:31'),
 (12, 'asdfasdf1234', '$1$lo6SHtNb$jBIMkIqBml5P1vFgTZUTi.', 'asdfasdf@a.ca', '2018-05-06 19:16:02'),
 (13, 'hashtest', '$1$9jnEV5IW$j.5RlJdneTLc1AUP7zbG50', 'hashtest1@test.com', '2018-05-06 19:21:07'),
 (14, 'newhashaccount', '$1$lT8jY523$XtpYiqlSqSZFQurKKPlU8/', 'email@email.com', '2018-05-07 12:01:44'),
 (16, 'newtest2', '$1$4Mo5YwHD$dQgsNhzkhVep8NgFNtwFb/', 'email@email.com', '2018-05-08 10:11:14'),
 (17, 'newtest123', '$1$mSjEghcd$b9E1kIkVtOLhZ.5xEmJ111', 'email@email.com', '2018-05-09 14:59:07'),
-(18, 'newtest1234', '$1$GK/1GzhN$EGmagjFhRJYyFZEZGMRwL1', 'email@email.com', '2018-05-09 14:59:43');
+(18, 'newtest1234', '$1$GK/1GzhN$EGmagjFhRJYyFZEZGMRwL1', 'email@email.com', '2018-05-09 14:59:43'),
+(28, 'newtest3', '$1$nprdWsLj$xefBD/fTWfqzJ4jNS3io7.', 'email@email.com', '2018-05-09 17:56:32');
 
 --
 -- Indexes for dumped tables
@@ -201,19 +201,19 @@ ALTER TABLE `tbl_event`
 -- AUTO_INCREMENT for table `tbl_group`
 --
 ALTER TABLE `tbl_group`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_registration`
 --
 ALTER TABLE `tbl_registration`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
