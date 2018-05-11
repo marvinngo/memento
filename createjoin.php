@@ -4,7 +4,7 @@
     }
 
 if($_SESSION['loggedin'] === false){
-  header( 'Location: error.html' ) ;
+  header( 'Location: index.php' ) ;
 }
 
 ?>
