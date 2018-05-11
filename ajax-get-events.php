@@ -3,7 +3,7 @@
     $methodType = $_SERVER['REQUEST_METHOD'];
     $data = array("msg" => "$methodType");
     
-    if ($methodType === 'GET') {
+    if ($methodType === 'POST') {
 
     $servername = "localhost";
     $dblogin = "evanmorr_team5";
@@ -37,7 +37,7 @@
       
     } else {
         // simple error message, only taking GET requests
-        $data = array("msg" => "Error: only GET allowed");
+        $data = array("msg" => "Error: only POST allowed");
     }
 
     echo json_encode($data, JSON_FORCE_OBJECT);

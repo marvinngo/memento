@@ -312,7 +312,7 @@ if($_SESSION['loggedin'] === false){
                   <!-- event 1 -->
                   <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                     <div class="card mx-auto">
-                      <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                      <img id="event1image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
                         <h3 id="event1name" class="card-title">event</h3>
                         <p id="event1description" class="card-text">event description</p>
@@ -334,7 +334,7 @@ if($_SESSION['loggedin'] === false){
                   <!-- event 2 -->
                   <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                     <div class="card mx-auto">
-                      <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                      <img id="event2image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
                         <h3 id="event2name" class="card-title">event</h3>
                         <p id="event2description" class="card-text">event description</p>
@@ -356,7 +356,7 @@ if($_SESSION['loggedin'] === false){
                   <!-- event 3 -->
                   <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                     <div class="card mx-auto">
-                      <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                      <img id="event3image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
                         <h3 id="event3name" class="card-title">event</h3>
                         <p id="event3description" class="card-text">event description</p>
@@ -534,7 +534,7 @@ crossorigin="anonymous"></script>
         $.ajax({
         url: "ajax-get-events.php",
         dataType: "json",
-        type: "GET",
+        type: "POST",
         success: function(data) {
             // get events
             var events = "";
@@ -560,10 +560,14 @@ crossorigin="anonymous"></script>
                 //Group_Size = "" + data[i]["Group_Size"]
                 document.getElementById("event1name").innerHTML = data[0]["Event_Name"];
                 document.getElementById("event1description").innerHTML = data[0]["Event_Description"];   
+                document.getElementById("event1image").setAttribute("src", data[0]["Event_ImgLocation"]);   
                 document.getElementById("event2name").innerHTML = data[1]["Event_Name"];
                 document.getElementById("event2description").innerHTML = data[1]["Event_Description"]; 
+          
+                document.getElementById("event2image").setAttribute("src", data[1]["Event_ImgLocation"]); 
                 document.getElementById("event3name").innerHTML = data[2]["Event_Name"];
                 document.getElementById("event3description").innerHTML = data[2]["Event_Description"]; 
+                document.getElementById("event3image").setAttribute("src", data[2]["Event_ImgLocation"]); 
           
             //} 
             //}
