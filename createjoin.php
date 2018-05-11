@@ -560,17 +560,17 @@ crossorigin="anonymous"></script>
               } 
               }
           
+              
+          
               var allbudgetsentered = false;
  
-              if (userCount < Group_Size || !allbudgetsentered) {
+              if (!allbudgetsentered || userCount < Group_Size) {
                 document.getElementById("budget").innerHTML = "<h6>Please note that the group must be full and all users must have entered a personal budget for the group's budget to display.</h6>";
               }
           
-              
-          
               if (userCount == Group_Size && allbudgetsentered) {
                     document.getElementById("budget").innerHTML += "budget";
-                  }
+              }
             
 
         },
