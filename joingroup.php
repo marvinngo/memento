@@ -59,6 +59,21 @@ if ($methodType === 'POST') {
             // Placeholder - should go to specific group's page? Depends
             // how MyGroups page is implemented.
             
+            // Check if group is full:
+            
+            $Group_Size = $rows[0]['Group_Size'];
+            
+            $sql = "SELECT * FROM tbl_Registration WHERE Group_Name = :GroupName";
+
+            $statement = $conn->prepare($sql);
+            $statement->execute(array(":GroupName" => $Group_Name));
+            $regCount = $statement->rowCount();
+            //$groupReg = $statement->fetchAll();
+            
+            if ($regCount >= $Group_Size) {
+              echo "Group is already full.";
+            } else {
+            
             // Add username to Registration:
             
             $sql = "INSERT INTO `tbl_Registration` (User_Name, Group_Name) values (:UserName, :GroupName)";
@@ -67,6 +82,7 @@ if ($methodType === 'POST') {
             $statement->execute(array(":UserName" => $_SESSION['User_Name'], ":GroupName" => $Group_Name));
             
             header( 'Location: createjoin.php' ) ;
+              }
           } else {
             echo "Username matches DB.<br>";
             echo "incorrect password";

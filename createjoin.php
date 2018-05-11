@@ -293,9 +293,10 @@ if($_SESSION['loggedin'] === false){
               </div>
               <div id="maintext" class="col-sm-12 col-md-7 mb-4">
                 <h2 id="modalgroupdescription">Description</h2>
-                <h3 id="numbermembers">Number of Members</h3>
+                <h3 id="numbermembers">Max Members</h3>
+                <h5 id="currentmembers"></h5>
                 <br>
-                <p>Budget</p>
+                <p id="budget">Budget: </p>
               </div>
             </div>
           </div>
@@ -520,14 +521,63 @@ crossorigin="anonymous"></script>
                     Group_Description = data[i]["Group_Description"];
                     Group_Size = "" + data[i]["Group_Size"]
                     document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
-                document.getElementById("numbermembers").innerHTML = "Number of members: " + Group_Size;   
-                } 
-                }
+                    document.getElementById("numbermembers").innerHTML = "Max members: " + Group_Size + "</br>";   
+              } 
+              }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 $("#modalgroupdescription").text("An error has occurred.");
             }
           }); 
+      
+            
+      // This Ajax call queries the Registration table to find the number
+      // of users in the group, and if the group is full, the total budget.
+      
+      $.ajax({
+        url: "ajax-get-registration.php",
+        dataType: "json",
+        type: "POST",
+        success: function(data) {
+            // get events
+            var events = "";
+            console.log("test");
+            console.log(data);
+          
+            var length = Object.keys(data).length;
+            var userCount = 0;
+          
+            document.getElementById("currentmembers").innerHTML = "<h5>Current members: " + "</br></h5>";
+                
+            for (i = 0; i < length; i++) {
+
+              if (data[i]["Group_Name"] === Group_Name) {
+                
+                userCount++;
+
+                document.getElementById("currentmembers").innerHTML += "<h5>" + data[i]["User_Name"] + "</br></h5>";   
+                
+              } 
+              }
+          
+              var allbudgetsentered = false;
+ 
+              if (userCount < Group_Size || !allbudgetsentered) {
+                document.getElementById("budget").innerHTML = "<h6>Please note that the group must be full and all users must have entered a personal budget for the group's budget to display.</h6>";
+              }
+          
+              
+          
+              if (userCount == Group_Size && allbudgetsentered) {
+                    document.getElementById("budget").innerHTML += "budget";
+                  }
+            
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#modalgroupdescription").text(jqXHR.statusText);
+        }
+      });
       
       // This Ajax call queries the database for all Events.
       
@@ -538,44 +588,26 @@ crossorigin="anonymous"></script>
         success: function(data) {
             // get events
             var events = "";
-            console.log("test");
-            console.log(data);
-            //console.log("Array length: " + Object.keys(events).length);
+            //console.log("test");
+            //console.log(data);
 
-            //var length = Object.keys(events).length;
+            document.getElementById("event1name").innerHTML = data[0]["Event_Name"];
+            document.getElementById("event1description").innerHTML = data[0]["Event_Description"];   
+            document.getElementById("event1image").setAttribute("src", data[0]["Event_ImgLocation"]);   
+            document.getElementById("event2name").innerHTML = data[1]["Event_Name"];
+            document.getElementById("event2description").innerHTML = data[1]["Event_Description"]; 
 
-            // for(var key in data) 
-
-            //for (i = 0; i < length; i++) {
-
-              //console.log("Group Name: " + Group_Name);
-              //console.log(data[i]["Group_Name"]);
-
-              //if (data[i]["Group_Name"] === Group_Name) {
-
-                //console.log("i = " + i);
-
-              //console.log(data[i]["Group_Description"]);
-                //Group_Description = data[i]["Group_Description"];
-                //Group_Size = "" + data[i]["Group_Size"]
-                document.getElementById("event1name").innerHTML = data[0]["Event_Name"];
-                document.getElementById("event1description").innerHTML = data[0]["Event_Description"];   
-                document.getElementById("event1image").setAttribute("src", data[0]["Event_ImgLocation"]);   
-                document.getElementById("event2name").innerHTML = data[1]["Event_Name"];
-                document.getElementById("event2description").innerHTML = data[1]["Event_Description"]; 
+            document.getElementById("event2image").setAttribute("src", data[1]["Event_ImgLocation"]); 
+            document.getElementById("event3name").innerHTML = data[2]["Event_Name"];
+            document.getElementById("event3description").innerHTML = data[2]["Event_Description"]; 
+            document.getElementById("event3image").setAttribute("src", data[2]["Event_ImgLocation"]); 
           
-                document.getElementById("event2image").setAttribute("src", data[1]["Event_ImgLocation"]); 
-                document.getElementById("event3name").innerHTML = data[2]["Event_Name"];
-                document.getElementById("event3description").innerHTML = data[2]["Event_Description"]; 
-                document.getElementById("event3image").setAttribute("src", data[2]["Event_ImgLocation"]); 
-          
-            //} 
-            //}
         },
         error: function(jqXHR, textStatus, errorThrown) {
             $("#modalgroupdescription").text(jqXHR.statusText);
         }
       });
+
       
       
       }
