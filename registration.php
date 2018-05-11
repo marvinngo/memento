@@ -178,7 +178,7 @@
         <a href="index.php">Home</a>
       </div>
       <div class="col-4">
-        <a href="register.php">Signup</a>
+        <a href="registration.php">Signup</a>
       </div>
       <div class="col-4">
         <a href="#" data-toggle="modal" data-target="#login">Login</a>
