@@ -295,10 +295,11 @@ if($_SESSION['loggedin'] === false){
                 <h2 id="modalgroupdescription">Description</h2>
                 <h3 id="numbermembers">Max Members</h3>
                 <h5 id="currentmembers"></h5>
+                <h5 id="currentmembers">Current Budget: <span id="currentBudgetID">not set.</span></h5>
                 <br>
                 <form>
                   <input type="text" class="form-control" id="personalBudget" placeholder="Personal Budget" pattern="[0-9]">
-                  <button id="budgetSubmit" type="submit" class="btn btn-primary mt-4 w-100">Submit</button>
+                  <button id="budgetSubmit" type="button" onclick="return updateBudgetTable();" class="btn btn-primary mt-4 w-100">Submit</button>
                 </form>
                 <br>
                 <p id="budget">Budget: </p>
@@ -515,7 +516,7 @@ crossorigin="anonymous"></script>
       
     // Updates the modal with the id of what was clicked - the id is set to the Group_Name when created.
     
-    var Group_Name = (clicked_id);
+    Group_Name = (clicked_id);
     document.getElementById("modalgroupname").innerHTML = Group_Name;
     
         // Ajax call to get query database for groups, find the group that matches the id that was clicked, updates the modal with group description and number of members.
@@ -525,13 +526,10 @@ crossorigin="anonymous"></script>
             dataType: "json",
             type: "GET",
             success: function(data) {
-                // get each item
-                //var groups = "";
-                //console.log("test");
-                //console.log(data);
-                //console.log("Array length: " + Object.keys(data).length);
               
                 var length = Object.keys(data).length;
+              
+                var Group_Size = 0
                 
                 // for(var key in data) 
                 
@@ -551,13 +549,10 @@ crossorigin="anonymous"></script>
                     document.getElementById("numbermembers").innerHTML = "Max members: " + Group_Size + "</br>";   
               } 
               }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                $("#modalgroupdescription").text("An error has occurred.");
-            }
-          }); 
-      
-            
+              
+              // Second Ajax call inside this one to access Group_Size variable.
+              
+                          
       // This Ajax call queries the Registration table to find the number
       // of users in the group, and if the group is full, the total budget.
       
@@ -568,11 +563,13 @@ crossorigin="anonymous"></script>
         success: function(data) {
             // get events
             var events = "";
-            console.log("test");
-            console.log(data);
+            //console.log("test");
+            //console.log(data);
           
             var length = Object.keys(data).length;
             var userCount = 0;
+          
+            
           
             document.getElementById("currentmembers").innerHTML = "<h5>Current members: " + "</br></h5>";
                 
@@ -582,7 +579,15 @@ crossorigin="anonymous"></script>
                 
                 userCount++;
 
-                document.getElementById("currentmembers").innerHTML += "<h5>" + data[i]["User_Name"] + "</br></h5>";   
+                document.getElementById("currentmembers").innerHTML += "<h5>" + data[i]["User_Name"] + "</br></h5>"; 
+                if (User_Name == data[i]["User_Name"]) {
+                  if (data[i]["Registration_Budget"] != null) {
+                  document.getElementById("currentBudgetID").innerHTML = data[i]["Registration_Budget"];
+                    } else {
+                      document.getElementById("currentBudgetID").innerHTML = "not set.";
+                    }
+                }
+                   
                 
               } 
               }
@@ -605,6 +610,15 @@ crossorigin="anonymous"></script>
             $("#modalgroupdescription").text(jqXHR.statusText);
         }
       });
+              
+              
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $("#modalgroupdescription").text("An error has occurred.");
+            }
+          }); 
+      
+
       
       // This Ajax call queries the database for all Events.
       
@@ -661,6 +675,53 @@ crossorigin="anonymous"></script>
       
       
       }
+    
+    
+    function updateBudgetTable() {
+      
+    var User_Name='<?php echo $_SESSION['User_Name'];?>';
+      
+    //var Group_Name previously assigned still points to correct variable based on testing:
+      
+    //console.log("Group Name: " + Group_Name);
+      
+    var Registration_Budget = document.getElementById('personalBudget').value;
+    
+    var indivBudgJSON = {"User_Name":User_Name,"Group_Name":Group_Name,"Registration_Budget":Registration_Budget};
+      
+    JSON.stringify(indivBudgJSON);
+      
+    // console.log(indivBudgJSON); // seems to work.
+          
+      // This Ajax call updates the database with the user's personal budget.
+      
+        $.ajax({
+        url: "ajax-post-personalBudget.php",
+        dataType: "json",
+        type: "POST",
+        data: indivBudgJSON,
+        success: function(data) {
+          
+          console.log("successss");
+          
+          console.log("Data returned from server: ", data);
+          var listData = "";
+          for(var key in data) {
+              listData += key + ":" + data[key] + " ";
+          }
+          
+          console.log("budget: " + data[0]["Registration_Budget"])
+          if (data[0]["Registration_Budget"] != null) {
+            document.getElementById("currentBudgetID").innerHTML = data[0]["Registration_Budget"];
+            }
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#modalgroupdescription").text(jqXHR.statusText);
+        }
+      });
+      
+    }
 
 /*]]>*/
 </script>
