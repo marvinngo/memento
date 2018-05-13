@@ -18,10 +18,10 @@
       
         $_POST["Registration_Budget"] = floatval($_POST["Registration_Budget"]);
       
-        foreach ($_POST as $key => $value){
+        //foreach ($_POST as $key => $value){
            //simply parrot back what was sent
-          $data[$key] = $value;
-        }
+        //  $data[$key] = $value;
+        //}
         // for testing:
         // echo json_encode($data, JSON_FORCE_OBJECT);
 
@@ -34,15 +34,22 @@
         // Convert JSON stringified float from String to float:  
         //$Registration_Budget = floatval($_POST["Registration_Budget"]);
         
-          if (isset($_POST["Registration_Budget"]) && !empty($_POST["Registration_Budget"])) {
+          if (isset($_POST["Registration_Budget"])) {
             // these names don't all have to be the same but if we have several variables
             // then it makes sense to make them the same
-            $Registration_Budget =  floatval($_POST["Registration_Budget"]);
+            $Registration_Budget =  $_POST["Registration_Budget"];
             $User_Name =  $_POST["User_Name"];
             $Group_Name =  $_POST["Group_Name"];
         }
-          if (!empty($User_Name) && !empty($Group_Name) && empty(!$Registration_Budget)) {
+      
+          // Changed from empty() to is_numeric() to deal with empty(0) returning true and because I can't check if is empty OR equals zero because the floatval won't exactly equal zero, so floatval('0') === 0 is false
+      
+          // Apparently floatval('0') >= 0 returns true.
+      
+          if (!empty($User_Name) && !empty($Group_Name) && is_numeric($Registration_Budget) && ($Registration_Budget >= 0)) {
             
+            
+              
             // Insert value into database:
             
             $sql = "UPDATE tbl_Registration SET Registration_Budget = :rBudget WHERE User_Name = :uName && Group_Name = :groupName";

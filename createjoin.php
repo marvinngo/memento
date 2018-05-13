@@ -295,7 +295,8 @@ if($_SESSION['loggedin'] === false){
                 <h2 id="modalgroupdescription">Description</h2>
                 <h3 id="numbermembers">Max Members</h3>
                 <h5 id="currentmembers"></h5>
-                <h5 id="currentmembers">Current Budget: <span id="currentBudgetID">not set.</span></h5>
+                <h5>Current Budget: <span id="currentBudgetID">not set.</span></h5>
+                <h5 id="BudgetErrorID"></h5>
                 <br>
                 <form>
                   <input type="text" class="form-control" id="personalBudget" placeholder="Personal Budget" pattern="[0-9]">
@@ -687,9 +688,13 @@ crossorigin="anonymous"></script>
       
     var Registration_Budget = document.getElementById('personalBudget').value;
     
+    // console.log("User entered: " + Registration_Budget);
+      
     var indivBudgJSON = {"User_Name":User_Name,"Group_Name":Group_Name,"Registration_Budget":Registration_Budget};
       
     JSON.stringify(indivBudgJSON);
+      
+    //console.log(indivBudgJSON);
       
     // console.log(indivBudgJSON); // seems to work.
           
@@ -702,22 +707,23 @@ crossorigin="anonymous"></script>
         data: indivBudgJSON,
         success: function(data) {
           
-          console.log("successss");
+          //console.log("successss");
           
-          console.log("Data returned from server: ", data);
-          var listData = "";
-          for(var key in data) {
-              listData += key + ":" + data[key] + " ";
-          }
+          //console.log("Data returned from server: ", data);
+          //var listData = "";
+          //for(var key in data) {
+              //listData += key + ":" + data[key] + " ";
+          //}
           
-          console.log("budget: " + data[0]["Registration_Budget"])
+          //console.log("budget: " + data[0]["Registration_Budget"])
           if (data[0]["Registration_Budget"] != null) {
+            $("#BudgetErrorID").text("");
             document.getElementById("currentBudgetID").innerHTML = data[0]["Registration_Budget"];
             }
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            $("#modalgroupdescription").text(jqXHR.statusText);
+            $("#BudgetErrorID").text("Please enter a number greater than zero.");
         }
       });
       
