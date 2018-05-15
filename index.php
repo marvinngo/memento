@@ -21,6 +21,16 @@
   <link href="style.css" rel="stylesheet">
   <title>Memento</title>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- To view the analytics, go to https://analytics.google.com/analytics/web/?authuser=0#/embed/report-home/a119244757w176500717p175343866 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119244757-1"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-119244757-1');
+  </script>
+
 </head>
   
 <body>
