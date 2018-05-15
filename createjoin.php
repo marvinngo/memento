@@ -296,14 +296,15 @@ if($_SESSION['loggedin'] === false){
                 <h3 id="numbermembers">Max Members</h3>
                 <h5 id="currentmembers"></h5>
                 <h5>Current Budget: <span id="currentBudgetID">not set.</span></h5>
-                <h5 id="BudgetErrorID"></h5>
+                <h5 id="groupBudgeth5"></h5>
+                <h5 color="red" id="BudgetErrorID"></h5>
                 <br>
                 <form>
                   <input type="text" class="form-control" id="personalBudget" placeholder="Personal Budget" pattern="[0-9]">
                   <button id="budgetSubmit" type="button" onclick="return updateBudgetTable();" class="btn btn-primary mt-4 w-100">Submit</button>
                 </form>
                 <br>
-                <p id="budget">Budget: </p>
+                
               </div>
             </div>
           </div>
@@ -505,7 +506,7 @@ crossorigin="anonymous"></script>
               
                 var length = Object.keys(data).length;
               
-                var Group_Size = 0
+                var Group_Size = 0;
                 
                 // for(var key in data) 
                 
@@ -544,8 +545,10 @@ crossorigin="anonymous"></script>
           
             var length = Object.keys(data).length;
             var userCount = 0;
-          
+            var userBudgetCount = 0;
             
+            // Create var outside loop so it's accessible outside loop:
+            var groupBudget = 0;
           
             document.getElementById("currentmembers").innerHTML = "<h5>Current members: " + "</br></h5>";
                 
@@ -555,15 +558,26 @@ crossorigin="anonymous"></script>
                 
                 userCount++;
 
-                document.getElementById("currentmembers").innerHTML += "<h5>" + data[i]["User_Name"] + "</br></h5>"; 
-                if (User_Name == data[i]["User_Name"]) {
-                  if (data[i]["Registration_Budget"] != null) {
+                document.getElementById("currentmembers").innerHTML += "<h5>" + data[i]["User_Name"] + "</br></h5>";
+                
+                // Sum up the group's budget:
+                
+                var Reg_Budget = data[i]["Registration_Budget"];
+                console.log("Reg_Budget = " + Reg_Budget)
+                  if (Reg_Budget != null) {
+                    
+                  groupBudget += data[i]["Registration_Budget"];
+                  userBudgetCount++;
+                    
+                }
+                
+                  if (User_Name == data[i]["User_Name"]) {
+                    if (Reg_Budget != null) {
                   document.getElementById("currentBudgetID").innerHTML = data[i]["Registration_Budget"];
                     } else {
                       document.getElementById("currentBudgetID").innerHTML = "not set.";
                     }
-                }
-                   
+                  }
                 
               } 
               }
@@ -571,13 +585,18 @@ crossorigin="anonymous"></script>
               
           
               var allbudgetsentered = false;
+          
+              if (userCount == Group_Size && userBudgetCount == Group_Size) {
+                allbudgetsentered = true;
+                groupBudget /= Group_Size;
+              }
  
               if (!allbudgetsentered || userCount < Group_Size) {
-                document.getElementById("budget").innerHTML = "<h6>Please note that the group must be full and all users must have entered a personal budget for the group's budget to display.</h6>";
+                document.getElementById("groupBudgeth5").innerHTML = "<h6>Please note that the group must be full and all users must have entered a personal budget for the group's budget to display.</h6>";
               }
           
               if (userCount == Group_Size && allbudgetsentered) {
-                    document.getElementById("budget").innerHTML += "budget";
+                    document.getElementById("groupBudgeth5").innerHTML = "Group Budget: " + "<span id=groupBudget>" + groupBudget + "</span>";
               }
             
 
@@ -662,6 +681,7 @@ crossorigin="anonymous"></script>
     //console.log("Group Name: " + Group_Name);
       
     var Registration_Budget = document.getElementById('personalBudget').value;
+    //var Group_Budget = document.getElementById('groupBudget').value;
     
     // console.log("User entered: " + Registration_Budget);
       
@@ -694,11 +714,13 @@ crossorigin="anonymous"></script>
           if (data[0]["Registration_Budget"] != null) {
             $("#BudgetErrorID").text("");
             document.getElementById("currentBudgetID").innerHTML = data[0]["Registration_Budget"];
+            
             }
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
             $("#BudgetErrorID").text("Please enter a number greater than zero.");
+            $("#BudgetErrorID").setAttribute("color","red");
         }
       });
       
