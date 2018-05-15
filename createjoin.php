@@ -315,6 +315,8 @@ if($_SESSION['loggedin'] === false){
                       <div class="card-body">
                         <h3 id="event1name" class="card-title">event</h3>
                         <p id="event1description" class="card-text">event description</p>
+                        <a id="event1link" href="#">Visit their site for more information</a>
+                        <button id="selectEvent1" type="button" onclick="" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
@@ -327,6 +329,8 @@ if($_SESSION['loggedin'] === false){
                       <div class="card-body">
                         <h3 id="event2name" class="card-title">event</h3>
                         <p id="event2description" class="card-text">event description</p>
+                        <a id="event2link" href="#">Visit their site for more information</a>
+                        <button id="selectEvent2" type="button" onclick="" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
@@ -339,6 +343,8 @@ if($_SESSION['loggedin'] === false){
                       <div class="card-body">
                         <h3 id="event3name" class="card-title">event</h3>
                         <p id="event3description" class="card-text">event description</p>
+                        <a id="event3link" href="#">Visit their site for more information</a>
+                        <button id="selectEvent3" type="button" onclick="" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
