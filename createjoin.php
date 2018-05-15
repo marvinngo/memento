@@ -523,7 +523,7 @@ crossorigin="anonymous"></script>
                     Group_Description = data[i]["Group_Description"];
                     Group_Size = "" + data[i]["Group_Size"]
                     document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
-                    document.getElementById("numbermembers").innerHTML = "Max members: " + Group_Size + "</br>";   
+                    document.getElementById("numbermembers").innerHTML = "Max members: <span id='groupSizeID'>" + Group_Size + "</span></br>";   
               } 
               }
               
@@ -681,8 +681,13 @@ crossorigin="anonymous"></script>
     //console.log("Group Name: " + Group_Name);
       
     var Registration_Budget = document.getElementById('personalBudget').value;
-    //var Group_Budget = document.getElementById('groupBudget').value;
-    
+    // Check if Group Budget exists:
+    //if( $('#groupBudget').length ) {
+      // It exists so assign it's value to Group Budget and set boolean true to be used in if statement:
+      //Group_Budget = document.getElementById('groupBudget').value;
+      //groupBudgetExists = true;
+      //}
+      
     // console.log("User entered: " + Registration_Budget);
       
     var indivBudgJSON = {"User_Name":User_Name,"Group_Name":Group_Name,"Registration_Budget":Registration_Budget};
@@ -711,11 +716,44 @@ crossorigin="anonymous"></script>
           //}
           
           //console.log("budget: " + data[0]["Registration_Budget"])
-          if (data[0]["Registration_Budget"] != null) {
-            $("#BudgetErrorID").text("");
-            document.getElementById("currentBudgetID").innerHTML = data[0]["Registration_Budget"];
+          
+              
+          //var groupBudgetExists = false;
+
+          var Group_Budget = 0;
+          
+          var groupMax = document.getElementById("groupSizeID").innerHTML;
+          console.log("Group size: " + groupMax);
+          
+          var budgetCount = 0;
+          
+          var length = Object.keys(data).length;
             
+            for (i = 0; i < length; i++) {
+              
+              // 
+              if (data[i]["Registration_Budget"] != null) {
+                
+                // Keep track of how many users have entered a budget and add up the total group's budget:
+                budgetCount++;
+                Group_Budget += data[i]["Registration_Budget"];
+                
+                // Update user's current showing budget:
+                if (data[i]["User_Name"] === User_Name) {
+                  document.getElementById("currentBudgetID").innerHTML = data[i]["Registration_Budget"];
+                }
+                }
+          
             }
+          
+            console.log("budget total: " + Group_Budget);
+            console.log("group max: " + groupMax);
+            console.log("budgetcount: " + budgetCount);
+            
+             if (groupMax == budgetCount) {
+                document.getElementById("groupBudget").innerHTML = (Group_Budget / groupMax);
+               console.log("if:" + Group_Budget);
+              }
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
