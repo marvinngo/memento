@@ -1,0 +1,13 @@
+{
+    "name": "mark/memento",
+    "authors": [
+        {
+            "name": "Mark Kropivnitski",
+            "email": "theultimatesizzle@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "codeception/codeception": "^2.4"
+    }
+}
