@@ -343,6 +343,7 @@ if($_SESSION['loggedin'] === false){
                     </div>
                   </div>
                   <!--event end-->
+                  <button id="refreshEvents" type="button" onclick="" class="btn btn-primary w-100">Refresh</button>
 
         </div>
       </div>
