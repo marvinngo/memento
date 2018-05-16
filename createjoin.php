@@ -300,8 +300,8 @@ if($_SESSION['loggedin'] === false){
                 <h5 color="red" id="BudgetErrorID"></h5>
                 <br>
                 <form>
-                  <input type="text" class="form-control" id="personalBudget" placeholder="Personal Budget" pattern="[0-9]">
-                  <button id="budgetSubmit" type="button" onclick="return updateBudgetTable();" class="btn btn-primary mt-4 w-100">Submit</button>
+                  <input type="number" class="form-control" id="personalBudget" placeholder="Personal Budget" min="0" value="0">
+                  <button id="budgetSubmit" type="submit" onclick="return updateBudgetTable();" class="btn btn-primary mt-4 w-100">Submit</button>
                 </form>
                 <br>
                 
