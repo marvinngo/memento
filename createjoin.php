@@ -301,7 +301,7 @@ if($_SESSION['loggedin'] === false){
                 <br>
                 <form>
                   <input type="number" class="form-control" id="personalBudget" placeholder="Personal Budget" min="0" value="0">
-                  <button id="budgetSubmit" type="button" onclick="return updateBudgetTable();" class="btn btn-primary mt-4 w-100">Submit</button>
+                  <button id="budgetSubmit" type="submit" onclick="return updateBudgetTable();" class="btn btn-primary mt-4 w-100">Submit</button>
                 </form>
                 <br>
                 
