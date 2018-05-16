@@ -275,7 +275,7 @@ if($_SESSION['loggedin'] === false){
                   <div class="col-8 text-center">
                      <h2 id="modalgroupname">
                        GROUP NAME
-                     </h2>
+                     </h2><h2 id=groupHiddenEventID style="display: none;"></h2>
                   </div>
                   <div class="col-2">
                       <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
@@ -530,9 +530,11 @@ crossorigin="anonymous"></script>
                     
                   //console.log(data[i]["Group_Description"]);
                     Group_Description = data[i]["Group_Description"];
-                    Group_Size = "" + data[i]["Group_Size"]
+                    Group_Size = "" + data[i]["Group_Size"];
+                    Group_Event_ID = data[i]["Event_Name"];
                     document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
                     document.getElementById("numbermembers").innerHTML = "Max members: <span id='groupSizeID'>" + Group_Size + "</span></br>";   
+                    document.getElementById("groupHiddenEventID").innerHTML = Group_Event_ID;   
               } 
               }
               
@@ -646,10 +648,34 @@ crossorigin="anonymous"></script>
         dataType: "json",
         type: "POST",
         success: function(data) {
-            // get events
-            var events = "";
             //console.log("test");
             //console.log(data);
+          
+            var Event_ID = document.getElementById("groupHiddenEventID").innerHTML;
+          
+            if (Event_ID) {
+              
+            // If the Group already has an Event set, show that Event and hide others:
+              
+            var length = Object.keys(data).length;
+            
+            for (i = 0; i < length; i++) {
+              // Use the Event if the ID matches what was saved in Event_ID:
+              if (data[i]["ID"] == Event_ID) {
+                document.getElementById("event1name").innerHTML = data[i]["Event_Name"];
+            document.getElementById("event1ID").innerHTML = data[i]["ID"];
+            document.getElementById("event1description").innerHTML = data[i]["Event_Description"];   
+            document.getElementById("event1image").setAttribute("src", data[i]["Event_ImgLocation"]);  
+            if (data[i]["Event_URL"]){
+              document.getElementById("event1link").style.display="block";
+              document.getElementById("event1link").setAttribute("href", data[i]["Event_URL"]);  
+            } else {
+              document.getElementById("event1link").style.display="none";
+            }
+            }
+            }
+              
+            } else {
           
             var Group_PricePP = 36.00;
           
@@ -706,6 +732,7 @@ crossorigin="anonymous"></script>
               document.getElementById("event3link").style.display="none";
             }
           
+        }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             $("#modalgroupdescription").text(jqXHR.statusText);
@@ -821,7 +848,7 @@ crossorigin="anonymous"></script>
             console.log("An email has been sent to notify all users that the final budget is now included.");
           },
           error: function(jqXHR, textStatus, errorThrown) {
-            $("#modalgroupname").text(jqXHR.statusText);
+            console.log(jqXHR.statusText);
           }
         });
       }
@@ -863,8 +890,7 @@ crossorigin="anonymous"></script>
           
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            $("#BudgetErrorID").text("Please enter a number greater than zero.");
-            $("#BudgetErrorID").setAttribute("color","red");
+            console.log(jqXHR.statusText);
         }
       });
       
