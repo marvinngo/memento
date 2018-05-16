@@ -590,6 +590,23 @@ crossorigin="anonymous"></script>
                 allbudgetsentered = true;
                 groupBudget /= Group_Size;
               }
+
+              if (allbudgetsentered) {
+
+                $.ajax({
+                  url: "ajax-get-events.php",
+                  dataType: "json",
+                  type: "POST",
+                  data: Group_Name,
+                   success: function(data) {
+                     console.log("An email has been sent to notify all users that the final budget is now included.");
+                   },
+                  error: function(jqXHR, textStatus, errorThrown) {
+                  $("#modalgroupdescription").text(jqXHR.statusText);
+                }
+              });
+   
+              }
  
               if (!allbudgetsentered || userCount < Group_Size) {
                 document.getElementById("groupBudgeth5").innerHTML = "<h6>Please note that the group must be full and all users must have entered a personal budget for the group's budget to display.</h6>";
