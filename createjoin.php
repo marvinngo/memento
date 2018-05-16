@@ -652,14 +652,32 @@ crossorigin="anonymous"></script>
             document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
             document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
             document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
+            if (data[rand1]["Event_URL"]){
+              document.getElementById("event1link").style.display="block";
+              document.getElementById("event1link").setAttribute("href", data[rand1]["Event_URL"]);  
+            } else {
+              document.getElementById("event1link").style.display="none";
+            }
           
             document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
             document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
-            document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]); 
+            document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]);
+            if (data[rand2]["Event_URL"]){
+              document.getElementById("event2link").style.display="block";
+              document.getElementById("event2link").setAttribute("href", data[rand2]["Event_URL"]);  
+            } else {
+              document.getElementById("event2link").style.display="none";
+            }
           
             document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
             document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
-            document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]); 
+            document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]);
+            if (data[rand3]["Event_URL"]){
+              document.getElementById("event3link").style.display="block";
+              document.getElementById("event3link").setAttribute("href", data[rand3]["Event_URL"]);  
+            } else {
+              document.getElementById("event3link").style.display="none";
+            }
           
         },
         error: function(jqXHR, textStatus, errorThrown) {
