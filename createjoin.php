@@ -315,9 +315,10 @@ if($_SESSION['loggedin'] === false){
                       <img id="event1image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
                         <h3 id="event1name" class="card-title">event</h3>
+                        <h6 id="event1ID"></h6>
                         <p id="event1description" class="card-text">event description</p>
                         <a id="event1link" href="#">Visit their site for more information</a>
-                        <button id="selectEvent1" type="button" onclick="" class="btn btn-primary float-right">Select This Event For Your Group</button>
+                        <button id="selectEvent1" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
@@ -329,9 +330,10 @@ if($_SESSION['loggedin'] === false){
                       <img id="event2image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
                         <h3 id="event2name" class="card-title">event</h3>
+                        <h6 id="event2ID"></h6>
                         <p id="event2description" class="card-text">event description</p>
                         <a id="event2link" href="#">Visit their site for more information</a>
-                        <button id="selectEvent2" type="button" onclick="" class="btn btn-primary float-right">Select This Event For Your Group</button>
+                        <button id="selectEvent2" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
@@ -343,9 +345,10 @@ if($_SESSION['loggedin'] === false){
                       <img id="event3image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
                         <h3 id="event3name" class="card-title">event</h3>
+                        <h6 id="event3ID"></h6>
                         <p id="event3description" class="card-text">event description</p>
                         <a id="event3link" href="#">Visit their site for more information</a>
-                        <button id="selectEvent3" type="button" onclick="" class="btn btn-primary float-right">Select This Event For Your Group</button>
+                        <button id="selectEvent3" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
@@ -386,6 +389,12 @@ document.getElementById("footerHome").innerHTML = "";
 document.getElementById("footerSignup").innerHTML = "Home";
 document.getElementById("footerSignup").setAttribute("href", "index.php");
 document.getElementById("footerLogin").innerHTML = "";
+  
+// The following just used to hold Event IDs for use in selecting Events for Groups.
+  
+document.getElementById("event1ID").style.display="none";
+document.getElementById("event2ID").style.display="none";
+document.getElementById("event3ID").style.display="none";
 
 </script>
   
@@ -671,6 +680,7 @@ crossorigin="anonymous"></script>
             }
 
             document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
+            document.getElementById("event1ID").innerHTML = data[rand1]["ID"];
             document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
             document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
             if (data[rand1]["Event_URL"]){
@@ -681,6 +691,7 @@ crossorigin="anonymous"></script>
             }
           
             document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
+            document.getElementById("event2ID").innerHTML = data[rand2]["ID"];
             document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
             document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]);
             if (data[rand2]["Event_URL"]){
@@ -691,6 +702,7 @@ crossorigin="anonymous"></script>
             }
           
             document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
+          document.getElementById("event3ID").innerHTML = data[rand3]["ID"];
             document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
             document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]);
             if (data[rand3]["Event_URL"]){
@@ -800,6 +812,37 @@ crossorigin="anonymous"></script>
             $("#BudgetErrorID").setAttribute("color","red");
         }
       });
+      
+    }
+    
+    function set_event(clicked_id) {
+      
+      var Event_ID = "";
+      
+      var Group_Name = document.getElementById("modalgroupname").innerHTML;
+      
+      console.log("Clicked id: " + clicked_id);
+      
+      if (clicked_id == "selectEvent1") {
+        Event_ID = document.getElementById("event1ID").innerHTML;
+      }
+      
+      if (clicked_id == "selectEvent2") {
+        Event_ID = document.getElementById("event2ID").innerHTML;
+      }
+      
+      if (clicked_id == "selectEvent3") {
+        Event_ID = document.getElementById("event3ID").innerHTML;
+      }
+      
+      var eventInfo = {"Group_Name":Group_Name,"Event_ID":Event_ID};
+      
+      JSON.stringify(eventInfo);
+      
+      console.log(eventInfo);
+      
+      
+      
       
     }
 
