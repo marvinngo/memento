@@ -592,19 +592,23 @@ crossorigin="anonymous"></script>
               }
 
               if (allbudgetsentered) {
-
+                var groupname = {"Group_Name":Group_Name};
+      
+                JSON.stringify(groupname);
+                
                 $.ajax({
-                  url: "ajax-get-events.php",
+                  url: "sendemail.php",
                   dataType: "json",
                   type: "POST",
-                  data: Group_Name,
-                   success: function(data) {
-                     console.log("An email has been sent to notify all users that the final budget is now included.");
-                   },
+                  data: groupname,
+                  success: function(data) {
+                    console.log("An email has been sent to notify all users that the final budget is now included.");
+                  },
                   error: function(jqXHR, textStatus, errorThrown) {
-                  $("#modalgroupdescription").text(jqXHR.statusText);
-                }
-              });
+                    $("#modalgroupname").text(jqXHR.statusText);
+                  }
+                });
+              }
    
               }
  
