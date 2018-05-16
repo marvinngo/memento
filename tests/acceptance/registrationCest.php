@@ -28,4 +28,19 @@ class registrationCest
         $I->amOnPage('memento/createjoin.php');
         // $I->see('Welcome Tester!');
     }
+
+    public function checkMyGroups(AcceptanceTester $I)
+    {
+    
+    }
+
+    public function logout(AcceptanceTester $I)
+    {
+
+    }
+
+    public function registerUser(AcceptanceTester $I)
+    {
+    
+    }
 }
