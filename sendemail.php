@@ -8,7 +8,7 @@ Create : Manage an email sender for a single API key. An e-mail address or a com
 $apikey = 'bda03cf3b50ed68929a12af793e57ca0';
 $apisecret = '86041458e2f3c9d9fe03c50cff814cc6';
 
-require 'vendor/autoload.php';
+require 'Mailjet/vendor/autoload.php';
 use \Mailjet\Resources;
 
 
