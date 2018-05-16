@@ -31,6 +31,9 @@ button {
   height: 100%;
 }
 
+.carouselTint {
+  filter: brightness(.6);
+}
 /* front page carousel caption */
 .carousel-caption {
   position: absolute;
@@ -189,7 +192,9 @@ button {
   color: #F6F6F6;
 }
 
-
+#BudgetErrorID {
+  color: red;
+}
 /* copyright in footer */
 #copyright {
   background-color: #232F3C;

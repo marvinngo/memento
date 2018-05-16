@@ -296,86 +296,65 @@ if($_SESSION['loggedin'] === false){
                 <h3 id="numbermembers">Max Members</h3>
                 <h5 id="currentmembers"></h5>
                 <h5>Current Budget: <span id="currentBudgetID">not set.</span></h5>
-                <h5 id="BudgetErrorID"></h5>
+                <h5 id="groupBudgeth5"></h5>
+                <h5 color="red" id="BudgetErrorID"></h5>
                 <br>
                 <form>
-                  <input type="text" class="form-control" id="personalBudget" placeholder="Personal Budget" pattern="[0-9]">
-                  <button id="budgetSubmit" type="button" onclick="return updateBudgetTable();" class="btn btn-primary mt-4 w-100">Submit</button>
+                  <input type="number" class="form-control" id="personalBudget" placeholder="Personal Budget" min="0" value="0">
+                  <button id="budgetSubmit" type="submit" onclick="return updateBudgetTable();" class="btn btn-primary mt-4 w-100">Submit</button>
                 </form>
                 <br>
-                <p id="budget">Budget: </p>
+                
               </div>
             </div>
           </div>
-          <!--collapse-->
-          <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title text-center">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Event 1</a>
-                </h4>
-              </div>
-              <div id="collapse1" class="panel-collapse collapse in">
-                <div class="panel-body">
+
                   <!-- event 1 -->
-                  <div class="w-100 mb-3">
+                  <div id="eventDiv1" class="w-100 mb-3">
                     <div class="card mx-auto">
                       <img id="event1image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
                         <h3 id="event1name" class="card-title">event</h3>
+                        <h6 id="event1ID"></h6>
                         <p id="event1description" class="card-text">event description</p>
+                        <a id="event1link" href="#">Visit their site for more information</a>
+                        <button id="selectEvent1" style="display: none;" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
                   <!--event end-->
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title text-center">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Event 2</a>
-                </h4>
-              </div>
-              <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body">
+
                   <!-- event 2 -->
-                  <div class="w-100 mb-3">
+                  <div id="eventDiv2" class="w-100 mb-3">
                     <div class="card mx-auto">
                       <img id="event2image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
                         <h3 id="event2name" class="card-title">event</h3>
+                        <h6 id="event2ID"></h6>
                         <p id="event2description" class="card-text">event description</p>
+                        <a id="event2link" href="#">Visit their site for more information</a>
+                        <button id="selectEvent2" style="display: none;" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
                   <!--event end-->
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title text-center">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Event 3</a>
-                </h4>
-              </div>
-              <div id="collapse3" class="panel-collapse collapse">
-                <div class="panel-body">
+
                   <!-- event 3 -->
-                  <div class="w-100 mb-3">
+                  <div id="eventDiv3" class="w-100 mb-3">
                     <div class="card mx-auto">
                       <img id="event3image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
                         <h3 id="event3name" class="card-title">event</h3>
+                        <h6 id="event3ID"></h6>
                         <p id="event3description" class="card-text">event description</p>
+                        <a id="event3link" href="#">Visit their site for more information</a>
+                        <button id="selectEvent3" type="button" style="display: none;" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
                   <!--event end-->
-                </div>
-              </div>
-            </div>
-          </div>
+                  <button id="refreshEvents" type="button" onclick="refreshEvents()" class="btn btn-primary w-100">Refresh</button>
+
         </div>
       </div>
     </div>
@@ -410,6 +389,12 @@ document.getElementById("footerHome").innerHTML = "";
 document.getElementById("footerSignup").innerHTML = "Home";
 document.getElementById("footerSignup").setAttribute("href", "index.php");
 document.getElementById("footerLogin").innerHTML = "";
+  
+// The following just used to hold Event IDs for use in selecting Events for Groups.
+  
+document.getElementById("event1ID").style.display="none";
+document.getElementById("event2ID").style.display="none";
+document.getElementById("event3ID").style.display="none";
 
 </script>
   
@@ -530,9 +515,9 @@ crossorigin="anonymous"></script>
               
                 var length = Object.keys(data).length;
               
-                var Group_Size = 0
+                var Group_Size = 0;
                 
-                // for(var key in data) 
+                var Group_Event_ID;
                 
                 for (i = 0; i < length; i++) {
                   
@@ -545,9 +530,10 @@ crossorigin="anonymous"></script>
                     
                   //console.log(data[i]["Group_Description"]);
                     Group_Description = data[i]["Group_Description"];
-                    Group_Size = "" + data[i]["Group_Size"]
+                    Group_Size = "" + data[i]["Group_Size"];
+                    Group_Event_ID = data[i]["Event_Name"];
                     document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
-                    document.getElementById("numbermembers").innerHTML = "Max members: " + Group_Size + "</br>";   
+                    document.getElementById("numbermembers").innerHTML = "Max members: <span id='groupSizeID'>" + Group_Size + "</span></br>";  
               } 
               }
               
@@ -569,8 +555,10 @@ crossorigin="anonymous"></script>
           
             var length = Object.keys(data).length;
             var userCount = 0;
-          
+            var userBudgetCount = 0;
             
+            // Create var outside loop so it's accessible outside loop:
+            var groupBudget = 0;
           
             document.getElementById("currentmembers").innerHTML = "<h5>Current members: " + "</br></h5>";
                 
@@ -580,15 +568,26 @@ crossorigin="anonymous"></script>
                 
                 userCount++;
 
-                document.getElementById("currentmembers").innerHTML += "<h5>" + data[i]["User_Name"] + "</br></h5>"; 
-                if (User_Name == data[i]["User_Name"]) {
-                  if (data[i]["Registration_Budget"] != null) {
+                document.getElementById("currentmembers").innerHTML += "<h5>" + data[i]["User_Name"] + "</br></h5>";
+                
+                // Sum up the group's budget:
+                
+                var Reg_Budget = data[i]["Registration_Budget"];
+                //console.log("Reg_Budget = " + Reg_Budget)
+                  if (Reg_Budget != null) {
+                    
+                  groupBudget += data[i]["Registration_Budget"];
+                  userBudgetCount++;
+                    
+                }
+                
+                  if (User_Name == data[i]["User_Name"]) {
+                    if (Reg_Budget != null) {
                   document.getElementById("currentBudgetID").innerHTML = data[i]["Registration_Budget"];
                     } else {
                       document.getElementById("currentBudgetID").innerHTML = "not set.";
                     }
-                }
-                   
+                  }
                 
               } 
               }
@@ -596,31 +595,35 @@ crossorigin="anonymous"></script>
               
           
               var allbudgetsentered = false;
+          
+              if (userCount == Group_Size && userBudgetCount == Group_Size) {
+                allbudgetsentered = true;
+                groupBudget /= Group_Size;
+                
+                // Display "Select This Event For Your Group"  
+                // buttons if all users have entered a budget:
+                
+                document.getElementById("selectEvent1").style.display="block";
+                document.getElementById("selectEvent2").style.display="block";
+                document.getElementById("selectEvent3").style.display="block";
+                
+              } else {
+                // Hides the select this event for your group buttons:
+                document.getElementById("selectEvent1").style.display="none";
+                document.getElementById("selectEvent2").style.display="none";
+                document.getElementById("selectEvent3").style.display="none";
+              }
+
+                     
  
               if (!allbudgetsentered || userCount < Group_Size) {
-                document.getElementById("budget").innerHTML = "<h6>Please note that the group must be full and all users must have entered a personal budget for the group's budget to display.</h6>";
+                document.getElementById("groupBudgeth5").innerHTML = "<h6>Please note that the group must be full and all users must have entered a personal budget for the group's budget to display.</h6>";
               }
           
               if (userCount == Group_Size && allbudgetsentered) {
-                    document.getElementById("budget").innerHTML += "budget";
+                    document.getElementById("groupBudgeth5").innerHTML = "Group Budget: " + "<span id=groupBudget>" + groupBudget + "</span>";
               }
-            
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            $("#modalgroupdescription").text(jqXHR.statusText);
-        }
-      });
-              
-              
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                $("#modalgroupdescription").text("An error has occurred.");
-            }
-          }); 
-      
-
-      
+                
       // This Ajax call queries the database for all Events.
       
         $.ajax({
@@ -628,10 +631,52 @@ crossorigin="anonymous"></script>
         dataType: "json",
         type: "POST",
         success: function(data) {
-            // get events
-            var events = "";
             //console.log("test");
             //console.log(data);
+          
+            //Only show first div and set it to Group's Event if an Event is set for the group:
+          
+            console.log("Group_Event_ID: " + Group_Event_ID);
+            if (Group_Event_ID) {
+            console.log("if statement entered.");
+            // If the Group already has an Event set, show that Event and hide others:
+              
+            
+            document.getElementById("eventDiv2").style.display="none";
+            document.getElementById("eventDiv3").style.display="none";
+            document.getElementById("refreshEvents").style.display="none";
+              
+            // and hide the Select this event button:
+              
+            document.getElementById("selectEvent1").style.display="none";
+              
+            var length = Object.keys(data).length;
+            
+            for (i = 0; i < length; i++) {
+            
+            if (data[i]["ID"] == Group_Event_ID) {
+                document.getElementById("event1name").innerHTML = data[i]["Event_Name"];
+            document.getElementById("event1ID").innerHTML = data[i]["ID"];
+            document.getElementById("event1description").innerHTML = data[i]["Event_Description"];   
+            document.getElementById("event1image").setAttribute("src", data[i]["Event_ImgLocation"]);  
+            if (data[i]["Event_URL"]){
+              document.getElementById("event1link").style.display="block";
+              document.getElementById("event1link").setAttribute("href", data[i]["Event_URL"]);  
+            } else {
+              document.getElementById("event1link").style.display="none";
+            }
+            }
+            }
+              
+            // Else populate with three unique Events:
+              
+            } else {
+              
+            // Display 2nd and 3rd divs:
+              
+            document.getElementById("eventDiv2").style.display="block";
+            document.getElementById("eventDiv3").style.display="block";
+            document.getElementById("refreshEvents").style.display="block";
           
             var Group_PricePP = 36.00;
           
@@ -656,24 +701,57 @@ crossorigin="anonymous"></script>
             }
 
             document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
+            document.getElementById("event1ID").innerHTML = data[rand1]["ID"];
             document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
             document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
+            if (data[rand1]["Event_URL"]){
+              document.getElementById("event1link").style.display="block";
+              document.getElementById("event1link").setAttribute("href", data[rand1]["Event_URL"]);  
+            } else {
+              document.getElementById("event1link").style.display="none";
+            }
           
             document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
+            document.getElementById("event2ID").innerHTML = data[rand2]["ID"];
             document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
-            document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]); 
+            document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]);
+            if (data[rand2]["Event_URL"]){
+              document.getElementById("event2link").style.display="block";
+              document.getElementById("event2link").setAttribute("href", data[rand2]["Event_URL"]);  
+            } else {
+              document.getElementById("event2link").style.display="none";
+            }
           
             document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
+          document.getElementById("event3ID").innerHTML = data[rand3]["ID"];
             document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
-            document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]); 
+            document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]);
+            if (data[rand3]["Event_URL"]){
+              document.getElementById("event3link").style.display="block";
+              document.getElementById("event3link").setAttribute("href", data[rand3]["Event_URL"]);  
+            } else {
+              document.getElementById("event3link").style.display="none";
+            }
+          
+        }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#modalgroupdescription").text(jqXHR.statusText);
+        }
+      });
           
         },
         error: function(jqXHR, textStatus, errorThrown) {
             $("#modalgroupdescription").text(jqXHR.statusText);
         }
       });
-
-      
+              
+              
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $("#modalgroupdescription").text("An error has occurred.");
+            }
+          }); 
       
       }
     
@@ -687,7 +765,13 @@ crossorigin="anonymous"></script>
     //console.log("Group Name: " + Group_Name);
       
     var Registration_Budget = document.getElementById('personalBudget').value;
-    
+    // Check if Group Budget exists:
+    //if( $('#groupBudget').length ) {
+      // It exists so assign it's value to Group Budget and set boolean true to be used in if statement:
+      //Group_Budget = document.getElementById('groupBudget').value;
+      //groupBudgetExists = true;
+      //}
+      
     // console.log("User entered: " + Registration_Budget);
       
     var indivBudgJSON = {"User_Name":User_Name,"Group_Name":Group_Name,"Registration_Budget":Registration_Budget};
@@ -699,7 +783,9 @@ crossorigin="anonymous"></script>
     // console.log(indivBudgJSON); // seems to work.
           
       // This Ajax call updates the database with the user's personal budget.
-      
+      event.preventDefault();
+      //prevents modal from closing on submission
+
         $.ajax({
         url: "ajax-post-personalBudget.php",
         dataType: "json",
@@ -716,18 +802,192 @@ crossorigin="anonymous"></script>
           //}
           
           //console.log("budget: " + data[0]["Registration_Budget"])
-          if (data[0]["Registration_Budget"] != null) {
-            $("#BudgetErrorID").text("");
-            document.getElementById("currentBudgetID").innerHTML = data[0]["Registration_Budget"];
+          
+              
+          //var groupBudgetExists = false;
+
+          var Group_Budget = 0;
+          
+          var groupMax = document.getElementById("groupSizeID").innerHTML;
+          console.log("Group size: " + groupMax);
+          
+          var budgetCount = 0;
+          
+          var length = Object.keys(data).length;
+            
+            for (i = 0; i < length; i++) {
+              
+              // 
+              if (data[i]["Registration_Budget"] != null) {
+                
+                // Keep track of how many users have entered a budget and add up the total group's budget:
+                budgetCount++;
+                Group_Budget += Number(data[i]["Registration_Budget"]);
+                
+                // Update user's current showing budget:
+                if (data[i]["User_Name"] === User_Name) {
+                  document.getElementById("currentBudgetID").innerHTML = data[i]["Registration_Budget"];
+                }
+                }
+          
             }
+          
+            console.log("budget total: " + Group_Budget);
+            console.log("group max: " + groupMax);
+            console.log("budgetcount: " + budgetCount);
+            
+             if (groupMax == budgetCount) {
+                document.getElementById("groupBudget").innerHTML = (Group_Budget / groupMax);
+               console.log("if:" + Group_Budget);
+
+               var groupname = {"Group_Name":Group_Name};
+               JSON.stringify(groupname);
+              
+               $.ajax({
+                url: "sendemail.php",
+                dataType: "json",
+                type: "POST",
+                data: groupname,
+                success: function(data) {
+                console.log("An email has been sent to notify all users that the final budget is now included.");
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.statusText);
+               }
+               });
+             }
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
             $("#BudgetErrorID").text("Please enter a number greater than zero.");
+            $("#BudgetErrorID").setAttribute("color","red");
         }
       });
       
     }
+
+    
+    function set_event(clicked_id) {
+      
+      var Event_ID = "";
+      
+      var Group_Name = document.getElementById("modalgroupname").innerHTML;
+      
+      console.log("Clicked id: " + clicked_id);
+      
+      if (clicked_id == "selectEvent1") {
+        Event_ID = document.getElementById("event1ID").innerHTML;
+      }
+      
+      if (clicked_id == "selectEvent2") {
+        Event_ID = document.getElementById("event2ID").innerHTML;
+      }
+      
+      if (clicked_id == "selectEvent3") {
+        Event_ID = document.getElementById("event3ID").innerHTML;
+      }
+      
+      var eventInfo = {"Group_Name":Group_Name,"Event_ID":Event_ID};
+      
+      JSON.stringify(eventInfo);
+      
+      console.log(eventInfo);
+      
+      $.ajax({
+        url: "ajax-post-selectEvent.php",
+        dataType: "json",
+        type: "POST",
+        data: eventInfo,
+        success: function(data) {
+          
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.statusText);
+        }
+      });
+      
+      
+    }
+    
+    function refreshEvents() {
+      
+            // This Ajax call queries the database for all Events.
+      
+        $.ajax({
+        url: "ajax-get-events.php",
+        dataType: "json",
+        type: "POST",
+        success: function(data) {
+              
+            // Display 2nd and 3rd divs:
+              
+            document.getElementById("eventDiv2").style.display="block";
+            document.getElementById("eventDiv3").style.display="block";
+            document.getElementById("refreshEvents").style.display="block";
+          
+            var Group_PricePP = 36.00;
+          
+            var eventslength = Object.keys(data).length;
+          
+            var rand1 = Math.floor(Math.random()*eventslength);
+          
+            while (data[rand1]["Event_PricePP"] > Group_PricePP) {
+              rand1 = Math.floor(Math.random()*eventslength);
+            }
+          
+            var rand2 = rand1;
+          
+            while (rand2 == rand1 || data[rand2]["Event_PricePP"] > Group_PricePP) {
+              rand2 = Math.floor(Math.random()*eventslength);
+            }
+          
+            var rand3 = rand1;
+          
+            while (rand3 == rand1 || rand3 == rand2 || data[rand3]["Event_PricePP"] > Group_PricePP) {
+              rand3 = Math.floor(Math.random()*eventslength);
+            }
+
+            document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
+            document.getElementById("event1ID").innerHTML = data[rand1]["ID"];
+            document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
+            document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
+            if (data[rand1]["Event_URL"]){
+              document.getElementById("event1link").style.display="block";
+              document.getElementById("event1link").setAttribute("href", data[rand1]["Event_URL"]);  
+            } else {
+              document.getElementById("event1link").style.display="none";
+            }
+          
+            document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
+            document.getElementById("event2ID").innerHTML = data[rand2]["ID"];
+            document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
+            document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]);
+            if (data[rand2]["Event_URL"]){
+              document.getElementById("event2link").style.display="block";
+              document.getElementById("event2link").setAttribute("href", data[rand2]["Event_URL"]);  
+            } else {
+              document.getElementById("event2link").style.display="none";
+            }
+          
+            document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
+          document.getElementById("event3ID").innerHTML = data[rand3]["ID"];
+            document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
+            document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]);
+            if (data[rand3]["Event_URL"]){
+              document.getElementById("event3link").style.display="block";
+              document.getElementById("event3link").setAttribute("href", data[rand3]["Event_URL"]);  
+            } else {
+              document.getElementById("event3link").style.display="none";
+            }
+          
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#modalgroupdescription").text(jqXHR.statusText);
+        }
+      });
+      
+    }
+
 
 /*]]>*/
 </script>

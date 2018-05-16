@@ -68,10 +68,23 @@ if ($methodType === 'POST') {
             $statement = $conn->prepare($sql);
             $statement->execute(array(":GroupName" => $Group_Name));
             $regCount = $statement->rowCount();
-            //$groupReg = $statement->fetchAll();
+            $groupReg = $statement->fetchAll();
             
+            // Check if user has already joined group:
+            $userExists = false;
+            
+            foreach ($groupReg as $row) {
+              if ($row["User_Name"] == $_SESSION['User_Name']) {
+                $userExists = true;
+              }
+            }
+
             if ($regCount >= $Group_Size) {
               echo "Group is already full.";
+            } else if ($userExists) {
+            
+              echo "You have already joined this group.";
+              
             } else {
             
             // Add username to Registration:

@@ -21,6 +21,16 @@
   <link href="style.css" rel="stylesheet">
   <title>Memento</title>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- To view the analytics, go to https://analytics.google.com/analytics/web/?authuser=0#/embed/report-home/a119244757w176500717p175343866 Login credentials are mementovancouver // Team5!Team5! -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119244757-1"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-119244757-1');
+  </script>
+
 </head>
   
 <body>
@@ -106,7 +116,7 @@
   <!-- first image -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="img/frontpage/carousel/picnic.jpeg">
+      <img class="carouselTint" src="img/frontpage/carousel/picnic.jpeg">
       <div class="carousel-caption">
         <h1 class="display-2">Memento</h1>
           <h3>Create Memories Together</h3>
@@ -115,7 +125,7 @@
     </div>
     <!-- second image -->
     <div class="carousel-item">
-      <img src="img/frontpage/carousel/hike.jpg">
+      <img class="carouselTint" src="img/frontpage/carousel/hike.jpg">
       <div class="carousel-caption">
         <h1 class="display-2">Memento</h1>
           <h3>Create Memories Together</h3>
@@ -124,7 +134,7 @@
     </div>
     <!-- third image -->
     <div class="carousel-item">
-      <img src="img/frontpage/carousel/beertour.jpg">
+      <img class="carouselTint" src="img/frontpage/carousel/beertour.jpg">
       <div class="carousel-caption">
         <h1 class="display-2">Memento</h1>
           <h3>Create Memories Together</h3>
@@ -206,6 +216,10 @@
         <a id="footerLogin" href="#" data-toggle="modal" data-target="#login">Login</a>
       </div>
     </div>
+    <div class="mb-2">
+      <a href="" class="blockoPayBtn" data-toggle="modal" data-uid=2dcbe732589b11e8><img width=110 src="./img/donate/button.png"></a>
+    </div>
+    </div>
   </div>
   <div id="copyright" class="pt-1 text-center">
       2018 &copy; Team Five
@@ -260,6 +274,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="mementoScripts.js"></script>
+<script src="https://www.blockonomics.co/js/pay_button.js"></script>
 
 </body>
 </html>

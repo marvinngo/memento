@@ -36,7 +36,7 @@ function checkPw(input) {
      if (!regex.test(input.value)) {
         input.setCustomValidity("Password must be at least 8 characters long and contain one letter and number.");
     } else if (input.value !== document.getElementById("confirmpasswordForm").value) {
-        input.setCustomValidity('Passwords do not match.');
+    xa    input.setCustomValidity('Passwords do not match.');
     } else {
         // gets rid of alert box if username is valid
     input.setCustomValidity('');
