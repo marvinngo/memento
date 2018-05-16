@@ -646,6 +646,10 @@ crossorigin="anonymous"></script>
             document.getElementById("eventDiv3").style.display="none";
             document.getElementById("refreshEvents").style.display="none";
               
+            // and hide the Select this event button:
+              
+            document.getElementById("selectEvent1").style.display="none";
+              
             var length = Object.keys(data).length;
             
             for (i = 0; i < length; i++) {
