@@ -353,7 +353,7 @@ if($_SESSION['loggedin'] === false){
                     </div>
                   </div>
                   <!--event end-->
-                  <button id="refreshEvents" type="button" onclick="" class="btn btn-primary w-100">Refresh</button>
+                  <button id="refreshEvents" type="button" onclick="refreshEvents()" class="btn btn-primary w-100">Refresh</button>
 
         </div>
       </div>
@@ -644,6 +644,7 @@ crossorigin="anonymous"></script>
             
             document.getElementById("eventDiv2").style.display="none";
             document.getElementById("eventDiv3").style.display="none";
+            document.getElementById("refreshEvents").style.display="none";
               
             var length = Object.keys(data).length;
             
@@ -671,6 +672,7 @@ crossorigin="anonymous"></script>
               
             document.getElementById("eventDiv2").style.display="block";
             document.getElementById("eventDiv3").style.display="block";
+            document.getElementById("refreshEvents").style.display="block";
           
             var Group_PricePP = 36.00;
           
@@ -900,6 +902,85 @@ crossorigin="anonymous"></script>
         }
       });
       
+      
+    }
+    
+    function refreshEvents() {
+      
+            // This Ajax call queries the database for all Events.
+      
+        $.ajax({
+        url: "ajax-get-events.php",
+        dataType: "json",
+        type: "POST",
+        success: function(data) {
+              
+            // Display 2nd and 3rd divs:
+              
+            document.getElementById("eventDiv2").style.display="block";
+            document.getElementById("eventDiv3").style.display="block";
+            document.getElementById("refreshEvents").style.display="block";
+          
+            var Group_PricePP = 36.00;
+          
+            var eventslength = Object.keys(data).length;
+          
+            var rand1 = Math.floor(Math.random()*eventslength);
+          
+            while (data[rand1]["Event_PricePP"] > Group_PricePP) {
+              rand1 = Math.floor(Math.random()*eventslength);
+            }
+          
+            var rand2 = rand1;
+          
+            while (rand2 == rand1 || data[rand2]["Event_PricePP"] > Group_PricePP) {
+              rand2 = Math.floor(Math.random()*eventslength);
+            }
+          
+            var rand3 = rand1;
+          
+            while (rand3 == rand1 || rand3 == rand2 || data[rand3]["Event_PricePP"] > Group_PricePP) {
+              rand3 = Math.floor(Math.random()*eventslength);
+            }
+
+            document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
+            document.getElementById("event1ID").innerHTML = data[rand1]["ID"];
+            document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
+            document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
+            if (data[rand1]["Event_URL"]){
+              document.getElementById("event1link").style.display="block";
+              document.getElementById("event1link").setAttribute("href", data[rand1]["Event_URL"]);  
+            } else {
+              document.getElementById("event1link").style.display="none";
+            }
+          
+            document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
+            document.getElementById("event2ID").innerHTML = data[rand2]["ID"];
+            document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
+            document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]);
+            if (data[rand2]["Event_URL"]){
+              document.getElementById("event2link").style.display="block";
+              document.getElementById("event2link").setAttribute("href", data[rand2]["Event_URL"]);  
+            } else {
+              document.getElementById("event2link").style.display="none";
+            }
+          
+            document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
+          document.getElementById("event3ID").innerHTML = data[rand3]["ID"];
+            document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
+            document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]);
+            if (data[rand3]["Event_URL"]){
+              document.getElementById("event3link").style.display="block";
+              document.getElementById("event3link").setAttribute("href", data[rand3]["Event_URL"]);  
+            } else {
+              document.getElementById("event3link").style.display="none";
+            }
+          
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#modalgroupdescription").text(jqXHR.statusText);
+        }
+      });
       
     }
 
