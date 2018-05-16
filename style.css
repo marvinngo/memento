@@ -31,6 +31,9 @@ button {
   height: 100%;
 }
 
+.carouselTint {
+  filter: brightness(.6);
+}
 /* front page carousel caption */
 .carousel-caption {
   position: absolute;

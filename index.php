@@ -116,7 +116,7 @@
   <!-- first image -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="img/frontpage/carousel/picnic.jpeg">
+      <img class="carouselTint" src="img/frontpage/carousel/picnic.jpeg">
       <div class="carousel-caption">
         <h1 class="display-2">Memento</h1>
           <h3>Create Memories Together</h3>
@@ -125,7 +125,7 @@
     </div>
     <!-- second image -->
     <div class="carousel-item">
-      <img src="img/frontpage/carousel/hike.jpg">
+      <img class="carouselTint" src="img/frontpage/carousel/hike.jpg">
       <div class="carousel-caption">
         <h1 class="display-2">Memento</h1>
           <h3>Create Memories Together</h3>
@@ -134,7 +134,7 @@
     </div>
     <!-- third image -->
     <div class="carousel-item">
-      <img src="img/frontpage/carousel/beertour.jpg">
+      <img class="carouselTint" src="img/frontpage/carousel/beertour.jpg">
       <div class="carousel-caption">
         <h1 class="display-2">Memento</h1>
           <h3>Create Memories Together</h3>
