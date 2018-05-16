@@ -66,7 +66,7 @@
                 
                 <!-- username -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="text" name="User_Name" class="form-control" id="usernameForm" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" oninput="checkUsername(this)" required autofocus>
+                  <input type="text" name="User_Name" class="form-control" id="usernameForm" placeholder="Username" pattern="^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$" oninput="checkUsername(this)" required autofocus>
                 </div>
 
                 <!-- password -->
