@@ -216,6 +216,10 @@
         <a id="footerLogin" href="#" data-toggle="modal" data-target="#login">Login</a>
       </div>
     </div>
+    <div class="mb-2">
+      <a href="" class="blockoPayBtn" data-toggle="modal" data-uid=2dcbe732589b11e8><img width=110 src="./img/donate/button.png"></a>
+    </div>
+    </div>
   </div>
   <div id="copyright" class="pt-1 text-center">
       2018 &copy; Team Five
@@ -270,6 +274,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="mementoScripts.js"></script>
+<script src="https://www.blockonomics.co/js/pay_button.js"></script>
 
 </body>
 </html>

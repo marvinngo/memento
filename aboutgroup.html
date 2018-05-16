@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
   <link href="style.css" rel="stylesheet">
   <title>Group name</title>
 
 </head>
-  
+
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-md navbar-dark sticky-top w-100" style="background-color: #1A75C1;">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-md navbar-dark sticky-top w-100" style="background-color: #1A75C1;">
     <div class="container-fluid w-75">
-      <a class="navbar-brand" href="index.html"><img src="img/frontpage/logo/logo.png"></a>
+      <a class="navbar-brand" href="index.html">
+        <img src="img/frontpage/logo/logo.png">
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -43,98 +47,98 @@
       </div>
     </div>
   </nav>
-<!-- The Modal -->
-<div class="modal fade" id="login">
-  <div class="modal-dialog">
-    <div class="modal-content">
-    <!-- Modal Header -->
-      <div class="modal-header mx-auto">
+  <!-- The Modal -->
+  <div class="modal fade" id="login">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header mx-auto">
           <div class="container mx-auto">
-              <div class="row">
-                <div class="col-2">
-                </div>
-                <div class="col-8 text-center">
-                   <h3>
-                     Login 
-                   </h3>
-                </div>
-                <div class="col-2">
-                    <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
-                </div>
+            <div class="row">
+              <div class="col-2">
               </div>
+              <div class="col-8 text-center">
+                <h3>
+                  Login
+                </h3>
               </div>
+              <div class="col-2">
+                <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body col-6 mx-auto">
+          <form method="post" action="signin.php">
+            <input type="text" name="User_Name" class="modaluserpw" placeholder="Username" autofocus>
+            <input type="password" name="User_Password" class="modaluserpw" placeholder="Password">
+            <input type="submit" name="login" class="login loginmodal-submit modaluserpw" value="Login">
+          </form>
+        </div>
       </div>
-      <!-- Modal body -->
-      <div class="modal-body col-6 mx-auto">
-        <form method="post" action="signin.php">
-		  <input type="text" name="User_Name" class="modaluserpw" placeholder="Username" autofocus>
-		  <input type="password" name="User_Password" 
-          class="modaluserpw" placeholder="Password">
-		  <input type="submit" name="login" class="login loginmodal-submit modaluserpw" value="Login">
-		</form>
-    </div>
     </div>
   </div>
-</div>
 
-  
 
-<!-- background div -->
-<div class="loggedInBG container-fluid">  
-  <!-- main container div -->
-  <div id="main" class="container col-lg-6 col-md-7 col-sm-9 w-90 px-2 pt-4">
-    <div class="row xs-12 text-left font-weight-bold">
-      <div class="col">
-        <div id="" class="container px-3 rounded mb-4">
-          <div class="row xs-12 text-left font-weight-bold title">
-            <div class="col text-center py-3 mb-3">
-              <h1 id="title">Group Name</h1>
-            </div>
-          </div>
-          <!-- group description, # of members, budget -->
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-12 col-md-5 mx-auto">
-                <img class="mr-2 mb-3 rounded mx-auto d-block img-fluid img-thumbnail" src="img/aboutgroup/groupimg.jpeg" alt="group picture 1">
-              </div>
-              <div id="maintext" class="col-sm-12 col-md-7 mb-4">
-                <h2>Description</h2>
-                <h3>Number of Members</h3>
-                <br>
-                <p>Budget</p>
+
+  <!-- background div -->
+  <div class="loggedInBG container-fluid">
+    <!-- main container div -->
+    <div id="main" class="container col-lg-6 col-md-7 col-sm-9 w-90 px-2 pt-4">
+      <div class="row xs-12 text-left font-weight-bold">
+        <div class="col">
+          <div id="" class="container px-3 rounded mb-4">
+            <div class="row xs-12 text-left font-weight-bold title">
+              <div class="col text-center py-3 mb-3">
+                <h1 id="title">Group Name</h1>
               </div>
             </div>
-          </div>
-          <!-- events -->
-          <div class="container-fluid">
-            <div class="row">
-              <!-- event 1 -->
-              <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                <div class="card mx-auto">
-                  <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
-                  <div class="card-body">
-                    <h3 class="card-title">event</h3>
-                    <p class="card-text">event description</p>
-                  </div>
+            <!-- group description, # of members, budget -->
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-12 col-md-5 mx-auto">
+                  <img class="mr-2 mb-3 rounded mx-auto d-block img-fluid img-thumbnail" src="img/aboutgroup/groupimg.jpeg" alt="group picture 1">
+                </div>
+                <div id="maintext" class="col-sm-12 col-md-7 mb-4">
+                  <h2>Description</h2>
+                  <h3>Number of Members</h3>
+                  <br>
+                  <p>Budget</p>
                 </div>
               </div>
-              <!-- event 2 -->
-              <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                <div class="card mx-auto">
-                  <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
-                  <div class="card-body">
-                    <h3 class="card-title">event</h3>
-                    <p class="card-text">event description</p>
+            </div>
+            <!-- events -->
+            <div class="container-fluid">
+              <div class="row">
+                <!-- event 1 -->
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                  <div class="card mx-auto">
+                    <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                    <div class="card-body">
+                      <h3 class="card-title">event</h3>
+                      <p class="card-text">event description</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <!-- event 3 -->
-              <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                <div class="card mx-auto">
-                  <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
-                  <div class="card-body">
-                    <h3 class="card-title">event</h3>
-                    <p class="card-text">event description</p>
+                <!-- event 2 -->
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                  <div class="card mx-auto">
+                    <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                    <div class="card-body">
+                      <h3 class="card-title">event</h3>
+                      <p class="card-text">event description</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- event 3 -->
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                  <div class="card mx-auto">
+                    <img class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
+                    <div class="card-body">
+                      <h3 class="card-title">event</h3>
+                      <p class="card-text">event description</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -144,34 +148,37 @@
       </div>
     </div>
   </div>
-</div>
 
-<!--- Footer -->
-<footer class="site-footer page-footer font-small pt-3">
-  <div class="container-fluid col-7 col-md-3 text-center my-auto">
-    <h4>Links</h4>
-    <div class="row pb-2">
-      <div class="col-4">
-        <a href="index.html">Home</a>
-      </div>
-      <div class="col-4">
-        <a href="register.html">Signup</a>
-      </div>
-      <div class="col-4">
-        <a href="#" data-toggle="modal" data-target="#login">Login</a>
+  <!--- Footer -->
+  <footer class="site-footer page-footer font-small pt-3">
+    <div class="container-fluid col-7 col-md-3 text-center my-auto">
+      <h4>Links</h4>
+      <div class="row pb-2">
+        <div class="col-4">
+          <a href="index.html">Home</a>
+        </div>
+        <div class="col-4">
+          <a href="register.html">Signup</a>
+        </div>
+        <div class="col-4">
+          <a href="#" data-toggle="modal" data-target="#login">Login</a>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="copyright" class="pt-1 text-center">
+    <div id="copyright" class="pt-1 text-center">
       2018 &copy; Team Five
-  </div>
-</footer>
+    </div>
+  </footer>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+    crossorigin="anonymous"></script>
   <script src="mementoScripts.js"></script>
-  </body>
+</body>
+
 </html>
