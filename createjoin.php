@@ -777,7 +777,9 @@ crossorigin="anonymous"></script>
     // console.log(indivBudgJSON); // seems to work.
           
       // This Ajax call updates the database with the user's personal budget.
-      
+      event.preventDefault();
+      //prevents modal from closing on submission
+
         $.ajax({
         url: "ajax-post-personalBudget.php",
         dataType: "json",
