@@ -275,7 +275,7 @@ if($_SESSION['loggedin'] === false){
                   <div class="col-8 text-center">
                      <h2 id="modalgroupname">
                        GROUP NAME
-                     </h2><h2 id=groupHiddenEventID style="display: none;"></h2>
+                     </h2>
                   </div>
                   <div class="col-2">
                       <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
@@ -310,7 +310,7 @@ if($_SESSION['loggedin'] === false){
           </div>
 
                   <!-- event 1 -->
-                  <div class="w-100 mb-3">
+                  <div id="eventDiv1" class="w-100 mb-3">
                     <div class="card mx-auto">
                       <img id="event1image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
@@ -325,7 +325,7 @@ if($_SESSION['loggedin'] === false){
                   <!--event end-->
 
                   <!-- event 2 -->
-                  <div class="w-100 mb-3">
+                  <div id="eventDiv2" class="w-100 mb-3">
                     <div class="card mx-auto">
                       <img id="event2image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
@@ -340,7 +340,7 @@ if($_SESSION['loggedin'] === false){
                   <!--event end-->
 
                   <!-- event 3 -->
-                  <div class="w-100 mb-3">
+                  <div id="eventDiv3" class="w-100 mb-3">
                     <div class="card mx-auto">
                       <img id="event3image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
                       <div class="card-body">
@@ -517,7 +517,7 @@ crossorigin="anonymous"></script>
               
                 var Group_Size = 0;
                 
-                // for(var key in data) 
+                var Group_Event_ID;
                 
                 for (i = 0; i < length; i++) {
                   
@@ -533,8 +533,7 @@ crossorigin="anonymous"></script>
                     Group_Size = "" + data[i]["Group_Size"];
                     Group_Event_ID = data[i]["Event_Name"];
                     document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
-                    document.getElementById("numbermembers").innerHTML = "Max members: <span id='groupSizeID'>" + Group_Size + "</span></br>";   
-                    document.getElementById("groupHiddenEventID").innerHTML = Group_Event_ID;   
+                    document.getElementById("numbermembers").innerHTML = "Max members: <span id='groupSizeID'>" + Group_Size + "</span></br>";  
               } 
               }
               
@@ -574,7 +573,7 @@ crossorigin="anonymous"></script>
                 // Sum up the group's budget:
                 
                 var Reg_Budget = data[i]["Registration_Budget"];
-                console.log("Reg_Budget = " + Reg_Budget)
+                //console.log("Reg_Budget = " + Reg_Budget)
                   if (Reg_Budget != null) {
                     
                   groupBudget += data[i]["Registration_Budget"];
@@ -624,23 +623,7 @@ crossorigin="anonymous"></script>
               if (userCount == Group_Size && allbudgetsentered) {
                     document.getElementById("groupBudgeth5").innerHTML = "Group Budget: " + "<span id=groupBudget>" + groupBudget + "</span>";
               }
-            
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            $("#modalgroupdescription").text(jqXHR.statusText);
-        }
-      });
-              
-              
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                $("#modalgroupdescription").text("An error has occurred.");
-            }
-          }); 
-      
-
-      
+                
       // This Ajax call queries the database for all Events.
       
         $.ajax({
@@ -651,17 +634,22 @@ crossorigin="anonymous"></script>
             //console.log("test");
             //console.log(data);
           
-            var Event_ID = document.getElementById("groupHiddenEventID").innerHTML;
+            //Only show first div and set it to Group's Event if an Event is set for the group:
           
-            if (Event_ID) {
-              
+            console.log("Group_Event_ID: " + Group_Event_ID);
+            if (Group_Event_ID) {
+            console.log("if statement entered.");
             // If the Group already has an Event set, show that Event and hide others:
+              
+            
+            document.getElementById("eventDiv2").style.display="none";
+            document.getElementById("eventDiv3").style.display="none";
               
             var length = Object.keys(data).length;
             
             for (i = 0; i < length; i++) {
-              // Use the Event if the ID matches what was saved in Event_ID:
-              if (data[i]["ID"] == Event_ID) {
+            
+            if (data[i]["ID"] == Group_Event_ID) {
                 document.getElementById("event1name").innerHTML = data[i]["Event_Name"];
             document.getElementById("event1ID").innerHTML = data[i]["ID"];
             document.getElementById("event1description").innerHTML = data[i]["Event_Description"];   
@@ -675,7 +663,14 @@ crossorigin="anonymous"></script>
             }
             }
               
+            // Else populate with three unique Events:
+              
             } else {
+              
+            // Display 2nd and 3rd divs:
+              
+            document.getElementById("eventDiv2").style.display="block";
+            document.getElementById("eventDiv3").style.display="block";
           
             var Group_PricePP = 36.00;
           
@@ -738,8 +733,19 @@ crossorigin="anonymous"></script>
             $("#modalgroupdescription").text(jqXHR.statusText);
         }
       });
-
-      
+          
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#modalgroupdescription").text(jqXHR.statusText);
+        }
+      });
+              
+              
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $("#modalgroupdescription").text("An error has occurred.");
+            }
+          }); 
       
       }
     
@@ -808,7 +814,7 @@ crossorigin="anonymous"></script>
                 
                 // Keep track of how many users have entered a budget and add up the total group's budget:
                 budgetCount++;
-                Group_Budget += data[i]["Registration_Budget"];
+                Group_Budget += Number(data[i]["Registration_Budget"]);
                 
                 // Update user's current showing budget:
                 if (data[i]["User_Name"] === User_Name) {
@@ -838,7 +844,7 @@ crossorigin="anonymous"></script>
                 console.log("An email has been sent to notify all users that the final budget is now included.");
                },
                error: function(jqXHR, textStatus, errorThrown) {
-                $("#modalgroupname").text(jqXHR.statusText);
+                console.log(jqXHR.statusText);
                }
                });
              }
@@ -849,6 +855,8 @@ crossorigin="anonymous"></script>
             $("#BudgetErrorID").setAttribute("color","red");
         }
       });
+      
+    }
 
     
     function set_event(clicked_id) {
