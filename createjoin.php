@@ -610,7 +610,7 @@ crossorigin="anonymous"></script>
                 });
               }
    
-              }
+              
  
               if (!allbudgetsentered || userCount < Group_Size) {
                 document.getElementById("groupBudgeth5").innerHTML = "<h6>Please note that the group must be full and all users must have entered a personal budget for the group's budget to display.</h6>";
