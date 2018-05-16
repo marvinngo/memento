@@ -755,7 +755,23 @@ crossorigin="anonymous"></script>
              if (groupMax == budgetCount) {
                 document.getElementById("groupBudget").innerHTML = (Group_Budget / groupMax);
                console.log("if:" + Group_Budget);
-              }
+
+               var groupname = {"Group_Name":Group_Name};
+               JSON.stringify(groupname);
+              
+               $.ajax({
+                url: "sendemail.php",
+                dataType: "json",
+                type: "POST",
+                data: groupname,
+                success: function(data) {
+                console.log("An email has been sent to notify all users that the final budget is now included.");
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+                $("#modalgroupname").text(jqXHR.statusText);
+               }
+               });
+             }
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -764,27 +780,7 @@ crossorigin="anonymous"></script>
         }
       });
 
-      if (allbudgetsentered) {
-        var groupname = {"Group_Name":Group_Name};
-      
-        JSON.stringify(groupname);
-                
-        $.ajax({
-          url: "sendemail.php",
-          dataType: "json",
-          type: "POST",
-          data: groupname,
-          success: function(data) {
-            console.log("An email has been sent to notify all users that the final budget is now included.");
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            $("#modalgroupname").text(jqXHR.statusText);
-          }
-        });
-      }
-
     }
-
 /*]]>*/
 </script>
   
