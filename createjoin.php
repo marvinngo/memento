@@ -318,7 +318,7 @@ if($_SESSION['loggedin'] === false){
                         <h6 id="event1ID"></h6>
                         <p id="event1description" class="card-text">event description</p>
                         <a id="event1link" href="#">Visit their site for more information</a>
-                        <button id="selectEvent1" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
+                        <button id="selectEvent1" style="display: none;" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
@@ -333,7 +333,7 @@ if($_SESSION['loggedin'] === false){
                         <h6 id="event2ID"></h6>
                         <p id="event2description" class="card-text">event description</p>
                         <a id="event2link" href="#">Visit their site for more information</a>
-                        <button id="selectEvent2" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
+                        <button id="selectEvent2" style="display: none;" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
@@ -348,7 +348,7 @@ if($_SESSION['loggedin'] === false){
                         <h6 id="event3ID"></h6>
                         <p id="event3description" class="card-text">event description</p>
                         <a id="event3link" href="#">Visit their site for more information</a>
-                        <button id="selectEvent3" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
+                        <button id="selectEvent3" type="button" style="display: none;" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
                       </div>
                     </div>
                   </div>
@@ -598,6 +598,19 @@ crossorigin="anonymous"></script>
               if (userCount == Group_Size && userBudgetCount == Group_Size) {
                 allbudgetsentered = true;
                 groupBudget /= Group_Size;
+                
+                // Display "Select This Event For Your Group"  
+                // buttons if all users have entered a budget:
+                
+                document.getElementById("selectEvent1").style.display="block";
+                document.getElementById("selectEvent2").style.display="block";
+                document.getElementById("selectEvent3").style.display="block";
+                
+              } else {
+                // Hides the select this event for your group buttons:
+                document.getElementById("selectEvent1").style.display="none";
+                document.getElementById("selectEvent2").style.display="none";
+                document.getElementById("selectEvent3").style.display="none";
               }
 
                      
@@ -841,7 +854,19 @@ crossorigin="anonymous"></script>
       
       console.log(eventInfo);
       
-      
+      $.ajax({
+        url: "ajax-post-selectEvent.php",
+        dataType: "json",
+        type: "POST",
+        data: eventInfo,
+        success: function(data) {
+          
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#BudgetErrorID").text("Please enter a number greater than zero.");
+            $("#BudgetErrorID").setAttribute("color","red");
+        }
+      });
       
       
     }
