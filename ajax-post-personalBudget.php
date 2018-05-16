@@ -59,9 +59,9 @@
             //$groupcount = $statement->rowCount();
             //$data = $statement->fetchAll();
             
-            $sql = "SELECT * FROM tbl_Registration WHERE User_Name = :uName && Group_Name = :groupName";
+            $sql = "SELECT * FROM tbl_Registration WHERE Group_Name = :groupName";
             $statement = $conn->prepare($sql);
-            $statement->execute(array(":uName" => $User_Name, ":groupName" => $Group_Name));
+            $statement->execute(array(":groupName" => $Group_Name));
             $data = $statement->fetchAll();
             echo json_encode($data, JSON_FORCE_OBJECT);
             
