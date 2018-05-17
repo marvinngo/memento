@@ -99,10 +99,14 @@ if ($methodType === 'POST') {
             
             $data["error"] = "no";
               
+            $data["Group_Description"] = $rows[0]['Group_Description'];
+              
               }
           } else {
             $data["error"] = "yes";
             $data["return"] = "Group name matches database but password is incorrect.";
+            $data["password"] = $Group_Password;
+            $data["passhash"] = password_hash($_POST["Group_Password"], PASSWORD_DEFAULT);
           }
           }
           }
