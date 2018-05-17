@@ -229,7 +229,15 @@ img.mr-2 {
   color: #1A75C1;
   font-size: 14pt;
 }
+#usernameError, #passwordError, #passwordMatch, #emailError, #registrationError, #loginErrorID2{
+  color: red;
+  font-size: 18px;
+}
 
+#registrationError {
+  color: red;
+  font-size: 18px;
+}
 /*---Media Queries --*/
 @media (max-width: 992px) {
 
@@ -258,7 +266,7 @@ img.mr-2 {
 
   /* card title to smaller size (home page, aboutgroup) */
   .card-title {
-    font-size: 14pt;
+    font-size: 20pt;
   }
 
   /* title for createjoin page */
