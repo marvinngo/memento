@@ -86,7 +86,7 @@ if($_SESSION['loggedin'] === true){
               <div class="form-row mx-auto my-4">
                 <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
                 <div class="col px-0">
-                  <button id="submitButton" onclick="return loginClick(this.id)" type="button" class="btn btn-primary w-100 mt-4 submitButton">Sign in</button>
+                  <button id="submitButton" onclick="return loginClick(this.id)" type="submit" class="btn btn-primary w-100 mt-4 submitButton">Sign in</button>
                 </div>
               </div>
             </form>
@@ -135,7 +135,7 @@ if($_SESSION['loggedin'] === true){
                   <input type="email" name="User_Email" class="form-control" id="emailRegistrationForm" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" oninput="checkEmail(this)" required>
                   <div class="col px-0">
                     <h5 id="registrationError"></h5>
-                    <button type="button" class="btn btn-primary mt-4 submitButton float-right" onclick="return registerClick()" name="submit">Submit</button>
+                    <button type="submit" class="btn btn-primary mt-4 submitButton float-right" onclick="return registerClick()" name="submit">Submit</button>
                   </div>
                 </div>
               </form>
@@ -160,7 +160,7 @@ if($_SESSION['loggedin'] === true){
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
                 <input type="password" name="User_Password" class="form-control" id="passwordForm3" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
                 <div class="col px-0">
-                  <button id="submitButton2" onclick="return loginClick(this.id)" type="button" class="btn btn-primary mt-4 submitButton float-right">Sign in</button>
+                  <button id="submitButton2" onclick="return loginClick(this.id)" type="submit" class="btn btn-primary mt-4 submitButton float-right">Sign in</button>
                 </div>
               </div>
             </form>
