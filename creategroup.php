@@ -6,6 +6,9 @@
 
 $methodType = $_SERVER['REQUEST_METHOD'];
 
+$data = array("msg" => "$methodType");
+$data["return"] = "";
+
 if ($methodType === 'POST') {
 
     $servername = "localhost";
@@ -31,7 +34,7 @@ if ($methodType === 'POST') {
         if (isset($_POST["Group_Password"]) && !empty($_POST["Group_Password"])) {
             // these names don't all have to be the same but if we have several variables
             // then it makes sense to make them the same
-            $Group_Password =  crypt($_POST["Group_Password"]);
+            $Group_Password =  password_hash($_POST["Group_Password"], PASSWORD_DEFAULT);
         }
         if (isset($_POST["Group_Description"]) && !empty($_POST["Group_Description"])) {
             // these names don't all have to be the same but if we have several variables
@@ -45,7 +48,8 @@ if ($methodType === 'POST') {
         }
 
         if(empty($Group_Name) || empty($Group_Password) || empty($Group_Description) || empty($Group_Size)) {
-            echo "<p>No update performed.</p>";
+            $data["error"] = "yes";
+            $data["return"] = "No group created - no fields can be left blank.";
         } else {
           
             // Check if username already exists in database:
@@ -57,7 +61,8 @@ if ($methodType === 'POST') {
             $count = $statement->rowCount();
           
             if ($count > 0) {
-              echo "Group Name already exists in DB.";
+              $data["error"] = "yes";
+              $data["return"] = "Group Name already exists.";
             } else {
               
             // perform update to tbl_Group
@@ -74,20 +79,21 @@ if ($methodType === 'POST') {
             $statement = $conn->prepare($sql);
             $statement->execute(array(":UserName" => $_SESSION['User_Name'], ":GroupName" => $Group_Name));
               
-              
-            
-            header( 'Location: createjoin.php' ) ;
+            $data["error"] = "no";
+
             }
         }
 
     } catch(PDOException $e) {
-        echo "<p style='color: red;'>From the SQL code: $sql</p>";
-        $error = $e->getMessage();
-        echo "<p style='color: red;'>$error</p>";
+        $data["error"] = "yes";
+        $data["return"] = "" . $sql . $e->getMessage() . $error;
     }
   
     } else {
-      echo "Has to be POST.";
+      $data["error"] = "yes";
+      $data["return"] = "Has to be POST.";
     }
+
+echo json_encode($data, JSON_FORCE_OBJECT);
 
 ?>

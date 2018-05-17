@@ -87,8 +87,9 @@
       </div>
       <!-- Modal body -->
       <div class="modal-body col-6 mx-auto">
+      <h5 id="loginErrorID"></h5>
         <!-- username -->
-        <form method="post" action="signin.php">
+        <form>
               <div class="form-row mx-auto my-4">
                 <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" required>
               </div>
@@ -97,7 +98,7 @@
               <div class="form-row mx-auto my-4">
                 <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
                 <div class="col px-0">
-                  <button id="submitButton" type="submit" class="btn btn-primary mt-4 w-100 submitButton">Sign in</button>
+                  <button id="submitButton" onclick="return loginClick()" type="submit" class="btn btn-primary mt-4 w-100 submitButton">Sign in</button>
                 </div>
               </div>
             </form>
@@ -220,7 +221,6 @@
       <a href="" class="blockoPayBtn" data-toggle="modal" data-uid=2dcbe732589b11e8><img width=110 src="./img/donate/button.png"></a>
     </div>
     </div>
-  </div>
   <div id="copyright" class="pt-1 text-center">
       2018 &copy; Team Five
   </div>
@@ -275,6 +275,50 @@ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="mementoScripts.js"></script>
 <script src="https://www.blockonomics.co/js/pay_button.js"></script>
+  
+<script>
+
+  function loginClick() {
+    
+    var User_Name = document.getElementById('usernameForm2').value;
+    var User_Password = document.getElementById('passwordForm2').value;
+    
+    var userLogin = {"User_Name":User_Name,"User_Password":User_Password};
+      
+    JSON.stringify(userLogin);
+      
+    console.log(userLogin);
+          
+      // This Ajax call sends user login info to the server to either login
+      // the user and redirect them to a new page or return an error message.
+
+        $.ajax({
+        url: "signin.php",
+        dataType: "json",
+        type: "POST",
+        data: userLogin,
+        success: function(data) {
+          
+          console.log("successss");
+          
+          console.log("Data returned from server: ", data);
+          
+          if (data["error"] == "yes") {
+          document.getElementById("loginErrorID").innerHTML = "Error: " + data["return"];
+          }
+          if (data["error"] == "no") {
+          window.location = 'createjoin.php';
+          }
+
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.statusText);
+        }
+      });
+  }
+  
+</script>
 
 </body>
 </html>

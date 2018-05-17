@@ -10,10 +10,11 @@
 
 $methodType = $_SERVER['REQUEST_METHOD'];
 
+$data = array("msg" => "$methodType");
+$data["return"] = "";
+
 if ($methodType === 'POST') {
   
-
-
     $servername = "localhost";
     $dblogin = "evanmorr_team5";
     $password = "Team5!Team5!";
@@ -67,25 +68,29 @@ if ($methodType === 'POST') {
           $rows = $statement->fetchAll();
 
           if ($count > 1) {
-            echo "Error: multiple instances of same Username in DB.";
+            $data["error"] = "yes";
+            $data["return"] = "Multiple instances of same Username in DB.";
           }
 
           if ($count == 0) {
-            echo "Username does not exist in DB.";
+            $data["error"] = "yes";
+            $data["return"] = "Username does not exist in DB.";
           }
 
 
           if ($count == 1) {
-            if (hash_equals($rows[0]['User_Password'], crypt($User_Password, $rows[0]['User_Password']))) {
+            if (password_verify($User_Password, $rows[0]['User_Password'])) {
               
               $_SESSION['User_Name'] = $User_Name;
               $_SESSION['email'] = $rows[0]['User_Email'];
               $_SESSION['loggedin'] = true;
               
-              header( 'Location: createjoin.php' ) ;
+              $data["error"] = "no";
+              
+              //header( 'Location: createjoin.php' ) ;
             } else {
-              echo "Username matches DB.<br>";
-              echo "incorrect password";
+              $data["error"] = "yes";
+              $data["return"] = "Username matches DB. Incorrect password.";
             }
 
           }
@@ -94,13 +99,15 @@ if ($methodType === 'POST') {
         
       
     } catch(PDOException $e) {
-        echo "<p style='color: red;'>From the SQL code: $sql</p>";
-        $error = $e->getMessage();
-        echo "<p style='color: red;'>$error</p>";
+        $data["error"] = "yes";
+        $data["return"] = "" . $sql . $e->getMessage() . $error;
     }
     } else {
-      echo "Has to be POST.";
+      $data["error"] = "yes";
+      $data["return"] = "Has to be POST.";
     }
+
+    echo json_encode($data, JSON_FORCE_OBJECT);
 
 ?>
 

@@ -75,6 +75,7 @@ if($_SESSION['loggedin'] === true){
       </div>
       <!-- Modal body -->
       <div class="modal-body col-6 mx-auto">
+      <h5 id="loginErrorID"></h5>
         <!-- username -->
         <form method="post" action="signin.php">
               <div class="form-row mx-auto my-4">
@@ -85,7 +86,7 @@ if($_SESSION['loggedin'] === true){
               <div class="form-row mx-auto my-4">
                 <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
                 <div class="col px-0">
-                  <button id="submitButton" type="submit" class="btn btn-primary w-100 mt-4 submitButton">Sign in</button>
+                  <button id="submitButton" onclick="return loginClick(this.id)" type="submit" class="btn btn-primary w-100 mt-4 submitButton">Sign in</button>
                 </div>
               </div>
             </form>
@@ -116,24 +117,25 @@ if($_SESSION['loggedin'] === true){
                 
                 <!-- username -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="text" name="User_Name" class="form-control" id="usernameForm" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" oninput="checkUsername(this)" required autofocus>
+                  <input type="text" name="User_Name" class="form-control" id="usernameRegistrationForm" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" oninput="checkUsername(this)" required autofocus>
                 </div>
 
                   <!-- confirm password -->
                   <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="password" name="confirm_User_Password" class="form-control" id="confirmpasswordForm" placeholder="Confirm password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" oninput="checkPw(this)" required>
+                  <input type="password" name="confirm_User_Password" class="form-control" id="confirmpasswordForm" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" oninput="checkPw(this)" required>
                 </div>
                 
                 <!-- password -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="password" name="User_Password" class="form-control" id="passwordForm" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" oninput="checkPw(this)" required>
+                  <input type="password" name="User_Password" class="form-control" id="passwordForm" placeholder="Confirm password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" oninput="checkPw(this)" required>
                 </div>
 
                 <!-- email -->
                 <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                  <input type="email" name="User_Email" class="form-control" id="emailForm" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" oninput="checkEmail(this)" required>
+                  <input type="email" name="User_Email" class="form-control" id="emailRegistrationForm" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" oninput="checkEmail(this)" required>
                   <div class="col px-0">
-                    <button type="submit" class="btn btn-primary mt-4 submitButton float-right" name="submit">Submit</button>
+                    <h5 id="registrationError"></h5>
+                    <button type="submit" class="btn btn-primary mt-4 submitButton float-right" onclick="return registerClick()" name="submit">Submit</button>
                   </div>
                 </div>
               </form>
@@ -146,19 +148,19 @@ if($_SESSION['loggedin'] === true){
             <!-- form for existing users -->
               <small><b>Already have an account? <br> 
                 Sign in:</b></small>
-                
+              <h5 id="loginErrorID2"></h5>
 
               <!-- username -->
               <form method="post" action="signin.php">
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" required>
+                <input type="text" name="User_Name" class="form-control" id="usernameForm" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" required>
               </div>
 
               <!-- password -->
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
-                <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
+                <input type="password" name="User_Password" class="form-control" id="passwordForm3" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
                 <div class="col px-0">
-                  <button id="submitButton2" type="submit" class="btn btn-primary mt-4 submitButton float-right">Sign in</button>
+                  <button id="submitButton2" onclick="return loginClick(this.id)" type="submit" class="btn btn-primary mt-4 submitButton float-right">Sign in</button>
                 </div>
               </div>
             </form>
@@ -217,6 +219,102 @@ if($_SESSION['loggedin'] === true){
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="mementoScripts.js"></script>
 
+  <script>
+  
+    function loginClick(clicked_id) {
+      
+    if (clicked_id == "submitButton") {
+        var User_Name = document.getElementById('usernameForm2').value;
+        var User_Password = document.getElementById('passwordForm2').value;
+        }
+    
+    if (clicked_id == "submitButton2") {
+        var User_Name = document.getElementById('usernameForm').value;
+        var User_Password = document.getElementById('passwordForm3').value;
+        }
+    
+    var userLogin = {"User_Name":User_Name,"User_Password":User_Password};
+      
+    JSON.stringify(userLogin);
+          
+      // This Ajax call sends user login info to the server to either login
+      // the user and redirect them to a new page or return an error message.
+
+        $.ajax({
+        url: "signin.php",
+        dataType: "json",
+        type: "POST",
+        data: userLogin,
+        success: function(data) {
+          
+          if (data["error"] == "yes") {
+            
+          if (clicked_id == "submitButton") {
+            document.getElementById("loginErrorID").innerHTML = "Error: " + data["return"];
+            }
+    
+          if (clicked_id == "submitButton2") {
+            document.getElementById("loginErrorID2").innerHTML = "Error: " + data["return"];
+            }
+            
+          }
+          if (data["error"] == "no") {
+          window.location = 'createjoin.php';
+          }
+
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.statusText);
+        }
+      });
+  }
+    
+    function registerClick() {
+      
+    var User_Name = document.getElementById('usernameRegistrationForm').value;
+    var User_Password = document.getElementById('passwordForm').value;
+    var User_Email = document.getElementById('emailRegistrationForm').value;
+    
+    var userRegistration = {"User_Name":User_Name,"User_Password":User_Password,"User_Email":User_Email};
+      
+    JSON.stringify(userRegistration);
+      
+    console.log(userRegistration);
+          
+      // This Ajax call sends user login info to the server to either login
+      // the user and redirect them to a new page or return an error message.
+
+        $.ajax({
+        url: "register.php",
+        dataType: "json",
+        type: "POST",
+        data: userRegistration,
+        success: function(data) {
+          
+          console.log("successss");
+          
+          console.log("Data returned from server: ", data);
+          
+          // Update page with meaningful error if registration is not successful:
+          if (data["error"] == "yes") {
+            document.getElementById("registrationError").innerHTML = "Error: " + data["return"];
+          }
+          
+          // Redirect user to Groups page if registration is successful:
+          if (data["error"] == "no") {
+            window.location = 'createjoin.php';
+          }
+
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.statusText);
+        }
+      });
+  }
+  
+  </script>
   
   </body>
 </html>
