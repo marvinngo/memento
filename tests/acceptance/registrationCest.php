@@ -1,0 +1,46 @@
+<?php
+
+class registrationCest
+{
+    public function _before(AcceptanceTester $I)
+    {
+        $I->amOnPage('/memento/registration.php');
+    }
+
+    public function _after(AcceptanceTester $I)
+    {
+    }
+
+    public function seeNav(AcceptanceTester $I)
+    {
+        $I->see('Sign Up');
+        $I->seeElement('nav');
+    }
+
+    public function testLogin(AcceptanceTester $I)
+    {
+        $I->amOnPage('/memento/registration.php');
+        // $I->click('Logout');
+        $I->click('Login');
+        $I->fillField('#usernameForm2', 'Tester');
+        $I->fillField('#passwordForm2', 'testing1');
+        $I->click('#submitButton');
+        $I->amOnPage('memento/createjoin.php');
+        // $I->see('Welcome Tester!');
+    }
+
+    public function checkMyGroups(AcceptanceTester $I)
+    {
+    
+    }
+
+    public function logout(AcceptanceTester $I)
+    {
+
+    }
+
+    public function registerUser(AcceptanceTester $I)
+    {
+    
+    }
+}
