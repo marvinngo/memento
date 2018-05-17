@@ -289,7 +289,9 @@ if($_SESSION['loggedin'] === false){
           <div class="container">
             <div class="row">
               <div class="col-sm-12 col-md-5 mx-auto">
-                <img class="mr-2 my-3 rounded mx-auto d-block img-fluid img-thumbnail" src="img/aboutgroup/groupimg.jpeg" alt="group picture 1">
+                <img id="grpimg" class="mr-2 my-3 rounded mx-auto d-block img-fluid img-thumbnail" src="img/aboutgroup/groupimg.jpeg" alt="group picture 1">
+                    
+
               </div>
               <div id="maintext" class="col-sm-12 col-md-7 mb-4">
                 <h2 id="modalgroupdescription">Description</h2>
@@ -472,11 +474,15 @@ document.getElementById("event3ID").style.display="none";
     
   ?>
   
-    <script>
+
+  
+  <script>
     var Group_Name = '<?php echo $row['Group_Name'];?>';
+    var Group_Image = '<?php echo $groupArray[0]['Group_ImgLoc'];?>';
     var Group_Description = '<?php echo $groupArray[0]['Group_Description'];?>';
-    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
+    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + Group_Image + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_Name + "><input type='file' name='grouppic' id='pic'><input type='submit' value='Upload' name='submit'></form></p></div>";
     </script>
+  
   
 <?php endforeach; ?>
 
@@ -519,6 +525,8 @@ crossorigin="anonymous"></script>
                 
                 var Group_Event_ID;
                 
+                var Group_ImgLoc;
+                
                 for (i = 0; i < length; i++) {
                   
                   //console.log("Group Name: " + Group_Name);
@@ -532,6 +540,8 @@ crossorigin="anonymous"></script>
                     Group_Description = data[i]["Group_Description"];
                     Group_Size = "" + data[i]["Group_Size"];
                     Group_Event_ID = data[i]["Event_Name"];
+                    Group_ImgLoc = data[i]["Group_ImgLoc"];
+                    document.getElementById("grpimg").setAttribute("src", Group_ImgLoc);
                     document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
                     document.getElementById("numbermembers").innerHTML = "Max members: <span id='groupSizeID'>" + Group_Size + "</span></br>";  
               } 
