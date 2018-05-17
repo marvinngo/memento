@@ -163,9 +163,10 @@ if($_SESSION['loggedin'] === false){
         <!-- Modal body -->
         <div class="modal-body col-8 mx-auto">
             <div id="form" class="col text-center px-3 py-3">
+              <h5 id="createGroupError"></h5>
             
                 <!-- form -->
-            <form method="post" action="creategroup.php" onsubmit="return validate()">
+            <form onsubmit="return validate()">
               <div class="form-row mx-auto my-4">
                 <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name" name="Group_Name" pattern="[a-zA-Z0-9]{4,20}" oninput="checkGroupName(this)"  required autofocus>
               </div>
@@ -212,7 +213,7 @@ if($_SESSION['loggedin'] === false){
                     <option value="24">24</option>
                 </select>
                 <div class="col px-0">
-                <button id="submitButton" type="submit" class="btn btn-primary mt-4 w-100">Submit</button>
+                <button id="submitButton" type="button" onclick="createClick()" class="btn btn-primary mt-4 w-100">Submit</button>
               </div>
               </div>
             </form>
@@ -246,14 +247,15 @@ if($_SESSION['loggedin'] === false){
         <!-- Modal body -->
         <div class="modal-body col-6 mx-auto">
           <!-- form -->
-          <form method="post" action="joingroup.php">
+          <form>
+              <h5 id="joinGroupError"></h5>
               <div class="form-row mx-auto my-4">
                 <input type="text" class="form-control" id="usernameForm" name="Group_Name" placeholder="Group Name" autofocus required>
               </div>
               <div class="form-row mx-auto my-4">
                 <input type="password" class="form-control" id="passwordForm" placeholder="Password" name="Group_Password" required>
                 <div class="col px-0">
-                  <button id="submitButton" type="submit" class="btn btn-primary mt-4 w-100">Submit</button>
+                  <button id="submitButton" onclick="joinClick()" type="button" class="btn btn-primary mt-4 w-100">Submit</button>
                 </div>
               </div>
               
@@ -646,6 +648,10 @@ crossorigin="anonymous"></script>
             document.getElementById("eventDiv3").style.display="none";
             document.getElementById("refreshEvents").style.display="none";
               
+            // and hide the Select this event button:
+              
+            document.getElementById("selectEvent1").style.display="none";
+              
             var length = Object.keys(data).length;
             
             for (i = 0; i < length; i++) {
@@ -983,6 +989,90 @@ crossorigin="anonymous"></script>
       });
       
     }
+    
+    // Join a group on click button:
+
+function joinClick() {
+  
+  // Get user entries from the form:
+  
+  var Group_Name = document.getElementById('usernameForm').value;
+  var Group_Password = document.getElementById('passwordForm').value;
+    
+  // Convert to JSON to send in Ajax:
+  
+  var groupLogin = {"Group_Name":Group_Name,"Group_Password":Group_Password};
+      
+  JSON.stringify(groupLogin);
+  
+  $.ajax({
+        url: "joingroup.php",
+        dataType: "json",
+        type: "POST",
+        data: groupLogin,
+        success: function(data) {
+          
+          console.log("successss");
+          
+          console.log("Data returned from server: ", data);
+          
+          if (data["error"] == "yes") {
+          document.getElementById("joinGroupError").innerHTML = "Error: " + data["return"];
+          }
+          if (data["error"] == "no") {
+          // no redirect required.
+          }
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.statusText);
+        }
+      });
+  
+}
+    
+  // Create a group on click button:
+
+function createClick() {
+  
+  // Get user entries from the form:
+  
+  var Group_Name = document.getElementById('groupNameForm').value;
+  var Group_Password = document.getElementById('confirmGroupPasswordForm').value;
+  var Group_Description = document.getElementById('descriptionForm').value;
+  var Group_Size = document.getElementById('totalPeople').value;
+    
+  // Convert to JSON to send in Ajax:
+  
+  var groupRegister = {"Group_Name":Group_Name,"Group_Password":Group_Password,"Group_Description":Group_Description,"Group_Size":Group_Size};
+      
+  JSON.stringify(groupRegister);
+  
+  $.ajax({
+        url: "creategroup.php",
+        dataType: "json",
+        type: "POST",
+        data: groupRegister,
+        success: function(data) {
+          
+          console.log("successss");
+          
+          console.log("Data returned from server: ", data);
+          
+          if (data["error"] == "yes") {
+          document.getElementById("createGroupError").innerHTML = "Error: " + data["return"];
+          }
+          if (data["error"] == "no") {
+          // no redirect required.
+          }
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.statusText);
+        }
+      });
+  
+}
 
 
 /*]]>*/
