@@ -6,6 +6,10 @@
 
 $methodType = $_SERVER['REQUEST_METHOD'];
 
+$data = array("msg" => "$methodType");
+$data["error"] = "";
+$data["return"] = "";
+
 if ($methodType === 'POST') {
 
     $servername = "localhost";
@@ -19,7 +23,7 @@ if ($methodType === 'POST') {
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$User_Name = "";
+		    $User_Name = "";
         $User_Password = "";
         $User_Email = "";
         if (isset($_POST["User_Name"]) && !empty($_POST["User_Name"])) {
@@ -30,7 +34,7 @@ if ($methodType === 'POST') {
         if (isset($_POST["User_Password"]) && !empty($_POST["User_Password"])) {
             // these names don't all have to be the same but if we have several variables
             // then it makes sense to make them the same
-            $User_Password =  crypt($_POST["User_Password"]);
+            $User_Password =  password_hash($_POST["User_Password"], PASSWORD_DEFAULT);
         }
         if (isset($_POST["User_Email"]) && !empty($_POST["User_Email"])) {
             // these names don't all have to be the same but if we have several variables
@@ -39,7 +43,8 @@ if ($methodType === 'POST') {
         }
 
         if(empty($User_Name) || empty($User_Password) || empty($User_Email)) {
-            echo "<p>No update performed.</p>";
+            $data["error"] = "yes";
+            $data["return"] = "Empty field(s) - no update performed.";
         } else {
           
             // Check if username already exists in database:
@@ -51,7 +56,8 @@ if ($methodType === 'POST') {
             $count = $statement->rowCount();
           
             if ($count > 0) {
-              echo "Username already exists in DB.";
+              $data["error"] = "yes";
+              $data["return"] = "Username already exists in DB.";
             } else {
               // perform update to the DB
               $sql = "INSERT INTO `tbl_User` (User_Name, User_Password, User_Email) values (:UserName, :UserPassword, :UserEmail)";
@@ -65,20 +71,22 @@ if ($methodType === 'POST') {
               //$_SESSION['email'] = $User_Email;
               $_SESSION['loggedin'] = true;
               
-              // Redirect user to MyGroups page after updating database and logging in:
+              // Send back no error - JS will redirect:
               
-              header( 'Location: createjoin.php' ) ;
+              $data["error"] = "no";
             }
         }
 
     } catch(PDOException $e) {
-        echo "<p style='color: red;'>From the SQL code: $sql</p>";
-        $error = $e->getMessage();
-        echo "<p style='color: red;'>$error</p>";
+        $data["error"] = "yes";
+        $data["return"] = "" . $sql . $e->getMessage() . $error;
     }
   
     } else {
-      echo "Has to be POST.";
+      $data["error"] = "yes";
+      $data["return"] = "Has to be POST.";
     }
+
+    echo json_encode($data, JSON_FORCE_OBJECT);
 
 ?>
