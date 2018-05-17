@@ -96,11 +96,11 @@ if($_SESSION['loggedin'] === false){
     <h1 class="mt-4 createheading">Create a Memento</h1>
       <div class="row">
         <div class="col-12 col-sm-6 my-4">
-            <button type="button" class="btn btn-primary btn-lg createjoin" data-toggle="modal" data-target="#createModal" style="background-color: #FFF; color: #1A75C1;">Create Group</button>
+            <button type="button" class="btn btn-primary btn-lg createjoin" data-toggle="modal" data-target="#createModal" onclick="clearModalErrors()" style="background-color: #FFF; color: #1A75C1;">Create Group</button>
           <!-- <button type="button" onclick="location.href = 'create.html'" class="btn btn-primary btn-lg createjoin" style="background-color: #FFF; color: #1A75C1;">Create Group</button> -->
         </div>
         <div class="col-12 col-sm-6 my-4">
-            <button type="button" class="btn btn-light btn-lg createjoin" data-toggle="modal" data-target="#joinModal" style="background-color: #1A75C1; color: #FFF;">Join Group</button>
+            <button type="button" class="btn btn-light btn-lg createjoin" data-toggle="modal" data-target="#joinModal" onclick="clearModalErrors()" style="background-color: #1A75C1; color: #FFF;">Join Group</button>
           <!-- <button type="button" onclick="location.href = 'join.html'" class="btn btn-light btn-lg createjoin" style="background-color: #1A75C1; color: #FFF;">Join Group</button> -->
         </div>
 
@@ -286,12 +286,15 @@ if($_SESSION['loggedin'] === false){
             </div>
         </div>
         <!-- Modal body -->
-        <div class="modal-body col-12 mx-auto">
+        <div id="modalbody" class="modal-body col-12 mx-auto">
+        
             <!-- group description, # of members, budget -->
           <div class="container">
             <div class="row">
               <div class="col-sm-12 col-md-5 mx-auto">
-                <img class="mr-2 my-3 rounded mx-auto d-block img-fluid img-thumbnail" src="img/aboutgroup/groupimg.jpeg" alt="group picture 1">
+                <img id="grpimg" class="mr-2 my-3 rounded mx-auto d-block img-fluid img-thumbnail" src="img/aboutgroup/groupimg.jpeg" alt="group picture 1">
+                    
+
               </div>
               <div id="maintext" class="col-sm-12 col-md-7 mb-4">
                 <h2 id="modalgroupdescription">Description</h2>
@@ -311,53 +314,9 @@ if($_SESSION['loggedin'] === false){
             </div>
           </div>
 
-                  <!-- event 1 -->
-                  <div id="eventDiv1" class="w-100 mb-3">
-                    <div class="card mx-auto">
-                      <img id="event1image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
-                      <div class="card-body">
-                        <h3 id="event1name" class="card-title">event</h3>
-                        <h6 id="event1ID"></h6>
-                        <p id="event1description" class="card-text">event description</p>
-                        <a id="event1link" href="#">Visit their site for more information</a>
-                        <button id="selectEvent1" style="display: none;" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
-                      </div>
-                    </div>
-                  </div>
-                  <!--event end-->
-
-                  <!-- event 2 -->
-                  <div id="eventDiv2" class="w-100 mb-3">
-                    <div class="card mx-auto">
-                      <img id="event2image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
-                      <div class="card-body">
-                        <h3 id="event2name" class="card-title">event</h3>
-                        <h6 id="event2ID"></h6>
-                        <p id="event2description" class="card-text">event description</p>
-                        <a id="event2link" href="#">Visit their site for more information</a>
-                        <button id="selectEvent2" style="display: none;" type="button" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
-                      </div>
-                    </div>
-                  </div>
-                  <!--event end-->
-
-                  <!-- event 3 -->
-                  <div id="eventDiv3" class="w-100 mb-3">
-                    <div class="card mx-auto">
-                      <img id="event3image" class="card-img-top" src="img/aboutgroup/event.jpeg" alt="Card image cap">
-                      <div class="card-body">
-                        <h3 id="event3name" class="card-title">event</h3>
-                        <h6 id="event3ID"></h6>
-                        <p id="event3description" class="card-text">event description</p>
-                        <a id="event3link" href="#">Visit their site for more information</a>
-                        <button id="selectEvent3" type="button" style="display: none;" onclick="set_event(this.id)" class="btn btn-primary float-right">Select This Event For Your Group</button>
-                      </div>
-                    </div>
-                  </div>
-                  <!--event end-->
-                  <button id="refreshEvents" type="button" onclick="refreshEvents()" class="btn btn-primary w-100">Refresh</button>
 
         </div>
+        <div id="modalbodyevents"></div>
       </div>
     </div>
   </div>
@@ -394,9 +353,9 @@ document.getElementById("footerLogin").innerHTML = "";
   
 // The following just used to hold Event IDs for use in selecting Events for Groups.
   
-document.getElementById("event1ID").style.display="none";
-document.getElementById("event2ID").style.display="none";
-document.getElementById("event3ID").style.display="none";
+//document.getElementById("event1ID").style.display="none";
+//document.getElementById("event2ID").style.display="none";
+//document.getElementById("event3ID").style.display="none";
 
 </script>
   
@@ -474,11 +433,15 @@ document.getElementById("event3ID").style.display="none";
     
   ?>
   
-    <script>
+
+  
+  <script>
     var Group_Name = '<?php echo $row['Group_Name'];?>';
+    var Group_Image = '<?php echo $groupArray[0]['Group_ImgLoc'];?>';
     var Group_Description = '<?php echo $groupArray[0]['Group_Description'];?>';
-    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
+    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + Group_Image + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_Name + "><input type='file' name='grouppic' id='pic'><input type='submit' value='Upload' name='submit'></form></p></div>";
     </script>
+  
   
 <?php endforeach; ?>
 
@@ -521,6 +484,8 @@ crossorigin="anonymous"></script>
                 
                 var Group_Event_ID;
                 
+                var Group_ImgLoc;
+                
                 for (i = 0; i < length; i++) {
                   
                   //console.log("Group Name: " + Group_Name);
@@ -534,6 +499,8 @@ crossorigin="anonymous"></script>
                     Group_Description = data[i]["Group_Description"];
                     Group_Size = "" + data[i]["Group_Size"];
                     Group_Event_ID = data[i]["Event_Name"];
+                    Group_ImgLoc = data[i]["Group_ImgLoc"];
+                    document.getElementById("grpimg").setAttribute("src", Group_ImgLoc);
                     document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
                     document.getElementById("numbermembers").innerHTML = "Max members: <span id='groupSizeID'>" + Group_Size + "</span></br>";  
               } 
@@ -578,14 +545,14 @@ crossorigin="anonymous"></script>
                 //console.log("Reg_Budget = " + Reg_Budget)
                   if (Reg_Budget != null) {
                     
-                  groupBudget += data[i]["Registration_Budget"];
+                  groupBudget += Number(Reg_Budget);
                   userBudgetCount++;
                     
                 }
                 
                   if (User_Name == data[i]["User_Name"]) {
                     if (Reg_Budget != null) {
-                  document.getElementById("currentBudgetID").innerHTML = data[i]["Registration_Budget"];
+                  document.getElementById("currentBudgetID").innerHTML = "$" + Number(Reg_Budget).toFixed(2);
                     } else {
                       document.getElementById("currentBudgetID").innerHTML = "not set.";
                     }
@@ -599,21 +566,25 @@ crossorigin="anonymous"></script>
               var allbudgetsentered = false;
           
               if (userCount == Group_Size && userBudgetCount == Group_Size) {
+                //console.log("userBudgetCount: " + userBudgetCount);
+                //console.log("Group size: " + Group_Size);
                 allbudgetsentered = true;
                 groupBudget /= Group_Size;
+                groupBudget = Number(groupBudget).toFixed(2);
                 
                 // Display "Select This Event For Your Group"  
                 // buttons if all users have entered a budget:
                 
-                document.getElementById("selectEvent1").style.display="block";
-                document.getElementById("selectEvent2").style.display="block";
-                document.getElementById("selectEvent3").style.display="block";
+                //document.getElementById("selectEvent1").style.display="block";
+                //document.getElementById("selectEvent2").style.display="block";
+                //document.getElementById("selectEvent3").style.display="block";
                 
               } else {
+                groupBudget = null;
                 // Hides the select this event for your group buttons:
-                document.getElementById("selectEvent1").style.display="none";
-                document.getElementById("selectEvent2").style.display="none";
-                document.getElementById("selectEvent3").style.display="none";
+                //document.getElementById("selectEvent1").style.display="none";
+                //document.getElementById("selectEvent2").style.display="none";
+                //document.getElementById("selectEvent3").style.display="none";
               }
 
                      
@@ -623,117 +594,129 @@ crossorigin="anonymous"></script>
               }
           
               if (userCount == Group_Size && allbudgetsentered) {
-                    document.getElementById("groupBudgeth5").innerHTML = "Group Budget: " + "<span id=groupBudget>" + groupBudget + "</span>";
+                    document.getElementById("groupBudgeth5").innerHTML = "Group Budget: " + "<span id=groupBudget>$" + groupBudget + "</span>";
               }
                 
       // This Ajax call queries the database for all Events.
+          
+      // First compile the data needed to query database for appropriate Events:
+          
+      var groupInfo = {"Group_Size":Group_Size,"Group_Budget_Set":allbudgetsentered,"Group_BudgetPP":groupBudget,"Group_Event_ID":Group_Event_ID}
+      
+      console.log("sent: ", groupInfo);
       
         $.ajax({
         url: "ajax-get-events.php",
         dataType: "json",
         type: "POST",
+        data: groupInfo,
         success: function(data) {
             //console.log("test");
             //console.log(data);
           
             //Only show first div and set it to Group's Event if an Event is set for the group:
-          
+            console.log("received: ", data);
             console.log("Group_Event_ID: " + Group_Event_ID);
             if (Group_Event_ID) {
             console.log("if statement entered.");
             // If the Group already has an Event set, show that Event and hide others:
               
-            
-            document.getElementById("eventDiv2").style.display="none";
-            document.getElementById("eventDiv3").style.display="none";
-            document.getElementById("refreshEvents").style.display="none";
+            modalbodyevents.innerHTML = "<div id='eventDiv1' class='w-100 mb-3'>"
+                    + "<div class='card mx-auto'><img id='event1image' class='card-img-top'"
+                    + "src='" + data[0]["Event_ImgLocation"]
+                    + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
+                    + data[0]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
+                    + data[0]["Event_Description"] + "</p><a id='event1link' href='" + data[0]["Event_URL"]
+                    + "'>Visit their site for more information</a></div></div></div>";   
               
-            // and hide the Select this event button:
               
-            document.getElementById("selectEvent1").style.display="none";
+            // Else populate with relevant Events:
+              
+            } else {
               
             var length = Object.keys(data).length;
             
+            if (length > 0){
+              
+            modalbodyevents.innerHTML = "";
+              
             for (i = 0; i < length; i++) {
             
-            if (data[i]["ID"] == Group_Event_ID) {
-                document.getElementById("event1name").innerHTML = data[i]["Event_Name"];
-            document.getElementById("event1ID").innerHTML = data[i]["ID"];
-            document.getElementById("event1description").innerHTML = data[i]["Event_Description"];   
-            document.getElementById("event1image").setAttribute("src", data[i]["Event_ImgLocation"]);  
-            if (data[i]["Event_URL"]){
-              document.getElementById("event1link").style.display="block";
-              document.getElementById("event1link").setAttribute("href", data[i]["Event_URL"]);  
-            } else {
-              document.getElementById("event1link").style.display="none";
-            }
-            }
+            modalbodyevents.innerHTML += "<div id='eventDiv1' class='w-100 mb-3'>"
+                    + "<div class='card mx-auto'><img class='card-img-top'"
+                    + "src='" + data[i]["Event_ImgLocation"]
+                    + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
+                    + data[i]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
+                    + data[i]["Event_Description"] + "</p><a href='" + data[i]["Event_URL"]
+                    + "'>Visit their site for more information</a><button id='"
+                    + data[i]["ID"] + "' type='button' onclick='set_event(this.id)'"
+                    + "class='btn btn-primary float-right'>Select This Event For Your Group</button></div></div></div>";
             }
               
-            // Else populate with three unique Events:
-              
             } else {
+              modalbodyevents.innerHTML = "The Group must be full and all members must have submitted budgets for Event options to be displayed. However, you can browse the full list of Events here.";
+            }
               
             // Display 2nd and 3rd divs:
               
-            document.getElementById("eventDiv2").style.display="block";
-            document.getElementById("eventDiv3").style.display="block";
-            document.getElementById("refreshEvents").style.display="block";
+            //document.getElementById("eventDiv2").style.display="block";
+            //document.getElementById("eventDiv3").style.display="block";
+            //document.getElementById("refreshEvents").style.display="block";
           
-            var Group_PricePP = 36.00;
+            //var Group_PricePP = 36.00;
           
-            var eventslength = Object.keys(data).length;
+            //var eventslength = Object.keys(data).length;
           
-            var rand1 = Math.floor(Math.random()*eventslength);
+            //var rand1 = Math.floor(Math.random()*eventslength);
           
-            while (data[rand1]["Event_PricePP"] > Group_PricePP) {
-              rand1 = Math.floor(Math.random()*eventslength);
-            }
+            //while (data[rand1]["Event_PricePP"] > Group_PricePP) {
+              //rand1 = Math.floor(Math.random()*eventslength);
+            //}
           
-            var rand2 = rand1;
+            //var rand2 = rand1;
           
-            while (rand2 == rand1 || data[rand2]["Event_PricePP"] > Group_PricePP) {
-              rand2 = Math.floor(Math.random()*eventslength);
-            }
+            //while (rand2 == rand1 || data[rand2]["Event_PricePP"] > Group_PricePP) {
+              //rand2 = Math.floor(Math.random()*eventslength);
+            //}
           
-            var rand3 = rand1;
+            //var rand3 = rand1;
           
-            while (rand3 == rand1 || rand3 == rand2 || data[rand3]["Event_PricePP"] > Group_PricePP) {
-              rand3 = Math.floor(Math.random()*eventslength);
-            }
+            //while (rand3 == rand1 || rand3 == rand2 || data[rand3]["Event_PricePP"] > Group_PricePP) {
+              //rand3 = Math.floor(Math.random()*eventslength);
+            //}
 
-            document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
-            document.getElementById("event1ID").innerHTML = data[rand1]["ID"];
-            document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
-            document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
-            if (data[rand1]["Event_URL"]){
-              document.getElementById("event1link").style.display="block";
-              document.getElementById("event1link").setAttribute("href", data[rand1]["Event_URL"]);  
-            } else {
-              document.getElementById("event1link").style.display="none";
-            }
+            //document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
+            //document.getElementById("event1ID").innerHTML = data[rand1]["ID"];
+            //document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
+            //document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
+            //if (data[rand1]["Event_URL"]){
+              //document.getElementById("event1link").style.display="block";
+              //document.getElementById("event1link").setAttribute("href", data[rand1]["Event_URL"]);  
+            //} else {
+              //document.getElementById("event1link").style.display="none";
+            //}
           
-            document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
-            document.getElementById("event2ID").innerHTML = data[rand2]["ID"];
-            document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
-            document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]);
-            if (data[rand2]["Event_URL"]){
-              document.getElementById("event2link").style.display="block";
-              document.getElementById("event2link").setAttribute("href", data[rand2]["Event_URL"]);  
-            } else {
-              document.getElementById("event2link").style.display="none";
-            }
+            //document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
+            //document.getElementById("event2ID").innerHTML = data[rand2]["ID"];
+            //document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
+            //document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]);
+            //if (data[rand2]["Event_URL"]){
+              //document.getElementById("event2link").style.display="block";
+              //document.getElementById("event2link").setAttribute("href", data[rand2]["Event_URL"]);  
+            //} else {
+              //document.getElementById("event2link").style.display="none";
+            //}
           
-            document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
-          document.getElementById("event3ID").innerHTML = data[rand3]["ID"];
-            document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
-            document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]);
-            if (data[rand3]["Event_URL"]){
-              document.getElementById("event3link").style.display="block";
-              document.getElementById("event3link").setAttribute("href", data[rand3]["Event_URL"]);  
-            } else {
-              document.getElementById("event3link").style.display="none";
-            }
+            //document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
+          //document.getElementById("event3ID").innerHTML = data[rand3]["ID"];
+            //document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
+            //document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]);
+            //if (data[rand3]["Event_URL"]){
+              //document.getElementById("event3link").style.display="block";
+              //document.getElementById("event3link").setAttribute("href", data[rand3]["Event_URL"]);  
+            //} else {
+              //document.getElementById("event3link").style.display="none";
+            //}
           
         }
         },
@@ -821,14 +804,14 @@ crossorigin="anonymous"></script>
               
               // 
               if (data[i]["Registration_Budget"] != null) {
-                
+                var RegBudget = data[i]["Registration_Budget"];
                 // Keep track of how many users have entered a budget and add up the total group's budget:
                 budgetCount++;
-                Group_Budget += Number(data[i]["Registration_Budget"]);
+                Group_Budget += Number(RegBudget);
                 
                 // Update user's current showing budget:
                 if (data[i]["User_Name"] === User_Name) {
-                  document.getElementById("currentBudgetID").innerHTML = data[i]["Registration_Budget"];
+                  document.getElementById("currentBudgetID").innerHTML = "$" + Number(RegBudget).toFixed(2);
                 }
                 }
           
@@ -839,7 +822,9 @@ crossorigin="anonymous"></script>
             console.log("budgetcount: " + budgetCount);
             
              if (groupMax == budgetCount) {
-                document.getElementById("groupBudget").innerHTML = (Group_Budget / groupMax);
+               var groupBudgetPP = Group_Budget / groupMax;
+                   
+                document.getElementById("groupBudget").innerHTML = "Group Budget: " + "<span id=groupBudget>$" + Number(groupBudgetPP).toFixed(2) + "</span>";
                console.log("if:" + Group_Budget);
 
                var groupname = {"Group_Name":Group_Name};
@@ -871,23 +856,11 @@ crossorigin="anonymous"></script>
     
     function set_event(clicked_id) {
       
-      var Event_ID = "";
+      var Event_ID = clicked_id;
       
       var Group_Name = document.getElementById("modalgroupname").innerHTML;
       
       console.log("Clicked id: " + clicked_id);
-      
-      if (clicked_id == "selectEvent1") {
-        Event_ID = document.getElementById("event1ID").innerHTML;
-      }
-      
-      if (clicked_id == "selectEvent2") {
-        Event_ID = document.getElementById("event2ID").innerHTML;
-      }
-      
-      if (clicked_id == "selectEvent3") {
-        Event_ID = document.getElementById("event3ID").innerHTML;
-      }
       
       var eventInfo = {"Group_Name":Group_Name,"Event_ID":Event_ID};
       
@@ -1020,7 +993,13 @@ function joinClick() {
           document.getElementById("joinGroupError").innerHTML = "Error: " + data["return"];
           }
           if (data["error"] == "no") {
-          // no redirect required.
+            
+            Group_Description = data["Group_Description"];
+          
+            // Add the group to the page:
+            
+            tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
+            
           }
 
         },
@@ -1063,7 +1042,11 @@ function createClick() {
           document.getElementById("createGroupError").innerHTML = "Error: " + data["return"];
           }
           if (data["error"] == "no") {
-          // no redirect required.
+          
+            // Add the group to the page:
+            
+            tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
+          
           }
 
         },
@@ -1072,6 +1055,11 @@ function createClick() {
         }
       });
   
+}
+    
+function clearModalErrors() {
+  document.getElementById("createGroupError").innerHTML = "";
+  document.getElementById("joinGroupError").innerHTML = "";
 }
 
 
