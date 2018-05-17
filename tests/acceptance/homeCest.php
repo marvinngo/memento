@@ -7,7 +7,7 @@ class homeCest
 {
     public function _before(AcceptanceTester $I)
     {
-        $I->amOnPage('/memento');
+        $I->amOnPage('');
     }
 
     public function _after(AcceptanceTester $I)
@@ -23,14 +23,19 @@ class homeCest
 
     public function loginLink(AcceptanceTester $I)
     {
-        $I->amOnPage('/memento');
         $I->see('Login');
     }
 
     public function notAlreadyLoggedIn(AcceptanceTester $I)
     {
-        $I->amOnPage('/memento');
         $I->dontSee('Welcome');
         $I->dontSee('Logout');
+    }
+
+    public function navigateToSignup(AcceptanceTester $I) 
+    {
+        $I->click('#getStarted1');
+        $I->amOnPage('memento/registration.php');
+        $I->seeInCurrentUrl('registration');
     }
 }

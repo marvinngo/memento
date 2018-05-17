@@ -7,6 +7,11 @@
 actor: AcceptanceTester
 modules:
     enabled:
-        - PhpBrowser:
-            url: http://localhost/memento
+        - WebDriver:
+            url: 'http://localhost/memento'
+            # window_size: false
+            # port: 9515
+            browser: chrome
+        # - PhpBrowser:
+        #     url: http://localhost/memento
         - \Helper\Acceptance
