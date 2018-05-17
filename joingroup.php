@@ -6,6 +6,9 @@
 
 $methodType = $_SERVER['REQUEST_METHOD'];
 
+$data = array("msg" => "$methodType");
+$data["return"] = "";
+
 if ($methodType === 'POST') {
 
     $servername = "localhost";
@@ -35,7 +38,8 @@ if ($methodType === 'POST') {
         }
 
         if(empty($Group_Name) || empty($Group_Password)) {
-            echo "<p>No update performed.</p>";
+            $data["error"] = "yes";
+            $data["return"] = "No group joined - group name and/or group password cannot be empty.";
           
         } else {
           
@@ -49,15 +53,14 @@ if ($methodType === 'POST') {
             $rows = $statement->fetchAll();
           
             if ($count == 0) {
-              echo "Group Name does not exist in DB.";
+              $data["error"] = "yes";
+              $data["return"] = "Group Name does not exist.";
             } else {
               
             // Check if Password matches in database:
               
           if ($count == 1) {
-          if (hash_equals($rows[0]['Group_Password'], crypt($Group_Password, $rows[0]['Group_Password']))) {
-            // Placeholder - should go to specific group's page? Depends
-            // how MyGroups page is implemented.
+          if (password_verify($Group_Password, $rows[0]['Group_Password'])) {
             
             // Check if group is full:
             
@@ -80,11 +83,11 @@ if ($methodType === 'POST') {
             }
 
             if ($regCount >= $Group_Size) {
-              echo "Group is already full.";
+              $data["error"] = "yes";
+              $data["return"] = "Group is already full.";
             } else if ($userExists) {
-            
-              echo "You have already joined this group.";
-              
+              $data["error"] = "yes";
+              $data["return"] = "You have already joined this group.";            
             } else {
             
             // Add username to Registration:
@@ -94,24 +97,27 @@ if ($methodType === 'POST') {
             $statement = $conn->prepare($sql);
             $statement->execute(array(":UserName" => $_SESSION['User_Name'], ":GroupName" => $Group_Name));
             
-            header( 'Location: createjoin.php' ) ;
+            $data["error"] = "no";
+              
               }
           } else {
-            echo "Username matches DB.<br>";
-            echo "incorrect password";
+            $data["error"] = "yes";
+            $data["return"] = "Group name matches database but password is incorrect.";
           }
           }
           }
           }
 
     } catch(PDOException $e) {
-        echo "<p style='color: red;'>From the SQL code: $sql</p>";
-        $error = $e->getMessage();
-        echo "<p style='color: red;'>$error</p>";
+        $data["error"] = "yes";
+        $data["return"] = "" . $sql . $e->getMessage() . $error;
     }
   
     } else {
-      echo "Has to be POST.";
+      $data["error"] = "yes";
+      $data["return"] = "Has to be POST.";
     }
+
+    echo json_encode($data, JSON_FORCE_OBJECT);
 
 ?>
