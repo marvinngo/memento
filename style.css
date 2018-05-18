@@ -77,6 +77,8 @@ button {
 /* three icons on front page,  */
 .icons {
   width: 50%;
+  background-color: transparent;
+border: none;
 }
 
 /* background divs */
@@ -122,7 +124,6 @@ button {
   width: 70%;
   
 }
-
 
 .modaluserpw {
   width: 100%;
@@ -193,6 +194,62 @@ button {
   color: #F6F6F6;
 }
 
+#event1name, #event1description {
+  color: black; 
+}
+#firstDiv {
+  background-color: #fff;
+}
+
+#icontext {
+  font-size: 16pt;
+}
+
+#descrip {
+font-size: 10pt;
+padding-top: 2%;
+}
+
+#slideshow {
+  padding: 0 !important;
+}
+
+#howitworks {
+  font-size: 16pt;
+  margin-bottom: 8px;
+}
+
+.tenptfont {
+  font-size: 10pt;
+  
+}
+ 
+
+
+#mockupcontainer {
+  margin-top: -200px;
+  overflow: hidden;
+}
+#mockup {
+  position: relative;
+  top: 50%;
+  width: 100%;
+}
+
+#seconddiv {
+  background-color: #DDEDFB;
+}
+
+
+#ms {
+  color: white;
+  background-color:#3193E3;
+}
+
+#citylogo {
+  width: 50%;
+}
+
 #BudgetErrorID {
   color: red;
 }
@@ -219,9 +276,7 @@ img.mr-2 {
   font-size: 12pt;
   color: #F6F6F6;
 }
-#groupBudgeth5 {
-  color: red;
-}
+
 /* title of main div containers */
 #main {
   font-size: 20pt;
@@ -237,7 +292,10 @@ img.mr-2 {
   font-size: 18px;
 }
 
-
+#registrationError {
+  color: red;
+  font-size: 18px;
+}
 /*---Media Queries --*/
 @media (max-width: 992px) {
 
