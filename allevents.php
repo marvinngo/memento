@@ -2,11 +2,9 @@
       if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-
       if (!isset($_SESSION['loggedin'])) {
       $_SESSION['loggedin'] = false;
   }
-
 ?>
 
 <!DOCTYPE html>
@@ -85,12 +83,12 @@
         <!-- username -->
         <form method="post" action="signin.php">
               <div class="form-row mx-auto my-4">
-                <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" required>
+                <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" required>
               </div>
 
               <!-- password -->
               <div class="form-row mx-auto my-4">
-                <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
+                <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" required>
                 <div class="col px-0">
                   <button id="submitButton" onclick="return loginClick(this.id)" type="button" class="btn btn-primary w-100 mt-4 submitButton">Sign in</button>
                 </div>
@@ -173,7 +171,6 @@
           
       // This Ajax call sends user login info to the server to either login
       // the user and redirect them to a new page or return an error message.
-
         $.ajax({
         url: "signin.php",
         dataType: "json",
@@ -195,8 +192,6 @@
           if (data["error"] == "no") {
           window.location = 'createjoin.php';
           }
-
-
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.statusText);
@@ -206,17 +201,14 @@
   
 <?php if($_SESSION['loggedin'] === false): ?>
   
-
     
   document.getElementById("Groups").innerHTML = ""; 
   document.getElementById("groupDivider").setAttribute("class", "");
   
-
   
 <?php endif; ?>
   
 <?php if($_SESSION['loggedin'] === true): ?>
-
 var User_Name='<?php echo $_SESSION['User_Name'];?>';
   
 document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!";  
@@ -227,9 +219,7 @@ document.getElementById("footerHome").innerHTML = "";
 document.getElementById("footerSignup").innerHTML = "Home";
 document.getElementById("footerSignup").setAttribute("href", "index.php");
 document.getElementById("footerLogin").innerHTML = "";
-
 <?php endif; ?>
-
 </script>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"
@@ -258,26 +248,21 @@ crossorigin="anonymous"></script>
           //console.log("received: ", data);
           
           var length = Object.keys(data).length;
-
           for (i = 0; i < length; i++) {
-
           tables.innerHTML += "<div id='eventDiv1' class='w-100 mb-3'>"
-                  + "<div class='card mx-auto'><img id='event1image' class='card-img-top'"
+                  + "<div id='eventcard' class='card mx-auto'><img id='event1image' class='card-img-top'"
                   + "src='" + data[i]["Event_ImgLocation"]
                   + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
                   + data[i]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
                   + data[i]["Event_Description"] + "</p><a id='event1link' href='" + data[i]["Event_URL"]
                   + "'>Visit their site for more information</a></div></div></div>"; 
           }
-
         },
         error: function(jqXHR, textStatus, errorThrown) {
             $("#tables").text(jqXHR.statusText);
         }
       });
     
-
-
 /*]]>*/
 </script>
   
