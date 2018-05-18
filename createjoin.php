@@ -624,7 +624,7 @@ crossorigin="anonymous"></script>
             console.log("if statement entered.");
             // If the Group already has an Event set, show that Event and hide others:
               
-            modalbodyevents.innerHTML = "<div id='eventDiv1' class='w-100 mb-3'>"
+            modalbodyevents.innerHTML = "Your group has selected the following event:<br><div id='eventDiv1' class='w-100 mb-3'>"
                     + "<div class='card mx-auto'><img id='event1image' class='card-img-top'"
                     + "src='" + data[0]["Event_ImgLocation"]
                     + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
