@@ -77,6 +77,8 @@ button {
 /* three icons on front page,  */
 .icons {
   width: 50%;
+  background-color: transparent;
+border: none;
 }
 
 /* background divs */
@@ -192,6 +194,63 @@ button {
   color: #F6F6F6;
 }
 
+#belowCarousel {
+  background-color: rgb(155, 203, 245);
+}
+#event1link {
+  color: navy;
+}
+#firstDiv {
+  background-color: #fff;
+}
+#grpimg {
+  width: 250px;
+  height: 250px;
+}
+#icontext {
+  font-size: 16pt;
+}
+
+#descrip {
+font-size: 10pt;
+padding-top: 2%;
+}
+
+#slideshow {
+  padding: 0 !important;
+}
+#eventcard {
+  background: rgba(255, 255, 255, 0);
+}
+#howitworks {
+  font-size: 16pt;
+  margin-bottom: 8px;
+}
+
+.tenptfont {
+  font-size: 10pt;
+  
+}
+
+#mockup {
+  position: relative;
+  width: 100%;
+}
+
+#seconddiv {
+  background-color: #DDEDFB;
+}
+
+
+#missionStatement {
+  color: white;
+  background-color:#3193E3;
+}
+
+#citylogo {
+  width: 50%;
+}
+
 #BudgetErrorID {
   color: red;
 }
@@ -229,7 +288,20 @@ img.mr-2 {
   color: #1A75C1;
   font-size: 14pt;
 }
+#usernameError, #passwordError, #passwordMatch, #emailError, #registrationError, #loginErrorID2, #groupnameError, #groupPwError, #groupPwMatch {
+  color: red;
+  font-size: 18px;
+}
 
+#registrationError {
+  color: red;
+  font-size: 18px;
+}
+
+#selectedEvent {
+  font-size: 20px;
+  font-weight: bold;
+}
 /*---Media Queries --*/
 @media (max-width: 992px) {
 
@@ -245,6 +317,10 @@ img.mr-2 {
   #A{
     left: -150%; /* Set initial position for each image off-screen left -- adjust according to image width */
   }
+  #grpimg {
+    width: 150px;
+    height: 150px;
+  }
 
 }
 
@@ -258,7 +334,7 @@ img.mr-2 {
 
   /* card title to smaller size (home page, aboutgroup) */
   .card-title {
-    font-size: 14pt;
+    font-size: 20pt;
   }
 
   /* title for createjoin page */

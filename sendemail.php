@@ -38,18 +38,15 @@ $statement->execute(array(":GroupName" => $_POST['Group_Name']));
 $count = $statement->rowCount();
 $rows = $statement->fetchAll();
 
-// Attempting to inner join to get user emails from registrations
-//$sql2 = "SELECT tbl_User.User_Name, tbl_User.User_Email FROM tbl_Registration INNER JOIN tbl_User ON tbl_Registration.Group_Name = :GroupName";
-
-/* 9:28AM gave up on the joins, attempting a foreach loop using the group's usernames. */
-
 foreach ($rows as $row) {
-    $sql2 = "SELECT User_Email FROM tbl_User WHERE User_Name = :UserName";
+    $sql2 = "SELECT * FROM tbl_User WHERE User_Name = :UserName";
     $statement2 = $conn->prepare($sql2);
     $statement2->execute(array(":UserName" => $row['User_Name']));
     $count2 = $statement2->rowCount();
     $rows2 = $statement2->fetchAll();
-    
+
+    if ($rows2[0]['User_LastEmail'] != date("Y-m-d")) {
+        
     $mj = new \Mailjet\Client($apikey, $apisecret,true,['version' => 'v3.1']);
     $body = [
         'Messages' => [
@@ -66,14 +63,22 @@ foreach ($rows as $row) {
                 ],
                 'Subject' => "Memento Vancouver: Group '" . $thisgroup . "' is ready to pick an event!",
                 'TextPart' => "" . $thisgroup . " now has events!",
-                'HTMLPart' => "Hey there " . $row['User_Name'] . ", <p>Great news! " . $thisgroup . " is now ready to rock n roll! Please visit www.mementovancouver.com to view your groups available events." 
+                'HTMLPart' => "Hey there " . $row['User_Name'] . ", <p>Great news! " . $thisgroup . " is now ready to rock n roll! Please visit www.mementovancouver.com to view your groups available events"
             ]
         ]
     ];
     $response = $mj->post(Resources::$Email, ['body' => $body]);
+    
         
+    // This breaks the email
+    $date = date("Y-m-d");
+    $sql3 = "UPDATE tbl_User SET User_LastEmail = :Date WHERE User_Name = :UserName";
+    $statement3 = $conn->prepare($sql3);
+    $statement3->execute(array(":Date" => $date, ":UserName" =>$row['User_Name']));
+    }
+  
 }
-
+$response->success();
 
 
 ?>

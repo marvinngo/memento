@@ -48,6 +48,10 @@
         <li class="nav-item my-0">
           <a class="nav-link" href="index.php">Home</a>
         </li>
+        <div class="dropdown-divider"></div>
+          <li class="nav-item my-0">
+            <a class="nav-link" href="allevents.php">Events</a>
+          </li>
         <div id="groupDivider" class="dropdown-divider"></div>
         <li id="Groups" class="nav-item my-0">
           <a class="nav-link" href="createjoin.php">Groups</a>
@@ -64,6 +68,7 @@
     </div>
   </div>
 </nav>
+
 <!-- The Modal -->
 <div class="modal fade" id="login">
   <div class="modal-dialog modal-dialog-centered">
@@ -89,16 +94,16 @@
       <div class="modal-body col-6 mx-auto">
       <h5 id="loginErrorID"></h5>
         <!-- username -->
-        <form>
+        <form method='POST'>
               <div class="form-row mx-auto my-4">
-                <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" required>
+                <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" autofocus required>
               </div>
 
               <!-- password -->
               <div class="form-row mx-auto my-4">
-                <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
+                <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" required>
                 <div class="col px-0">
-                  <button id="submitButton" onclick="return loginClick()" type="button" class="btn btn-primary mt-4 w-100 submitButton">Sign in</button>
+                  <button id="submitButton" onclick="return loginClick()" type="submit" class="btn btn-primary mt-4 w-100 submitButton">Sign in</button>
                 </div>
               </div>
             </form>
@@ -107,100 +112,113 @@
   </div>
 </div>
 
-  <!--- carousel image slider -->
-<div id="slideshow" class="carousel mx-auto slide " data-ride="carousel">
-  <ul class="carousel-indicators">
-    <li data-target="#slideshow" data-slide-to="0" class="active"></li>
-    <li data-target="#slideshow" data-slide-to="1"></li>
-    <li data-target="#slideshow" data-slide-to="2"></li>
-  </ul>
-  <!-- first image -->
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="carouselTint" src="img/frontpage/carousel/picnic.jpeg">
-      <div class="carousel-caption">
-        <h1 class="display-2">Memento</h1>
-          <h3>Create Memories Together</h3>
-            <button type="button" id="getStarted1" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
-      </div>
-    </div>
-    <!-- second image -->
-    <div class="carousel-item">
-      <img class="carouselTint" src="img/frontpage/carousel/hike.jpg">
-      <div class="carousel-caption">
-        <h1 class="display-2">Memento</h1>
-          <h3>Create Memories Together</h3>
-            <button type="button" id="getStarted2" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
-      </div>
-    </div>
-    <!-- third image -->
-    <div class="carousel-item">
-      <img class="carouselTint" src="img/frontpage/carousel/beertour.jpg">
-      <div class="carousel-caption">
-        <h1 class="display-2">Memento</h1>
-          <h3>Create Memories Together</h3>
-            <button type="button" id="getStarted3" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
-      </div>
-    </div>    
-  </div>
-</div>
 
-<!--- Jumbotron (name and description of app) -->
-<div class="textcenter jumbotron">
-  <div id="about" class="navbarOffset"></div>
-  <h2>Memento</h2>
-  <p class="lead">An event generating service which allows individuals and groups to contribute to a pot and enjoy local activities together.</p>
-</div>
 
 <!-- three icons (get together, reduce waste, support locals) -->
-<div class="container col-lg-9 col-md-10 col-sm-11 col-xs-12">
-  <div class="row">
+
+  <div class="row mt-4">
     <img src="img/recycling.gif" id="A" alt="A"/>
     <!-- first ion -->
-    <div class="col-12 col-md-4">
+    <div class="col-4 mt-2">
       <div class="card border-0">
         <img class="icons card-img-top mx-auto" src="img/frontpage/icon/social.png" alt="Create memories with loved ones">
-        <div class="card-body">
-          <h5 class="card-title text-center">Get Together</h5>
-        </div>
       </div>
     </div>
     <!-- second icon -->
-    <div class="col-12 col-md-4">
+    <div class="col-4 mt-2">
       <div class="card border-0">
         <img class="icons card-img-top mx-auto" src="img/frontpage/icon/recycling.png" alt="Recycling and reduce waste" onclick="huehuehue()">
-        <div class="card-body">
-          <h5 class="card-title text-center">Reduce Waste</h5>
-        </div>
       </div>
     </div>
     <!-- third icon -->
-    <div class="col-12 col-md-4">
+    <div class="col-4 mt-2">
       <div class="card border-0">
         <img class="icons card-img-top mx-auto" src="img/frontpage/icon/local.png" alt="Support small local businesses">
-        <div class="card-body">
-          <h5 class="card-title text-center">Support Local Economy</h5>
-        </div>
       </div>
     </div>
   </div>
+  <div class="row">
+        <div class="row text-center mx-auto tenptfont py-4">
+            <div  id="icontext"class="col-12 my-2 mx-auto">
+                Simple. Unique.<br>
+                Community Building.
+            </div>
+            <div class="col-md-3"></div>
+            <div id="descrip" class="col-md-6 text-center tenptfont">
+                With Memento, you'll get instant, creative, and memorable activity ideas for free, available in the palm of your hands. Contribute what you can afford towards a group event, and check out the unique suggestions that we've thought of for your group to do!
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+
+
+    <!--- carousel image slider -->
+    <div id="slideshow" class="carousel mx-auto slide" data-ride="carousel">
+          <ul class="carousel-indicators">
+            <li data-target="#slideshow" data-slide-to="0" class="active"></li>
+            <li data-target="#slideshow" data-slide-to="1"></li>
+            <li data-target="#slideshow" data-slide-to="2"></li>
+          </ul>
+          <!-- first image -->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="carouselTint img-fluid" src="img/frontpage/carousel/picnic.jpeg">
+              <div class="carousel-caption">
+                <h1 class="display-2">Memento</h1>
+                  <h3>Create Memories Together</h3>
+                    <button type="button" id="getStarted1" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
+              </div>
+            </div>
+            <!-- second image -->
+            <div class="carousel-item">
+              <img class="carouselTint img-fluid" src="img/frontpage/carousel/hike.jpg">
+              <div class="carousel-caption">
+                <h1 class="display-2">Memento</h1>
+                  <h3>Create Memories Together</h3>
+                    <button type="button" id="getStarted2" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
+              </div>
+            </div>
+            <!-- third image -->
+            <div class="carousel-item">
+              <img class="carouselTint img-fluid" src="img/frontpage/carousel/beertour.jpg">
+              <div class="carousel-caption">
+                <h1 class="display-2">Memento</h1>
+                  <h3>Create Memories Together</h3>
+                    <button type="button" id="getStarted3" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
+              </div>
+            </div>    
+          </div>
+        </div>
+
+  <div id="belowCarousel" class="row text-center mx-auto tenptfont py-4">
+    <div id="howitworks" class="col-12 mx-auto">
+        How It Works
+    </div>
+    <div class="col-md-12 text-center tenptfont">
+        1.	Sign up for an account <br>
+        2.	Create a group <br>
+        3.	Share your group name and password with your friends <br>
+        4.	Wait for all members to join the group and enter a personal budget <br>
+        5.	View the events and chose your next adventure
+    </div>
+    <div id="" class="mx-auto my-1">
+        <img id="mockup" src="img/mockup.png">
+    </div>
 </div>
 
-<!--- Two Column Section (mission statement, video) -->
-<div class="row m-4 mx-auto col-lg-9 col-md-10 col-sm-11 col-xs-12 greyBG">
-  <!-- mission statement -->
-  <div class="textcenter col xs-12 lg-8 pt-3">
-    <h2>Mission statement<small><br></small></h2>
-    <p>While gift giving is well intentioned, we often miss the point: to create lasting memories with other people. 24% of all people believe most of the gifts they receive are useless junk. Each year, Canadians will throw out 540,000 tonnes of wrapping paper and gift bags. Our application, Memento takes all the money a group would have spent on gift-giving, aggregates a sum from anonymous personal budgets, and turns that sum it into a memorable experience. This not only reduces waste, but also supports local businesses and brings people together.</p>
-  </div>
-  <!-- video -->
-  <div class="col-lg-4 mt-1">
-    <br>
-    <div class="embed-responsive embed-responsive-16by9">
-    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/FQHxHH8y3VA" allowfullscreen></iframe>
+  <div id="missionStatement" class="row text-center mx-auto tenptfont py-4">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 mb-4"><img id="citylogo" src="img/citylogo.png" alt=""></div>
+    <div class="col-md-3"></div>
+   <div id="howitworks" class="col-12 mx-auto">
+     Mission statement
+   </div>
+   <div class="col-md-3"></div>
+    <div class="col-md-6 text-center">While gift giving is well intentioned, we often miss the point: to create lasting memories with other people. 24% of all people believe most of the gifts they receive are useless junk. Each year, Canadians will throw out 540,000 tonnes of wrapping paper and gift bags. Our application, Memento takes all the money a group would have spent on gift-giving, aggregates a sum from anonymous personal budgets, and turns that sum it into a memorable experience. This not only reduces waste, but also supports local businesses and brings people together.</div>
+    <div class="col-md-3"></div>
+
     </div>
-  </div>
-</div>
+
 
 <!--- Footer -->
 <footer class="site-footer page-footer font-small pt-3">
@@ -226,6 +244,15 @@
   </div>
 </footer>
   
+
+
+
+
+
+
+
+
+
   <?php if($_SESSION['loggedin'] === false): ?>
   
   <script>
@@ -262,8 +289,11 @@
   document.getElementById("getStarted2").setAttribute("onclick", "location.href='createjoin.php'");
   document.getElementById("getStarted3").setAttribute("onclick", "location.href='createjoin.php'");
   </script>
-  
+
+
+
 <?php endif; ?>
+
 
 <script
 src="https://code.jquery.com/jquery-3.3.1.js"
@@ -275,50 +305,63 @@ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="mementoScripts.js"></script>
 <script src="https://www.blockonomics.co/js/pay_button.js"></script>
-  
+
 <script>
 
-  function loginClick() {
-    
-    var User_Name = document.getElementById('usernameForm2').value;
-    var User_Password = document.getElementById('passwordForm2').value;
-    
-    var userLogin = {"User_Name":User_Name,"User_Password":User_Password};
-      
-    JSON.stringify(userLogin);
-      
-    console.log(userLogin);
-          
-      // This Ajax call sends user login info to the server to either login
-      // the user and redirect them to a new page or return an error message.
-
-        $.ajax({
-        url: "signin.php",
-        dataType: "json",
-        type: "POST",
-        data: userLogin,
-        success: function(data) {
-          
-          console.log("successss");
-          
-          console.log("Data returned from server: ", data);
-          
-          if (data["error"] == "yes") {
-          document.getElementById("loginErrorID").innerHTML = "Error: " + data["return"];
-          }
-          if (data["error"] == "no") {
-          window.location = 'createjoin.php';
-          }
-
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.statusText);
-        }
-      });
-  }
+function loginClick() {
   
+  var User_Name = document.getElementById('usernameForm2').value;
+  var User_Password = document.getElementById('passwordForm2').value;
+  
+  var userLogin = {"User_Name":User_Name,"User_Password":User_Password};
+    
+  JSON.stringify(userLogin);
+    
+  console.log(userLogin);
+        
+    // This Ajax call sends user login info to the server to either login
+    // the user and redirect them to a new page or return an error message.
+
+      $.ajax({
+      url: "signin.php",
+      dataType: "json",
+      type: "POST",
+      data: userLogin,
+      success: function(data) {
+        
+        console.log("successss");
+        
+        console.log("Data returned from server: ", data);
+        
+        if (data["error"] == "yes") {
+        document.getElementById("loginErrorID").innerHTML = "Error: " + data["return"];
+        }
+        if (data["error"] == "no") {
+        window.location = 'createjoin.php';
+        }
+
+
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR.statusText);
+      }
+    });
+}
+
 </script>
+
+
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

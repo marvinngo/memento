@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2018 at 09:19 PM
+-- Generation Time: May 18, 2018 at 02:57 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -75,29 +75,38 @@ CREATE TABLE `tbl_group` (
   `ID` int(11) NOT NULL,
   `Group_Name` varchar(100) NOT NULL,
   `Group_Description` varchar(50) NOT NULL,
-  `Group_Password` varchar(50) NOT NULL,
+  `Group_Password` varchar(255) NOT NULL,
   `Group_Size` int(11) NOT NULL,
   `Event_Name` varchar(100) DEFAULT NULL,
-  `DateTime_Created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `DateTime_Created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Group_ImgLoc` varchar(100) DEFAULT 'img/mygroups/suit.jpeg'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_group`
 --
 
-INSERT INTO `tbl_group` (`ID`, `Group_Name`, `Group_Description`, `Group_Password`, `Group_Size`, `Event_Name`, `DateTime_Created`) VALUES
-(1, 'grouptest', 'this is a description', 'password', 6, NULL, '2018-05-06 22:19:42'),
-(2, 'grouptest2', 'this is a description', 'password', 6, NULL, '2018-05-06 22:19:42'),
-(3, 'Moms Birthday', 'Moms Birthday', '123123123', 4, NULL, '2018-05-06 22:19:42'),
-(4, 'newsitenewtestgrp', 'this is a new test group', 'password8', 1, NULL, '2018-05-06 22:31:15'),
-(5, 'Hash Test', 'this is a hash test', '$1$LbxvqK4I$YI5hW.GWJrYfXbM.xGtNt/', 12, NULL, '2018-05-07 02:29:04'),
-(7, 'newtest', 'password1', '$1$nQiNAAwa$yfdpozFACwRRCjQlEc9PE.', 3, NULL, '2018-05-09 02:06:03'),
-(8, 'newtest2', 'password1 test', '$1$UX9Qs57j$Idd6PpBzxJ.v0wje7Ed.U/', 3, NULL, '2018-05-09 02:07:04'),
-(9, 'SamsGroup', 'Sams Group is the best', '$1$TAon48Nv$PXbKHL6Fol6ztN.jR2it41', 8, NULL, '2018-05-09 03:29:00'),
-(12, 'Newtest2Group', 'Grp description password1', '$1$KxSibW.y$WSGZy/CgSxyduEYqDTTfl1', 2, NULL, '2018-05-10 00:03:52'),
-(11, 'Balloon', 'this group is all about balloons', '$1$J/Y.Sg3C$u8lturd9xYYpqrrBKmUD9.', 24, NULL, '2018-05-09 21:14:07'),
-(13, 'Justin50th', 'Justin is getting old', '$1$TgOWT3Bi$SckxV8MP6nwa246hWb31t0', 1, NULL, '2018-05-10 01:03:27'),
-(14, 'ArronLANParty', 'Arron is throwing a LAN party', '$1$GXoatIxi$fLZDgFfbyAd76WVnA.WDQ0', 3, NULL, '2018-05-10 01:05:06');
+INSERT INTO `tbl_group` (`ID`, `Group_Name`, `Group_Description`, `Group_Password`, `Group_Size`, `Event_Name`, `DateTime_Created`, `Group_ImgLoc`) VALUES
+(1, 'grouptest', 'this is a description', 'password', 6, NULL, '2018-05-06 22:19:42', 'img/mygroups/suit.jpeg'),
+(2, 'grouptest2', 'this is a description', 'password', 6, NULL, '2018-05-06 22:19:42', 'img/mygroups/suit.jpeg'),
+(3, 'Moms Birthday', 'Moms Birthday', '123123123', 4, NULL, '2018-05-06 22:19:42', 'img/mygroups/suit.jpeg'),
+(4, 'newsitenewtestgrp', 'this is a new test group', 'password8', 1, NULL, '2018-05-06 22:31:15', 'img/mygroups/suit.jpeg'),
+(5, 'Hash Test', 'this is a hash test', '$1$LbxvqK4I$YI5hW.GWJrYfXbM.xGtNt/', 12, NULL, '2018-05-07 02:29:04', 'img/mygroups/suit.jpeg'),
+(7, 'newtest', 'password1', '$1$nQiNAAwa$yfdpozFACwRRCjQlEc9PE.', 3, '3', '2018-05-09 02:06:03', 'img/mygroups/suit.jpeg'),
+(8, 'newtest2', 'password1 test', '$1$UX9Qs57j$Idd6PpBzxJ.v0wje7Ed.U/', 3, '2', '2018-05-09 02:07:04', 'img/mygroups/suit.jpeg'),
+(9, 'SamsGroup', 'Sams Group is the best', '$1$TAon48Nv$PXbKHL6Fol6ztN.jR2it41', 8, NULL, '2018-05-09 03:29:00', 'img/mygroups/suit.jpeg'),
+(12, 'Newtest2Group', 'Grp description password1', '$1$KxSibW.y$WSGZy/CgSxyduEYqDTTfl1', 2, NULL, '2018-05-10 00:03:52', 'img/mygroups/suit.jpeg'),
+(11, 'Balloon', 'this group is all about balloons', '$1$J/Y.Sg3C$u8lturd9xYYpqrrBKmUD9.', 24, NULL, '2018-05-09 21:14:07', 'img/mygroups/suit.jpeg'),
+(13, 'Justin50th', 'Justin is getting old', '$1$TgOWT3Bi$SckxV8MP6nwa246hWb31t0', 1, NULL, '2018-05-10 01:03:27', 'img/mygroups/suit.jpeg'),
+(14, 'ArronLANParty', 'Arron is throwing a LAN party', '$1$GXoatIxi$fLZDgFfbyAd76WVnA.WDQ0', 3, NULL, '2018-05-10 01:05:06', 'img/mygroups/suit.jpeg'),
+(15, 'newgroup1', 'password1', '$1$BoL557Vy$jujjJLtaoER2aQiJv1Ssa/', 1, '9', '2018-05-15 18:36:11', 'img/mygroups/suit.jpeg'),
+(16, 'password1', 'password1', '$1$3v2JJybg$YfNt9WFhE23huKqkTW5wO.', 3, NULL, '2018-05-17 02:58:20', 'img/mygroups/suit.jpeg'),
+(17, 'abcpassword1', 'whatever', '$2y$10$qbTyq8QC03kWQzKU04l.Ue2JA6YH2R9o4b0r7tnzC9m', 3, NULL, '2018-05-17 03:22:06', 'img/mygroups/suit.jpeg'),
+(18, 'Newertest', 'testmay15', '$2y$10$c87PqOkdBILATMLmETCCuOjga1bjvnfPgM0l4HtUi43', 1, NULL, '2018-05-17 21:44:33', 'img/mygroups/suit.jpeg'),
+(19, 'newtestabcd', 'new group 310 may15', '$2y$10$w4/yVIsjdEEx6yf0vwIPE.TxuY3uiOgtY7cacr/yFvy', 2, NULL, '2018-05-17 22:10:29', 'img/mygroups/suit.jpeg'),
+(20, 'newgroupabc', '312 may 15', '$2y$10$qAytbPfy9G7EsJVfQnzhuuuNASiV7hzdnDSuthF1MY2', 2, NULL, '2018-05-17 22:12:20', 'img/mygroups/suit.jpeg'),
+(21, 'password11', 'password11', '$2y$10$OEDbztx.Vb/wvZDcYB4ZOexVcR1zUcLpwUSdoj2mSQ8', 2, NULL, '2018-05-17 22:20:04', 'img/mygroups/suit.jpeg'),
+(22, 'new12345', 'password1', '$2y$10$4/gX7I4aQ7J/H66hRCsYluCjNit9J36L26b0l.cd5o3P/bF9nOA3i', 4, NULL, '2018-05-17 23:34:28', 'img/mygroups/suit.jpeg');
 
 -- --------------------------------------------------------
 
@@ -118,18 +127,28 @@ CREATE TABLE `tbl_registration` (
 --
 
 INSERT INTO `tbl_registration` (`ID`, `User_Name`, `Group_Name`, `Registration_Budget`, `DateTime_Created`) VALUES
-(1, 'newtest', 'newtest', NULL, '2018-05-09 02:06:03'),
-(2, 'newtest', 'newtest2', NULL, '2018-05-09 02:07:04'),
+(1, 'newtest', 'newtest', 57, '2018-05-09 02:06:03'),
+(2, 'newtest', 'newtest2', 25, '2018-05-09 02:07:04'),
 (3, 'newtest', 'SamsGroup', NULL, '2018-05-09 03:29:00'),
 (6, 'newtest2', 'Newtest2Group', NULL, '2018-05-10 00:03:52'),
-(5, 'newtest', 'Balloon', NULL, '2018-05-09 21:14:07'),
-(7, 'newtest', 'Newtest2Group', NULL, '2018-05-10 00:06:30'),
+(5, 'newtest', 'Balloon', 7, '2018-05-09 21:14:07'),
+(7, 'newtest', 'Newtest2Group', 22, '2018-05-10 00:06:30'),
 (8, 'newtest3', 'Justin50th', NULL, '2018-05-10 01:03:27'),
-(9, 'newtest3', 'ArronLANParty', NULL, '2018-05-10 01:05:06'),
-(15, 'newtest3', 'newtest', NULL, '2018-05-10 01:13:32'),
-(11, 'newtest3', 'newtest2', NULL, '2018-05-10 01:06:52'),
+(9, 'newtest3', 'ArronLANParty', 1.5, '2018-05-10 01:05:06'),
+(15, 'newtest3', 'newtest', 25.5, '2018-05-10 01:13:32'),
+(11, 'newtest3', 'newtest2', 25, '2018-05-10 01:06:52'),
 (12, 'newtest3', 'Newtest2Group', NULL, '2018-05-10 01:08:21'),
-(16, 'newtest2', 'newtest2', NULL, '2018-05-11 02:00:40');
+(16, 'newtest2', 'newtest2', 0, '2018-05-11 02:00:40'),
+(17, 'newtest', 'newgroup1', 5, '2018-05-15 18:36:11'),
+(18, 'newtest2', 'password1', 54.25, '2018-05-17 02:58:20'),
+(19, 'newtest', 'password1', NULL, '2018-05-17 03:05:58'),
+(20, 'newtest', 'abcpassword1', NULL, '2018-05-17 03:22:06'),
+(22, 'newtest', 'Newertest', 25, '2018-05-17 21:44:33'),
+(21, 'newtest2', 'newtest', 54.5, '2018-05-17 17:07:06'),
+(23, 'newtest', 'newtestabcd', NULL, '2018-05-17 22:10:29'),
+(24, 'newtest2', 'newgroupabc', NULL, '2018-05-17 22:12:20'),
+(25, 'newtest', 'password11', NULL, '2018-05-17 22:20:04'),
+(26, 'newtest', 'new12345', NULL, '2018-05-17 23:34:28');
 
 -- --------------------------------------------------------
 
@@ -140,7 +159,7 @@ INSERT INTO `tbl_registration` (`ID`, `User_Name`, `Group_Name`, `Registration_B
 CREATE TABLE `tbl_user` (
   `ID` int(11) NOT NULL,
   `User_Name` varchar(20) NOT NULL,
-  `User_Password` varchar(100) NOT NULL,
+  `User_Password` varchar(255) NOT NULL,
   `User_Email` varchar(35) NOT NULL,
   `User_SignUpTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -151,13 +170,22 @@ CREATE TABLE `tbl_user` (
 
 INSERT INTO `tbl_user` (`ID`, `User_Name`, `User_Password`, `User_Email`, `User_SignUpTime`) VALUES
 (15, 'newtest', '$1$2yTLCJVs$J.Q6UcLDOZyfWWBgGWhG2.', 'email@email.com', '2018-05-07 15:09:59'),
+(35, 'testaccount', '$1$mOeEdA.f$zsdR9rGJrI1MECOQn1ARo0', 'email@email.com', '2018-05-16 18:26:05'),
+(34, 'asdfasdf', '$1$uP0u4O66$g0D2f.Cn4lGiTCBoqy/um.', 'email@email.com', '2018-05-16 18:10:08'),
+(29, 'newaccount123', '$1$VNUD6HpQ$sAX.FKsJKi/2ue97a72av/', 'email@email.com', '2018-05-16 17:04:36'),
+(31, 'newaccount1234', '$1$LT9CsuNQ$n7kuHOqoW3WsCjSTGWDGe.', 'email@email.com', '2018-05-16 17:30:29'),
+(32, 'newtest12345', '$1$IcnOfJ3k$VR1QfANouCS.9I5eebRsP0', 'email@email.com', '2018-05-16 17:32:00'),
+(33, 'newtest123456', '$1$6vy5q2G1$DM73M6JqFd.lbjs0S39yF/', 'email@email.com', '2018-05-16 17:42:09'),
 (12, 'asdfasdf1234', '$1$lo6SHtNb$jBIMkIqBml5P1vFgTZUTi.', 'asdfasdf@a.ca', '2018-05-06 19:16:02'),
 (13, 'hashtest', '$1$9jnEV5IW$j.5RlJdneTLc1AUP7zbG50', 'hashtest1@test.com', '2018-05-06 19:21:07'),
 (14, 'newhashaccount', '$1$lT8jY523$XtpYiqlSqSZFQurKKPlU8/', 'email@email.com', '2018-05-07 12:01:44'),
 (16, 'newtest2', '$1$4Mo5YwHD$dQgsNhzkhVep8NgFNtwFb/', 'email@email.com', '2018-05-08 10:11:14'),
 (17, 'newtest123', '$1$mSjEghcd$b9E1kIkVtOLhZ.5xEmJ111', 'email@email.com', '2018-05-09 14:59:07'),
 (18, 'newtest1234', '$1$GK/1GzhN$EGmagjFhRJYyFZEZGMRwL1', 'email@email.com', '2018-05-09 14:59:43'),
-(28, 'newtest3', '$1$nprdWsLj$xefBD/fTWfqzJ4jNS3io7.', 'email@email.com', '2018-05-09 17:56:32');
+(28, 'newtest3', '$1$nprdWsLj$xefBD/fTWfqzJ4jNS3io7.', 'email@email.com', '2018-05-09 17:56:32'),
+(36, 'newtestwtf', '$2y$10$T9yEjFzAZIB88nerCKoAZO/V3an/A7r298Cz9p0WZ8yQhaC3jxWf2', 'email@email.com', '2018-05-16 19:22:47'),
+(37, 'abcd1234', '$2y$10$fV8gHlnQdgkqpHM4s1fp6OFNeHk0yS32seSittO1dn30LseW1ZDR2', 'email@email.com', '2018-05-16 19:27:03'),
+(38, 'newtestabc', '$2y$10$CKAub7CEB4jO9hbuUqqLlOAaf3gJ/Yg0SACRGBe9rq9jcjtwDJsb.', 'email@email.com', '2018-05-17 15:14:15');
 
 --
 -- Indexes for dumped tables
@@ -201,19 +229,19 @@ ALTER TABLE `tbl_event`
 -- AUTO_INCREMENT for table `tbl_group`
 --
 ALTER TABLE `tbl_group`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_registration`
 --
 ALTER TABLE `tbl_registration`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
