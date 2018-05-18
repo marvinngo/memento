@@ -288,7 +288,7 @@ img.mr-2 {
   color: #1A75C1;
   font-size: 14pt;
 }
-#usernameError, #passwordError, #passwordMatch, #emailError, #registrationError, #loginErrorID2{
+#usernameError, #passwordError, #passwordMatch, #emailError, #registrationError, #loginErrorID2, #groupnameError, #groupPwError, #groupPwMatch {
   color: red;
   font-size: 18px;
 }
@@ -296,6 +296,11 @@ img.mr-2 {
 #registrationError {
   color: red;
   font-size: 18px;
+}
+
+#selectedEvent {
+  font-size: 20px;
+  font-weight: bold;
 }
 /*---Media Queries --*/
 @media (max-width: 992px) {

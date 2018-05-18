@@ -172,17 +172,20 @@ if($_SESSION['loggedin'] === false){
                 <!-- form -->
             <form method='POST' onsubmit="return validate()">
               <div class="form-row mx-auto my-4">
-                <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name" name="Group_Name" pattern="[a-zA-Z0-9]{4,20}" oninput="checkGroupName(this)"  required autofocus>
+                <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name" name="Group_Name" pattern="[a-zA-Z0-9]{4,20}" required autofocus>
+                <div id="groupnameError"></div>
               </div>
 
             <!-- password -->
               <div class="form-row mx-auto my-4">
-                <input type="password" name="Group_Password" class="form-control" id="groupPasswordForm" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"  oninput="checkPw(this)" required>
+                <input type="password" name="Group_Password" class="form-control" id="groupPasswordForm" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>
+                <div id="groupPwError"></div>
               </div>
 
             <!-- confirm password -->
               <div class="form-row mx-auto my-4">
-                <input type="password" class="form-control" id="confirmGroupPasswordForm" placeholder="Confirm password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" oninput="checkPw(this)" required>
+                <input type="password" class="form-control" id="confirmGroupPasswordForm" placeholder="Confirm password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>
+                <div id="groupPwMatch"></div>
               </div>
               
               <div class="form-row mx-auto my-4" style="height: 100px;">
@@ -624,7 +627,7 @@ crossorigin="anonymous"></script>
             console.log("if statement entered.");
             // If the Group already has an Event set, show that Event and hide others:
               
-            modalbodyevents.innerHTML = "Your group has selected the following event:<br><div id='eventDiv1' class='w-100 mb-3'>"
+            modalbodyevents.innerHTML = "<div id='selectedEvent' class='text-center mb-3'>Your group has selected the following event:<br></div><div id='eventDiv1' class='w-100 mb-3'>"
                     + "<div class='card mx-auto'><img id='event1image' class='card-img-top'"
                     + "src='" + data[0]["Event_ImgLocation"]
                     + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
@@ -867,13 +870,45 @@ function joinClick() {
   // Create a group on click button:
 
 function createClick() {
-  
+
+  var groupnameRegex = /^[a-zA-Z0-9]+$/;
+  var groupPwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+  var groupnamePass;
+  var groupPwPass;
+  var confirmPass;
+
   // Get user entries from the form:
   
   var Group_Name = document.getElementById('groupNameForm').value;
+  var Group_Password_Ini = document.getElementById('groupPasswordForm').value;
   var Group_Password = document.getElementById('confirmGroupPasswordForm').value;
   var Group_Description = document.getElementById('descriptionForm').value;
   var Group_Size = document.getElementById('totalPeople').value;
+
+  if (!groupnameRegex.test(Group_Name) || Group_Name.length < 4 || Group_Name.length > 20) {
+        document.getElementById('groupnameError').innerHTML = "Group can only contain uppercase letters, lowercase letters, numbers, no spaces, and must be between 4 and 20 characters.";
+        groupnamePass=false;
+    } else {
+      document.getElementById('groupnameError').innerHTML = "";
+      groupnamePass=true;
+    }
+
+    if (!groupPwRegex.test(Group_Password_Ini) || Group_Password_Ini < 8) {
+        document.getElementById('groupPwError').innerHTML = "Password must have at least one uppercase, one lowercase, one number, and must be at least 8 characters.";
+        groupPwPass=false;
+    } else {
+      document.getElementById('groupPwError').innerHTML = "";
+      groupPwPass=true;
+    }
+
+    if (Group_Password_Ini !== Group_Password) {
+      document.getElementById('groupPwMatch').innerHTML = "Passwords must match";
+      confirmPass=false;
+    } else {
+      document.getElementById('groupPwMatch').innerHTML = "";
+      confirmPass=true;
+    }
     
   // Convert to JSON to send in Ajax:
   
