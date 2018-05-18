@@ -40,6 +40,10 @@ if($_SESSION['loggedin'] === false){
           </li>
           <div class="dropdown-divider"></div>
           <li class="nav-item my-0">
+            <a class="nav-link" href="allevents.php">Events</a>
+          </li>
+          <div class="dropdown-divider"></div>
+          <li class="nav-item my-0">
             <a class="nav-link" href="createjoin.php">Groups</a>
           </li>
           <div class="dropdown-divider"></div>

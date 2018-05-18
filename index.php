@@ -48,6 +48,10 @@
         <li class="nav-item my-0">
           <a class="nav-link" href="index.php">Home</a>
         </li>
+        <div class="dropdown-divider"></div>
+          <li class="nav-item my-0">
+            <a class="nav-link" href="allevents.php">Events</a>
+          </li>
         <div id="groupDivider" class="dropdown-divider"></div>
         <li id="Groups" class="nav-item my-0">
           <a class="nav-link" href="createjoin.php">Groups</a>
