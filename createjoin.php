@@ -170,7 +170,7 @@ if($_SESSION['loggedin'] === false){
               <h5 id="createGroupError"></h5>
             
                 <!-- form -->
-            <form onsubmit="return validate()">
+            <form method='POST' onsubmit="return validate()">
               <div class="form-row mx-auto my-4">
                 <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name" name="Group_Name" pattern="[a-zA-Z0-9]{4,20}" oninput="checkGroupName(this)"  required autofocus>
               </div>
@@ -251,7 +251,7 @@ if($_SESSION['loggedin'] === false){
         <!-- Modal body -->
         <div class="modal-body col-6 mx-auto">
           <!-- form -->
-          <form>
+          <form method='POST'>
               <h5 id="joinGroupError"></h5>
               <div class="form-row mx-auto my-4">
                 <input type="text" class="form-control" id="usernameForm" name="Group_Name" placeholder="Group Name" autofocus required>
@@ -308,7 +308,7 @@ if($_SESSION['loggedin'] === false){
                 <div id="groupBudgeth5"></div>
                 <h5 color="red" id="BudgetErrorID"></h5>
                 <br>
-                <form>
+                <form method='POST'>
                   <input type="number" class="form-control" id="personalBudget" placeholder="Personal Budget" min="0" value="0">
                   <button id="budgetSubmit" type="submit" onclick="return updateBudgetTable();" class="btn btn-primary mt-4 w-100">Submit</button>
                 </form>
