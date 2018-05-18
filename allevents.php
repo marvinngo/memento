@@ -154,11 +154,6 @@ document.getElementById("footerSignup").innerHTML = "Home";
 document.getElementById("footerSignup").setAttribute("href", "index.php");
 document.getElementById("footerLogin").innerHTML = "";
   
-// The following just used to hold Event IDs for use in selecting Events for Groups.
-  
-//document.getElementById("event1ID").style.display="none";
-//document.getElementById("event2ID").style.display="none";
-//document.getElementById("event3ID").style.display="none";
 
 </script>
 
@@ -173,6 +168,38 @@ crossorigin="anonymous"></script>
   
   <script>
 /*<![CDATA[*/
+    
+    // Adding all events:  
+  
+// Ajax call to get all events:
+  
+  
+  $.ajax({
+        url: "ajax-get-all-events.php",
+        dataType: "json",
+        type: "POST",
+        success: function(data) {
+          
+          //console.log("received: ", data);
+          
+          var length = Object.keys(data).length;
+
+          for (i = 0; i < length; i++) {
+
+          tables.innerHTML += "<div id='eventDiv1' class='w-100 mb-3'>"
+                  + "<div class='card mx-auto'><img id='event1image' class='card-img-top'"
+                  + "src='" + data[i]["Event_ImgLocation"]
+                  + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
+                  + data[i]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
+                  + data[i]["Event_Description"] + "</p><a id='event1link' href='" + data[i]["Event_URL"]
+                  + "'>Visit their site for more information</a></div></div></div>"; 
+          }
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#tables").text(jqXHR.statusText);
+        }
+      });
     
     var User_Name='<?php echo $_SESSION['User_Name'];?>';
     
