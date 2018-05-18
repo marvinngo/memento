@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2018 at 01:45 AM
+-- Generation Time: May 18, 2018 at 02:57 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -79,7 +79,7 @@ CREATE TABLE `tbl_group` (
   `Group_Size` int(11) NOT NULL,
   `Event_Name` varchar(100) DEFAULT NULL,
   `DateTime_Created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Group_ImgLoc` varchar(100) DEFAULT 'img/my groups/suit.jpeg'
+  `Group_ImgLoc` varchar(100) DEFAULT 'img/mygroups/suit.jpeg'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --

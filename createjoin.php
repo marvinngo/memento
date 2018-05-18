@@ -304,7 +304,7 @@ if($_SESSION['loggedin'] === false){
                 <h2 id="modalgroupdescription">Description</h2>
                 <h3 id="numbermembers">Max Members</h3>
                 <h5 id="currentmembers"></h5>
-                <h5>Current Budget: <span id="currentBudgetID">not set.</span></h5>
+                <h5>Personal Budget: <span id="currentBudgetID">not set.</span></h5>
                 <div id="groupBudgeth5"></div>
                 <h5 color="red" id="BudgetErrorID"></h5>
                 <br>
@@ -619,6 +619,7 @@ crossorigin="anonymous"></script>
             //Only show first div and set it to Group's Event if an Event is set for the group:
             console.log("received: ", data);
             console.log("Group_Event_ID: " + Group_Event_ID);
+          
             if (Group_Event_ID) {
             console.log("if statement entered.");
             // If the Group already has an Event set, show that Event and hide others:
@@ -634,7 +635,7 @@ crossorigin="anonymous"></script>
               
             // Else populate with relevant Events:
               
-            } else {
+            } else if (allbudgetsentered) {
               
             var length = Object.keys(data).length;
             
@@ -657,67 +658,11 @@ crossorigin="anonymous"></script>
               
             }
               
-            // Display 2nd and 3rd divs:
-              
-            //document.getElementById("eventDiv2").style.display="block";
-            //document.getElementById("eventDiv3").style.display="block";
-            //document.getElementById("refreshEvents").style.display="block";
-          
-            //var Group_PricePP = 36.00;
-          
-            //var eventslength = Object.keys(data).length;
-          
-            //var rand1 = Math.floor(Math.random()*eventslength);
-          
-            //while (data[rand1]["Event_PricePP"] > Group_PricePP) {
-              //rand1 = Math.floor(Math.random()*eventslength);
-            //}
-          
-            //var rand2 = rand1;
-          
-            //while (rand2 == rand1 || data[rand2]["Event_PricePP"] > Group_PricePP) {
-              //rand2 = Math.floor(Math.random()*eventslength);
-            //}
-          
-            //var rand3 = rand1;
-          
-            //while (rand3 == rand1 || rand3 == rand2 || data[rand3]["Event_PricePP"] > Group_PricePP) {
-              //rand3 = Math.floor(Math.random()*eventslength);
-            //}
 
-            //document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
-            //document.getElementById("event1ID").innerHTML = data[rand1]["ID"];
-            //document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
-            //document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
-            //if (data[rand1]["Event_URL"]){
-              //document.getElementById("event1link").style.display="block";
-              //document.getElementById("event1link").setAttribute("href", data[rand1]["Event_URL"]);  
-            //} else {
-              //document.getElementById("event1link").style.display="none";
-            //}
           
-            //document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
-            //document.getElementById("event2ID").innerHTML = data[rand2]["ID"];
-            //document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
-            //document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]);
-            //if (data[rand2]["Event_URL"]){
-              //document.getElementById("event2link").style.display="block";
-              //document.getElementById("event2link").setAttribute("href", data[rand2]["Event_URL"]);  
-            //} else {
-              //document.getElementById("event2link").style.display="none";
-            //}
-          
-            //document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
-          //document.getElementById("event3ID").innerHTML = data[rand3]["ID"];
-            //document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
-            //document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]);
-            //if (data[rand3]["Event_URL"]){
-              //document.getElementById("event3link").style.display="block";
-              //document.getElementById("event3link").setAttribute("href", data[rand3]["Event_URL"]);  
-            //} else {
-              //document.getElementById("event3link").style.display="none";
-            //}
-          
+        } else {
+          // Clear the events if the group isn't ready to pick one yet:
+          modalbodyevents.innerHTML ="";
         }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -763,8 +708,6 @@ crossorigin="anonymous"></script>
       
     JSON.stringify(indivBudgJSON);
       
-    //console.log(indivBudgJSON);
-      
     // console.log(indivBudgJSON); // seems to work.
           
       // This Ajax call updates the database with the user's personal budget.
@@ -778,18 +721,6 @@ crossorigin="anonymous"></script>
         data: indivBudgJSON,
         success: function(data) {
           
-          //console.log("successss");
-          
-          //console.log("Data returned from server: ", data);
-          //var listData = "";
-          //for(var key in data) {
-              //listData += key + ":" + data[key] + " ";
-          //}
-          
-          //console.log("budget: " + data[0]["Registration_Budget"])
-          
-              
-          //var groupBudgetExists = false;
 
           var Group_Budget = 0;
           
@@ -824,7 +755,7 @@ crossorigin="anonymous"></script>
              if (groupMax == budgetCount) {
                var groupBudgetPP = Group_Budget / groupMax;
                    
-                document.getElementById("groupBudget").innerHTML = "<span id=groupBudget>$" + Number(groupBudgetPP).toFixed(2) + "</span>";
+                document.getElementById("groupBudgeth5").innerHTML = "Budget per Person: <span id=groupBudget>$" + Number(groupBudgetPP).toFixed(2) + "</span>";
                console.log("if:" + Group_Budget);
 
                var groupname = {"Group_Name":Group_Name};
@@ -884,84 +815,7 @@ crossorigin="anonymous"></script>
       
     }
     
-    function refreshEvents() {
-      
-            // This Ajax call queries the database for all Events.
-      
-        $.ajax({
-        url: "ajax-get-events.php",
-        dataType: "json",
-        type: "POST",
-        success: function(data) {
-              
-            // Display 2nd and 3rd divs:
-              
-            document.getElementById("eventDiv2").style.display="block";
-            document.getElementById("eventDiv3").style.display="block";
-            document.getElementById("refreshEvents").style.display="block";
-          
-            var Group_PricePP = 36.00;
-          
-            var eventslength = Object.keys(data).length;
-          
-            var rand1 = Math.floor(Math.random()*eventslength);
-          
-            while (data[rand1]["Event_PricePP"] > Group_PricePP) {
-              rand1 = Math.floor(Math.random()*eventslength);
-            }
-          
-            var rand2 = rand1;
-          
-            while (rand2 == rand1 || data[rand2]["Event_PricePP"] > Group_PricePP) {
-              rand2 = Math.floor(Math.random()*eventslength);
-            }
-          
-            var rand3 = rand1;
-          
-            while (rand3 == rand1 || rand3 == rand2 || data[rand3]["Event_PricePP"] > Group_PricePP) {
-              rand3 = Math.floor(Math.random()*eventslength);
-            }
 
-            document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
-            document.getElementById("event1ID").innerHTML = data[rand1]["ID"];
-            document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
-            document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
-            if (data[rand1]["Event_URL"]){
-              document.getElementById("event1link").style.display="block";
-              document.getElementById("event1link").setAttribute("href", data[rand1]["Event_URL"]);  
-            } else {
-              document.getElementById("event1link").style.display="none";
-            }
-          
-            document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
-            document.getElementById("event2ID").innerHTML = data[rand2]["ID"];
-            document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
-            document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]);
-            if (data[rand2]["Event_URL"]){
-              document.getElementById("event2link").style.display="block";
-              document.getElementById("event2link").setAttribute("href", data[rand2]["Event_URL"]);  
-            } else {
-              document.getElementById("event2link").style.display="none";
-            }
-          
-            document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
-          document.getElementById("event3ID").innerHTML = data[rand3]["ID"];
-            document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
-            document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]);
-            if (data[rand3]["Event_URL"]){
-              document.getElementById("event3link").style.display="block";
-              document.getElementById("event3link").setAttribute("href", data[rand3]["Event_URL"]);  
-            } else {
-              document.getElementById("event3link").style.display="none";
-            }
-          
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            $("#modalgroupdescription").text(jqXHR.statusText);
-        }
-      });
-      
-    }
     
     // Join a group on click button:
 
