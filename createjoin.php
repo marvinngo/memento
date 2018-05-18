@@ -433,13 +433,11 @@ document.getElementById("footerLogin").innerHTML = "";
     
   ?>
   
-
-  
   <script>
     var Group_Name = '<?php echo $row['Group_Name'];?>';
     var Group_Image = '<?php echo $groupArray[0]['Group_ImgLoc'];?>';
     var Group_Description = '<?php echo $groupArray[0]['Group_Description'];?>';
-    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + Group_Image + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_Name + "><input type='file' name='grouppic' id='pic'><input type='submit' value='Upload' name='submit'></form></p></div>";
+    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + Group_Image + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_Name + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
     </script>
   
   
