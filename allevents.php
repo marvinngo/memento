@@ -3,6 +3,9 @@
         session_start();
     }
 
+      if (!isset($_SESSION['loggedin'])) {
+      $_SESSION['loggedin'] = false;
+  }
 
 ?>
 
@@ -16,7 +19,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   <link href="style.css" rel="stylesheet">
-  <title>Groups</title>
+  <title>Events</title>
 
 </head>
   
@@ -39,14 +42,14 @@
           <li class="nav-item my-0">
             <a class="nav-link" href="allevents.php">Events</a>
           </li>
-          <div class="dropdown-divider"></div>
-          <li class="nav-item my-0">
-            <a class="nav-link" href="createjoin.php">Groups</a>
-          </li>
-          <div class="dropdown-divider"></div>
-          <li class="nav-item my-0">
-            <a id="signup" class="nav-link" href="logout.php">Logout</a>
-          </li>
+          <div id="groupDivider" class="dropdown-divider"></div>
+        <li id="Groups" class="nav-item my-0">
+          <a class="nav-link" href="createjoin.php">Groups</a>
+        </li>
+        <div class="dropdown-divider"></div>
+        <li class="nav-item my-0">
+          <a id="signup" class="nav-link" href="registration.php">Sign Up</a>
+        </li>
           <div class="dropdown-divider"></div>
           <li id="ms" class="nav-item my-0">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#login">Login</a>
@@ -78,12 +81,21 @@
       </div>
       <!-- Modal body -->
       <div class="modal-body col-6 mx-auto">
+      <h5 id="loginErrorID"></h5>
+        <!-- username -->
         <form method="post" action="signin.php">
-		  <input type="text" name="User_Name" class="modaluserpw" placeholder="Username" autofocus>
-		  <input type="password" name="User_Password" 
-          class="modaluserpw" placeholder="Password">
-		  <input type="submit" name="login" class="login loginmodal-submit modaluserpw" value="Login">
-		</form>
+              <div class="form-row mx-auto my-4">
+                <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" required>
+              </div>
+
+              <!-- password -->
+              <div class="form-row mx-auto my-4">
+                <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
+                <div class="col px-0">
+                  <button id="submitButton" onclick="return loginClick(this.id)" type="button" class="btn btn-primary w-100 mt-4 submitButton">Sign in</button>
+                </div>
+              </div>
+            </form>
     </div>
     </div>
   </div>
@@ -143,14 +155,80 @@
   
 <script>
   
-var User_Name='<?php echo $_SESSION['User_Name'];?>';
+      function loginClick(clicked_id) {
+      
+    if (clicked_id == "submitButton") {
+        var User_Name = document.getElementById('usernameForm2').value;
+        var User_Password = document.getElementById('passwordForm2').value;
+        }
     
-document.getElementById("ms").innerHTML += User_Name + "!";  
+    if (clicked_id == "submitButton2") {
+        var User_Name = document.getElementById('usernameForm').value;
+        var User_Password = document.getElementById('passwordForm3').value;
+        }
+    
+    var userLogin = {"User_Name":User_Name,"User_Password":User_Password};
+      
+    JSON.stringify(userLogin);
+          
+      // This Ajax call sends user login info to the server to either login
+      // the user and redirect them to a new page or return an error message.
+
+        $.ajax({
+        url: "signin.php",
+        dataType: "json",
+        type: "POST",
+        data: userLogin,
+        success: function(data) {
+          
+          if (data["error"] == "yes") {
+            
+          if (clicked_id == "submitButton") {
+            document.getElementById("loginErrorID").innerHTML = "Error: " + data["return"];
+            }
+    
+          if (clicked_id == "submitButton2") {
+            document.getElementById("loginErrorID2").innerHTML = "Error: " + data["return"];
+            }
+            
+          }
+          if (data["error"] == "no") {
+          window.location = 'createjoin.php';
+          }
+
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.statusText);
+        }
+      });
+  }
+  
+<?php if($_SESSION['loggedin'] === false): ?>
+  
+
+    
+  document.getElementById("Groups").innerHTML = ""; 
+  document.getElementById("groupDivider").setAttribute("class", "");
+  
+
+  
+<?php endif; ?>
+  
+<?php if($_SESSION['loggedin'] === true): ?>
+
+var User_Name='<?php echo $_SESSION['User_Name'];?>';
+  
+document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!";  
+document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
+document.getElementById("signup").innerHTML = "Logout";
+document.getElementById("signup").setAttribute("href", "logout.php");
 document.getElementById("footerHome").innerHTML = "";
 document.getElementById("footerSignup").innerHTML = "Home";
 document.getElementById("footerSignup").setAttribute("href", "index.php");
 document.getElementById("footerLogin").innerHTML = "";
-  
+
+<?php endif; ?>
 
 </script>
 
@@ -198,11 +276,7 @@ crossorigin="anonymous"></script>
         }
       });
     
-    var User_Name='<?php echo $_SESSION['User_Name'];?>';
-    
-    document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!"; 
-    
-    document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
+
 
 /*]]>*/
 </script>
