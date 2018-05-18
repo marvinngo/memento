@@ -234,10 +234,7 @@ img.mr-2 {
   font-size: 18px;
 }
 
-#registrationError {
-  color: red;
-  font-size: 18px;
-}
+
 /*---Media Queries --*/
 @media (max-width: 992px) {
 
