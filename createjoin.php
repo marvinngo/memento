@@ -809,6 +809,20 @@ crossorigin="anonymous"></script>
         data: eventInfo,
         success: function(data) {
           
+        console.log("Data received: ", data);
+          
+        if (data["error"] = "no") {
+          
+        modalbodyevents.innerHTML = "<div id='selectedEvent' class='text-center mb-3'>Your group has selected the following event:<br></div><div id='eventDiv1' class='w-100 mb-3'>"
+                    + "<div class='card mx-auto'><img id='event1image' class='card-img-top'"
+                    + "src='" + data[0]["Event_ImgLocation"]
+                    + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
+                    + data[0]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
+                    + data[0]["Event_Description"] + "</p><a id='event1link' href='" + data[0]["Event_URL"]
+                    + "'>Visit their site for more information</a></div></div></div>"; 
+          
+          }
+          
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.statusText);
