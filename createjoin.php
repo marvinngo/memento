@@ -711,7 +711,7 @@ crossorigin="anonymous"></script>
     // console.log(indivBudgJSON); // seems to work.
           
       // This Ajax call updates the database with the user's personal budget.
-      //event.preventDefault(); // does nothing?
+      event.preventDefault();
       //prevents modal from closing on submission
 
         $.ajax({
@@ -721,7 +721,6 @@ crossorigin="anonymous"></script>
         data: indivBudgJSON,
         success: function(data) {
           
-          console.log("Received: ", data);
 
           var Group_Budget = 0;
           
@@ -806,23 +805,7 @@ crossorigin="anonymous"></script>
         type: "POST",
         data: eventInfo,
         success: function(data) {
-        console.log("Received: ", data);
-        
-        // Update the modal if DB update was successful with just that Event:
           
-        if (data["error"] == "no") {
-          
-          modalbodyevents.innerHTML = "<div id='eventDiv1' class='w-100 mb-3'>"
-          + "<div class='card mx-auto'><img id='event1image' class='card-img-top'"
-          + "src='" + data[0]["Event_ImgLocation"]
-          + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
-          + data[0]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
-          + data[0]["Event_Description"] + "</p><a id='event1link' href='" + data[0]["Event_URL"]
-          + "'>Visit their site for more information</a></div></div></div>";
-      
-          
-        }
-        
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.statusText);
