@@ -305,7 +305,7 @@ if($_SESSION['loggedin'] === false){
                 <h3 id="numbermembers">Max Members</h3>
                 <h5 id="currentmembers"></h5>
                 <h5>Current Budget: <span id="currentBudgetID">not set.</span></h5>
-                <h5 id="groupBudgeth5"></h5>
+                <div id="groupBudgeth5"></div>
                 <h5 color="red" id="BudgetErrorID"></h5>
                 <br>
                 <form>
@@ -531,7 +531,7 @@ crossorigin="anonymous"></script>
             // Create var outside loop so it's accessible outside loop:
             var groupBudget = 0;
           
-            document.getElementById("currentmembers").innerHTML = "<h5>Current members: " + "</br></h5>";
+            document.getElementById("currentmembers").innerHTML = "<h5>Members: " + "</br></h5>";
                 
             for (i = 0; i < length; i++) {
 
@@ -592,11 +592,11 @@ crossorigin="anonymous"></script>
                      
  
               if (!allbudgetsentered || userCount < Group_Size) {
-                document.getElementById("groupBudgeth5").innerHTML = "<h6>Please note that the group must be full and all users must have entered a personal budget for the group's budget to display.</h6>";
+                document.getElementById("groupBudgeth5").innerHTML = "<h6>The Group must be full and all members must have submitted budgets for Event options to be displayed. However, you can browse the full list of Event <a href='allevents.php'>here.</a></h6>";
               }
           
               if (userCount == Group_Size && allbudgetsentered) {
-                    document.getElementById("groupBudgeth5").innerHTML = "Group Budget: " + "<span id=groupBudget>$" + groupBudget + "</span>";
+                    document.getElementById("groupBudgeth5").innerHTML = "Budget per Person: " + "<span id=groupBudget>$" + groupBudget + "</span>";
               }
                 
       // This Ajax call queries the database for all Events.
@@ -655,8 +655,6 @@ crossorigin="anonymous"></script>
                     + "class='btn btn-primary float-right'>Select This Event For Your Group</button></div></div></div>";
             }
               
-            } else {
-              modalbodyevents.innerHTML = "The Group must be full and all members must have submitted budgets for Event options to be displayed. However, you can browse the full list of Events here.";
             }
               
             // Display 2nd and 3rd divs:
@@ -826,7 +824,7 @@ crossorigin="anonymous"></script>
              if (groupMax == budgetCount) {
                var groupBudgetPP = Group_Budget / groupMax;
                    
-                document.getElementById("groupBudget").innerHTML = "Group Budget: " + "<span id=groupBudget>$" + Number(groupBudgetPP).toFixed(2) + "</span>";
+                document.getElementById("groupBudget").innerHTML = "<span id=groupBudget>$" + Number(groupBudgetPP).toFixed(2) + "</span>";
                console.log("if:" + Group_Budget);
 
                var groupname = {"Group_Name":Group_Name};
