@@ -94,7 +94,7 @@
       <div class="modal-body col-6 mx-auto">
       <h5 id="loginErrorID"></h5>
         <!-- username -->
-        <form>
+        <form method='POST'>
               <div class="form-row mx-auto my-4">
                 <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" autofocus required>
               </div>

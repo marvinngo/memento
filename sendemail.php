@@ -76,9 +76,9 @@ foreach ($rows as $row) {
     $statement3 = $conn->prepare($sql3);
     $statement3->execute(array(":Date" => $date, ":UserName" =>$row['User_Name']));
     }
-  $response->success();
+  
 }
-
+$response->success();
 
 
 ?>
