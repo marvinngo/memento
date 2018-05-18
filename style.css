@@ -194,13 +194,19 @@ border: none;
   color: #F6F6F6;
 }
 
-#event1name, #event1description {
-  color: black; 
+#belowCarousel {
+  background-color: rgb(155, 203, 245);
+}
+#event1link {
+  color: navy;
 }
 #firstDiv {
   background-color: #fff;
 }
-
+#grpimg {
+  width: 250px;
+  height: 250px;
+}
 #icontext {
   font-size: 16pt;
 }
@@ -213,7 +219,9 @@ padding-top: 2%;
 #slideshow {
   padding: 0 !important;
 }
-
+#eventcard {
+  background: rgba(255, 255, 255, 0);
+}
 #howitworks {
   font-size: 16pt;
   margin-bottom: 8px;
@@ -223,16 +231,9 @@ padding-top: 2%;
   font-size: 10pt;
   
 }
- 
 
-
-#mockupcontainer {
-  margin-top: -200px;
-  overflow: hidden;
-}
 #mockup {
   position: relative;
-  top: 50%;
   width: 100%;
 }
 
@@ -241,7 +242,7 @@ padding-top: 2%;
 }
 
 
-#ms {
+#missionStatement {
   color: white;
   background-color:#3193E3;
 }
@@ -310,6 +311,10 @@ img.mr-2 {
 
   #A{
     left: -150%; /* Set initial position for each image off-screen left -- adjust according to image width */
+  }
+  #grpimg {
+    width: 150px;
+    height: 150px;
   }
 
 }
