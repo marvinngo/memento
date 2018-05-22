@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Tests for the Registration page.
+ */
 class registrationCest
 {
     public function _before(AcceptanceTester $I)
@@ -32,9 +35,12 @@ class registrationCest
 
     }
 
+    /**
+     * Attempts to register a new user with a randomly generated name.
+     */
     public function registerUser(AcceptanceTester $I)
     {
-        $username = substr(md5(rand()), 0, 7);
+        $username = substr(md5(rand()), 0, 7); //generate random name
         $password = "testing1";
         $email = substr(md5(rand()), 0, 7) . "@gmail.com";
         $I->fillField('#usernameRegistrationForm', $username);

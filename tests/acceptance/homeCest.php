@@ -1,14 +1,13 @@
 <?php
 
 /**
- * Sample DocBlock.
+ * Tests for the Home page.
  */
 class homeCest
 {    
     public function _before(AcceptanceTester $I)
     {
         $I->amOnPage('');
-
     }
 
     public function _after(AcceptanceTester $I)
@@ -38,8 +37,6 @@ class homeCest
 
     /**
      * Logs in using a premade Tester account.
-     * 
-     * @param AcceptanceTester $I gets called to make assertions
      */
     public function loginFromHome(AcceptanceTester $I)
     {
