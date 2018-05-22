@@ -233,11 +233,10 @@ padding-top: 2%;
 }
 
 #mockupContainer {
-  position: relative;
+  width: 100%;
 }
 #mockup {
-  position: absolute;
-  bottom: 0;
+  width: 70%;
 }
 
 #seconddiv {
