@@ -16,8 +16,9 @@ class registrationCest
 
     public function seeNav(AcceptanceTester $I)
     {
-        $I->see('Sign Up');
-        $I->seeElement('nav');
+        // $I->see('Sign Up');
+        // $I->seeElement('nav');
+        $I->seeNav($I);
     }
 
     public function testLogin(AcceptanceTester $I)

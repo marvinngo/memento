@@ -1,17 +1,36 @@
 <?php
 
+function login(AcceptanceTester $I) {
+    $I->click('Login');
+    $I->wait(2);
+    $I->fillField('#usernameForm2','Tester');
+    $I->fillField('#passwordForm2', 'testing1');
+    $I->click('Sign in');
+    $I->wait(3);
+}
+
+function logout(AcceptanceTester $I) {
+    $I->click('Logout');
+    $I->wait(3);
+}
+
 /**
  * Tests for the Groups page.
  */
 class groupCest
 {
+
     public function _before(AcceptanceTester $I)
     {
-        $I->amOnPage('/createjoin.php');
+        $I->amOnPage('');
+        login($I);
+        $I->canSeeInCurrentUrl('createjoin');
     }
 
     public function _after(AcceptanceTester $I)
     {
+        logout($I);
+        $I->canSeeInCurrentUrl('index');
     }
 
     public function first(AcceptanceTester $I)
@@ -34,6 +53,9 @@ class groupCest
         $I->selectOption('#totalPeople', '5');
         $I->click('Submit');
         $I->wait(2);
+        $I->see($groupName);
+        $I->click('#createModal .close');
+        $I->wait(1);
     }
 
     /**
@@ -52,7 +74,7 @@ class groupCest
 
     public function getEvent(AcceptanceTester $I)
     {
-    
+        
     }
 
     

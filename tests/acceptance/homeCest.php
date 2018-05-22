@@ -1,10 +1,25 @@
 <?php
 
+function login(AcceptanceTester $I) {
+    $I->click('Login');
+    $I->wait(2);
+    $I->fillField('#usernameForm2','Tester');
+    $I->fillField('#passwordForm2', 'testing1');
+    $I->click('Sign in');
+    $I->wait(4);
+}
+
+function logout(AcceptanceTester $I) {
+    $I->click('Logout');
+    $I->wait(4);
+}
+
 /**
  * Tests for the Home page.
  */
 class homeCest
 {    
+
     public function _before(AcceptanceTester $I)
     {
         $I->amOnPage('');
@@ -40,13 +55,30 @@ class homeCest
      */
     public function loginFromHome(AcceptanceTester $I)
     {
-        $I->click('Login');
-        $I->wait(2);
-        $I->fillField('#usernameForm2','Tester');
-        $I->fillField('#passwordForm2', 'testing1');
-        $I->click('Sign in');
-        $I->wait(2);
+        // $I->click('Login');
+        // $I->wait(2);
+        // $I->fillField('#usernameForm2','Tester');
+        // $I->fillField('#passwordForm2', 'testing1');
+        // $I->click('Sign in');
+        // $I->wait(4);
+        login($I);
         $I->seeInCurrentUrl('createjoin');
         $I->see('Create a Memento');
+    }
+
+    public function loginThenLogout(AcceptanceTester $I)
+    {
+        login($I);
+        $I->seeInCurrentUrl('createjoin');
+        logout($I);
+        $I->see('Login');
+        $I->dontSee('Welcome');
+    }
+
+    public function closeLoginModal(AcceptanceTester $I){
+        $I->click('Login');
+        $I->see('Login');
+        $I->click('.close');
+        $I->wait(2);
     }
 }
