@@ -190,7 +190,7 @@
           </div>
         </div>
 
-  <div id="belowCarousel" class="row text-center mx-auto tenptfont py-4">
+  <div id="belowCarousel" class="row text-center mx-auto tenptfont pt-4">
     <div id="howitworks" class="col-12 mx-auto">
         How It Works
     </div>
@@ -201,7 +201,7 @@
         4.	Wait for all members to join the group and enter a personal budget <br>
         5.	View the events and chose your next adventure
     </div>
-    <div id="" class="mx-auto my-1">
+    <div id="mockupContainer" class="mx-auto">
         <img id="mockup" src="img/mockup.png">
     </div>
 </div>
