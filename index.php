@@ -201,8 +201,8 @@
         4.	Wait for all members to join the group and enter a personal budget <br>
         5.	View the events and chose your next adventure
     </div>
-    <div id="mockupContainer" class="mx-auto">
-        <img id="mockup" src="img/mockup.png">
+    <div id="mockupContainer" class="text-center mt-3">
+        <img id="mockup" src="img/mockup.png" class="px-5">
     </div>
 </div>
 
