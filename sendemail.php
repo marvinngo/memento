@@ -68,6 +68,7 @@ foreach ($rows as $row) {
         ]
     ];
     $response = $mj->post(Resources::$Email, ['body' => $body]);
+    
         
     // This breaks the email
     $date = date("Y-m-d");
@@ -75,8 +76,9 @@ foreach ($rows as $row) {
     $statement3 = $conn->prepare($sql3);
     $statement3->execute(array(":Date" => $date, ":UserName" =>$row['User_Name']));
     }
+  
 }
-
+$response->success();
 
 
 ?>

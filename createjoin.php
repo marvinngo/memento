@@ -40,6 +40,10 @@ if($_SESSION['loggedin'] === false){
           </li>
           <div class="dropdown-divider"></div>
           <li class="nav-item my-0">
+            <a class="nav-link" href="allevents.php">Events</a>
+          </li>
+          <div class="dropdown-divider"></div>
+          <li class="nav-item my-0">
             <a class="nav-link" href="createjoin.php">Groups</a>
           </li>
           <div class="dropdown-divider"></div>
@@ -166,24 +170,31 @@ if($_SESSION['loggedin'] === false){
               <h5 id="createGroupError"></h5>
             
                 <!-- form -->
-            <form onsubmit="return validate()">
+            <form method='POST'>
               <div class="form-row mx-auto my-4">
-                <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name" name="Group_Name" pattern="[a-zA-Z0-9]{4,20}" oninput="checkGroupName(this)"  required autofocus>
+                <input type="text" class="form-control" id="groupNameForm" placeholder="Group Name" name="Group_Name" pattern="[a-zA-Z0-9]{4,20}" required autofocus>
+                <div id="groupnameError"></div>
               </div>
 
             <!-- password -->
               <div class="form-row mx-auto my-4">
-                <input type="password" name="Group_Password" class="form-control" id="groupPasswordForm" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"  oninput="checkPw(this)" required>
+                <input type="password" name="Group_Password" class="form-control" id="groupPasswordForm" placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>
+                <div id="groupPwError"></div>
               </div>
 
             <!-- confirm password -->
               <div class="form-row mx-auto my-4">
-                <input type="password" class="form-control" id="confirmGroupPasswordForm" placeholder="Confirm password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" oninput="checkPw(this)" required>
+                <input type="password" class="form-control" id="confirmGroupPasswordForm" placeholder="Confirm password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" required>
+                <div id="groupPwMatch"></div>
               </div>
               
+              <!-- Description -->
               <div class="form-row mx-auto my-4" style="height: 100px;">
                 <textarea type="text" id="descriptionForm" class="form-control" rows ="5" name="Group_Description" placeholder="Description" required></textarea>
               </div>
+                <div id="descriptionError"></div>
+              
+              <!-- Group Size -->
               <div class="form-row mx-auto my-4">
                 <select class="form-control" name="Group_Size" title="Number of people" id="totalPeople" required>
                   <option value="" selected>Number of people</option>
@@ -212,8 +223,9 @@ if($_SESSION['loggedin'] === false){
                     <option value="23">23</option>
                     <option value="24">24</option>
                 </select>
+                <div id="groupSizeError"></div>
                 <div class="col px-0">
-                <button id="submitButton" type="submit" onclick="createClick()" class="btn btn-primary mt-4 w-100">Submit</button>
+                <button id="createSubmitButton" type="button" class="btn btn-primary mt-4 w-100">Submit</button>
               </div>
               </div>
             </form>
@@ -247,7 +259,7 @@ if($_SESSION['loggedin'] === false){
         <!-- Modal body -->
         <div class="modal-body col-6 mx-auto">
           <!-- form -->
-          <form>
+          <form method='POST'>
               <h5 id="joinGroupError"></h5>
               <div class="form-row mx-auto my-4">
                 <input type="text" class="form-control" id="usernameForm" name="Group_Name" placeholder="Group Name" autofocus required>
@@ -255,7 +267,7 @@ if($_SESSION['loggedin'] === false){
               <div class="form-row mx-auto my-4">
                 <input type="password" class="form-control" id="passwordForm" placeholder="Password" name="Group_Password" required>
                 <div class="col px-0">
-                  <button id="submitButton" onclick="joinClick()" type="submit" class="btn btn-primary mt-4 w-100">Submit</button>
+                  <button id="joinSubmitButton" type="button" class="btn btn-primary mt-4 w-100">Submit</button>
                 </div>
               </div>
               
@@ -300,13 +312,14 @@ if($_SESSION['loggedin'] === false){
                 <h2 id="modalgroupdescription">Description</h2>
                 <h3 id="numbermembers">Max Members</h3>
                 <h5 id="currentmembers"></h5>
-                <h5>Current Budget: <span id="currentBudgetID">not set.</span></h5>
-                <h5 id="groupBudgeth5"></h5>
+                <h5>Personal Budget: <span id="currentBudgetID">not set.</span></h5>
+                <div id="groupBudgeth5"></div>
+                <div id="groupEventID" style="display: none;"></div>
                 <h5 color="red" id="BudgetErrorID"></h5>
                 <br>
-                <form>
+                <form method='POST'>
                   <input type="number" class="form-control" id="personalBudget" placeholder="Personal Budget" min="0" value="0">
-                  <button id="budgetSubmit" type="submit" onclick="return updateBudgetTable();" class="btn btn-primary mt-4 w-100">Submit</button>
+                  <button id="budgetSubmit" type="button" class="btn btn-primary mt-4 w-100">Submit</button>
                 </form>
                 <br>
                 
@@ -433,13 +446,11 @@ document.getElementById("footerLogin").innerHTML = "";
     
   ?>
   
-
-  
   <script>
     var Group_Name = '<?php echo $row['Group_Name'];?>';
     var Group_Image = '<?php echo $groupArray[0]['Group_ImgLoc'];?>';
     var Group_Description = '<?php echo $groupArray[0]['Group_Description'];?>';
-    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + Group_Image + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_Name + "><input type='file' name='grouppic' id='pic'><input type='submit' value='Upload' name='submit'></form></p></div>";
+    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + Group_Image + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_Name + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
     </script>
   
   
@@ -466,6 +477,10 @@ crossorigin="anonymous"></script>
     function reply_click(clicked_id) {
       
     // Updates the modal with the id of what was clicked - the id is set to the Group_Name when created.
+      
+    var Group_Event_ID;
+      
+    var allbudgetsentered;
     
     Group_Name = (clicked_id);
     document.getElementById("modalgroupname").innerHTML = Group_Name;
@@ -482,8 +497,6 @@ crossorigin="anonymous"></script>
               
                 var Group_Size = 0;
                 
-                var Group_Event_ID;
-                
                 var Group_ImgLoc;
                 
                 for (i = 0; i < length; i++) {
@@ -499,6 +512,9 @@ crossorigin="anonymous"></script>
                     Group_Description = data[i]["Group_Description"];
                     Group_Size = "" + data[i]["Group_Size"];
                     Group_Event_ID = data[i]["Event_Name"];
+                    
+                    document.getElementById("groupEventID").innerHTML = Group_Event_ID;
+                    
                     Group_ImgLoc = data[i]["Group_ImgLoc"];
                     document.getElementById("grpimg").setAttribute("src", Group_ImgLoc);
                     document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
@@ -529,7 +545,7 @@ crossorigin="anonymous"></script>
             // Create var outside loop so it's accessible outside loop:
             var groupBudget = 0;
           
-            document.getElementById("currentmembers").innerHTML = "<h5>Current members: " + "</br></h5>";
+            document.getElementById("currentmembers").innerHTML = "<h5>Members: " + "</br></h5>";
                 
             for (i = 0; i < length; i++) {
 
@@ -563,7 +579,7 @@ crossorigin="anonymous"></script>
           
               
           
-              var allbudgetsentered = false;
+              allbudgetsentered = false;
           
               if (userCount == Group_Size && userBudgetCount == Group_Size) {
                 //console.log("userBudgetCount: " + userBudgetCount);
@@ -590,11 +606,11 @@ crossorigin="anonymous"></script>
                      
  
               if (!allbudgetsentered || userCount < Group_Size) {
-                document.getElementById("groupBudgeth5").innerHTML = "<h6>Please note that the group must be full and all users must have entered a personal budget for the group's budget to display.</h6>";
+                document.getElementById("groupBudgeth5").innerHTML = "<h6>The Group must be full and all members must have submitted budgets for Event options to be displayed. However, you can browse the full list of Event <a href='allevents.php'>here.</a></h6>";
               }
           
               if (userCount == Group_Size && allbudgetsentered) {
-                    document.getElementById("groupBudgeth5").innerHTML = "Group Budget: " + "<span id=groupBudget>$" + groupBudget + "</span>";
+                    document.getElementById("groupBudgeth5").innerHTML = "Budget per Person: " + "<span id=groupBudget>$" + groupBudget + "</span>";
               }
                 
       // This Ajax call queries the database for all Events.
@@ -617,11 +633,12 @@ crossorigin="anonymous"></script>
             //Only show first div and set it to Group's Event if an Event is set for the group:
             console.log("received: ", data);
             console.log("Group_Event_ID: " + Group_Event_ID);
+          
             if (Group_Event_ID) {
             console.log("if statement entered.");
             // If the Group already has an Event set, show that Event and hide others:
               
-            modalbodyevents.innerHTML = "<div id='eventDiv1' class='w-100 mb-3'>"
+            modalbodyevents.innerHTML = "<div id='selectedEvent' class='text-center mb-3'>Your group has selected the following event:<br></div><div id='eventDiv1' class='w-100 mb-3'>"
                     + "<div class='card mx-auto'><img id='event1image' class='card-img-top'"
                     + "src='" + data[0]["Event_ImgLocation"]
                     + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
@@ -632,13 +649,13 @@ crossorigin="anonymous"></script>
               
             // Else populate with relevant Events:
               
-            } else {
+            } else if (allbudgetsentered) {
               
             var length = Object.keys(data).length;
             
             if (length > 0){
               
-            modalbodyevents.innerHTML = "";
+            modalbodyevents.innerHTML = "The following events are recommended for your group based on your group size and budget per person. Choose one for your group and make it happen!";
               
             for (i = 0; i < length; i++) {
             
@@ -653,71 +670,13 @@ crossorigin="anonymous"></script>
                     + "class='btn btn-primary float-right'>Select This Event For Your Group</button></div></div></div>";
             }
               
-            } else {
-              modalbodyevents.innerHTML = "The Group must be full and all members must have submitted budgets for Event options to be displayed. However, you can browse the full list of Events here.";
             }
               
-            // Display 2nd and 3rd divs:
-              
-            //document.getElementById("eventDiv2").style.display="block";
-            //document.getElementById("eventDiv3").style.display="block";
-            //document.getElementById("refreshEvents").style.display="block";
-          
-            //var Group_PricePP = 36.00;
-          
-            //var eventslength = Object.keys(data).length;
-          
-            //var rand1 = Math.floor(Math.random()*eventslength);
-          
-            //while (data[rand1]["Event_PricePP"] > Group_PricePP) {
-              //rand1 = Math.floor(Math.random()*eventslength);
-            //}
-          
-            //var rand2 = rand1;
-          
-            //while (rand2 == rand1 || data[rand2]["Event_PricePP"] > Group_PricePP) {
-              //rand2 = Math.floor(Math.random()*eventslength);
-            //}
-          
-            //var rand3 = rand1;
-          
-            //while (rand3 == rand1 || rand3 == rand2 || data[rand3]["Event_PricePP"] > Group_PricePP) {
-              //rand3 = Math.floor(Math.random()*eventslength);
-            //}
 
-            //document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
-            //document.getElementById("event1ID").innerHTML = data[rand1]["ID"];
-            //document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
-            //document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
-            //if (data[rand1]["Event_URL"]){
-              //document.getElementById("event1link").style.display="block";
-              //document.getElementById("event1link").setAttribute("href", data[rand1]["Event_URL"]);  
-            //} else {
-              //document.getElementById("event1link").style.display="none";
-            //}
           
-            //document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
-            //document.getElementById("event2ID").innerHTML = data[rand2]["ID"];
-            //document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
-            //document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]);
-            //if (data[rand2]["Event_URL"]){
-              //document.getElementById("event2link").style.display="block";
-              //document.getElementById("event2link").setAttribute("href", data[rand2]["Event_URL"]);  
-            //} else {
-              //document.getElementById("event2link").style.display="none";
-            //}
-          
-            //document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
-          //document.getElementById("event3ID").innerHTML = data[rand3]["ID"];
-            //document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
-            //document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]);
-            //if (data[rand3]["Event_URL"]){
-              //document.getElementById("event3link").style.display="block";
-              //document.getElementById("event3link").setAttribute("href", data[rand3]["Event_URL"]);  
-            //} else {
-              //document.getElementById("event3link").style.display="none";
-            //}
-          
+        } else {
+          // Clear the events if the group isn't ready to pick one yet:
+          modalbodyevents.innerHTML ="";
         }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -739,119 +698,6 @@ crossorigin="anonymous"></script>
           }); 
       
       }
-    
-    
-    function updateBudgetTable() {
-      
-    var User_Name='<?php echo $_SESSION['User_Name'];?>';
-      
-    //var Group_Name previously assigned still points to correct variable based on testing:
-      
-    //console.log("Group Name: " + Group_Name);
-      
-    var Registration_Budget = document.getElementById('personalBudget').value;
-    // Check if Group Budget exists:
-    //if( $('#groupBudget').length ) {
-      // It exists so assign it's value to Group Budget and set boolean true to be used in if statement:
-      //Group_Budget = document.getElementById('groupBudget').value;
-      //groupBudgetExists = true;
-      //}
-      
-    // console.log("User entered: " + Registration_Budget);
-      
-    var indivBudgJSON = {"User_Name":User_Name,"Group_Name":Group_Name,"Registration_Budget":Registration_Budget};
-      
-    JSON.stringify(indivBudgJSON);
-      
-    //console.log(indivBudgJSON);
-      
-    // console.log(indivBudgJSON); // seems to work.
-          
-      // This Ajax call updates the database with the user's personal budget.
-      event.preventDefault();
-      //prevents modal from closing on submission
-
-        $.ajax({
-        url: "ajax-post-personalBudget.php",
-        dataType: "json",
-        type: "POST",
-        data: indivBudgJSON,
-        success: function(data) {
-          
-          //console.log("successss");
-          
-          //console.log("Data returned from server: ", data);
-          //var listData = "";
-          //for(var key in data) {
-              //listData += key + ":" + data[key] + " ";
-          //}
-          
-          //console.log("budget: " + data[0]["Registration_Budget"])
-          
-              
-          //var groupBudgetExists = false;
-
-          var Group_Budget = 0;
-          
-          var groupMax = document.getElementById("groupSizeID").innerHTML;
-          console.log("Group size: " + groupMax);
-          
-          var budgetCount = 0;
-          
-          var length = Object.keys(data).length;
-            
-            for (i = 0; i < length; i++) {
-              
-              // 
-              if (data[i]["Registration_Budget"] != null) {
-                var RegBudget = data[i]["Registration_Budget"];
-                // Keep track of how many users have entered a budget and add up the total group's budget:
-                budgetCount++;
-                Group_Budget += Number(RegBudget);
-                
-                // Update user's current showing budget:
-                if (data[i]["User_Name"] === User_Name) {
-                  document.getElementById("currentBudgetID").innerHTML = "$" + Number(RegBudget).toFixed(2);
-                }
-                }
-          
-            }
-          
-            console.log("budget total: " + Group_Budget);
-            console.log("group max: " + groupMax);
-            console.log("budgetcount: " + budgetCount);
-            
-             if (groupMax == budgetCount) {
-               var groupBudgetPP = Group_Budget / groupMax;
-                   
-                document.getElementById("groupBudget").innerHTML = "Group Budget: " + "<span id=groupBudget>$" + Number(groupBudgetPP).toFixed(2) + "</span>";
-               console.log("if:" + Group_Budget);
-
-               var groupname = {"Group_Name":Group_Name};
-               JSON.stringify(groupname);
-              
-               $.ajax({
-                url: "sendemail.php",
-                dataType: "json",
-                type: "POST",
-                data: groupname,
-                success: function(data) {
-                console.log("An email has been sent to notify all users that the final budget is now included.");
-               },
-               error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR.statusText);
-               }
-               });
-             }
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            $("#BudgetErrorID").text("Please enter a number greater than zero.");
-            $("#BudgetErrorID").setAttribute("color","red");
-        }
-      });
-      
-    }
 
     
     function set_event(clicked_id) {
@@ -875,6 +721,20 @@ crossorigin="anonymous"></script>
         data: eventInfo,
         success: function(data) {
           
+        console.log("Data received: ", data);
+          
+        if (data["error"] = "no") {
+          
+        modalbodyevents.innerHTML = "<div id='selectedEvent' class='text-center mb-3'>Your group has selected the following event:<br></div><div id='eventDiv1' class='w-100 mb-3'>"
+                    + "<div class='card mx-auto'><img id='event1image' class='card-img-top'"
+                    + "src='" + data[0]["Event_ImgLocation"]
+                    + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
+                    + data[0]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
+                    + data[0]["Event_Description"] + "</p><a id='event1link' href='" + data[0]["Event_URL"]
+                    + "'>Visit their site for more information</a></div></div></div>"; 
+          
+          }
+          
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR.statusText);
@@ -884,178 +744,6 @@ crossorigin="anonymous"></script>
       
     }
     
-    function refreshEvents() {
-      
-            // This Ajax call queries the database for all Events.
-      
-        $.ajax({
-        url: "ajax-get-events.php",
-        dataType: "json",
-        type: "POST",
-        success: function(data) {
-              
-            // Display 2nd and 3rd divs:
-              
-            document.getElementById("eventDiv2").style.display="block";
-            document.getElementById("eventDiv3").style.display="block";
-            document.getElementById("refreshEvents").style.display="block";
-          
-            var Group_PricePP = 36.00;
-          
-            var eventslength = Object.keys(data).length;
-          
-            var rand1 = Math.floor(Math.random()*eventslength);
-          
-            while (data[rand1]["Event_PricePP"] > Group_PricePP) {
-              rand1 = Math.floor(Math.random()*eventslength);
-            }
-          
-            var rand2 = rand1;
-          
-            while (rand2 == rand1 || data[rand2]["Event_PricePP"] > Group_PricePP) {
-              rand2 = Math.floor(Math.random()*eventslength);
-            }
-          
-            var rand3 = rand1;
-          
-            while (rand3 == rand1 || rand3 == rand2 || data[rand3]["Event_PricePP"] > Group_PricePP) {
-              rand3 = Math.floor(Math.random()*eventslength);
-            }
-
-            document.getElementById("event1name").innerHTML = data[rand1]["Event_Name"];
-            document.getElementById("event1ID").innerHTML = data[rand1]["ID"];
-            document.getElementById("event1description").innerHTML = data[rand1]["Event_Description"];   
-            document.getElementById("event1image").setAttribute("src", data[rand1]["Event_ImgLocation"]);  
-            if (data[rand1]["Event_URL"]){
-              document.getElementById("event1link").style.display="block";
-              document.getElementById("event1link").setAttribute("href", data[rand1]["Event_URL"]);  
-            } else {
-              document.getElementById("event1link").style.display="none";
-            }
-          
-            document.getElementById("event2name").innerHTML = data[rand2]["Event_Name"];
-            document.getElementById("event2ID").innerHTML = data[rand2]["ID"];
-            document.getElementById("event2description").innerHTML = data[rand2]["Event_Description"]; 
-            document.getElementById("event2image").setAttribute("src", data[rand2]["Event_ImgLocation"]);
-            if (data[rand2]["Event_URL"]){
-              document.getElementById("event2link").style.display="block";
-              document.getElementById("event2link").setAttribute("href", data[rand2]["Event_URL"]);  
-            } else {
-              document.getElementById("event2link").style.display="none";
-            }
-          
-            document.getElementById("event3name").innerHTML = data[rand3]["Event_Name"];
-          document.getElementById("event3ID").innerHTML = data[rand3]["ID"];
-            document.getElementById("event3description").innerHTML = data[rand3]["Event_Description"]; 
-            document.getElementById("event3image").setAttribute("src", data[rand3]["Event_ImgLocation"]);
-            if (data[rand3]["Event_URL"]){
-              document.getElementById("event3link").style.display="block";
-              document.getElementById("event3link").setAttribute("href", data[rand3]["Event_URL"]);  
-            } else {
-              document.getElementById("event3link").style.display="none";
-            }
-          
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            $("#modalgroupdescription").text(jqXHR.statusText);
-        }
-      });
-      
-    }
-    
-    // Join a group on click button:
-
-function joinClick() {
-  
-  // Get user entries from the form:
-  
-  var Group_Name = document.getElementById('usernameForm').value;
-  var Group_Password = document.getElementById('passwordForm').value;
-    
-  // Convert to JSON to send in Ajax:
-  
-  var groupLogin = {"Group_Name":Group_Name,"Group_Password":Group_Password};
-      
-  JSON.stringify(groupLogin);
-  
-  $.ajax({
-        url: "joingroup.php",
-        dataType: "json",
-        type: "POST",
-        data: groupLogin,
-        success: function(data) {
-          
-          console.log("successss");
-          
-          console.log("Data returned from server: ", data);
-          
-          if (data["error"] == "yes") {
-          document.getElementById("joinGroupError").innerHTML = "Error: " + data["return"];
-          }
-          if (data["error"] == "no") {
-            
-            Group_Description = data["Group_Description"];
-          
-            // Add the group to the page:
-            
-            tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
-            
-          }
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.statusText);
-        }
-      });
-  
-}
-    
-  // Create a group on click button:
-
-function createClick() {
-  
-  // Get user entries from the form:
-  
-  var Group_Name = document.getElementById('groupNameForm').value;
-  var Group_Password = document.getElementById('confirmGroupPasswordForm').value;
-  var Group_Description = document.getElementById('descriptionForm').value;
-  var Group_Size = document.getElementById('totalPeople').value;
-    
-  // Convert to JSON to send in Ajax:
-  
-  var groupRegister = {"Group_Name":Group_Name,"Group_Password":Group_Password,"Group_Description":Group_Description,"Group_Size":Group_Size};
-      
-  JSON.stringify(groupRegister);
-  
-  $.ajax({
-        url: "creategroup.php",
-        dataType: "json",
-        type: "POST",
-        data: groupRegister,
-        success: function(data) {
-          
-          console.log("successss");
-          
-          console.log("Data returned from server: ", data);
-          
-          if (data["error"] == "yes") {
-          document.getElementById("createGroupError").innerHTML = "Error: " + data["return"];
-          }
-          if (data["error"] == "no") {
-          
-            // Add the group to the page:
-            
-            tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
-          
-          }
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.statusText);
-        }
-      });
-  
-}
     
 function clearModalErrors() {
   document.getElementById("createGroupError").innerHTML = "";

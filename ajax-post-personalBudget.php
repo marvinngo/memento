@@ -59,18 +59,19 @@
             //$groupcount = $statement->rowCount();
             //$data = $statement->fetchAll();
             
+            // Find all registration entries in database that match the group name and return them to the Ajax call for processing:
+            
             $sql = "SELECT * FROM tbl_Registration WHERE Group_Name = :groupName";
             $statement = $conn->prepare($sql);
             $statement->execute(array(":groupName" => $Group_Name));
             $data = $statement->fetchAll();
-            echo json_encode($data, JSON_FORCE_OBJECT);
+            //echo json_encode($data, JSON_FORCE_OBJECT);
             
           }
 
     } catch(PDOException $e) {
-        echo "<p style='color: red;'>From the SQL code: $sql</p>";
-        $error = $e->getMessage();
-        echo "<p style='color: red;'>$error</p>";
+        $data["error"] = "yes";
+        $data["return"] = "" . $sql . $e->getMessage() . $error;
     }
       
     } else {
@@ -78,6 +79,6 @@
         $data = array("msg" => "Error: only GET allowed");
     }
 
-    //echo json_encode($data, JSON_FORCE_OBJECT);
+    echo json_encode($data, JSON_FORCE_OBJECT);
 
 ?>

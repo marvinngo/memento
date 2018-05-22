@@ -33,24 +33,42 @@
         
           if (isset($_POST["Event_ID"]) && isset($_POST["Group_Name"])) {
             
-            $Event_ID =  $_POST["Event_ID"];
-            $Group_Name =  $_POST["Group_Name"];
-        }
+            $Event_ID = $_POST["Event_ID"];
+            $Group_Name = $_POST["Group_Name"];
       
             // Insert value into database:
             
             $sql = "UPDATE tbl_Group SET Event_Name = :eventID WHERE Group_Name = :groupName";
-
             $statement = $conn->prepare($sql);
             $statement->execute(array(":eventID" => $Event_ID, ":groupName" => $Group_Name));
+            
+            // Check if insert successful:
+            
+            $sql = "SELECT * FROM tbl_Group WHERE Group_Name = :groupName";
+            $statement = $conn->prepare($sql);
+            $statement->execute(array(":groupName" => $Group_Name));
             //$count = $statement->rowCount();
-            //$data = $statement->fetchAll();
-            //echo json_encode($data, JSON_FORCE_OBJECT);
-
+            $groupData = $statement->fetchAll();
+            if ($groupData[0]["Event_Name"] == $Event_ID) {
+              
+              
+              
+              // Grab event info to update the modal with:
+              
+              $sql = "SELECT * FROM tbl_Event WHERE ID = :eventID";
+              $statement = $conn->prepare($sql);
+              $statement->execute(array(":eventID" => $Event_ID));
+              $data = $statement->fetchAll();
+              
+              $data["error"] = "no";
+              
+            } else {
+            $data["error"] = "An error has occurred.";
+          }
+          }
     } catch(PDOException $e) {
-        echo "<p style='color: red;'>From the SQL code: $sql</p>";
-        $error = $e->getMessage();
-        echo "<p style='color: red;'>$error</p>";
+        $data["error"] = "yes";
+        $data["return"] = "" . $sql . $e->getMessage() . $error;
     }
       
     } else {
@@ -58,6 +76,6 @@
         $data = array("msg" => "Error: only GET allowed");
     }
 
-    //echo json_encode($data, JSON_FORCE_OBJECT);
+    echo json_encode($data, JSON_FORCE_OBJECT);
 
 ?>

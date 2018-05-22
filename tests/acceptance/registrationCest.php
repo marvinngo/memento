@@ -19,14 +19,7 @@ class registrationCest
 
     public function testLogin(AcceptanceTester $I)
     {
-        $I->amOnPage('/memento/registration.php');
-        // $I->click('Logout');
-        $I->click('Login');
-        $I->fillField('#usernameForm2', 'Tester');
-        $I->fillField('#passwordForm2', 'testing1');
-        $I->click('#submitButton');
-        $I->amOnPage('memento/createjoin.php');
-        // $I->see('Welcome Tester!');
+        
     }
 
     public function checkMyGroups(AcceptanceTester $I)

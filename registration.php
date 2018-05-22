@@ -36,6 +36,10 @@ if($_SESSION['loggedin'] === true){
         <li class="nav-item my-0">
           <a class="nav-link" href="index.php">Home</a>
         </li>
+        <div class="dropdown-divider"></div>
+        <li class="nav-item my-0">
+          <a class="nav-link" href="allevents.php">Events</a>
+        </li>
         <div id="groupDivider" class="dropdown-divider"></div>
         <li id="Groups" class="nav-item my-0">
           <a class="nav-link" href="createjoin.php">Groups</a>
@@ -79,14 +83,14 @@ if($_SESSION['loggedin'] === true){
         <!-- username -->
         <form method="post" action="signin.php">
               <div class="form-row mx-auto my-4">
-                <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" pattern="[a-zA-Z0-9]{4,20}" required>
+                <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" required>
               </div>
 
               <!-- password -->
               <div class="form-row mx-auto my-4">
-                <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
+                <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" required>
                 <div class="col px-0">
-                  <button id="submitButton" onclick="return loginClick(this.id)" type="button" class="btn btn-primary w-100 mt-4 submitButton">Sign in</button>
+                  <button id="submitButton" type="button" class="btn btn-primary w-100 mt-4 submitButton">Sign in</button>
                 </div>
               </div>
             </form>
@@ -144,7 +148,7 @@ if($_SESSION['loggedin'] === true){
                   <div id="emailError" class="text-center"></div>
 
                   <div class="col px-0">
-                    <button type="button" class="btn btn-primary mt-4 submitButton float-right" onclick="return registerClick()" name="submit">Submit</button>
+                    <button type="button" id="registerSubmit" class="btn btn-primary mt-4 submitButton float-right" name="submit">Submit</button>
                   </div>
                 </div>
               </form>
@@ -169,7 +173,7 @@ if($_SESSION['loggedin'] === true){
               <div class="form-row col-xs-12 col-sm-10 col-md-10 col-lg-6 mx-auto my-4">
                 <input type="password" name="User_Password" class="form-control" id="passwordForm3" placeholder="Password" pattern="[a-zA-Z0-9]{8,20}" required>
                 <div class="col px-0">
-                  <button id="submitButton2" onclick="return loginClick(this.id)" type="button" class="btn btn-primary mt-4 submitButton float-right">Sign in</button>
+                  <button id="submitButton2" type="button" class="btn btn-primary mt-4 submitButton float-right">Sign in</button>
                 </div>
               </div>
             </form>
@@ -229,57 +233,6 @@ if($_SESSION['loggedin'] === true){
     <script src="mementoScripts.js"></script>
 
   <script>
-  
-    function loginClick(clicked_id) {
-      
-    if (clicked_id == "submitButton") {
-        var User_Name = document.getElementById('usernameForm2').value;
-        var User_Password = document.getElementById('passwordForm2').value;
-        }
-    
-    if (clicked_id == "submitButton2") {
-        var User_Name = document.getElementById('usernameForm').value;
-        var User_Password = document.getElementById('passwordForm3').value;
-        }
-    
-    var userLogin = {"User_Name":User_Name,"User_Password":User_Password};
-      
-    JSON.stringify(userLogin);
-          
-      // This Ajax call sends user login info to the server to either login
-      // the user and redirect them to a new page or return an error message.
-
-        $.ajax({
-        url: "signin.php",
-        dataType: "json",
-        type: "POST",
-        data: userLogin,
-        success: function(data) {
-          
-          if (data["error"] == "yes") {
-            
-          if (clicked_id == "submitButton") {
-            document.getElementById("loginErrorID").innerHTML = "Error: " + data["return"];
-            }
-    
-          if (clicked_id == "submitButton2") {
-            document.getElementById("loginErrorID2").innerHTML = "Error: " + data["return"];
-            }
-            
-          }
-          if (data["error"] == "no") {
-          window.location = 'createjoin.php';
-          }
-
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.statusText);
-        }
-      });
-  }
-    
- 
   
   </script>
   
