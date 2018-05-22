@@ -18,6 +18,7 @@ if($_SESSION['loggedin'] === false){
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="style.css" rel="stylesheet">
   <title>Groups</title>
 
@@ -309,11 +310,32 @@ if($_SESSION['loggedin'] === false){
 
               </div>
               <div id="maintext" class="col-sm-12 col-md-7 mb-4">
-                <h2 id="modalgroupdescription">Description</h2>
-                <h3 id="numbermembers">Max Members</h3>
-                <h5 id="currentmembers"></h5>
-                <h5>Personal Budget: <span id="currentBudgetID">not set.</span></h5>
-                <div id="groupBudgeth5"></div>
+                <div class="row">
+                  <div class="col-1">
+                    <i class='fa fa-comment'></i>
+                  </div>
+                  <div class="col-11">
+                    <h5 id="modalgroupdescription"></h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-1">
+                    <i class='fa fa-users'></i>
+                  </div>
+                  <div class="col-11">
+                    <h5 id="numbermembers"></h5>
+                    <h5 id="currentmembers"></h5>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-1">
+                    <i class='fa fa-dollar'></i>
+                  </div>
+                  <div class="col-11">
+                    <h5>Personal Budget: <span id="currentBudgetID">Please enter below</span></h5>
+                    <h5 id="groupBudgeth5"></h5>
+                  </div>
+                </div>
                 <div id="groupEventID" style="display: none;"></div>
                 <h5 color="red" id="BudgetErrorID"></h5>
                 <br>
@@ -517,8 +539,8 @@ crossorigin="anonymous"></script>
                     
                     Group_ImgLoc = data[i]["Group_ImgLoc"];
                     document.getElementById("grpimg").setAttribute("src", Group_ImgLoc);
-                    document.getElementById("modalgroupdescription").innerHTML = "Group Description: " + Group_Description;
-                    document.getElementById("numbermembers").innerHTML = "Max members: <span id='groupSizeID'>" + Group_Size + "</span></br>";  
+                    document.getElementById("modalgroupdescription").innerHTML = "" + Group_Description;
+                    document.getElementById("numbermembers").innerHTML = "Members (max <span id='groupSizeID'>" + Group_Size + "):</span></br>";  
               } 
               }
               
@@ -545,7 +567,7 @@ crossorigin="anonymous"></script>
             // Create var outside loop so it's accessible outside loop:
             var groupBudget = 0;
           
-            document.getElementById("currentmembers").innerHTML = "<h5>Members: " + "</br></h5>";
+            document.getElementById("currentmembers").innerHTML = "<h5>" + "</h5>";
                 
             for (i = 0; i < length; i++) {
 
@@ -570,7 +592,7 @@ crossorigin="anonymous"></script>
                     if (Reg_Budget != null) {
                   document.getElementById("currentBudgetID").innerHTML = "$" + Number(Reg_Budget).toFixed(2);
                     } else {
-                      document.getElementById("currentBudgetID").innerHTML = "not set.";
+                      document.getElementById("currentBudgetID").innerHTML = "Please enter below";
                     }
                   }
                 
