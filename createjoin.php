@@ -315,7 +315,7 @@ if($_SESSION['loggedin'] === false){
                     <i class='fa fa-comment'></i>
                   </div>
                   <div class="col-11">
-                    <h5 id="modalgroupdescription">Description</h5>
+                    <h5 id="modalgroupdescription"></h5>
                   </div>
                 </div>
                 <div class="row">
@@ -323,7 +323,7 @@ if($_SESSION['loggedin'] === false){
                     <i class='fa fa-users'></i>
                   </div>
                   <div class="col-11">
-                    <h5 id="numbermembers">Max Members</h5>
+                    <h5 id="numbermembers"></h5>
                     <h5 id="currentmembers"></h5>
                   </div>
                 </div>
@@ -332,8 +332,8 @@ if($_SESSION['loggedin'] === false){
                     <i class='fa fa-dollar'></i>
                   </div>
                   <div class="col-11">
-                    <h5>Personal Budget:<span id="currentBudgetID">not set.</span></h5>
-                    <h5 id="groupBudgeth5"></>
+                    <h5>Personal Budget: <span id="currentBudgetID">Please enter below</span></h5>
+                    <h5 id="groupBudgeth5"></h5>
                   </div>
                 </div>
                 <div id="groupEventID" style="display: none;"></div>
@@ -540,7 +540,7 @@ crossorigin="anonymous"></script>
                     Group_ImgLoc = data[i]["Group_ImgLoc"];
                     document.getElementById("grpimg").setAttribute("src", Group_ImgLoc);
                     document.getElementById("modalgroupdescription").innerHTML = "" + Group_Description;
-                    document.getElementById("numbermembers").innerHTML = "Max members: <span id='groupSizeID'>" + Group_Size + "</span></br>";  
+                    document.getElementById("numbermembers").innerHTML = "Members (max <span id='groupSizeID'>" + Group_Size + "):</span></br>";  
               } 
               }
               
@@ -567,7 +567,7 @@ crossorigin="anonymous"></script>
             // Create var outside loop so it's accessible outside loop:
             var groupBudget = 0;
           
-            document.getElementById("currentmembers").innerHTML = "<h5>Members: " + "</br></h5>";
+            document.getElementById("currentmembers").innerHTML = "<h5>" + "</h5>";
                 
             for (i = 0; i < length; i++) {
 
@@ -592,7 +592,7 @@ crossorigin="anonymous"></script>
                     if (Reg_Budget != null) {
                   document.getElementById("currentBudgetID").innerHTML = "$" + Number(Reg_Budget).toFixed(2);
                     } else {
-                      document.getElementById("currentBudgetID").innerHTML = "not set.";
+                      document.getElementById("currentBudgetID").innerHTML = "Please enter below";
                     }
                   }
                 
