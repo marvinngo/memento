@@ -216,7 +216,7 @@ $("#createSubmitButton").click(function(event) {
   
   event.preventDefault;
   
-  var groupnameRegex = /^[a-zA-Z0-9]+$/;
+  var groupnameRegex = /^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$/;
   var groupPwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
   var groupnamePass;
@@ -234,7 +234,7 @@ $("#createSubmitButton").click(function(event) {
   var Group_Size = document.getElementById('totalPeople').value;
   
   if (!groupnameRegex.test(Group_Name) || Group_Name.length < 4 || Group_Name.length > 20) {
-        document.getElementById('groupnameError').innerHTML = "Group can only contain uppercase letters, lowercase letters, numbers, no spaces, and must be between 4 and 20 characters.";
+        document.getElementById('groupnameError').innerHTML = "Group name must be between 4 and 20 characters and can only contain letters, numbers and/or spaces.";
         groupnamePass=false;
     } else {
       document.getElementById('groupnameError').innerHTML = "";
@@ -475,7 +475,7 @@ $("#budgetSubmit").click(function(event) {
 
   JSON.stringify(indivBudgJSON);
 
-  console.log("Sent: ", indivBudgJSON); // seems to work.
+  console.log("Budget sent: ", indivBudgJSON); // seems to work.
 
   // This Ajax call updates the database with the user's personal budget and then returns every row in the registration table associated with the group. 
 
@@ -486,13 +486,13 @@ $("#budgetSubmit").click(function(event) {
   data: indivBudgJSON,
   success: function(data) {
     
-    console.log("Received: ", data);
+    console.log("Budget received: ", data);
 
     var Group_Budget = 0;
 
     var groupMax = document.getElementById("groupSizeID").innerHTML;
     
-    // console.log("Group size: " + groupMax);
+    console.log("Group size: " + groupMax);
 
     var budgetCount = 0;
     
@@ -518,6 +518,8 @@ $("#budgetSubmit").click(function(event) {
       }
 
         // If all users have entered a budget, update the Group Budget per person value:
+    
+        console.log("budgetCount: " + budgetCount);
     
         if (groupMax == budgetCount) {
           var groupBudgetPP = Group_Budget / groupMax;

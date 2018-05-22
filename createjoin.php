@@ -288,9 +288,7 @@ if($_SESSION['loggedin'] === false){
                   <div class="col-2">
                   </div>
                   <div class="col-8 text-center">
-                     <h2 id="modalgroupname">
-                       GROUP NAME
-                     </h2>
+                     <h2 id="modalgroupname">GROUP NAME</h2>
                   </div>
                   <div class="col-2">
                       <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
@@ -315,6 +313,7 @@ if($_SESSION['loggedin'] === false){
                     <i class='fa fa-comment'></i>
                   </div>
                   <div class="col-11">
+                    <h5>Group ID: <span id="modalgroupID"></span></h5>
                     <h5 id="modalgroupdescription"></h5>
                   </div>
                 </div>
@@ -339,7 +338,7 @@ if($_SESSION['loggedin'] === false){
                 <div id="groupEventID" style="display: none;"></div>
                 <h5 color="red" id="BudgetErrorID"></h5>
                 <br>
-                <form method='POST'>
+                <form method='POST' autocomplete="off">
                   <input type="number" class="form-control" id="personalBudget" placeholder="Personal Budget" min="0" value="0">
                   <button id="budgetSubmit" type="button" class="btn btn-primary mt-4 w-100">Submit</button>
                 </form>
@@ -470,9 +469,10 @@ document.getElementById("footerLogin").innerHTML = "";
   
   <script>
     var Group_Name = '<?php echo $row['Group_Name'];?>';
+    var Group_ID = '<?php echo $groupArray[0]['ID'];?>';
     var Group_Image = '<?php echo $groupArray[0]['Group_ImgLoc'];?>';
     var Group_Description = '<?php echo $groupArray[0]['Group_Description'];?>';
-    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + Group_Image + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_Name + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
+    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_ID + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + Group_Image + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>Group ID: " + Group_ID + "</p><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_ID + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
     </script>
   
   
@@ -504,8 +504,8 @@ crossorigin="anonymous"></script>
       
     var allbudgetsentered;
     
-    Group_Name = (clicked_id);
-    document.getElementById("modalgroupname").innerHTML = Group_Name;
+    Group_ID = (clicked_id);
+    document.getElementById("modalgroupID").innerHTML = Group_ID;
     
         // Ajax call to get query database for groups, find the group that matches the id that was clicked, updates the modal with group description and number of members.
       
@@ -526,7 +526,7 @@ crossorigin="anonymous"></script>
                   //console.log("Group Name: " + Group_Name);
                   //console.log(data[i]["Group_Name"]);
                   
-                  if (data[i]["Group_Name"] === Group_Name) {
+                  if (data[i]["ID"] === Group_ID) {
                     
                     //console.log("i = " + i);
                     
@@ -534,13 +534,15 @@ crossorigin="anonymous"></script>
                     Group_Description = data[i]["Group_Description"];
                     Group_Size = "" + data[i]["Group_Size"];
                     Group_Event_ID = data[i]["Event_Name"];
+                    Group_Name = data[i]["Group_Name"];
                     
+                    document.getElementById("modalgroupname").innerHTML = Group_Name;
                     document.getElementById("groupEventID").innerHTML = Group_Event_ID;
                     
                     Group_ImgLoc = data[i]["Group_ImgLoc"];
                     document.getElementById("grpimg").setAttribute("src", Group_ImgLoc);
                     document.getElementById("modalgroupdescription").innerHTML = "" + Group_Description;
-                    document.getElementById("numbermembers").innerHTML = "Members (max <span id='groupSizeID'>" + Group_Size + "):</span></br>";  
+                    document.getElementById("numbermembers").innerHTML = "Members (max <span id='groupSizeID'>" + Group_Size + "</span>):</br>";  
               } 
               }
               
@@ -599,8 +601,6 @@ crossorigin="anonymous"></script>
               } 
               }
           
-              
-          
               allbudgetsentered = false;
           
               if (userCount == Group_Size && userBudgetCount == Group_Size) {
@@ -610,19 +610,8 @@ crossorigin="anonymous"></script>
                 groupBudget /= Group_Size;
                 groupBudget = Number(groupBudget).toFixed(2);
                 
-                // Display "Select This Event For Your Group"  
-                // buttons if all users have entered a budget:
-                
-                //document.getElementById("selectEvent1").style.display="block";
-                //document.getElementById("selectEvent2").style.display="block";
-                //document.getElementById("selectEvent3").style.display="block";
-                
               } else {
                 groupBudget = null;
-                // Hides the select this event for your group buttons:
-                //document.getElementById("selectEvent1").style.display="none";
-                //document.getElementById("selectEvent2").style.display="none";
-                //document.getElementById("selectEvent3").style.display="none";
               }
 
                      
