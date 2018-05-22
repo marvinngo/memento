@@ -288,9 +288,11 @@ img.mr-2 {
   color: #1A75C1;
   font-size: 14pt;
 }
-#usernameError, #passwordError, #passwordMatch, #emailError, #registrationError, #loginErrorID2, #groupnameError, #groupPwError, #groupPwMatch {
+#usernameError, #passwordError, #passwordMatch, #emailError, #registrationError, #loginErrorID2, #groupnameError, #groupPwError, #groupPwMatch, #groupSizeError, #descriptionError {
   color: red;
   font-size: 18px;
+  margin: auto;
+  padding-top: 5px;
 }
 
 #registrationError {

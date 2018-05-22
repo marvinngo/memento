@@ -59,6 +59,8 @@
             //$groupcount = $statement->rowCount();
             //$data = $statement->fetchAll();
             
+            // Find all registration entries in database that match the group name and return them to the Ajax call for processing:
+            
             $sql = "SELECT * FROM tbl_Registration WHERE Group_Name = :groupName";
             $statement = $conn->prepare($sql);
             $statement->execute(array(":groupName" => $Group_Name));

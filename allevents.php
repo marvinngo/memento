@@ -81,7 +81,7 @@
       <div class="modal-body col-6 mx-auto">
       <h5 id="loginErrorID"></h5>
         <!-- username -->
-        <form method="post" action="signin.php">
+        <form method="post">
               <div class="form-row mx-auto my-4">
                 <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" required>
               </div>
@@ -90,7 +90,7 @@
               <div class="form-row mx-auto my-4">
                 <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" required>
                 <div class="col px-0">
-                  <button id="submitButton" onclick="return loginClick(this.id)" type="button" class="btn btn-primary w-100 mt-4 submitButton">Sign in</button>
+                  <button id="submitButton" type="button" class="btn btn-primary w-100 mt-4 submitButton">Sign in</button>
                 </div>
               </div>
             </form>
