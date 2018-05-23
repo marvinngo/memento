@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Registers a new user.
+ */
   if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
