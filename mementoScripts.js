@@ -216,7 +216,7 @@ $("#createSubmitButton").click(function(event) {
   
   event.preventDefault;
   
-  var groupnameRegex = /^[a-zA-Z0-9]+$/;
+  var groupnameRegex = /^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$/;
   var groupPwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
   var groupnamePass;
@@ -234,7 +234,7 @@ $("#createSubmitButton").click(function(event) {
   var Group_Size = document.getElementById('totalPeople').value;
   
   if (!groupnameRegex.test(Group_Name) || Group_Name.length < 4 || Group_Name.length > 20) {
-        document.getElementById('groupnameError').innerHTML = "Group can only contain uppercase letters, lowercase letters, numbers, no spaces, and must be between 4 and 20 characters.";
+        document.getElementById('groupnameError').innerHTML = "Group name must be between 4 and 20 characters and can only contain letters, numbers and/or spaces.";
         groupnamePass=false;
     } else {
       document.getElementById('groupnameError').innerHTML = "";
@@ -280,6 +280,8 @@ $("#createSubmitButton").click(function(event) {
   var groupRegister = {"Group_Name":Group_Name,"Group_Password":Group_Password,"Group_Description":Group_Description,"Group_Size":Group_Size};
       
   JSON.stringify(groupRegister);
+    
+  console.log("sent: ", groupRegister);
   
   $.ajax({
         url: "creategroup.php",
@@ -297,11 +299,11 @@ $("#createSubmitButton").click(function(event) {
           }
           if (data["error"] == "no") {
             
-            document.getElementById("createGroupError").innerHTML = "You have successully created " + Group_Name + "!";
+            document.getElementById("createGroupError").innerHTML = "You have successully created: " + Group_Name + "!<br> Anyone else that wishes to join this group will require the group's ID and password. The ID for this group is: " + data["Group_ID"];
           
             // Add the group to the page:
             
-            tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
+            tables.innerHTML += "<div class='clickableDiv'><a id=" + data["Group_ID"] + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>Group ID: " + data["Group_ID"] + "</p><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + data["Group_ID"] + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
           
           }
 
@@ -321,14 +323,16 @@ $("#joinSubmitButton").click(function(event) {
   
     // Get user entries from the form:
   
-  var Group_Name = document.getElementById('usernameForm').value;
+  var Group_ID = document.getElementById('usernameForm').value;
   var Group_Password = document.getElementById('passwordForm').value;
     
   // Convert to JSON to send in Ajax:
   
-  var groupLogin = {"Group_Name":Group_Name,"Group_Password":Group_Password};
+  var groupLogin = {"Group_ID":Group_ID,"Group_Password":Group_Password};
       
   JSON.stringify(groupLogin);
+  
+  console.log("Sent:",groupLogin);
   
   $.ajax({
         url: "joingroup.php",
@@ -346,13 +350,15 @@ $("#joinSubmitButton").click(function(event) {
           }
           if (data["error"] == "no") {
             
-            document.getElementById("joinGroupError").innerHTML = "You have successfully joined " + Group_Name + "!";
+            Group_Name = data["Group_Name"];
+            
+            document.getElementById("joinGroupError").innerHTML = "You have successfully joined " + Group_Name + "(group id:" + Group_ID + ")!";
             
             Group_Description = data["Group_Description"];
           
             // Add the group to the page:
             
-            tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_Name + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>" + Group_Description + "</p></div></li></div></a></div>";
+            tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_ID + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='" + data["Group_ImgLoc"] + "' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>Group ID: " + Group_ID + "</p><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_ID + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
             
           }
 
@@ -475,7 +481,7 @@ $("#budgetSubmit").click(function(event) {
 
   JSON.stringify(indivBudgJSON);
 
-  console.log("Sent: ", indivBudgJSON); // seems to work.
+  console.log("Budget sent: ", indivBudgJSON); // seems to work.
 
   // This Ajax call updates the database with the user's personal budget and then returns every row in the registration table associated with the group. 
 
@@ -486,13 +492,13 @@ $("#budgetSubmit").click(function(event) {
   data: indivBudgJSON,
   success: function(data) {
     
-    console.log("Received: ", data);
+    console.log("Budget received: ", data);
 
     var Group_Budget = 0;
 
     var groupMax = document.getElementById("groupSizeID").innerHTML;
     
-    // console.log("Group size: " + groupMax);
+    console.log("Group size: " + groupMax);
 
     var budgetCount = 0;
     
@@ -518,6 +524,8 @@ $("#budgetSubmit").click(function(event) {
       }
 
         // If all users have entered a budget, update the Group Budget per person value:
+    
+        console.log("budgetCount: " + budgetCount);
     
         if (groupMax == budgetCount) {
           var groupBudgetPP = Group_Budget / groupMax;

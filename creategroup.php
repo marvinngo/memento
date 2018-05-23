@@ -51,37 +51,25 @@ if ($methodType === 'POST') {
             $data["error"] = "yes";
             $data["return"] = "No group created - no fields can be left blank.";
         } else {
-          
-            // Check if username already exists in database:
-          
-            $sql = "SELECT * FROM tbl_Group WHERE Group_Name = :GroupName";
-
-            $statement = $conn->prepare($sql);
-            $statement->execute(array(":GroupName" => $Group_Name));
-            $count = $statement->rowCount();
-          
-            if ($count > 0) {
-              $data["error"] = "yes";
-              $data["return"] = "Group Name already exists.";
-            } else {
               
             // perform update to tbl_Group
               
             $sql = "INSERT INTO `tbl_Group` (Group_Name, Group_Description, Group_Password, Group_Size) values (:GroupName, :GroupDescription, :GroupPassword, :GroupSize)";
             // $insert is a 'PDOStatement
             $statement = $conn->prepare($sql);
-            $statement->execute(array(":GroupName" => $Group_Name, ":GroupPassword" => $Group_Password, ":GroupDescription" => $Group_Description, ":GroupSize" => $Group_Size));
+            $statement->execute(array(":GroupName" => $Group_Name, ":GroupDescription" => $Group_Description, ":GroupPassword" => $Group_Password, ":GroupSize" => $Group_Size));
+            $last_id = $conn->lastInsertId();
+            $data["Group_ID"] = $last_id;
             
             // perform update to tbl_Registration
               
-            $sql = "INSERT INTO `tbl_Registration` (User_Name, Group_Name) values (:UserName, :GroupName)";
+            $sql = "INSERT INTO `tbl_Registration` (User_Name, Group_Name, Group_ID) values (:UserName, :GroupName, :GroupID)";
             // $insert is a 'PDOStatement
             $statement = $conn->prepare($sql);
-            $statement->execute(array(":UserName" => $_SESSION['User_Name'], ":GroupName" => $Group_Name));
+            $statement->execute(array(":UserName" => $_SESSION['User_Name'], ":GroupName" => $Group_Name,":GroupID" => $last_id));
               
             $data["error"] = "no";
 
-            }
         }
 
     } catch(PDOException $e) {
