@@ -414,7 +414,7 @@ $.ajax({
 
     var userReg = data;
 
-    //console.log("user reg data:", userReg);
+    console.log("user reg data:", userReg);
 
     $.ajax({
     url: "ajax-get-groups.php",
@@ -422,7 +422,7 @@ $.ajax({
     type: "GET",
     success: function(data) {
       
-      //console.log("groups data:",data);
+      console.log("groups data:",data);
 
       var userRegLength = Object.keys(userReg).length;
       var groupLength = Object.keys(data).length;
@@ -435,7 +435,7 @@ $.ajax({
           if (userReg[i]["Group_ID"] == data[g]["ID"]) {
             
 
-            tables.innerHTML += "<div class='clickableDiv'><a id=" + userReg[i]["Group_ID"] + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + data[g]["Group_ImgLoc"] + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + data[g]["Group_Name"] + "</h4><p>Group ID: " + userReg[i]["Group_ID"] + "</p><p>" + data[g]["Group_Description"] + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='Group_ID' value=" + userReg[i]["Group_ID"] + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
+            tables.innerHTML += "<div class='clickableDiv' id='" + userReg[i]["Group_ID"] + "hideid'><a id=" + userReg[i]["Group_ID"] + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + data[g]["Group_ImgLoc"] + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + data[g]["Group_Name"] + "</h4><p>Group ID: " + userReg[i]["Group_ID"] + "</p><p>" + data[g]["Group_Description"] + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='Group_ID' value=" + userReg[i]["Group_ID"] + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
 
             }
         }
@@ -545,7 +545,7 @@ $.ajax({
                 
             for (i = 0; i < length; i++) {
 
-              if (data[i]["Group_Name"] === Group_Name) {
+              if (data[i]["Group_ID"] === Group_ID) {
                 
                 userCount++;
 

@@ -613,6 +613,54 @@ $("#budgetSubmit").click(function(event) {
       });
     });
 
+// Calls ajax to delete a group from the registration and group tables, then removes it from the page:
+
+$("#deleteButton").click(function(event) {
+  
+  event.preventDefault;
+  
+  var Group_ID = event.target.id;
+  
+  var groupIDjson = {"Group_ID":Group_ID};
+    
+  JSON.stringify(groupIDjson);
+    
+  console.log(groupIDjson);
+        
+    // This Ajax call sends user login info to the server to either login
+    // the user and redirect them to a new page or return an error message.
+
+      $.ajax({
+      url: "ajax-post-delete-group.php",
+      dataType: "json",
+      type: "POST",
+      data: groupIDjson,
+      success: function(data) {
+        
+        console.log("successss");
+        
+        console.log("Data returned from server: ", data);
+        
+        if (data["error"] == "yes") {
+        document.getElementById("loginErrorID2").innerHTML = "Error: " + data["return"];
+        }
+        if (data["error"] == "no") {
+          
+        var divID = Group_ID + "hideid";
+        
+        document.getElementById(divID).style.display = "none";
+          
+        }
+
+
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR.statusText);
+      }
+    });
+    });
+
+
 
 // Binds enter to the Submit button for the modal login on index.php, registration.php and allevents.php
 // see for more info:
