@@ -1,8 +1,6 @@
 
 
 <?php
-// Refreshes the page
-header("Location: createjoin.php");
 
 // saves img to this directory
 $target_dir = "img/mygroups/";
@@ -75,13 +73,14 @@ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dblogin, $password);
 // set the PDO error mode to exception
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$Group_Name = $_POST['GroupName'];
+$Group_ID = $_POST['Group_ID'];
 
-$sql = "UPDATE tbl_Group SET Group_ImgLoc = :TFile WHERE Group_Name = :GName";
+$sql = "UPDATE tbl_Group SET Group_ImgLoc = :TFile WHERE ID = :groupID";
 
 $statement = $conn->prepare($sql);
-$statement->execute(array(":TFile" => $target_file, ":GName" => $Group_Name));
+$statement->execute(array(":TFile" => $target_file, ":groupID" => $Group_ID));
 
-
+// Refreshes the page
+header("Location: createjoin.php");
 
 ?>
