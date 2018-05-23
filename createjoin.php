@@ -263,7 +263,7 @@ if($_SESSION['loggedin'] === false){
           <form method='POST'>
               <h5 id="joinGroupError"></h5>
               <div class="form-row mx-auto my-4">
-                <input type="text" class="form-control" id="usernameForm" name="Group_Name" placeholder="Group Name" autofocus required>
+                <input type="text" class="form-control" id="usernameForm" name="Group_ID" placeholder="Group ID" autofocus required>
               </div>
               <div class="form-row mx-auto my-4">
                 <input type="password" class="form-control" id="passwordForm" placeholder="Password" name="Group_Password" required>
@@ -384,100 +384,8 @@ document.getElementById("footerHome").innerHTML = "";
 document.getElementById("footerSignup").innerHTML = "Home";
 document.getElementById("footerSignup").setAttribute("href", "index.php");
 document.getElementById("footerLogin").innerHTML = "";
-  
-// The following just used to hold Event IDs for use in selecting Events for Groups.
-  
-//document.getElementById("event1ID").style.display="none";
-//document.getElementById("event2ID").style.display="none";
-//document.getElementById("event3ID").style.display="none";
-
 </script>
   
-<?php 
-  
-  try {
-  
-  $servername = "localhost";
-  $dblogin = "evanmorr_team5";
-  $password = "Team5!Team5!";
-  $dbname = "evanmorr_mementodb";
-  
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dblogin, $password);
-
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  
-  $sql = "SELECT * FROM tbl_Registration WHERE User_Name = :UserName";
-
-  $statement = $conn->prepare($sql);
-  $statement->execute(array(":UserName" => $_SESSION['User_Name']));
-  $count = $statement->rowCount();
-  $rows = $statement->fetchAll();
-  
-  // Storing group data for use in modal:
-  
-  $sql = "SELECT * FROM tbl_Group";
-
-  $statement = $conn->prepare($sql);
-  $statement->execute(array());
-  $groupcount = $statement->rowCount();
-  $groups = $statement->fetchAll();
-    
-  } catch(PDOException $e) {
-      echo "<p style='color: red;'>From the SQL code: $sql</p>";
-      $error = $e->getMessage();
-      echo "<p style='color: red;'>$error</p>";
-  }
-    
-  ?>
-  <script>
-    var groupcount = '<?php echo $groupcount;?>';
-    var groups = new Array();
-    
-    <?php foreach($groups as $key => $group){
-    foreach($group as $key => $value){?>
-        groups.push('<?php echo $value; ?>');
-    <?php } } ?>
-  </script>
-  <?php
-  // Loop begins below foreach, and ends at endforeach
-  
-  foreach ($rows as $row): ?>
-  
-  <?php
-  
-  try {
-  
-  $Group_Name = $row['Group_Name'];
-  
-  $sql2 = "SELECT * FROM tbl_Group WHERE Group_Name = :GroupName";
-  
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dblogin, $password);
-
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  $statement2 = $conn->prepare($sql2);
-  $statement2->execute(array(":GroupName" => $Group_Name));
-  $groupArray = $statement2->fetchAll();
-    
-  } catch(PDOException $e) {
-    echo "<p style='color: red;'>From the SQL code: $sql</p>";
-    $error = $e->getMessage();
-    echo "<p style='color: red;'>$error</p>";
-  }
-    
-  ?>
-  
-  <script>
-    var Group_Name = '<?php echo $row['Group_Name'];?>';
-    var Group_ID = '<?php echo $groupArray[0]['ID'];?>';
-    var Group_Image = '<?php echo $groupArray[0]['Group_ImgLoc'];?>';
-    var Group_Description = '<?php echo $groupArray[0]['Group_Description'];?>';
-    tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_ID + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + Group_Image + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>Group ID: " + Group_ID + "</p><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_ID + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
-    </script>
-  
-  
-<?php endforeach; ?>
-
 <script src="https://code.jquery.com/jquery-3.3.1.js"
 integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 crossorigin="anonymous"></script>
@@ -486,6 +394,70 @@ crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="mementoScripts.js"></script>
+  
+<script>
+  /*<![CDATA[*/
+  var User_Name='<?php echo $_SESSION['User_Name'];?>';
+  //console.log(User_Name);
+  
+  var userInfo = {"User_Name":User_Name};
+
+  //JSON.stringify(userInfo);
+  console.log(userInfo);
+  
+$.ajax({
+  url: "ajax-post-userReg.php",
+  dataType: "json",
+  type: "POST",
+  data: userInfo,
+  success: function(data) {
+
+    var userReg = data;
+
+    //console.log("user reg data:", userReg);
+
+    $.ajax({
+    url: "ajax-get-groups.php",
+    dataType: "json",
+    type: "GET",
+    success: function(data) {
+      
+      //console.log("groups data:",data);
+
+      var userRegLength = Object.keys(userReg).length;
+      var groupLength = Object.keys(data).length;
+
+      // iterate through user registration info
+      for (i = 0; i < userRegLength; i++) {
+
+        //iterate through all groups
+        for (g = 0; g < groupLength; g++) {
+          if (userReg[i]["Group_ID"] == data[g]["ID"]) {
+            
+
+            tables.innerHTML += "<div class='clickableDiv'><a id=" + userReg[i]["Group_ID"] + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + data[g]["Group_ImgLoc"] + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + data[g]["Group_Name"] + "</h4><p>Group ID: " + userReg[i]["Group_ID"] + "</p><p>" + data[g]["Group_Description"] + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='Group_ID' value=" + userReg[i]["Group_ID"] + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
+
+            }
+        }
+      }
+
+
+
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR.statusText);
+    }
+  });
+
+  },
+  error: function(jqXHR, textStatus, errorThrown) {
+      console.log(jqXHR.statusText);
+  }
+});
+  
+  
+/*]]>*/
+</script>
   
   <script>
 /*<![CDATA[*/
