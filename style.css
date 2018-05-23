@@ -113,6 +113,16 @@ border: none;
   margin-bottom: 20px;
   width: 100%
 }
+
+.modal-content {
+  position: relative;
+  transform: translateY(70%);
+}
+
+.modal-header {
+  background-color: #FF9900;
+}
+
 .loginmodal-submit {
   background: #FFF;
   color: #1A75C1;
