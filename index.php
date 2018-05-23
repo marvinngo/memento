@@ -226,7 +226,7 @@
     <h4>Links</h4>
     <div class="row pb-2">
       <div class="col-4">
-        <a id="footerHome" ref="index.php">Home</a>
+        <a id="footerHome" href="index.php">Home</a>
       </div>
       <div class="col-4">
         <a id="footerSignup" href="registration.php">Signup</a>
