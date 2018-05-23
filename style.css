@@ -184,9 +184,15 @@ top: -14px !important;
   background-size: cover;
 }
 /* colors for sign in button in nav bar */
-.signin {
-  background-color: #FFF;
-  color: #1A75C1;
+.deleteButton {
+  background-color: red;
+  color: #FFF;
+  border: none;
+}
+.groupDelete {
+  background-color: #1A75C1;
+  color: #FFF;
+  border: none;
 }
 
 /* background color for site footer */
