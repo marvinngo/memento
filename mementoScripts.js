@@ -303,7 +303,7 @@ $("#createSubmitButton").click(function(event) {
           
             // Add the group to the page:
             
-            tables.innerHTML += "<div class='clickableDiv'><a id=" + data["Group_ID"] + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>Group ID: " + data["Group_ID"] + "</p><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + data["Group_ID"] + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
+            tables.innerHTML += "<div class='clickableDiv' id='" + data["Group_ID"] + "hideid'><a id=" + data["Group_ID"] + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='img/mygroups/suit.jpeg' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>Group ID: " + data["Group_ID"] + "</p><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + data["Group_ID"] + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p><div class='text-center'><button type='button' id='0" + data["Group_ID"] + "' name='deleteButton' onClick='delete_click(this.id)' class='groupDelete mb-2' href='#' data-toggle='modal' data-target='#deleteModal'>Delete Group</button></div></div>";
           
           }
 
@@ -358,7 +358,7 @@ $("#joinSubmitButton").click(function(event) {
           
             // Add the group to the page:
             
-            tables.innerHTML += "<div class='clickableDiv'><a id=" + Group_ID + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='" + data["Group_ImgLoc"] + "' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>Group ID: " + Group_ID + "</p><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_ID + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
+            tables.innerHTML += "<div class='clickableDiv' id='" + Group_ID + "hideid'><a id=" + Group_ID + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src='" + data["Group_ImgLoc"] + "' alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + Group_Name + "</h4><p>Group ID: " + Group_ID + "</p><p>" + Group_Description + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='GroupName' value=" + Group_ID + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p><div class='text-center'><button type='button' id='0" + Group_ID + "' name='deleteButton' onClick='delete_click(this.id)' class='groupDelete mb-2' href='#' data-toggle='modal' data-target='#deleteModal'>Delete Group</button></div></div>";
             
           }
 
@@ -619,7 +619,9 @@ $("#deleteButton").click(function(event) {
   
   event.preventDefault;
   
-  var Group_ID = event.target.id;
+  var Group_ID = document.getElementById("deletemodalID").innerHTML;
+  
+  console.log("Group_ID = " + Group_ID);
   
   var groupIDjson = {"Group_ID":Group_ID};
     

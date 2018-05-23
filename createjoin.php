@@ -136,10 +136,6 @@ if($_SESSION['loggedin'] === false){
     </div>
   </div>
   </div>
-
-
-
-
       </div>
       
 </header>
@@ -274,6 +270,40 @@ if($_SESSION['loggedin'] === false){
               
             </form>
       </div>
+      </div>
+    </div>
+  </div>
+  <!-- Delete Group Modal -->
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      <!-- Modal Header -->
+        <div class="modal-header mx-auto">
+            <div class="container mx-auto">
+                <div class="row">
+                  <div class="col-2">
+                  </div>
+                  <div class="col-8 text-center">
+                     <h3>
+                       Delete Group
+                     </h3>
+                  </div>
+                  <div class="col-2">
+                      <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
+                  </div>
+                </div>
+                </div>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body col-8 mx-auto">
+          <h6>Are you sure you want to delete this group? This cannot be undone.</h6>
+          <div class="col px-0">
+            <div id='deletemodalID' style="display: none;"></div>
+            <button id="deleteButton" type="button" class="btn btn-primary mt-4 w-100 deleteButton">Delete</button>
+            <button id="noDelete" type="button" class="btn btn-primary mt-4 w-100" data-dismiss="modal">No</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -434,8 +464,7 @@ $.ajax({
         for (g = 0; g < groupLength; g++) {
           if (userReg[i]["Group_ID"] == data[g]["ID"]) {
             
-
-            tables.innerHTML += "<div class='clickableDiv' id='" + userReg[i]["Group_ID"] + "hideid'><a id=" + userReg[i]["Group_ID"] + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + data[g]["Group_ImgLoc"] + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + data[g]["Group_Name"] + "</h4><p>Group ID: " + userReg[i]["Group_ID"] + "</p><p>" + data[g]["Group_Description"] + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='Group_ID' value=" + userReg[i]["Group_ID"] + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p></div>";
+            tables.innerHTML += "<div class='clickableDiv' id='" + userReg[i]["Group_ID"] + "hideid'><a id=" + userReg[i]["Group_ID"] + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + data[g]["Group_ImgLoc"] + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + data[g]["Group_Name"] + "</h4><p>Group ID: " + userReg[i]["Group_ID"] + "</p><p>" + data[g]["Group_Description"] + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='Group_ID' value=" + userReg[i]["Group_ID"] + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p><div class='text-center'><button type='button' id='0" + userReg[i]["Group_ID"] + "' name='deleteButton' onClick='delete_click(this.id)' class='groupDelete mb-2' href='#' data-toggle='modal' data-target='#deleteModal'>Delete Group</button></div></div>";
 
             }
         }
@@ -467,6 +496,11 @@ $.ajax({
     document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!"; 
     
     document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
+    
+    function delete_click(clicked_id) {
+      var Group_ID = clicked_id.substring(1);
+      document.getElementById("deletemodalID").innerHTML = Group_ID;
+    }
   
     function reply_click(clicked_id) {
       
