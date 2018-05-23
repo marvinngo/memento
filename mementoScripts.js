@@ -210,6 +210,332 @@ function huehuehue() {
     }
 }
 
+// Function that populates the createjoin.php page with content
+
+$(function() {
+  
+  if ($('body').is('.createJoinPage')) {
+
+  var User_Name = userNameID.innerHTML;
+  
+  var userInfo = {"User_Name":User_Name};
+
+  //JSON.stringify(userInfo);
+  console.log(userInfo);
+  
+$.ajax({
+  url: "ajax-post-userReg.php",
+  dataType: "json",
+  type: "POST",
+  data: userInfo,
+  success: function(data) {
+
+    var userReg = data;
+
+    console.log("user reg data:", userReg);
+
+    $.ajax({
+    url: "ajax-get-groups.php",
+    dataType: "json",
+    type: "GET",
+    success: function(data) {
+      
+      console.log("groups data:",data);
+
+      var userRegLength = Object.keys(userReg).length;
+      var groupLength = Object.keys(data).length;
+
+      // iterate through user registration info
+      for (i = 0; i < userRegLength; i++) {
+
+        //iterate through all groups
+        for (g = 0; g < groupLength; g++) {
+          if (userReg[i]["Group_ID"] == data[g]["ID"]) {
+            
+            tables.innerHTML += "<div class='clickableDiv' id='" + userReg[i]["Group_ID"] + "hideid'><a id=" + userReg[i]["Group_ID"] + " href='#' data-toggle='modal' onClick='reply_click(this.id)' data-target='#aboutModal'><div class='row xs-12 mx-2'><li class='media'><img class='mr-2 mb-3' src=" + data[g]["Group_ImgLoc"] + " alt='group picture'><div class='media-body'><h4 class='mt-0 mb-1'>" + data[g]["Group_Name"] + "</h4><p>Group ID: " + userReg[i]["Group_ID"] + "</p><p>" + data[g]["Group_Description"] + "</p></div></li></div></a><p><form action='upload.php' method='post' enctype='multipart/form-data'>Choose a profile picture for your group (optional):<input type='hidden' name='Group_ID' value=" + userReg[i]["Group_ID"] + "><input type='file' name='grouppic'><input type='submit' value='Upload' name='submit'></form></p><div class='text-center'><button type='button' id='0" + userReg[i]["Group_ID"] + "' name='deleteButton' onClick='delete_click(this.id)' class='groupDelete mb-2' href='#' data-toggle='modal' data-target='#deleteModal'>Delete Group</button></div></div>";
+
+            }
+        }
+      }
+
+
+
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR.statusText);
+    }
+  });
+
+  },
+  error: function(jqXHR, textStatus, errorThrown) {
+      console.log(jqXHR.statusText);
+  }
+});
+    }
+});
+
+// Reply click - populates group modal with information about the group
+
+function reply_click(clicked_id) {
+      
+    // Updates the modal with the id of what was clicked - the id is set to the Group_Name when created.
+      
+    var Group_Event_ID;
+      
+    var allbudgetsentered;
+    
+    Group_ID = (clicked_id);
+    document.getElementById("modalgroupID").innerHTML = Group_ID;
+    
+        // Ajax call to get query database for groups, find the group that matches the id that was clicked, updates the modal with group description and number of members.
+      
+        $.ajax({
+            url: "ajax-get-groups.php",
+            dataType: "json",
+            type: "GET",
+            success: function(data) {
+              
+                var length = Object.keys(data).length;
+              
+                var Group_Size = 0;
+                
+                var Group_ImgLoc;
+                
+                for (i = 0; i < length; i++) {
+                  
+                  //console.log("Group Name: " + Group_Name);
+                  //console.log(data[i]["Group_Name"]);
+                  
+                  if (data[i]["ID"] === Group_ID) {
+                    
+                    //console.log("i = " + i);
+                    
+                  //console.log(data[i]["Group_Description"]);
+                    Group_Description = data[i]["Group_Description"];
+                    Group_Size = "" + data[i]["Group_Size"];
+                    Group_Event_ID = data[i]["Event_Name"];
+                    Group_Name = data[i]["Group_Name"];
+                    
+                    document.getElementById("modalgroupname").innerHTML = Group_Name;
+                    document.getElementById("groupEventID").innerHTML = Group_Event_ID;
+                    
+                    Group_ImgLoc = data[i]["Group_ImgLoc"];
+                    document.getElementById("grpimg").setAttribute("src", Group_ImgLoc);
+                    document.getElementById("modalgroupdescription").innerHTML = "" + Group_Description;
+                    document.getElementById("numbermembers").innerHTML = "Members (max <span id='groupSizeID'>" + Group_Size + "</span>):</br>";  
+              } 
+              }
+              
+              // Second Ajax call inside this one to access Group_Size variable.
+              
+                          
+      // This Ajax call queries the Registration table to find the number
+      // of users in the group, and if the group is full, the total budget.
+      
+      $.ajax({
+        url: "ajax-get-registration.php",
+        dataType: "json",
+        type: "POST",
+        success: function(data) {
+            // get events
+            var events = "";
+            //console.log("test");
+            //console.log(data);
+          
+            var length = Object.keys(data).length;
+            var userCount = 0;
+            var userBudgetCount = 0;
+            
+            // Create var outside loop so it's accessible outside loop:
+            var groupBudget = 0;
+          
+            document.getElementById("currentmembers").innerHTML = "<h5>" + "</h5>";
+                
+            for (i = 0; i < length; i++) {
+
+              if (data[i]["Group_ID"] === Group_ID) {
+                
+                userCount++;
+
+                document.getElementById("currentmembers").innerHTML += "<h5>" + data[i]["User_Name"] + "</br></h5>";
+                
+                // Sum up the group's budget:
+                
+                var Reg_Budget = data[i]["Registration_Budget"];
+                //console.log("Reg_Budget = " + Reg_Budget)
+                  if (Reg_Budget != null) {
+                    
+                  groupBudget += Number(Reg_Budget);
+                  userBudgetCount++;
+                    
+                }
+                
+                  if (User_Name == data[i]["User_Name"]) {
+                    if (Reg_Budget != null) {
+                  document.getElementById("currentBudgetID").innerHTML = "$" + Number(Reg_Budget).toFixed(2);
+                    } else {
+                      document.getElementById("currentBudgetID").innerHTML = "Please enter below";
+                    }
+                  }
+                
+              } 
+              }
+          
+              allbudgetsentered = false;
+          
+              if (userCount == Group_Size && userBudgetCount == Group_Size) {
+                //console.log("userBudgetCount: " + userBudgetCount);
+                //console.log("Group size: " + Group_Size);
+                allbudgetsentered = true;
+                groupBudget /= Group_Size;
+                groupBudget = Number(groupBudget).toFixed(2);
+                
+              } else {
+                groupBudget = null;
+              }
+
+                     
+ 
+              if (!allbudgetsentered || userCount < Group_Size) {
+                document.getElementById("groupBudgeth5").innerHTML = "<h6>The Group must be full and all members must have submitted budgets for Event options to be displayed. However, you can browse the full list of Event <a href='allevents.php'>here.</a></h6>";
+              }
+          
+              if (userCount == Group_Size && allbudgetsentered) {
+                    document.getElementById("groupBudgeth5").innerHTML = "Budget per Person: " + "<span id=groupBudget>$" + groupBudget + "</span>";
+              }
+                
+      // This Ajax call queries the database for all Events.
+          
+      // First compile the data needed to query database for appropriate Events:
+          
+      var groupInfo = {"Group_Size":Group_Size,"Group_Budget_Set":allbudgetsentered,"Group_BudgetPP":groupBudget,"Group_Event_ID":Group_Event_ID}
+      
+      console.log("sent: ", groupInfo);
+      
+        $.ajax({
+        url: "ajax-get-events.php",
+        dataType: "json",
+        type: "POST",
+        data: groupInfo,
+        success: function(data) {
+            //console.log("test");
+            //console.log(data);
+          
+            //Only show first div and set it to Group's Event if an Event is set for the group:
+            console.log("received: ", data);
+            console.log("Group_Event_ID: " + Group_Event_ID);
+          
+            if (Group_Event_ID) {
+            console.log("if statement entered.");
+            // If the Group already has an Event set, show that Event and hide others:
+              
+            modalbodyevents.innerHTML = "<div id='selectedEvent' class='text-center mb-3'>Your group has selected the following event:<br></div><div id='eventDiv1' class='w-100 mb-3'>"
+                    + "<div class='card mx-auto'><img id='event1image' class='card-img-top'"
+                    + "src='" + data[0]["Event_ImgLocation"]
+                    + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
+                    + data[0]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
+                    + data[0]["Event_Description"] + "</p><a id='event1link' href='" + data[0]["Event_URL"]
+                    + "'>Visit their site for more information</a></div></div></div>";   
+              
+              
+            // Else populate with relevant Events:
+              
+            } else if (allbudgetsentered) {
+              
+            var length = Object.keys(data).length;
+            
+            if (length > 0){
+              
+            modalbodyevents.innerHTML = "The following events are recommended for your group based on your group size and budget per person. Choose one for your group and make it happen!";
+              
+            for (i = 0; i < length; i++) {
+            
+            modalbodyevents.innerHTML += "<div id='eventDiv1' class='w-100 mb-3'>"
+                    + "<div class='card mx-auto'><img class='card-img-top'"
+                    + "src='" + data[i]["Event_ImgLocation"]
+                    + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
+                    + data[i]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
+                    + data[i]["Event_Description"] + "</p><a href='" + data[i]["Event_URL"]
+                    + "'>Visit their site for more information</a><button id='"
+                    + data[i]["ID"] + "' type='button' onclick='set_event(this.id)'"
+                    + "class='btn btn-primary float-right'>Select This Event For Your Group</button></div></div></div>";
+            }
+              
+            }
+              
+
+          
+        } else {
+          // Clear the events if the group isn't ready to pick one yet:
+          modalbodyevents.innerHTML ="";
+        }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#modalgroupdescription").text(jqXHR.statusText);
+        }
+      });
+          
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            $("#modalgroupdescription").text(jqXHR.statusText);
+        }
+      });
+              
+              
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $("#modalgroupdescription").text("An error has occurred.");
+            }
+          }); 
+      
+      }
+
+// Defines action of the 'Select This Event For Your Group' button.
+
+function set_event(clicked_id) {
+      
+      var Event_ID = clicked_id;
+      
+      var Group_Name = document.getElementById("modalgroupname").innerHTML;
+      
+      console.log("Clicked id: " + clicked_id);
+      
+      var eventInfo = {"Group_Name":Group_Name,"Event_ID":Event_ID};
+      
+      JSON.stringify(eventInfo);
+      
+      console.log(eventInfo);
+      
+      $.ajax({
+        url: "ajax-post-selectEvent.php",
+        dataType: "json",
+        type: "POST",
+        data: eventInfo,
+        success: function(data) {
+          
+        console.log("Data received: ", data);
+          
+        if (data["error"] = "no") {
+          
+        modalbodyevents.innerHTML = "<div id='selectedEvent' class='text-center mb-3'>Your group has selected the following event:<br></div><div id='eventDiv1' class='w-100 mb-3'>"
+                    + "<div class='card mx-auto'><img id='event1image' class='card-img-top'"
+                    + "src='" + data[0]["Event_ImgLocation"]
+                    + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
+                    + data[0]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
+                    + data[0]["Event_Description"] + "</p><a id='event1link' href='" + data[0]["Event_URL"]
+                    + "'>Visit their site for more information</a></div></div></div>"; 
+          
+          }
+          
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.statusText);
+        }
+      });
+      
+      
+    }
+
 // Function that validates the create group form:
 
 $("#createSubmitButton").click(function(event) {
@@ -368,6 +694,19 @@ $("#joinSubmitButton").click(function(event) {
         }
       });
       });
+
+// Function that clears errors from the modals associated with the Create and Join Group buttons when they are pressed.
+
+function clearModalErrors() {
+  document.getElementById("createGroupError").innerHTML = "";
+  document.getElementById("joinGroupError").innerHTML = "";
+  document.getElementById("groupnameError").innerHTML = "";
+  document.getElementById("groupPwError").innerHTML = "";
+  document.getElementById("groupPwMatch").innerHTML = "";
+  document.getElementById("descriptionError").innerHTML = "";
+  document.getElementById("groupSizeError").innerHTML = "";
+  document.getElementById("joinGroupError").innerHTML = "";
+}
 
 // Login function for login modal on index.php, registration.php and allevents.php 
 
@@ -612,6 +951,13 @@ $("#budgetSubmit").click(function(event) {
         }
       });
     });
+
+// Function that updates the delete modal with the ID of the group that was clicked, which is then used if the user confirms the delete action.
+
+function delete_click(clicked_id) {
+      var Group_ID = clicked_id.substring(1);
+      document.getElementById("deletemodalID").innerHTML = Group_ID;
+}
 
 // Calls ajax to delete a group from the registration and group tables, then removes it from the page:
 
