@@ -190,7 +190,7 @@ if($_SESSION['loggedin'] === false){
               </div>
               
               <!-- Description -->
-              <div class="form-row mx-auto my-4" style="height: 100px;">
+              <div class="form-row mx-auto mt-4" style="height: 100px;">
                 <textarea type="text" id="descriptionForm" class="form-control" rows ="5" name="Group_Description" placeholder="Description" required></textarea>
               </div>
                 <div id="descriptionError"></div>

@@ -236,7 +236,7 @@ padding-top: 2%;
   width: 100%;
 }
 #mockup {
-  width: 70%;
+  width: 30%;
 }
 
 #seconddiv {
@@ -290,16 +290,11 @@ img.mr-2 {
   color: #1A75C1;
   font-size: 14pt;
 }
-#usernameError, #passwordError, #passwordMatch, #emailError, #registrationError, #loginErrorID2, #groupnameError, #groupPwError, #groupPwMatch, #groupSizeError, #descriptionError {
+#usernameError, #passwordError, #passwordMatch, #emailError, #registrationError, #loginErrorID, #loginErrorID2, #groupnameError, #groupPwError, #groupPwMatch, #groupSizeError, #descriptionError, #joinGroupError {
   color: red;
   font-size: 18px;
   margin: auto;
   padding-top: 5px;
-}
-
-#registrationError {
-  color: red;
-  font-size: 18px;
 }
 
 #selectedEvent {
@@ -324,6 +319,9 @@ img.mr-2 {
   #grpimg {
     width: 150px;
     height: 150px;
+  }
+  #mockup {
+    width: 70%;
   }
 
 }
