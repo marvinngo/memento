@@ -114,14 +114,25 @@ border: none;
   width: 100%
 }
 
+/* positions donate modal */
 .modal-content {
   position: relative;
   transform: translateY(70%);
 }
-
 .modal-header {
   background-color: #FF9900;
 }
+
+/* centers title and description for donate modal */
+.modal-title {
+  position: relative;
+top: -14px !important;
+
+}
+.modal-desc {
+  top: 8px !important;
+  position: relative;
+  
 
 .loginmodal-submit {
   background: #FFF;
