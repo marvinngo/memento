@@ -115,11 +115,11 @@ border: none;
 }
 
 /* positions donate modal */
-.modal-content {
+#blockoPayModal .modal-content {
   position: relative;
   transform: translateY(70%);
 }
-.modal-header {
+#blockoPayModal .modal-header {
   background-color: #FF9900;
 }
 
@@ -132,7 +132,7 @@ top: -14px !important;
 .modal-desc {
   top: 8px !important;
   position: relative;
-  
+} 
 
 .loginmodal-submit {
   background: #FFF;
