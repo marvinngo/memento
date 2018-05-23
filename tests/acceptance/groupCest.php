@@ -14,6 +14,20 @@ function logout(AcceptanceTester $I) {
     $I->wait(3);
 }
 
+function createGroup(AccepTanceTester $I, $groupName) {
+    $I->click('Create Group');
+    $I->wait(2);
+    $I->fillField('#groupNameForm', $groupName);
+    $I->fillField('#groupPasswordForm', 'testing1');
+    $I->fillField('#confirmGroupPasswordForm', 'testing1');
+    $I->fillField('#descriptionForm','Test description');
+    $I->selectOption('#totalPeople', '5');
+    $I->click('Submit');
+    $I->wait(2);
+    $I->click('#createModal .close');
+    $I->wait(1);
+}
+
 /**
  * Tests for the Groups page.
  */
@@ -44,18 +58,20 @@ class groupCest
     public function createGroup(AcceptanceTester $I)
     {
         $groupName = substr(md5(rand()), 0, 7); //generate random name
-        $I->click('Create Group');
-        $I->wait(2);
-        $I->fillField('#groupNameForm', $groupName);
-        $I->fillField('#groupPasswordForm', 'testing1');
-        $I->fillField('#confirmGroupPasswordForm', 'testing1');
-        $I->fillField('#descriptionForm','Test description');
-        $I->selectOption('#totalPeople', '5');
-        $I->click('Submit');
-        $I->wait(2);
+        createGroup($I, $groupName);
         $I->see($groupName);
-        $I->click('#createModal .close');
-        $I->wait(1);
+    }
+
+    /**
+     * Checks if the app remembers whether a user made a group.
+     */
+    public function persistence(AcceptenceTester $I) 
+    {
+        $groupName = substr(md5(rand()), 0, 7); //generate random name
+        createGroup($I, $groupName);
+        logout($I);
+        login($I);
+        $I->see($groupName);
     }
 
     /**

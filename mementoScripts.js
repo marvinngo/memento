@@ -177,7 +177,7 @@ function validate() {
 
 //checks username regex and displays alert 
 function checkGroupName(input) {
-    let regex = /^[a-zA-Z0-9]+$/;
+    let regex = /^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$/;
 
     //true if username is not between 4-20 chars AND does not match regex
     if ((input.value.length < 4 || input.value.length > 20) && !regex.test(input.value)) {
