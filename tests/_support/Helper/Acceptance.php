@@ -6,8 +6,5 @@ namespace Helper;
 
 class Acceptance extends \Codeception\Module
 {
-    public function seeNav(AcceptanceTester $I) {
-        $I->see('Sign Up');
-        $I->seeElement('nav');
-    }
+
 }

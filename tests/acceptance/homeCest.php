@@ -1,19 +1,5 @@
 <?php
 
-function login(AcceptanceTester $I) {
-    $I->click('Login');
-    $I->wait(2);
-    $I->fillField('#usernameForm2','Tester');
-    $I->fillField('#passwordForm2', 'testing1');
-    $I->click('Sign in');
-    $I->wait(4);
-}
-
-function logout(AcceptanceTester $I) {
-    $I->click('Logout');
-    $I->wait(4);
-}
-
 /**
  * Tests for the Home page.
  */
@@ -61,16 +47,16 @@ class homeCest
         // $I->fillField('#passwordForm2', 'testing1');
         // $I->click('Sign in');
         // $I->wait(4);
-        login($I);
+        $I->login();
         $I->seeInCurrentUrl('createjoin');
         $I->see('Create a Memento');
     }
 
     public function loginThenLogout(AcceptanceTester $I)
     {
-        login($I);
+        $I->login();
         $I->seeInCurrentUrl('createjoin');
-        logout($I);
+        $I->logout();
         $I->see('Login');
         $I->dontSee('Welcome');
     }
