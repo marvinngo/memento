@@ -1,10 +1,16 @@
-<?php 
-      if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-      if (!isset($_SESSION['loggedin'])) {
-      $_SESSION['loggedin'] = false;
-  }
+<?php
+  
+// Start a session if it doesn't already exist, and set state of logged in to false if it isn't set.
+
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
+// Set session state of logged in to false if it isn't already set.
+
+if (!isset($_SESSION['loggedin'])) {
+  $_SESSION['loggedin'] = false;
+}
 ?>
 
 <!DOCTYPE html>

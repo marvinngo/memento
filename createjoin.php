@@ -1,7 +1,12 @@
 <?php 
-      if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
+
+// Start a session if it doesn't already exist.
+
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
+// Redirect to the home page if user is logged in.
 
 if($_SESSION['loggedin'] === false){
   header( 'Location: index.php' ) ;

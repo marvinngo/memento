@@ -1,12 +1,18 @@
 <?php 
-      if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
+
+// Start a session if it doesn't already exist, and set state of logged in to false if it isn't set.
+
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
+// Redirect to the home page if user is logged in.
+
 if($_SESSION['loggedin'] === true){
   header( 'Location: index.php' ) ;
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,10 +45,6 @@ if($_SESSION['loggedin'] === true){
         <div class="dropdown-divider"></div>
         <li class="nav-item my-0">
           <a class="nav-link" href="allevents.php">Events</a>
-        </li>
-        <div id="groupDivider" class="dropdown-divider"></div>
-        <li id="Groups" class="nav-item my-0">
-          <a class="nav-link" href="createjoin.php">Groups</a>
         </li>
         <div class="dropdown-divider"></div>
         <li class="nav-item my-0">
@@ -208,17 +210,6 @@ if($_SESSION['loggedin'] === true){
       2018 &copy; Team Five
   </div>
 </footer>
-
-<?php if($_SESSION['loggedin'] === false): ?>
-  
-  <script>
-    
-  document.getElementById("Groups").innerHTML = ""; 
-  document.getElementById("groupDivider").setAttribute("class", "");
-  
-  </script>
-  
-<?php endif; ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -1,12 +1,16 @@
 <?php 
-      if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
 
-      if (!isset($_SESSION['loggedin'])) {
-      $_SESSION['loggedin'] = false;
-  }
+// Start a session if it doesn't already exist.
 
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
+// Set session state of logged in to false if it isn't already set.
+
+if (!isset($_SESSION['loggedin'])) {
+  $_SESSION['loggedin'] = false;
+}
 ?>
 
 <!DOCTYPE html>
@@ -243,15 +247,6 @@
       2018 &copy; Team Five
   </div>
 </footer>
-  
-
-
-
-
-
-
-
-
 
   <?php if($_SESSION['loggedin'] === false): ?>
   
