@@ -18,13 +18,25 @@ html, body, footer, footer a {
 button {
   border-radius: 30px !important;
 }
+/* images on mygroups page */
+img.mr-2 {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #8c8c8c;
+}
+
 /* Class Selectors */
 
 /* aboutgroups (events) */
 .card-text {
   font-size: 14pt;
 }
-
+/* front page carousel caption */
+.carousel-caption {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
 /* front page carousel images */
 .carousel-inner img {
   width: 100%;
@@ -34,24 +46,11 @@ button {
 .carouselTint {
   filter: brightness(.6);
 }
-/* front page carousel caption */
-.carousel-caption {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+.c {
+  align-content: center;
+  margin-bottom: 10px;
+  width: 70%;
 }
-
-/* colour of text on hover (my groups page) */
-.clickableDiv a:hover {
-  text-decoration:none;
-  color: #d8d8d8;
-}
-
-/* colour of text (my groups page) */
-.clickableDiv a {
-  color: #f2f2f2;
-}
-
 /* style of each groups div (my groups page) */
 .clickableDiv {
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -60,12 +59,25 @@ button {
   margin-bottom: 7px;
   width: 100%;
 }
-
+/* colour of text (my groups page) */
+.clickableDiv a {
+  color: #f2f2f2;
+}
+/* colour of text on hover (my groups page) */
+.clickableDiv a:hover {
+  text-decoration:none;
+  color: #d8d8d8;
+}
 /* size of 'join group' button on aboutgroups page */
 .createjoin {
   width: 180px;
 }
-
+/* colors for sign in button in nav bar */
+.deleteButton {
+  background-color: red;
+  color: #FFF;
+  border: none;
+}
 /* style of transparent divs */
 .divBorder {
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -73,7 +85,11 @@ button {
   background: rgba(255, 255, 255, 0.15);
   
 }
-
+.groupDelete {
+  background-color: #1A75C1;
+  color: #FFF;
+  border: none;
+}
 /* three icons on front page,  */
 .icons {
   width: 50%;
@@ -87,16 +103,21 @@ border: none;
   background-size: cover;
   height: 82%;
 }
-
+.loginmodal-submit {
+  background: #FFF;
+  color: #1A75C1;
+  width: 70%;
+}
 /* background for createjoin page */
 .masthead {
   min-height: 100%;
   width: 100%;
   background: url("img/createjoin/background.jpg");
+  background-attachment: fixed;
   background-position: center center;
+  background-repeat: no-repeat;
   background-size: cover;
 }
-
 .modal {
   border: 0px;
 }
@@ -104,7 +125,6 @@ border: none;
   background: #FFF;
   color: #1A75C1;
 }
-
 .modal-header {
   background: #AED6F1;
   width: 100%;
@@ -113,56 +133,25 @@ border: none;
   margin-bottom: 20px;
   width: 100%
 }
-
-/* positions donate modal */
-#blockoPayModal .modal-content {
-  position: relative;
-  transform: translateY(70%);
-}
-#blockoPayModal .modal-header {
-  background-color: #FF9900;
-}
-
-/* centers title and description for donate modal */
-.modal-title {
-  position: relative;
-top: -14px !important;
-
-}
 .modal-desc {
   top: 8px !important;
   position: relative;
 } 
-
-.loginmodal-submit {
-  background: #FFF;
-  color: #1A75C1;
-  width: 70%;
+/* centers title and description for donate modal */
+.modal-title {
+  position: relative;
+top: -14px !important;
 }
-.c {
-  align-content: center;
-  margin-bottom: 10px;
-  width: 70%;
-  
-}
-
-.modaluserpw {
-  width: 100%;
-}
-
-
 /* links in navbar */
 .nav-link {
   font-size: 1.1em;
   text-align: right;
 }
-
 /* offsets the navbar when 'about' is clicked */
 .navbarOffset {
   top: -130px;
   position: relative;
 }
-
 .oneliner {
   width: 80%;
 }
@@ -183,12 +172,6 @@ top: -14px !important;
   background: url("img/loggedin/sky.jpg");
   background-size: cover;
 }
-/* colors for sign in button in nav bar */
-.signin {
-  background-color: #FFF;
-  color: #1A75C1;
-}
-
 /* background color for site footer */
 .site-footer {
   background: #273443;
@@ -204,22 +187,77 @@ top: -14px !important;
 .site-footer a:hover {
   color: white;
 }
-
 /* colour for buttons (most pages) */
 .submitButton {
   background-color: #1A75C1;
 }
-
+.tenptfont {
+  font-size: 10pt;
+}
 /* colour of title text for most pages */
 .title {
   color: #F6F6F6;
 }
-
+/* ID Selectors */
+#A{
+  display: none;
+  position:absolute;
+  z-index: 1;
+	left: -100%; /* Set initial position for each image off-screen left -- adjust according to image width */
+	animation:mymove 8s infinite;	/* total animation time for each image is 8 seconds, loops forever */
+	animation-direction:normal;	
+	animation-delay:0s;
+	-webkit-animation-delay: 0s;
+}
+@keyframes mymove {
+	from {left:-100%;}	/*off-screen left (adjust for image width)*/
+	to {left:150%;}		/*off-screen right*/
+}
+#aboutModal {
+  background: rgba(255, 255, 255, 0.3);
+  color: #1A75C1;
+}
 #belowCarousel {
   background-color: rgb(155, 203, 245);
 }
+/* positions donate modal */
+#blockoPayModal .modal-content {
+  position: relative;
+  transform: translateY(70%);
+}
+#blockoPayModal .modal-header {
+  background-color: #FF9900;
+}
+#BudgetErrorID {
+  color: red;
+}
+#citylogo {
+  width: 50%;
+}
+/* content of mygroups page */
+#content {
+  font-size: 12pt;
+  color: #F6F6F6;
+}
+/* copyright in footer */
+#copyright {
+  background-color: #232F3C;
+}
+#descrip {
+  font-size: 10pt;
+  padding-top: 2%;
+}
+#descriptionError, #emailError, #groupnameError, #groupPwError, #groupPwMatch, #groupSizeError, #joinGroupError, #loginErrorID, #loginErrorID2, #passwordError, #passwordMatch, #registrationError, #usernameError {
+  color: red;
+  font-size: 18px;
+  margin: auto;
+  padding-top: 5px;
+}
 #event1link {
   color: navy;
+}
+#eventcard {
+  background: rgba(255, 255, 255, 0);
 }
 #firstDiv {
   background-color: #fff;
@@ -228,79 +266,13 @@ top: -14px !important;
   width: 250px;
   height: 250px;
 }
-#icontext {
-  font-size: 16pt;
-}
-
-#descrip {
-font-size: 10pt;
-padding-top: 2%;
-}
-
-#slideshow {
-  padding: 0 !important;
-}
-#eventcard {
-  background: rgba(255, 255, 255, 0);
-}
 #howitworks {
   font-size: 16pt;
   margin-bottom: 8px;
 }
-
-.tenptfont {
-  font-size: 10pt;
-  
+#icontext {
+  font-size: 16pt;
 }
-
-#mockupContainer {
-  width: 100%;
-}
-#mockup {
-  width: 30%;
-}
-
-#seconddiv {
-  background-color: #DDEDFB;
-}
-
-
-#missionStatement {
-  color: white;
-  background-color:#3193E3;
-}
-
-#citylogo {
-  width: 50%;
-}
-
-#BudgetErrorID {
-  color: red;
-}
-/* copyright in footer */
-#copyright {
-  background-color: #232F3C;
-}
-
-/* images on mygroups page */
-img.mr-2 {
-  width: 100px;
-  height: 100px;
-  border: 1px solid #8c8c8c;
-}
-
-/* ID Selectors */
-
-#aboutModal {
-  background: rgba(255, 255, 255, 0.3);
-  color: #1A75C1;
-}
-/* content of mygroups page */
-#content {
-  font-size: 12pt;
-  color: #F6F6F6;
-}
-
 /* title of main div containers */
 #main {
   font-size: 20pt;
@@ -311,16 +283,25 @@ img.mr-2 {
   color: #1A75C1;
   font-size: 14pt;
 }
-#usernameError, #passwordError, #passwordMatch, #emailError, #registrationError, #loginErrorID, #loginErrorID2, #groupnameError, #groupPwError, #groupPwMatch, #groupSizeError, #descriptionError, #joinGroupError {
-  color: red;
-  font-size: 18px;
-  margin: auto;
-  padding-top: 5px;
+#missionStatement {
+  color: white;
+  background-color:#3193E3;
 }
-
+#mockup {
+  width: 30%;
+}
+#mockupContainer {
+  width: 100%;
+}
+#seconddiv {
+  background-color: #DDEDFB;
+}
 #selectedEvent {
   font-size: 20px;
   font-weight: bold;
+}
+#slideshow {
+  padding: 0 !important;
 }
 /*---Media Queries --*/
 @media (max-width: 992px) {
@@ -346,56 +327,30 @@ img.mr-2 {
   }
 
 }
-
-
 @media (max-width: 576px) {
-
-  /* hides carousel captions */
-  .carousel-caption h1, .carousel-caption h3 {
-    display: none;
-  }
-
   /* card title to smaller size (home page, aboutgroup) */
   .card-title {
     font-size: 20pt;
   }
-
+  /* hides carousel captions */
+  .carousel-caption h1, .carousel-caption h3 {
+    display: none;
+  }
   /* title for createjoin page */
   .createheading {
     display: none;
   }
-
-  /* used to center text */
-  .textcenter{
-    text-align: center;
-  }
-
   /* used on home page */
   .greyBG {
     background-color: #e9ecef;
   }
-  
-/* easter egg is smaller when viewed on smaller viewport */
+  /* used to center text */
+  .textcenter{
+    text-align: center;
+  }
+  /* easter egg is smaller when viewed on smaller viewport */
   #A{ 
     width: 500px;
   }
 
 }
-
-
-#A{
-  display: none;
-  position:absolute;
-  z-index: 1;
-	left: -100%; /* Set initial position for each image off-screen left -- adjust according to image width */
-	animation:mymove 8s infinite;	/* total animation time for each image is 8 seconds, loops forever */
-	animation-direction:normal;	
-	animation-delay:0s;
-	-webkit-animation-delay: 0s;
-}
-
-@keyframes mymove
-	{
-	from {left:-100%;}	/*off-screen left (adjust for image width)*/
-	to {left:150%;}		/*off-screen right*/
-	}
