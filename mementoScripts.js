@@ -141,17 +141,7 @@ function checkPw(input) {
 
 }
 
-
-// //checks if passwords match
-// function validate(){
-//     // console.log((document.getElementById("passwordForm").value === document.getElementById("confirmpasswordForm").value));
-
-// if ((document.getElementById("passwordForm").value !== document.getElementById("confirmpasswordForm").value)){
-//     alert("Passwords do not match.");
-
-//     return (document.getElementById("passwordForm").value === document.getElementById("confirmpasswordForm").value);
-// }
-// }
+// Checks email regex and displays alert
 
 function checkEmail(input) {
     let regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
@@ -165,15 +155,12 @@ function checkEmail(input) {
     }
 }
 
-
 //prevents form from submitting if no option has been selected for group size
 function validate() {
     var select = document.getElementById('totalPeople');
     // console.log(select.value);
     return !select.value == 0;
 }
-
-
 
 //checks username regex and displays alert 
 function checkGroupName(input) {
@@ -209,6 +196,17 @@ function huehuehue() {
         x.style.display = "block";
     }
 }
+
+// Function that checks if user is logged in, and if they are, changes the Navigation buttons to welcome the user and give access to the Groups page instead of Registration.
+
+$(function() {
+  
+  if ($('body').is('.createJoinPage')) {
+    
+    
+    
+    }
+});
 
 // Function that populates the createjoin.php page with content
 

@@ -114,35 +114,30 @@ if($_SESSION['loggedin'] === false){
             <button type="button" class="btn btn-light btn-lg createjoin" data-toggle="modal" data-target="#joinModal" onclick="clearModalErrors()" style="background-color: #1A75C1; color: #FFF;">Join Group</button>
           <!-- <button type="button" onclick="location.href = 'join.html'" class="btn btn-light btn-lg createjoin" style="background-color: #1A75C1; color: #FFF;">Join Group</button> -->
         </div>
-
-
-
-
-
-  </div>
+      </div>
 
       <!-- main div container -->
-<div class="container-fluid divBorder my-4">
-  <div id="main" class="container col-12 w-90 px-2 pt-4 title">
-    <div class="row xs-12 text-left font-weight-bold">
-      <div class="col">
-        <!-- signup form -->
-        <div class="container px-3 rounded mb-4">
-          <div class="row xs-12 text-left font-weight-bold">
-            <div id="title" class="col text-center mb-3">
-              My Groups
+    <div class="container-fluid divBorder my-4">
+      <div id="main" class="container col-12 w-90 px-2 pt-4 title">
+        <div class="row xs-12 text-left font-weight-bold">
+          <div class="col">
+            <!-- signup form -->
+            <div class="container px-3 rounded mb-4">
+              <div class="row xs-12 text-left font-weight-bold">
+                <div id="title" class="col text-center mb-3">
+                  My Groups
+                </div>
+              </div>
+              <div id="content" class="row xs-12">
+                <ul id="tables" class="list-unstyled w-100">
+                </ul>
+              </div>
             </div>
-          </div>
-          <div id="content" class="row xs-12">
-            <ul id="tables" class="list-unstyled w-100">
-            </ul>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  </div>
       </div>
+  </div>
       
 </header>
 
@@ -416,7 +411,6 @@ if($_SESSION['loggedin'] === false){
 var User_Name='<?php echo $_SESSION['User_Name'];?>';
   
 document.getElementById("userNameID").innerHTML = User_Name;
-    
 document.getElementById("ms").innerHTML += User_Name + "!";  
 document.getElementById("footerHome").innerHTML = "";
 document.getElementById("footerSignup").innerHTML = "Home";
