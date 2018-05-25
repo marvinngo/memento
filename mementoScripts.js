@@ -1,5 +1,4 @@
 var count=0;
-var regexPass=false;
 
 // User registration front and back end validation and submission function:
 
@@ -96,95 +95,11 @@ $("#registerSubmit").click(function(event) {
     }
   });
 
-function construction() {
-    alert("Page is under construction!");
-}
-
-
-//checks username regex and displays alert 
-function checkUsername(input) {
-    let regex = /^[a-zA-Z0-9]+$/;
-
-    //true if username is not between 4-20 chars AND does not match regex
-    if ((input.value.length < 4 || input.value.length > 20) && !regex.test(input.value)) {
-        input.setCustomValidity('Username must be between 4 and 20 characters and can only contain letters and numbers.');
-    } 
-    // true if username is not between 4-20 chars
-    else if (input.value.length < 4 || input.value.length > 20) {
-        input.setCustomValidity('Username must be between 4 and 20 characters.'); 
-    } 
-    //true if username does not match regex
-    else if (!regex.test(input.value)) {
-        input.setCustomValidity('Username can only contain letters and numbers.'); 
-    } else {
-            // gets rid of alert box if username is valid
-      input.setCustomValidity('');
-    }
-}
-
-//checks password regex and displays alert 
-function checkPw(input) {
-    let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-    //console.log(!regex.test(input.value));
-    //console.log((document.getElementById("passwordForm").value !== document.getElementById("confirmpasswordForm").value));
-
-     if (!regex.test(input.value)) {
-        input.setCustomValidity("Password must be at least 8 characters long and contain one letter and number.");
-    } else if (input.value !== document.getElementById("confirmpasswordForm").value) {
-        input.setCustomValidity('Passwords do not match.');
-    } else {
-        // gets rid of alert box if username is valid
-    input.setCustomValidity('');
-
-    }
-
-}
-
-// Checks email regex and displays alert
-
-function checkEmail(input) {
-    let regex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
-
-    //true if username is not between 4-20 chars AND does not match regex
-    if (!regex.test(input.value)) {
-        input.setCustomValidity('Please enter a valid email.');
-    } else {
-            // gets rid of alert box if username is valid
-      input.setCustomValidity('');
-    }
-}
-
 //prevents form from submitting if no option has been selected for group size
 function validate() {
     var select = document.getElementById('totalPeople');
     // console.log(select.value);
     return !select.value == 0;
-}
-
-//checks username regex and displays alert 
-function checkGroupName(input) {
-    let regex = /^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$/;
-
-    //true if username is not between 4-20 chars AND does not match regex
-    if ((input.value.length < 4 || input.value.length > 20) && !regex.test(input.value)) {
-        input.setCustomValidity('Group name must be between 4 and 20 characters and can only contain letters and numbers.');
-        regexPass=false;
-    } 
-    // true if username is not between 4-20 chars
-    else if (input.value.length < 4 || input.value.length > 20) {
-        input.setCustomValidity('Group name must be between 4 and 20 characters.'); 
-        regexPass=false;
-    } 
-    //true if username does not match regex
-    else if (!regex.test(input.value)) {
-        input.setCustomValidity('Group name can only contain letters and numbers.'); 
-        regexPass=false;
-    } else {
-            // gets rid of alert box if username is valid
-      input.setCustomValidity('');
-      regexPass=true;
-    }
 }
 
 // Easter egg function
@@ -197,18 +112,81 @@ function huehuehue() {
     }
 }
 
-// Function that checks if user is logged in, and if they are, changes the Navigation buttons to welcome the user and give access to the Groups page instead of Registration.
+// Function that checks if user is logged in, and if they are, changes the 
+// Navigation buttons to welcome the user and give access to the Groups page
+// instead of Registration.
 
 $(function() {
   
-  if ($('body').is('.createJoinPage')) {
+  // The sessionJS class ignores the Registration page, which redirects to Index
+  // if logged in, so styling for logged in users isn't necessary.
+  
+  if ($('body').is('.sessionJS')) {
     
+    if (document.getElementById("sessionStatusID").innerHTML == true) {
     
-    
+      var User_Name = userNameID.innerHTML;
+
+      // Add a welcome and style for the user:
+
+      document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!"; 
+      document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
+
+      // Change the navigation elements - removes the Login button, center the Home button:
+
+      document.getElementById("footerHome").innerHTML = "";
+      document.getElementById("footerSignup").innerHTML = "Home";
+      document.getElementById("footerSignup").setAttribute("href", "index.php");
+      document.getElementById("footerLogin").innerHTML = ""; 
     }
+  }
+  
+  // For pages with a Sign Up navigation button:
+  
+  if ($('body').is('.changeSignUp')) {
+    if (document.getElementById("sessionStatusID").innerHTML == true) {
+
+      // Convert the Signup button to Logout if user is logged in:
+
+        document.getElementById("signup").innerHTML = "Logout";
+        document.getElementById("signup").setAttribute("href", "logout.php");
+    } else {
+      
+      // Hide the Groups navigation button:
+      
+      document.getElementById("Groups").innerHTML = ""; 
+      document.getElementById("groupDivider").setAttribute("class", "");
+      
+    }
+  }
+
+  // Only for the Index homepage, change the Get Started buttons to redirect to the Groups
+  // page if the user is logged in, or back to the Registration if the user logs out:
+  
+  if ($('body').is('.indexPHPpage')) {
+    
+    if (document.getElementById("sessionStatusID").innerHTML == true) {
+
+      document.getElementById("getStarted1").setAttribute("onclick", "location.href='createjoin.php'");
+      document.getElementById("getStarted2").setAttribute("onclick", "location.href='createjoin.php'");
+      document.getElementById("getStarted3").setAttribute("onclick", "location.href='createjoin.php'");
+        
+    } else {
+      
+      // Redirect Get Started to registration if user isn't logged in:
+      
+      document.getElementById("getStarted1").setAttribute("onclick", "location.href='registration.php'");
+      document.getElementById("getStarted2").setAttribute("onclick", "location.href='registration.php'");
+      document.getElementById("getStarted3").setAttribute("onclick", "location.href='registration.php'");
+      
+    }
+  }
+  
+  
+  
 });
 
-// Function that populates the createjoin.php page with content
+// Function that populates createjoin.php with group content:
 
 $(function() {
   
@@ -271,6 +249,85 @@ $.ajax({
 });
     }
 });
+
+// Function that populates allevents.php with events:
+
+  if ($('body').is('.eventsPage')) {
+
+    $.ajax({
+      url: "ajax-get-all-events.php",
+      dataType: "json",
+      type: "POST",
+      success: function(data) {
+
+        //console.log("received: ", data);
+
+        var length = Object.keys(data).length;
+        
+        for (i = 0; i < length; i++) {
+          tables.innerHTML += "<div id='eventDiv1' class='w-100 mb-3'>"
+          + "<div id='eventcard' class='card mx-auto'><img id='event1image' class='card-img-top'"
+          + "src='" + data[i]["Event_ImgLocation"]
+          + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
+          + data[i]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
+          + data[i]["Event_Description"] + "</p><a id='event1link' href='" + data[i]["Event_URL"]
+          + "'>Visit their site for more information</a></div></div></div>"; 
+        }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+          $("#tables").text(jqXHR.statusText);
+      }
+    });
+
+  }
+
+// Login click - for allevents.php page - handles the modal login.
+
+function loginClick(clicked_id) {
+      
+    if (clicked_id == "submitButton") {
+        var User_Name = document.getElementById('usernameForm2').value;
+        var User_Password = document.getElementById('passwordForm2').value;
+        }
+    
+    if (clicked_id == "submitButton2") {
+        var User_Name = document.getElementById('usernameForm').value;
+        var User_Password = document.getElementById('passwordForm3').value;
+        }
+    
+    var userLogin = {"User_Name":User_Name,"User_Password":User_Password};
+      
+    JSON.stringify(userLogin);
+          
+      // This Ajax call sends user login info to the server to either login
+      // the user and redirect them to a new page or return an error message.
+        $.ajax({
+        url: "signin.php",
+        dataType: "json",
+        type: "POST",
+        data: userLogin,
+        success: function(data) {
+          
+          if (data["error"] == "yes") {
+            
+          if (clicked_id == "submitButton") {
+            document.getElementById("loginErrorID").innerHTML = "Error: " + data["return"];
+            }
+    
+          if (clicked_id == "submitButton2") {
+            document.getElementById("loginErrorID2").innerHTML = "Error: " + data["return"];
+            }
+            
+          }
+          if (data["error"] == "no") {
+          window.location = 'createjoin.php';
+          }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.statusText);
+        }
+      });
+  }
 
 // Reply click - populates group modal with information about the group
 
@@ -747,7 +804,6 @@ $("#submitButton").click(function(event) {
         window.location = 'createjoin.php';
         }
 
-
       },
       error: function(jqXHR, textStatus, errorThrown) {
           console.log(jqXHR.statusText);
@@ -1005,8 +1061,6 @@ $("#deleteButton").click(function(event) {
       }
     });
     });
-
-
 
 // Binds enter to the Submit button for the modal login on index.php, registration.php and allevents.php
 // see for more info:

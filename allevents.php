@@ -27,7 +27,7 @@ if (!isset($_SESSION['loggedin'])) {
 
 </head>
   
-<body>
+<body class="sessionJS changeSignUp eventsPage">
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-dark sticky-top w-100" style="background-color: #1A75C1;">
@@ -63,6 +63,8 @@ if (!isset($_SESSION['loggedin'])) {
     </div>
   </nav>
 <!-- The Modal -->
+<div id="userNameID" style="display: none;"></div>
+<div id="sessionStatusID" style="display: none;">false</div>
 <div class="modal fade" id="login" role="dialog">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -113,26 +115,22 @@ if (!isset($_SESSION['loggedin'])) {
     <h1 class="mt-4 eventsheading">Events</h1>
 
       <!-- main div container -->
-<div class="container-fluid divBorder my-4">
-  <div id="main" class="container col-12 w-90 px-2 pt-4 title">
-    <div class="row xs-12 text-left font-weight-bold">
-      <div class="col">
-        <!-- signup form -->
-        <div class="container px-3 rounded mb-4">
-          <div id="content" class="row xs-12">
-            <ul id="tables" class="list-unstyled w-100">
-            </ul>
+    <div class="container-fluid divBorder my-4">
+      <div id="main" class="container col-12 w-90 px-2 pt-4 title">
+        <div class="row xs-12 text-left font-weight-bold">
+          <div class="col">
+            <!-- signup form -->
+            <div class="container px-3 rounded mb-4">
+              <div id="content" class="row xs-12">
+                <ul id="tables" class="list-unstyled w-100">
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
-
-
-
-
-      </div>
       
 </header>
 
@@ -159,72 +157,15 @@ if (!isset($_SESSION['loggedin'])) {
   
 <script>
   
-      function loginClick(clicked_id) {
-      
-    if (clicked_id == "submitButton") {
-        var User_Name = document.getElementById('usernameForm2').value;
-        var User_Password = document.getElementById('passwordForm2').value;
-        }
-    
-    if (clicked_id == "submitButton2") {
-        var User_Name = document.getElementById('usernameForm').value;
-        var User_Password = document.getElementById('passwordForm3').value;
-        }
-    
-    var userLogin = {"User_Name":User_Name,"User_Password":User_Password};
-      
-    JSON.stringify(userLogin);
-          
-      // This Ajax call sends user login info to the server to either login
-      // the user and redirect them to a new page or return an error message.
-        $.ajax({
-        url: "signin.php",
-        dataType: "json",
-        type: "POST",
-        data: userLogin,
-        success: function(data) {
-          
-          if (data["error"] == "yes") {
-            
-          if (clicked_id == "submitButton") {
-            document.getElementById("loginErrorID").innerHTML = "Error: " + data["return"];
-            }
-    
-          if (clicked_id == "submitButton2") {
-            document.getElementById("loginErrorID2").innerHTML = "Error: " + data["return"];
-            }
-            
-          }
-          if (data["error"] == "no") {
-          window.location = 'createjoin.php';
-          }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR.statusText);
-        }
-      });
-  }
-  
-<?php if($_SESSION['loggedin'] === false): ?>
-  
-    
-  document.getElementById("Groups").innerHTML = ""; 
-  document.getElementById("groupDivider").setAttribute("class", "");
-  
-  
-<?php endif; ?>
-  
 <?php if($_SESSION['loggedin'] === true): ?>
 var User_Name='<?php echo $_SESSION['User_Name'];?>';
   
-document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!";  
-document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
-document.getElementById("signup").innerHTML = "Logout";
-document.getElementById("signup").setAttribute("href", "logout.php");
-document.getElementById("footerHome").innerHTML = "";
-document.getElementById("footerSignup").innerHTML = "Home";
-document.getElementById("footerSignup").setAttribute("href", "index.php");
-document.getElementById("footerLogin").innerHTML = "";
+// Store username in a hidden variable for use by external JS file:
+document.getElementById("sessionStatusID").innerHTML = '<?php echo $_SESSION['loggedin'];?>'
+  
+// Store username in a hidden variable for use by external JS file:
+document.getElementById("userNameID").innerHTML = User_Name;
+
 <?php endif; ?>
 </script>
 
@@ -236,41 +177,6 @@ crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="mementoScripts.js"></script>
-  
-  <script>
-/*<![CDATA[*/
-    
-    // Adding all events:  
-  
-// Ajax call to get all events:
-  
-  
-  $.ajax({
-        url: "ajax-get-all-events.php",
-        dataType: "json",
-        type: "POST",
-        success: function(data) {
-          
-          //console.log("received: ", data);
-          
-          var length = Object.keys(data).length;
-          for (i = 0; i < length; i++) {
-          tables.innerHTML += "<div id='eventDiv1' class='w-100 mb-3'>"
-                  + "<div id='eventcard' class='card mx-auto'><img id='event1image' class='card-img-top'"
-                  + "src='" + data[i]["Event_ImgLocation"]
-                  + "' alt='Card image cap'><div class='card-body'><h3 id='event1name' class='card-title'>"
-                  + data[i]["Event_Name"] + "</h3><p id='event1description' class='card-text'>"
-                  + data[i]["Event_Description"] + "</p><a id='event1link' href='" + data[i]["Event_URL"]
-                  + "'>Visit their site for more information</a></div></div></div>"; 
-          }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            $("#tables").text(jqXHR.statusText);
-        }
-      });
-    
-/*]]>*/
-</script>
   
 </body>
 </html>

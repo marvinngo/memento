@@ -37,7 +37,7 @@ if (!isset($_SESSION['loggedin'])) {
 
 </head>
   
-<body>
+<body class="sessionJS indexPHPpage changeSignUp">
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-dark sticky-top w-100" style="background-color: #1A75C1;">
@@ -74,6 +74,8 @@ if (!isset($_SESSION['loggedin'])) {
 </nav>
 
 <!-- The Modal -->
+<div id="userNameID" style="display: none;"></div>
+<div id="sessionStatusID" style="display: none;">false</div>
 <div class="modal fade" id="login">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -247,48 +249,22 @@ if (!isset($_SESSION['loggedin'])) {
       2018 &copy; Team Five
   </div>
 </footer>
-
-  <?php if($_SESSION['loggedin'] === false): ?>
-  
-  <script>
-    
-  document.getElementById("Groups").innerHTML = ""; 
-  document.getElementById("groupDivider").setAttribute("class", "");
-  
-  document.getElementById("getStarted1").setAttribute("onclick", "location.href='registration.php'");
-  document.getElementById("getStarted2").setAttribute("onclick", "location.href='registration.php'");
-  document.getElementById("getStarted3").setAttribute("onclick", "location.href='registration.php'");
-  </script>
-  
-<?php endif; ?>
-
   
 <?php if($_SESSION['loggedin'] === true): ?>
   
   <script>
-  
+
   var User_Name='<?php echo $_SESSION['User_Name'];?>';
     
-  document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!"; 
-  document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
-    
-  document.getElementById("signup").innerHTML = "Logout";
-  document.getElementById("signup").setAttribute("href", "logout.php");
-
-  document.getElementById("footerHome").innerHTML = "";
-  document.getElementById("footerSignup").innerHTML = "Home";
-  document.getElementById("footerSignup").setAttribute("href", "index.php");
-  document.getElementById("footerLogin").innerHTML = "";
+  // Store session status in a hidden variable for use by external JS file:
+  document.getElementById("sessionStatusID").innerHTML = '<?php echo $_SESSION['loggedin'];?>'
   
-  document.getElementById("getStarted1").setAttribute("onclick", "location.href='createjoin.php'");
-  document.getElementById("getStarted2").setAttribute("onclick", "location.href='createjoin.php'");
-  document.getElementById("getStarted3").setAttribute("onclick", "location.href='createjoin.php'");
+  // Store username in a hidden variable for use by external JS file:
+  document.getElementById("userNameID").innerHTML = User_Name;
+
   </script>
 
-
-
 <?php endif; ?>
-
 
 <script
 src="https://code.jquery.com/jquery-3.3.1.js"
@@ -300,9 +276,6 @@ src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="mementoScripts.js"></script>
 <script src="https://www.blockonomics.co/js/pay_button.js"></script>
-
-
-
 
 </body>
 </html>

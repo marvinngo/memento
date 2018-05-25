@@ -29,7 +29,7 @@ if($_SESSION['loggedin'] === false){
 
 </head>
   
-<body class="createJoinPage">
+<body class="createJoinPage sessionJS">
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-dark sticky-top w-100" style="background-color: #1A75C1;">
@@ -57,6 +57,7 @@ if($_SESSION['loggedin'] === false){
             <a id="signup" class="nav-link" href="logout.php">Logout</a>
           </li>
           <div class="dropdown-divider"></div>
+          <div id="sessionStatusID" style="display: none;">false</div>
           <div id="userNameID" style="display: none;"></div>
           <li id="ms" class="nav-item my-0">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#login">Login</a>
@@ -407,21 +408,16 @@ if($_SESSION['loggedin'] === false){
 </footer>
   
 <script>
-  
+// User is redirected if loggedin != true, so no need for if statement
 var User_Name='<?php echo $_SESSION['User_Name'];?>';
-  
+
+// Store session status in a hidden variable for use by external JS file:
+document.getElementById("sessionStatusID").innerHTML = '<?php echo $_SESSION['loggedin'];?>'
+
+// Store username in a hidden variable for use by external JS file:
 document.getElementById("userNameID").innerHTML = User_Name;
-document.getElementById("ms").innerHTML += User_Name + "!";  
-document.getElementById("footerHome").innerHTML = "";
-document.getElementById("footerSignup").innerHTML = "Home";
-document.getElementById("footerSignup").setAttribute("href", "index.php");
-document.getElementById("footerLogin").innerHTML = "";
-  
-var User_Name='<?php echo $_SESSION['User_Name'];?>';
-
-document.getElementById("ms").innerHTML = "Welcome " + User_Name + "!"; 
-
-document.getElementById("ms").setAttribute("class", "nav-link ml-5"); 
+    
+ 
 </script>
   
 <script src="https://code.jquery.com/jquery-3.3.1.js"
