@@ -157,6 +157,9 @@ if (!isset($_SESSION['loggedin'])) {
   
 <script>
   
+// Check if the user is logged in - if yes, save the state and username
+// to be retrieved by the external JavaScript file.
+  
 <?php if($_SESSION['loggedin'] === true): ?>
 var User_Name='<?php echo $_SESSION['User_Name'];?>';
   
