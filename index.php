@@ -81,39 +81,39 @@ if (!isset($_SESSION['loggedin'])) {
     <div class="modal-content">
     <!-- Modal Header -->
       <div class="modal-header mx-auto">
-          <div class="container mx-auto">
-              <div class="row">
-                <div class="col-2">
-                </div>
+        <div class="container mx-auto">
+          <div class="row">
+            <div class="col-2">              
+              </div>
                 <div class="col-8 text-center">
-                   <h3>
-                     Login 
-                   </h3>
+                  <h3>
+                   Login 
+                  </h3>
                 </div>
                 <div class="col-2">
-                    <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
+                  <button type="button" class="close text-right" data-dismiss="modal">&times;</button>
                 </div>
-              </div>
-              </div>
+          </div>
+        </div>
       </div>
       <!-- Modal body -->
       <div class="modal-body col-6 mx-auto">
       <h5 id="loginErrorID"></h5>
         <!-- username -->
         <form method='POST'>
-              <div class="form-row mx-auto my-4">
-                <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" autofocus required>
-              </div>
+          <div class="form-row mx-auto my-4">
+            <input type="text" name="User_Name" class="form-control" id="usernameForm2" placeholder="Username" autofocus required>
+          </div>
 
-              <!-- password -->
-              <div class="form-row mx-auto my-4">
-                <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" required>
-                <div class="col px-0">
-                  <button id="submitButton" type="button" class="btn btn-primary mt-4 w-100 submitButton">Sign in</button>
-                </div>
-              </div>
-            </form>
-    </div>
+        <!-- password -->
+          <div class="form-row mx-auto my-4">
+            <input type="password" name="User_Password" class="form-control" id="passwordForm2" placeholder="Password" required>
+            <div class="col px-0">
+              <button id="submitButton" type="button" class="btn btn-primary mt-4 w-100 submitButton">Sign in</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -144,73 +144,73 @@ if (!isset($_SESSION['loggedin'])) {
     </div>
   </div>
   <div class="row">
-        <div class="row text-center mx-auto tenptfont py-4">
-            <div  id="icontext"class="col-12 my-2 mx-auto">
-                Simple. Unique.<br>
-                Community Building.
-            </div>
-            <div class="col-md-3"></div>
-            <div id="descrip" class="col-md-6 text-center tenptfont">
-                With Memento, you'll get instant, creative, and memorable activity ideas for free, available in the palm of your hands. Contribute what you can afford towards a group event, and check out the unique suggestions that we've thought of for your group to do!
-            </div>
-            <div class="col-md-3"></div>
+    <div class="row text-center mx-auto tenptfont py-4">
+      <div  id="icontext"class="col-12 my-2 mx-auto">
+        Simple. Unique.<br>
+        Community Building.
+      </div>
+      <div class="col-md-3"></div>
+      <div id="descrip" class="col-md-6 text-center tenptfont">
+          With Memento, you'll get instant, creative, and memorable activity ideas for free, available in the palm of your hands. Contribute what you can afford towards a group event, and check out the unique suggestions that we've thought of for your group to do!
         </div>
+      <div class="col-md-3"></div>
     </div>
+  </div>
 
 
     <!--- carousel image slider -->
-    <div id="slideshow" class="carousel mx-auto slide" data-ride="carousel">
-          <ul class="carousel-indicators">
-            <li data-target="#slideshow" data-slide-to="0" class="active"></li>
-            <li data-target="#slideshow" data-slide-to="1"></li>
-            <li data-target="#slideshow" data-slide-to="2"></li>
-          </ul>
-          <!-- first image -->
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img class="carouselTint img-fluid" src="img/frontpage/carousel/picnic.jpeg">
-              <div class="carousel-caption">
-                <h1 class="display-2">Memento</h1>
-                  <h3>Create Memories Together</h3>
-                    <button type="button" id="getStarted1" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
-              </div>
-            </div>
-            <!-- second image -->
-            <div class="carousel-item">
-              <img class="carouselTint img-fluid" src="img/frontpage/carousel/hike.jpg">
-              <div class="carousel-caption">
-                <h1 class="display-2">Memento</h1>
-                  <h3>Create Memories Together</h3>
-                    <button type="button" id="getStarted2" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
-              </div>
-            </div>
-            <!-- third image -->
-            <div class="carousel-item">
-              <img class="carouselTint img-fluid" src="img/frontpage/carousel/beertour.jpg">
-              <div class="carousel-caption">
-                <h1 class="display-2">Memento</h1>
-                  <h3>Create Memories Together</h3>
-                    <button type="button" id="getStarted3" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
-              </div>
-            </div>    
-          </div>
+  <div id="slideshow" class="carousel mx-auto slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+      <li data-target="#slideshow" data-slide-to="0" class="active"></li>
+      <li data-target="#slideshow" data-slide-to="1"></li>
+      <li data-target="#slideshow" data-slide-to="2"></li>
+    </ul>
+    <!-- first image -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="carouselTint img-fluid" src="img/frontpage/carousel/picnic.jpeg">
+        <div class="carousel-caption">
+          <h1 class="display-2">Memento</h1>
+          <h3>Create Memories Together</h3>
+          <button type="button" id="getStarted1" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
         </div>
+      </div>
+    <!-- second image -->
+      <div class="carousel-item">
+        <img class="carouselTint img-fluid" src="img/frontpage/carousel/hike.jpg">
+        <div class="carousel-caption">
+          <h1 class="display-2">Memento</h1>
+          <h3>Create Memories Together</h3>
+          <button type="button" id="getStarted2" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
+        </div>
+      </div>
+    <!-- third image -->
+      <div class="carousel-item">
+        <img class="carouselTint img-fluid" src="img/frontpage/carousel/beertour.jpg">
+        <div class="carousel-caption">
+          <h1 class="display-2">Memento</h1>
+          <h3>Create Memories Together</h3>
+          <button type="button" id="getStarted3" onclick="location.href = 'registration.php'" class="btn btn-light btn-lg" style="background-color: #1A75C1; color: #FFF;">Get Started</button>
+        </div>
+      </div>    
+    </div>
+  </div>
 
   <div id="belowCarousel" class="row text-center mx-auto tenptfont pt-4">
     <div id="howitworks" class="col-12 mx-auto">
-        How It Works
+      How It Works
     </div>
     <div class="col-md-12 text-center tenptfont">
-        1.	Sign up for an account <br>
-        2.	Create a group <br>
-        3.	Share your group name and password with your friends <br>
-        4.	Wait for all members to join the group and enter a personal budget <br>
-        5.	View the events and chose your next adventure
+      1.	Sign up for an account <br>
+      2.	Create a group <br>
+      3.	Share your group name and password with your friends <br>
+      4.	Wait for all members to join the group and enter a personal budget <br>
+      5.	View the events and chose your next adventure
     </div>
     <div id="mockupContainer" class="text-center mt-3">
-        <img id="mockup" src="img/mockup.png" class="px-5">
+      <img id="mockup" src="img/mockup.png" class="px-5">
     </div>
-</div>
+  </div>
 
   <div id="missionStatement" class="row text-center mx-auto tenptfont py-4">
     <div class="col-md-3"></div>
