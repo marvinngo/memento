@@ -1,19 +1,14 @@
 <?php
 
-      if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 
 $methodType = $_SERVER['REQUEST_METHOD'];
 
+$_SESSION['loggedin'] = false;
 
-
-        $_SESSION['loggedin'] = false;
-              
-        header( 'Location: index.php' ) ;
-
+header( 'Location: index.php' ) ;
 
 ?>
-
 
