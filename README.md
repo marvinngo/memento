@@ -1,8 +1,4 @@
-To generate the documentation, use:
-php phpDocumentor.phar -d ./tests/acceptance -t ./docs
-
-
-# Memento
+## Memento
 
 This application helps groups of people who would usually buy gifts for an event by aggregating personal budgets (from what people would have spent) into a communal budget. From the communal budget it suggests communal activities or events. Memento helps users reduce waste from giving gifts (wrapping paper, boxes, plastics) by suggesting group events and activities for them to participate in. This reduces their ecological footprint and create long lasting memories by allowing people to participate in a social event together.
 
@@ -53,8 +49,6 @@ Challenges we faced in this project included:
 * Dividing the work when our team members are specialized.
 * Communicating and coordinating the code we are writing/will write.
 * Managing our time when under external constraints.
-
-## Testing
 
 ### Prerequisites
 
