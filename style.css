@@ -2,19 +2,21 @@
 
 /* Element Selectors */
 
+/*  takes care of body height */
 html, body {
   height: 100%;
 
-  /* following two used for easter egg: */
+/* following two used for easter egg: */
   max-width: 100%;
   overflow-x: hidden;
 }
 
+/* sets font and width for all important elements */
 html, body, footer, footer a {
   width: 100%;
   font-family: 'Poppins', sans-serif;
 }
-
+/* used to make buttons round */
 button {
   border-radius: 30px !important;
 }
@@ -42,10 +44,11 @@ img.mr-2 {
   width: 100%;
   height: 100%;
 }
-
+/* tints carousel images */
 .carouselTint {
   filter: brightness(.6);
 }
+
 .c {
   align-content: center;
   margin-bottom: 10px;
@@ -83,8 +86,8 @@ img.mr-2 {
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.15);
-  
 }
+/* delete button */
 .groupDelete {
   background-color: #1A75C1;
   color: #FFF;
@@ -96,13 +99,13 @@ img.mr-2 {
   background-color: transparent;
 border: none;
 }
-
 /* background divs */
 .loggedInBG {
   background: url("img/loggedin/sky.jpg");
   background-size: cover;
   height: 82%;
 }
+/* submit button for login modal */
 .loginmodal-submit {
   background: #FFF;
   color: #1A75C1;
@@ -118,21 +121,26 @@ border: none;
   background-repeat: no-repeat;
   background-size: cover;
 }
+/* gets rid of modal borders */
 .modal {
   border: 0px;
 }
+/* background and font of modals */
 .modal-content {
   background: #FFF;
   color: #1A75C1;
 }
+/* modal header */
 .modal-header {
   background: #AED6F1;
   width: 100%;
 }
+/* margins for password input field */
 .modaluserpw {
   margin-bottom: 20px;
   width: 100%
 }
+/* modal description */
 .modal-desc {
   top: 8px !important;
   position: relative;
@@ -177,7 +185,6 @@ top: -14px !important;
   background: #273443;
   color: white;
 }
-
 /* site footer links */
 .site-footer a {
   color: #D5D5D5;
@@ -191,6 +198,7 @@ top: -14px !important;
 .submitButton {
   background-color: #1A75C1;
 }
+/* ten pt font class */
 .tenptfont {
   font-size: 10pt;
 }
@@ -199,6 +207,7 @@ top: -14px !important;
   color: #F6F6F6;
 }
 /* ID Selectors */
+/* easter egg */
 #A{
   display: none;
   position:absolute;
@@ -209,14 +218,17 @@ top: -14px !important;
 	animation-delay:0s;
 	-webkit-animation-delay: 0s;
 }
+/* easter egg animation */
 @keyframes mymove {
 	from {left:-100%;}	/*off-screen left (adjust for image width)*/
 	to {left:150%;}		/*off-screen right*/
 }
+/* about groups modal */
 #aboutModal {
   background: rgba(255, 255, 255, 0.3);
   color: #1A75C1;
 }
+/* div below homepage carousel */
 #belowCarousel {
   background-color: rgb(155, 203, 245);
 }
@@ -225,12 +237,15 @@ top: -14px !important;
   position: relative;
   transform: translateY(70%);
 }
+/* donate button */
 #blockoPayModal .modal-header {
   background-color: #FF9900;
 }
+/* error message for budgets */
 #BudgetErrorID {
   color: red;
 }
+/* metro vancouver logo */
 #citylogo {
   width: 50%;
 }
@@ -243,33 +258,41 @@ top: -14px !important;
 #copyright {
   background-color: #232F3C;
 }
+/* descriptions */
 #descrip {
   font-size: 10pt;
   padding-top: 2%;
 }
+/* general style for error messages */
 #descriptionError, #emailError, #groupnameError, #groupPwError, #groupPwMatch, #groupSizeError, #joinGroupError, #loginErrorID, #loginErrorID2, #passwordError, #passwordMatch, #registrationError, #usernameError {
   color: red;
   font-size: 18px;
   margin: auto;
   padding-top: 5px;
 }
+/* event link color */
 #event1link {
   color: navy;
 }
+/* event cards on my groups */
 #eventcard {
   background: rgba(255, 255, 255, 0);
 }
+/* first div on home page*/
 #firstDiv {
   background-color: #fff;
 }
+/* group profile pic */
 #grpimg {
   width: 250px;
   height: 250px;
 }
+/* how it works div */
 #howitworks {
   font-size: 16pt;
   margin-bottom: 8px;
 }
+/* text for 3 icons on front */
 #icontext {
   font-size: 16pt;
 }
@@ -277,29 +300,34 @@ top: -14px !important;
 #main {
   font-size: 20pt;
 }
-
 /* smaller text bodies of main div containers */
 #maintext {
   color: #1A75C1;
   font-size: 14pt;
 }
+/* mission statement */
 #missionStatement {
   color: white;
   background-color:#3193E3;
 }
+/* phone mockup front page*/
 #mockup {
   width: 30%;
 }
+/* container for mock up */
 #mockupContainer {
   width: 100%;
 }
+/* second div on first pagea */
 #seconddiv {
   background-color: #DDEDFB;
 }
+/* selected event on createjoin */
 #selectedEvent {
   font-size: 20px;
   font-weight: bold;
 }
+/* carousel */
 #slideshow {
   padding: 0 !important;
 }
@@ -308,20 +336,24 @@ top: -14px !important;
 
 }
 @media (max-width: 768px) {
+  /* navbar brand memento */
   .navbar-brand {
     width: 60%;
   }
+  /* navbar brand memento image */
   .navbar-brand img {
     width: 100%;
   }
-
+  /* easter egg */
   #A{
     left: -150%; /* Set initial position for each image off-screen left -- adjust according to image width */
   }
+  /* group profile picture */
   #grpimg {
     width: 150px;
     height: 150px;
   }
+  /* phone mockup frontpage */
   #mockup {
     width: 70%;
   }
